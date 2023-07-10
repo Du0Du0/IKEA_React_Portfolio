@@ -106,9 +106,6 @@ function Community() {
 					<p>
 						전체 <span>{Posts.length}</span>건
 					</p>
-					<p>
-						현재 페이지 <span>1</span>/ <span>16</span>
-					</p>
 					<select
 						className='arrayBtn'
 						onClick={(e) => {
@@ -137,8 +134,6 @@ function Community() {
 						<option value='오름차순'>오름차순</option>
 						<option value='내림차순'>내림차순</option>
 						<option value='최신순'>최신순</option>
-						<option value='조회순'>조회순</option>
-						<option value='댓글순'>댓글순</option>
 					</select>
 				</div>
 			</div>

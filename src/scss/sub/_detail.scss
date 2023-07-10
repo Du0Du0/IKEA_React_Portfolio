@@ -146,10 +146,11 @@
 
 			h3 {
 				font: 18px/1 $ikeaFontKo;
-				color: $fontColorGrC;
+				color: $fontColorBl;
 				display: flex;
 				gap: 10px;
 				cursor: pointer;
+				-webkit-user-select: none;
 
 				.fa-circle-exclamation,
 				.fa-angle-down {

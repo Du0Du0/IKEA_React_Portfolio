@@ -7,12 +7,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import LayoutNone from '../common/LayoutNone';
 import { useEffect, useState, useRef } from 'react';
 import Write from './Write';
+import CommentModal from './CommentModal';
 
 function Detail(props) {
 	const history = useHistory();
 	const location = useLocation();
 	const [Posts, setPosts] = useState([]);
 	const [LikeBtn, setLikeBtn] = useState([0, 0, 0, 0, 0, 0, 0]);
+	const [NoticeModal, setNoticeModal] = useState(false);
 
 	const { idx } = location.state || {};
 	const comment = useRef(null);
@@ -129,6 +131,10 @@ function Detail(props) {
 		resetComment();
 	};
 
+	const openModal = () => {
+		setNoticeModal((NoticeModal) => !NoticeModal);
+	};
+
 	return (
 		<LayoutNone type={''} name1={'detail'}>
 			<div className='listWrap'>
@@ -168,11 +174,12 @@ function Detail(props) {
 			<div className='commentWriteWrap'>
 				<div className='commentWriteTop'>
 					<h2>댓글 남기기</h2>
-					<h3>
+					<h3 onClick={openModal}>
 						<FontAwesomeIcon icon={faCircleExclamation} />
 						글 작성 시 유의사항
 						<FontAwesomeIcon icon={faAngleDown} />
 					</h3>
+					<CommentModal NoticeModal={NoticeModal} setNoticeModal={setNoticeModal} />
 				</div>
 				<div className='commentWriteBottom'>
 					<textarea cols='30' rows='6' placeholder='로그인 후 남길 수 있어요. 문의사항을 댓글로 알려주세요! 욕설 및 인신공격성 글은 삭제될 수 있습니다.' ref={comment}></textarea>
