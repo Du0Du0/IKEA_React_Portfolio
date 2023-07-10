@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/ikea-react/static/css/main.ca431271.css",
+    "main.js": "/ikea-react/static/js/main.73ec9d41.js",
+    "index.html": "/ikea-react/index.html",
+    "main.ca431271.css.map": "/ikea-react/static/css/main.ca431271.css.map",
+    "main.73ec9d41.js.map": "/ikea-react/static/js/main.73ec9d41.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.ca431271.css",
+    "static/js/main.73ec9d41.js"
+  ]
+}

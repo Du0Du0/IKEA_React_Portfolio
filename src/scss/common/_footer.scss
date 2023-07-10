@@ -1,0 +1,279 @@
+#footer {
+	width: 100vw;
+	height: 400px;
+	bottom: 0;
+	position: relative;
+	left: 0;
+	right: 0;
+	object-fit: cover;
+	object-position: center;
+
+	img {
+		padding-top: 0px;
+		margin-bottom: 0;
+		object-fit: cover;
+		width: 100%;
+		height: 100%;
+	}
+
+	.footerContainer {
+		width: 100%;
+		height: 300px;
+		flex-direction: column;
+		background: $ikeaBl;
+		display: flex;
+
+		.footerTopWrap {
+			display: flex;
+			flex-wrap: nowrap;
+			justify-content: center;
+			align-items: center;
+			padding: 80px 0vw 0px;
+
+			.footerTop {
+				display: flex;
+				justify-content: center;
+
+				li {
+					font: 25px/1 $ikeaFontKo;
+					color: $grey;
+					float: left;
+					cursor: pointer;
+
+					&:after {
+						content: '|';
+						top: 50%;
+						left: 100%;
+						margin-left: 20px;
+						margin-right: 20px;
+					}
+				}
+			}
+
+			.footerDown {
+				li {
+					font: 25px/1 $ikeaFontKo;
+					color: $grey;
+					float: left;
+					cursor: pointer;
+
+					&:after {
+						content: '|';
+						top: 50%;
+						left: 100%;
+						margin-left: 20px;
+						margin-right: 20px;
+					}
+
+					&:nth-of-type(2) {
+						&:after {
+							content: '';
+							top: 50%;
+							left: 100%;
+							margin-left: 20px;
+							margin-right: 20px;
+						}
+					}
+				}
+			}
+		}
+		.footerLeftCategory {
+			flex: 1;
+			padding-top: 70px;
+			width: 100%;
+			height: 100%;
+			display: flex;
+			flex-wrap: nowrap;
+			justify-content: space-between;
+			align-items: center;
+
+			ul {
+				float: left;
+				margin-left: 10px;
+				display: flex;
+
+				&:nth-of-type(1) {
+					li {
+						font: 16px/1 $ikeaFontKo;
+						color: $fontColorGr;
+
+						&:nth-of-type(1) {
+							&:after {
+								content: '|';
+								top: 50%;
+								left: 100%;
+								margin-left: 20px;
+								margin-right: 20px;
+							}
+						}
+					}
+				}
+
+				&:nth-of-type(2) {
+					li {
+						font: 16px/1 $ikeaFontKo;
+						color: $fontColorGr;
+						margin-left: -100px;
+					}
+				}
+
+				li {
+					font: 16px/1 $ikeaFontKo;
+					color: $fontColorGr;
+					cursor: pointer;
+
+					&:after {
+						content: '';
+						top: 50%;
+						left: 100%;
+						margin-left: 20px;
+						margin-right: 20px;
+					}
+				}
+			}
+		}
+	}
+}
+
+@media screen and (max-width: $tablet) {
+	#footer {
+		height: 361px;
+
+		.footerContainer {
+			.footerTopWrap {
+				.footerTop {
+					li {
+						font: 16px/1 $ikeaFontKo;
+
+						&:after {
+							margin-left: 10px;
+							margin-right: 10px;
+						}
+					}
+				}
+
+				.footerDown {
+					li {
+						font: 16px/1 $ikeaFontKo;
+
+						&:after {
+							margin-left: 10px;
+							margin-right: 10px;
+						}
+
+						&:nth-of-type(2) {
+							&:after {
+								content: '';
+								top: 50%;
+								left: 100%;
+								margin-left: 10px;
+								margin-right: 10px;
+							}
+						}
+					}
+				}
+			}
+			.footerLeftCategory {
+				flex-direction: column;
+				justify-content: center;
+
+				ul {
+					margin-bottom: 10px;
+
+					&:nth-of-type(1) {
+						li {
+							font: 16px/1 $ikeaFontKo;
+
+							&:nth-of-type(1) {
+								&:after {
+									margin-left: 10px;
+									margin-right: 10px;
+								}
+							}
+						}
+					}
+
+					&:nth-of-type(2) {
+						li {
+							font: 16px/1 $ikeaFontKo;
+							margin-left: 0px;
+						}
+					}
+
+					li {
+						font: 16px/1 $ikeaFontKo;
+
+						&:after {
+							margin-left: 10px;
+							margin-right: 10px;
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+@media screen and (max-width: $mobile) {
+	#footer {
+		height: 350px;
+
+		.footerContainer {
+			.footerTopWrap {
+				flex-wrap: wrap;
+				justify-content: center;
+				padding: 60px 0vw 0px;
+
+				.footerTop {
+					margin-bottom: 15px;
+				}
+			}
+			.footerLeftCategory {
+				padding-top: 50px;
+
+				ul {
+					margin-bottom: 15px;
+				}
+			}
+		}
+	}
+}
+
+#footer.bl {
+	.footerContainer {
+		background: white;
+
+		.footerTopWrap {
+			.footerTop {
+				li {
+					color: $fontColorBl;
+				}
+			}
+
+			.footerDown {
+				li {
+					color: $fontColorBl;
+				}
+			}
+		}
+		.footerLeftCategory {
+			ul {
+				&:nth-of-type(1) {
+					li {
+						color: $fontColorBl;
+					}
+				}
+
+				&:nth-of-type(2) {
+					li {
+						color: $fontColorBl;
+					}
+				}
+
+				li {
+					color: $fontColorBl;
+				}
+			}
+		}
+	}
+}

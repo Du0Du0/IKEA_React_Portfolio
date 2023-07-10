@@ -1,0 +1,185 @@
+.update {
+	width: 100vw;
+	min-height: calc(100vh - 300px);
+
+	.titTop {
+		h1 {
+			padding: 250px 15vw 120px;
+			text-align: center;
+			font: bold 48px/1 $ikeaFontKo;
+			color: $fontColorBl;
+		}
+	}
+	fieldset {
+		border: none;
+		padding: 0px 15vw 0px;
+	}
+
+	table {
+		width: 100%;
+		height: 700px;
+		border: none;
+		padding: 0px 15vw 0px;
+		position: relative;
+
+		&::before {
+			content: '';
+			position: absolute;
+			top: 0;
+			border-top: 2px solid $ikeaBl;
+			width: calc(100% - 30vw);
+		}
+
+		th,
+		td {
+			padding: 5px 18px;
+			border-bottom: 1px solid $border;
+		}
+
+		th {
+			font: bold 18px/1 $ikeaFontKo;
+			color: $fontColorBl;
+			text-align: left;
+			padding: 0px 2vw 0px;
+		}
+
+		td {
+			width: 80%;
+		}
+
+		.userIdInput {
+			border: none;
+			padding: 2px 15px;
+			width: 30%;
+			height: 50px;
+			font: 18px/1 $ikeaFontKo;
+			color: $fontColorBl;
+
+			&:focus {
+				outline: none;
+			}
+		}
+
+		.keywordInput,
+		.titleInput {
+			padding: 2px 25px;
+			width: 30%;
+			height: 50px;
+			border-radius: 5px;
+			border: 1px solid #cfcfcf;
+			background: #fff;
+			font: 18px/1 $ikeaFontKo;
+			color: $fontColorBl;
+
+			&:focus {
+				outline: 1px solid #12a8ce;
+			}
+		}
+
+		.contentWrap {
+			display: flex;
+			flex-direction: column;
+			width: 100%;
+			height: 100%;
+			margin-top: 30px;
+
+			th {
+				border-bottom: none;
+				margin-bottom: 15px;
+			}
+
+			td {
+				border: none;
+
+				textarea {
+					width: 700%;
+					height: 300px;
+					padding: 15px 18px;
+					font: 18px/1 $ikeaFontKo;
+					color: $fontColorBl;
+					border: 1px solid $border;
+					border-radius: 5px;
+					margin-left: 15px;
+
+					&:focus {
+						outline: 1px solid #12a8ce;
+					}
+				}
+			}
+		}
+
+		input[placeholder] {
+			padding: 2px 20px;
+			width: 96%;
+			height: 50px;
+			border-radius: 5px;
+			border: 1px solid #cfcfcf;
+			background: #fff;
+			font: 18px/1 $ikeaFontKo;
+			color: $fontColorBl;
+		}
+
+		select {
+			padding: 2px 15px;
+			width: 13%;
+			height: 50px;
+			border-radius: 5px;
+			border: 1px solid #cfcfcf;
+			background: transparent;
+			font: 18px/1 $ikeaFontKo;
+			color: $fontColorBl;
+
+			&:focus {
+				outline: 1px solid #12a8ce;
+			}
+		}
+	}
+
+	.horzienLine {
+		height: 1px;
+		width: 70%;
+		margin: 0px auto;
+		margin-bottom: 5px;
+		background: $border;
+	}
+	.submitBtnWrap {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		width: 100%;
+		height: 200px;
+		margin-bottom: 56px;
+		gap: 15px;
+
+		button {
+			width: 120px;
+			height: 46px;
+			background: $tableBtn;
+			border-radius: 5px;
+			color: $fontColorW;
+			border: none;
+			transform: translate(0, -5%);
+			font: 16px/1 $ikeaFontKo;
+			cursor: pointer;
+			transition: 0.5s;
+
+			&:nth-of-type(1) {
+				background: #fff;
+				border: 1px solid $tableBtn;
+				color: $fontColorBl;
+
+				&:hover {
+					background: $tableBtn;
+					color: $fontColorW;
+				}
+			}
+
+			&:nth-of-type(2) {
+				&:hover {
+					background: $hoverBtn;
+					color: $fontColorW;
+				}
+			}
+		}
+	}
+}
