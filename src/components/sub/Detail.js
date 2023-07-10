@@ -15,6 +15,7 @@ function Detail(props) {
 	const [Posts, setPosts] = useState([]);
 	const [LikeBtn, setLikeBtn] = useState([0, 0, 0, 0, 0, 0, 0]);
 	const [NoticeModal, setNoticeModal] = useState(false);
+	let [InputCount, setInputCount] = useState(0);
 
 	const { idx } = location.state || {};
 	const comment = useRef(null);
@@ -129,6 +130,7 @@ function Detail(props) {
 		setComments(updatedComment);
 		localStorage.setItem('comment', JSON.stringify(updatedComment));
 		resetComment();
+		setInputCount(0);
 	};
 
 	const openModal = () => {
@@ -182,9 +184,24 @@ function Detail(props) {
 					<CommentModal NoticeModal={NoticeModal} setNoticeModal={setNoticeModal} />
 				</div>
 				<div className='commentWriteBottom'>
-					<textarea cols='30' rows='6' placeholder='로그인 후 남길 수 있어요. 문의사항을 댓글로 알려주세요! 욕설 및 인신공격성 글은 삭제될 수 있습니다.' ref={comment}></textarea>
+					<textarea
+						cols='30'
+						rows='6'
+						placeholder='로그인 후 남길 수 있어요. 문의사항을 댓글로 알려주세요! 욕설 및 인신공격성 글은 삭제될 수 있습니다.'
+						maxLength={1500}
+						ref={comment}
+						onChange={(e) => {
+							if (e.target.value.length > e.target.maxLength) {
+								e.target.value = e.target.value.slice(0, e.target.maxLength);
+							}
+							setInputCount(e.target.value.length);
+						}}
+						onInput={(e) => {
+							if (e.target.value.length > e.target.maxLength) e.target.value = e.target.value.slice(0, e.target.maxLength);
+						}}
+					></textarea>
 					<div className='textareaBottom'>
-						<p>0/1500</p>
+						<p>{InputCount}/1500</p>
 						<button onClick={creatComment}>남기기</button>
 					</div>
 				</div>
