@@ -11,6 +11,9 @@ function Youtube() {
 	const [Vids, setVids] = useState([]);
 	const [Index, setIndex] = useState(0);
 	const modal = useRef(null);
+	const [ImgNum, setImgNum] = useState(1);
+	const imgBox = useRef(null);
+	const [ImgSrc, setImgSrc] = useState(process.env.PUBLIC_URL + '/img/imgBoxGroup1.png');
 
 	const fetchYoutube = async () => {
 		const key = 'AIzaSyCKs11Yu98hp6fq7N54tY2iWSY9qvTh4cM';
@@ -22,6 +25,21 @@ function Youtube() {
 		setVids(result.data.items);
 	};
 	useEffect(() => fetchYoutube(), []);
+
+	//imgBox 클릭하면 순서보여주는 기능
+
+	const ImgBoxClick = () => {
+		const imgBoxGroups = ['imgBoxGroup1.png', 'imgBoxGroup2.png', 'imgBoxGroup3.png', 'imgBoxGroup4.png', 'imgBoxGroup5.png'];
+
+		if (ImgNum > imgBoxGroups.length - 1) {
+			setImgNum(1);
+		} else {
+			setImgNum(ImgNum + 1);
+		}
+
+		setImgSrc(process.env.PUBLIC_URL + `/img/${imgBoxGroups[ImgNum]}`);
+	};
+
 	return (
 		<>
 			<Layout type={'bl'} name1={'youtube'} name2={'유투브'} video={'pexels.mp4'}>
@@ -89,11 +107,11 @@ function Youtube() {
 
 						<div className='imgBoxRight'>
 							<div className='imgBoxTop'>
-								<div className='imgBox1' data-name='Click'>
-									<img className='changeImg' src={path + '/img/imgBoxGroup1.png'} alt='Black OBEGRÄNSAD armchair on a black background.' />
+								<div className='imgBox1' data-name='Click' ref={imgBox} onClick={ImgBoxClick}>
+									<img className='changeImg' src={ImgSrc} alt='Black OBEGRÄNSAD armchair on a black background.' />
 
 									<button>
-										<span id='result'>1</span>&nbsp;/&nbsp;5
+										<span id='result'>{ImgNum}</span>&nbsp;/&nbsp;5
 									</button>
 								</div>
 								<div className='imgBox2'>

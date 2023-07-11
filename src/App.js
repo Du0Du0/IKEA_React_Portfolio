@@ -55,7 +55,7 @@ function App() {
 					render={() => (
 						<>
 							<Department />
-							<Footer type={'sub'} imgBg={'footerW'} />
+							<FooterNone type={'sub'} imgBg={'footerW'} />
 						</>
 					)}
 				></Route>

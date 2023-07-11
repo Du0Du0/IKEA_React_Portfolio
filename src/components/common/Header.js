@@ -66,7 +66,7 @@ function Header({ type }) {
 								</NavLink>
 							</li>
 							<li>
-								<NavLink to='/members' activeClassName='active'>
+								<NavLink to='/member' activeClassName='active'>
 									Members
 								</NavLink>
 							</li>
@@ -87,19 +87,19 @@ function Header({ type }) {
 						<ul>
 							{/* ikea twitter icon */}
 							<li>
-								<a href='https://twitter.com/IKEA' target='_blank' title='새창-이케아 미국 트위터'>
+								<a href='https://twitter.com/IKEA' target='_blank' title='새창-이케아 미국 트위터' rel='noreferrer'>
 									<FontAwesomeIcon icon={faTwitter} />
 								</a>
 							</li>
 							{/* ikea facebook icon */}
 							<li>
-								<a href='https://www.facebook.com/IKEAUSA/' target='_blank' title='새창-이케아 미국 페이스북'>
+								<a href='https://www.facebook.com/IKEAUSA/' target='_blank' title='새창-이케아 미국 페이스북' rel='noreferrer'>
 									<FontAwesomeIcon icon={faFacebookF} />
 								</a>
 							</li>
 							{/* ikea kakao icon */}
 							<li>
-								<a href='https://pf.kakao.com/_jhmfxd' target='_blank' title='새창-이케아 코리아 카카오톡'>
+								<a href='https://pf.kakao.com/_jhmfxd' target='_blank' title='새창-이케아 코리아 카카오톡' rel='noreferrer'>
 									<FontAwesomeIcon icon={faEnvelope} />
 								</a>
 							</li>
