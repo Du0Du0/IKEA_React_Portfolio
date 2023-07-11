@@ -12,8 +12,17 @@ function Department() {
 	const [ZoneCode, setZoneCode] = useState('');
 	const introduce = useRef(null);
 	const [InputCount, setInputCount] = useState(0);
+	const [InputType1, setInputType1] = useState('password');
+	const [InputType2, setInputType2] = useState('password');
 
 	const open = useDaumPostcodePopup('https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js');
+
+	const passwordToggle1 = () => {
+		setInputType1((InputType1) => !InputType1);
+	};
+	const passwordToggle2 = () => {
+		setInputType2((InputType2) => !InputType2);
+	};
 
 	const handleComplete = (data) => {
 		let fullAddress = data.address;
@@ -107,8 +116,8 @@ function Department() {
 											<label htmlFor='password'>비밀번호</label>
 										</th>
 										<td>
-											<input type='password' name='password' id='password' placeholder='새 비밀번호' autocomplete='off' />
-											<FontAwesomeIcon icon={faEye} />
+											<input type={InputType1 ? 'password' : 'text'} name='password' id='password' placeholder='새 비밀번호' autocomplete='off' />
+											<FontAwesomeIcon icon={faEye} onClick={passwordToggle1} />
 											<br />
 
 											<progress max='4' value='0' id='meter'></progress>
@@ -121,8 +130,8 @@ function Department() {
 											<label htmlFor='passwordCheck'>비밀번호 확인</label>
 										</th>
 										<td>
-											<input type='password' name='passwordCheck' id='passwordCheck' placeholder='변경할 비밀번호 확인' />
-											<FontAwesomeIcon icon={faEye} />
+											<input type={InputType2 ? 'password' : 'text'} name='passwordCheck' id='passwordCheck' placeholder='변경할 비밀번호 확인' />
+											<FontAwesomeIcon icon={faEye} onClick={passwordToggle2} />
 											<br />
 											<p className='pwdErr2'>비밀번호 확인을 위해 다시 한번 입력해 주세요.</p>
 										</td>
