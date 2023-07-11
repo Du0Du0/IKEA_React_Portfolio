@@ -14,8 +14,15 @@ function Department() {
 	const [InputCount, setInputCount] = useState(0);
 	const [InputType1, setInputType1] = useState('password');
 	const [InputType2, setInputType2] = useState('password');
+	const [EmailAddress, setEmailAddress] = useState('');
+	const selectEmailAddress = useRef(null);
+	const [IsDisabled, setIsDisabled] = useState(false);
 
 	const open = useDaumPostcodePopup('https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js');
+
+	const selectEmail = () => {
+		setEmailAddress(selectEmailAddress.current.value);
+	};
 
 	const passwordToggle1 = () => {
 		setInputType1((InputType1) => !InputType1);
@@ -117,7 +124,7 @@ function Department() {
 										</th>
 										<td>
 											<input type={InputType1 ? 'password' : 'text'} name='password' id='password' placeholder='새 비밀번호' autocomplete='off' />
-											<FontAwesomeIcon icon={faEye} onClick={passwordToggle1} />
+											<FontAwesomeIcon icon={faEye} onClick={passwordToggle1} style={InputType1 ? { color: '#969696' } : { color: '#1b2539' }} />
 											<br />
 
 											<progress max='4' value='0' id='meter'></progress>
@@ -131,7 +138,7 @@ function Department() {
 										</th>
 										<td>
 											<input type={InputType2 ? 'password' : 'text'} name='passwordCheck' id='passwordCheck' placeholder='변경할 비밀번호 확인' />
-											<FontAwesomeIcon icon={faEye} onClick={passwordToggle2} />
+											<FontAwesomeIcon icon={faEye} onClick={passwordToggle2} style={InputType2 ? { color: '#969696' } : { color: '#1b2539' }} />
 											<br />
 											<p className='pwdErr2'>비밀번호 확인을 위해 다시 한번 입력해 주세요.</p>
 										</td>
@@ -150,8 +157,15 @@ function Department() {
 										<td>
 											<input type='email' name='email' id='email' />
 											&nbsp;<span>@</span>&nbsp;
-											<input type='email' name='emailAddress' id='emailAddress' />
-											<select name='emailAddressSelect' id='emailAddressSelect'>
+											<input
+												type='email'
+												name='emailAddress'
+												id='emailAddress'
+												value={EmailAddress === '' ? null : EmailAddress}
+												disabled={EmailAddress === '' ? false : true}
+												style={EmailAddress === '' ? { background: '#fff' } : { background: '#f4f5f6' }}
+											/>
+											<select name='emailAddressSelect' id='emailAddressSelect' ref={selectEmailAddress} onChange={selectEmail}>
 												<option value=''>직접입력</option>
 												<option value='naver.com'>naver.com</option>
 												<option value='google.com'>google.com</option>
