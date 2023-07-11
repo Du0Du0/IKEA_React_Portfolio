@@ -3,13 +3,15 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye } from '@fortawesome/free-regular-svg-icons';
 import DaumPostcode from './DaumPostcode';
 import { useDaumPostcodePopup } from 'react-daum-postcode';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 
 function Department() {
 	const [IsOpen, setIsOpen] = useState(false);
 	const [AddressValue, setAddressValue] = useState('');
 	const [ExtraAddress, setExtraAddress] = useState('');
 	const [ZoneCode, setZoneCode] = useState('');
+	const introduce = useRef(null);
+	const [InputCount, setInputCount] = useState(0);
 
 	const open = useDaumPostcodePopup('https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js');
 
@@ -183,9 +185,29 @@ function Department() {
 											<label htmlFor='introduce'>프로필 소개</label>
 										</th>
 										<td>
-											<textarea name='introduce' id='introduce' placeholder='프로필 소개를 입력해주세요.' cols='30' rows='6' className='introducehtmlForm'></textarea>
+											<textarea
+												name='introduce'
+												id='introduce'
+												placeholder='프로필 소개를 입력해주세요.'
+												cols='30'
+												rows='6'
+												className='introducehtmlForm'
+												maxLength={200}
+												ref={introduce}
+												onChange={(e) => {
+													if (e.target.value.length > e.target.maxLength) {
+														e.target.value = e.target.value.slice(0, e.target.maxLength);
+													}
+													setInputCount(e.target.value.length);
+												}}
+												onInput={(e) => {
+													if (e.target.value.length > e.target.maxLength) e.target.value = e.target.value.slice(0, e.target.maxLength);
+												}}
+											></textarea>
 											<br />
-											<span className='textareaCount'>(0/200)</span>
+											<span className='textareaCount'>
+												(<span>{InputCount}</span>/200)
+											</span>
 										</td>
 									</tr>
 
