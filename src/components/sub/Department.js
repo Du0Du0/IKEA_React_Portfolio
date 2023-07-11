@@ -1,8 +1,42 @@
 import LayoutNone from '../common/LayoutNone';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye } from '@fortawesome/free-regular-svg-icons';
+import DaumPostcode from './DaumPostcode';
+import { useDaumPostcodePopup } from 'react-daum-postcode';
+import { useState } from 'react';
 
 function Department() {
+	const [IsOpen, setIsOpen] = useState(false);
+	const [AddressValue, setAddressValue] = useState('');
+	const [ExtraAddress, setExtraAddress] = useState('');
+	const [ZoneCode, setZoneCode] = useState('');
+
+	const open = useDaumPostcodePopup('https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js');
+
+	const handleComplete = (data) => {
+		let fullAddress = data.address;
+		let extraAddress = '';
+
+		if (data.addressType === 'R') {
+			if (data.bname !== '') {
+				extraAddress += data.bname;
+			}
+			if (data.buildingName !== '') {
+				extraAddress += extraAddress !== '' ? `, ${data.buildingName}` : data.buildingName;
+			}
+			fullAddress += extraAddress !== '' ? ` (${extraAddress})` : '';
+		}
+
+		console.log(fullAddress); // e.g. '서울 성동구 왕십리로2길 20 (성수동1가)'
+
+		setAddressValue(data.address);
+		setExtraAddress(data.bname);
+		setZoneCode(data.zonecode);
+	};
+
+	const handleClick = () => {
+		open({ onComplete: handleComplete });
+	};
 	return (
 		<>
 			<LayoutNone type={''} name1={'department'}>
@@ -227,13 +261,14 @@ function Department() {
 											</label>
 										</th>
 										<td>
-											<input type='text' name='postcode' id='sample6_postcode' placeholder='우편번호' className='address' readonly />
-											<input type='button' onclick='sample6_execDaumPostcode()' value='우편번호 찾기' className='addressBtn' />
+											<input type='text' name='postcode' id='sample6_postcode' placeholder='우편번호' className='address' readonly value={ZoneCode} />
+											<input type='button' onclick='sample6_execDaumPostcode()' value='우편번호 찾기' className='addressBtn' onClick={handleClick} />
 											<br />
-											<input type='text' name='address' id='sample6_address' placeholder='주소' className='address' />
+
+											<input type='text' name='address' id='sample6_address' placeholder='주소' className='address' value={AddressValue} />
 											<br />
 											<input type='text' name='detailAddress' id='sample6_detailAddress' placeholder='상세주소' className='address' />
-											<input type='text' name='extraAddress' id='sample6_extraAddress' placeholder='참고항목' className='address' />
+											<input type='text' name='extraAddress' id='sample6_extraAddress' placeholder='참고항목' className='address' value={ExtraAddress} />
 										</td>
 									</tr>
 								</tbody>
