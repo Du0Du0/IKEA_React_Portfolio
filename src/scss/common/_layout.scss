@@ -61,6 +61,36 @@
 	}
 }
 
+.content.member {
+	.subVisual {
+		width: 100%;
+		height: 480px;
+		position: relative;
+		overflow: hidden;
+
+		video {
+			object-fit: contain;
+			object-position: 0vw -28vw;
+		}
+
+		.background {
+			width: 50%;
+			height: 80px;
+			background: #fff;
+			position: absolute;
+			bottom: 0;
+			left: 0;
+		}
+	}
+	.titContainer {
+		display: none;
+	}
+
+	.inner {
+		min-height: 600px;
+	}
+}
+
 @media screen and (max-width: $tablet) {
 	.content {
 		.subVisual {
