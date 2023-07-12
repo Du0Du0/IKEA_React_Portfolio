@@ -60,7 +60,7 @@ function Member() {
 					<br /> pieces." – Trini Guzmán, designer
 				</p>
 			</Parallax>
-			{Members.map((member, idx) => {
+			{/* {Members.map((member, idx) => {
 				return (
 					<>
 						<div className='membersBox' key={idx}>
@@ -77,7 +77,7 @@ function Member() {
 						</div>
 					</>
 				);
-			})}
+			})} */}
 			<div className='container'>
 				<div className='sticky-container'>
 					<div className='col-2'>

@@ -53,8 +53,24 @@ function Department() {
 	};
 
 	const handleClick = () => {
-		open({ onComplete: handleComplete });
+		var width = 500;
+		var height = 600;
+		open({
+			onComplete: handleComplete,
+			theme: themeObj,
+			popupTitle: '우편번호 검색 팝업',
+			popupKey: 'popup1',
+			width: width,
+			height: height,
+			left: window.screen.width / 2 - width / 2,
+			top: window.screen.height / 2 - height / 2,
+		});
 	};
+	const themeObj = {
+		searchBgColor: '#1B2539',
+		queryTextColor: '#FFFFFF',
+	};
+
 	return (
 		<>
 			<LayoutNone type={''} name1={'department'}>
