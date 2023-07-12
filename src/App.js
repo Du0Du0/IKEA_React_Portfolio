@@ -45,7 +45,7 @@ function App() {
 					render={() => (
 						<>
 							<Contact />
-							<Footer type={'sub'} imgBg={'footerW'} />
+							<FooterNone type={'sub'} imgBg={'footerW'} />
 						</>
 					)}
 				></Route>

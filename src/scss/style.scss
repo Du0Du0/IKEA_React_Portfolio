@@ -31,9 +31,15 @@ $errRed: #d80000;
 //community
 $border: rgba(128, 128, 128, 0.4);
 $hoverBtn: #17809b;
-
 $tablet: 1199px;
 $mobile: 759px;
+
+//contact
+$borderLight: rgba(128, 128, 128, 0.4);
+$lightGrey: #f6f6f6;
+$holiday: #d80000;
+$openLong: rgba(128, 128, 128, 0.4);
+$today: #bea36f;
 
 body {
 	overflow-x: hidden;
@@ -84,3 +90,4 @@ a:visited {
 @import 'sub/detail';
 @import 'sub/update';
 @import 'sub/commentModal';
+@import 'sub/storeName';
