@@ -15,8 +15,14 @@ function MapTraffic() {
 	useEffect(() => {
 		const mapInstance = new kakao.maps.Map(map.current, option);
 
+		const imgSrc = `${process.env.PUBLIC_URL}/img/marker1.png`;
+		const imgSize = new kakao.maps.Size(110, 100);
+		const imgPos = { offset: new kakao.maps.Point(56, 80) };
+		const markerImage = new kakao.maps.MarkerImage(imgSrc, imgSize, imgPos);
+
 		const marker = new kakao.maps.Marker({
 			position: option.center,
+			image: markerImage,
 		});
 
 		marker.setMap(mapInstance);
