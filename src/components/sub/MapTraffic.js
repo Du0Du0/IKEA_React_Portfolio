@@ -1,11 +1,12 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEarthAsia } from '@fortawesome/free-solid-svg-icons';
+import { faEarthAsia, faCaretDown } from '@fortawesome/free-solid-svg-icons';
 import { useState, useRef } from 'react';
 import { useEffect } from 'react';
 
 function MapTraffic() {
 	const map = useRef(null);
 	const { kakao } = window;
+	const [Traffic, setTraffic] = useState(false);
 
 	const option = {
 		center: new kakao.maps.LatLng(37.42432343572819, 126.88286963577373), // 지도의 중심좌표
@@ -26,7 +27,9 @@ function MapTraffic() {
 		});
 
 		marker.setMap(mapInstance);
-	}, []);
+
+		Traffic ? mapInstance.addOverlayMapTypeId(kakao.maps.MapTypeId.TRAFFIC) : mapInstance.removeOverlayMapTypeId(kakao.maps.MapTypeId.TRAFFIC);
+	}, [Traffic]);
 
 	return (
 		<div className='locationContainer'>
@@ -47,8 +50,15 @@ function MapTraffic() {
 							map
 						</div>
 						<div className='addressDesc'>
-							<FontAwesomeIcon icon={faEarthAsia} className='loactionIcon' />
-							주소
+							<div className='leftside'>
+								<FontAwesomeIcon icon={faEarthAsia} className='loactionIcon' />
+								주소
+							</div>
+							<div className='rightside'>
+								<button onClick={() => setTraffic(!Traffic)}>
+									{Traffic ? '교통정보 ON' : '교통정보 OFF'} <FontAwesomeIcon icon={faCaretDown} />
+								</button>
+							</div>
 						</div>
 					</div>
 
