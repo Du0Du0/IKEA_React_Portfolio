@@ -8,22 +8,47 @@ function MapTraffic() {
 	const { kakao } = window;
 	const [Traffic, setTraffic] = useState(false);
 	const [Location, setLocation] = useState(null);
-	const option = {
-		center: new kakao.maps.LatLng(37.42432343572819, 126.88286963577373), // 지도의 중심좌표
-		level: 3, // 지도의 확대 레벨
-	};
-	const imgSrc = `${process.env.PUBLIC_URL}/img/marker1.png`;
-	const imgSize = new kakao.maps.Size(110, 100);
-	const imgPos = { offset: new kakao.maps.Point(56, 80) };
+
+	const info = [
+		{
+			title: 'IKEA 고양점',
+			latlng: new kakao.maps.LatLng(37.62986119395948, 126.8631475894335),
+			imgSrc: `${process.env.PUBLIC_URL}/img/marker1.png`,
+			imgSize: new kakao.maps.Size(110, 100),
+			imgPos: { offset: new kakao.maps.Point(56, 80) },
+		},
+		{
+			title: 'IKEA 기흥점',
+			latlng: new kakao.maps.LatLng(37.22224126621655, 127.11567913939837),
+			imgSrc: `${process.env.PUBLIC_URL}/img/marker1.png`,
+			imgSize: new kakao.maps.Size(110, 100),
+			imgPos: { offset: new kakao.maps.Point(54, 90) },
+		},
+		{
+			title: 'IKEA 광명점',
+			latlng: new kakao.maps.LatLng(37.42432343572819, 126.88286963577373),
+			imgSrc: `${process.env.PUBLIC_URL}/img/marker1.png`,
+			imgSize: new kakao.maps.Size(110, 100),
+			imgPos: { offset: new kakao.maps.Point(55, 90) },
+		},
+		{
+			title: 'IKEA 동부산점',
+			latlng: new kakao.maps.LatLng(35.19079483522182, 129.210473742942),
+			imgSrc: `${process.env.PUBLIC_URL}/img/marker1.png`,
+			imgSize: new kakao.maps.Size(110, 100),
+			imgPos: { offset: new kakao.maps.Point(54, 90) },
+		},
+	];
+
+	const option = { center: info[0].latlng, level: 3 };
+	const imgSrc = info[0].imgSrc;
+	const imgSize = info[0].imgSize;
+	const imgPos = info[0].imgPos;
 	const markerImage = new kakao.maps.MarkerImage(imgSrc, imgSize, imgPos);
-	const marker = new kakao.maps.Marker({
-		position: option.center,
-		image: markerImage,
-	});
+	const marker = new kakao.maps.Marker({ latlng: option.center, image: markerImage });
 
 	useEffect(() => {
 		const mapInstance = new kakao.maps.Map(map.current, option);
-
 		marker.setMap(mapInstance);
 		setLocation(mapInstance);
 	}, []);
