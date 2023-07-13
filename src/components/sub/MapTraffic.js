@@ -12,28 +12,32 @@ function MapTraffic({ City, setCity, Index, setIndex }) {
 
 	const info = [
 		{
-			title: 'IKEA 고양점',
+			title: '고양점',
+			address: '경기도 고양시 덕양구 권율대로 420',
 			latlng: new kakao.maps.LatLng(37.62986119395948, 126.8631475894335),
 			imgSrc: `${process.env.PUBLIC_URL}/img/marker1.png`,
 			imgSize: new kakao.maps.Size(110, 100),
 			imgPos: { offset: new kakao.maps.Point(56, 80) },
 		},
 		{
-			title: 'IKEA 기흥점',
+			title: '기흥점',
+			address: '경기도 용인시 기흥구 신고매로 62',
 			latlng: new kakao.maps.LatLng(37.22224126621655, 127.11567913939837),
 			imgSrc: `${process.env.PUBLIC_URL}/img/marker1.png`,
 			imgSize: new kakao.maps.Size(110, 100),
 			imgPos: { offset: new kakao.maps.Point(54, 90) },
 		},
 		{
-			title: 'IKEA 광명점',
+			title: '광명점',
+			address: '경기도 광명시 일직로 17',
 			latlng: new kakao.maps.LatLng(37.42432343572819, 126.88286963577373),
 			imgSrc: `${process.env.PUBLIC_URL}/img/marker1.png`,
 			imgSize: new kakao.maps.Size(110, 100),
 			imgPos: { offset: new kakao.maps.Point(55, 90) },
 		},
 		{
-			title: 'IKEA 동부산점',
+			title: '동부산점',
+			address: '부산시 기장군 기장읍 동부산관광3로 17',
 			latlng: new kakao.maps.LatLng(35.19079483522182, 129.210473742942),
 			imgSrc: `${process.env.PUBLIC_URL}/img/marker1.png`,
 			imgSize: new kakao.maps.Size(110, 100),
@@ -41,12 +45,14 @@ function MapTraffic({ City, setCity, Index, setIndex }) {
 		},
 	];
 
+	const title = info[Index].title;
+	const address = info[Index].address;
 	const option = { center: info[Index].latlng, level: 3 };
-	const imgSrc = `${process.env.PUBLIC_URL}/img/marker1.png`;
+	const imgSrc = info[Index].imgSrc;
 	const imgSize = info[Index].imgSize;
 	const imgPos = info[Index].imgPos;
 	const markerImage = new kakao.maps.MarkerImage(imgSrc, imgSize, imgPos);
-	const marker = new kakao.maps.Marker({ latlng: option.center, image: markerImage });
+	const marker = new kakao.maps.Marker({ position: option.center, image: markerImage });
 
 	useEffect(() => {
 		const mapInstance = new kakao.maps.Map(map.current, option);
@@ -79,7 +85,7 @@ function MapTraffic({ City, setCity, Index, setIndex }) {
 						<div className='addressDesc'>
 							<div className='leftside'>
 								<FontAwesomeIcon icon={faEarthAsia} className='loactionIcon' />
-								{City}
+								{title} : {address}
 							</div>
 							<div className='rightside'>
 								<button onClick={() => setTraffic(!Traffic)}>
