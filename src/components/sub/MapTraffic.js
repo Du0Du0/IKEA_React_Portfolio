@@ -13,7 +13,13 @@ function MapTraffic() {
 	};
 
 	useEffect(() => {
-		new kakao.maps.Map(map.current, option);
+		const mapInstance = new kakao.maps.Map(map.current, option);
+
+		const marker = new kakao.maps.Marker({
+			position: option.center,
+		});
+
+		marker.setMap(mapInstance);
 	}, []);
 
 	return (
