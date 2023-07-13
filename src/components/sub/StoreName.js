@@ -3,28 +3,59 @@ import axios from 'axios';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import moment from 'moment';
+import Rain from './Rain';
 
 function StoreName() {
-	const [City, setCity] = useState('');
+	const [City, setCity] = useState('Goyang-si');
 	const [Weather, setWeather] = useState('');
 	const [Icon, setIcon] = useState('');
 	const [Temp, setTemp] = useState(0);
 	const [value, onChange] = useState(new Date());
 
-	// const fetchWeather = async () => {
-	// 	const cityName = 'Seoul';
-	// 	const apiKey = '92f6760901be4aa4456b1e38b5d060c6';
-	// 	const url = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}`;
+	// 지점명: 영어 도시 이름 => 한글로 변경
+	const getCityLocation = (City) => {
+		switch (City) {
+			case 'Goyang-si':
+				console.log('고양점');
+				return <h2>고양점</h2>;
+			case 'Yongin':
+				console.log('기흥점');
+				return <h2>기흥점</h2>;
+			case 'Gyeonggi-do':
+				console.log('광명점');
+				return <h2>광명점</h2>;
+			case 'Busan':
+				console.log('동부산점');
+				return <h2>동부산점</h2>;
+			default:
+				return null;
+		}
+	};
 
-	// 	const result = await axios.get(url);
+	//openWeather api 데이터 가져오기
+	const fetchWeather = async () => {
+		let cityName = City;
+		const apiKey = '3bc1f51ea0960a95958152e47fb71800';
+		const url = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=3bc1f51ea0960a95958152e47fb71800&units=metric`;
 
-	// 	console.log(result);
-	// 	setCity(result.data.name);
-	// 	setWeather(result.data.weather[0].main);
-	// 	setIcon(result.data.weather[0].icon);
-	// 	setTemp(result.data.main.feels_like);
-	// };
-	// useEffect(() => fetchWeather(), []);
+		try {
+			const result = await axios.get(url);
+
+			console.log(result);
+			setCity(result.data.name);
+			console.log('result.data.name', result.data.name);
+			setWeather(result.data.weather[0].main);
+			setIcon(result.data.weather[0].icon);
+			console.log('Icon', Icon);
+			setTemp(result.data.main.temp + '℃');
+		} catch (error) {
+			console.error('Error fetching weather:', error);
+		}
+	};
+
+	useEffect(() => {
+		fetchWeather();
+	}, [City]);
 
 	//휴점
 	const holidayMarks = ['11-07-2023'];
@@ -58,7 +89,7 @@ function StoreName() {
 			<div className='storeListContainer'>
 				<div className='leftContainer'>
 					<div className='storeNameWrap'>
-						<h2>{City}</h2>
+						<h2>{getCityLocation(City)}</h2>
 						<select
 							name='storeName'
 							id='storeName'
@@ -66,18 +97,18 @@ function StoreName() {
 								setCity(e.target.value);
 							}}
 						>
-							점포 변경
-							<option value=''>점포 변경</option>
-							<option value='Seoul'>서울</option>
-							{/* <option value='기흥'>기흥</option>
-							<option value='광명'>광명</option> */}
-							<option value='Busan'>동부산</option>
+							<option value='Goyang'>고양점</option>
+							<option value='Yongin'>기흥점</option>
+							<option value='Gyeonggi-do'>광명점</option>
+							<option value='Busan'>동부산점</option>
 						</select>
 					</div>
 					<div className='weatherWrap'>
-						{Weather}
-						{Icon}
-						{Temp}
+						{/* {Weather} */}
+						<img src={` https://openweathermap.org/img/wn/${Icon}@2x.png`} />
+						<div className='temperature'>
+							<p>{Temp}</p>
+						</div>
 					</div>
 					<div className='selectStoreDesc'>
 						<p>

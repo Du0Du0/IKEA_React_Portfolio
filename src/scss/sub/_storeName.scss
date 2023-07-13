@@ -30,7 +30,7 @@
 
 				h2 {
 					font: 48px/60px $ikeaFontKo;
-					color: $fontColorGrC;
+					color: $fontColorBl;
 				}
 
 				select {
@@ -56,9 +56,31 @@
 
 			.weatherWrap {
 				width: 224px;
-				height: 70px;
-				background: grey;
+				height: 100px;
 				margin-bottom: 20px;
+				display: flex;
+				justify-content: left;
+				align-items: center;
+
+				img {
+					width: 150px;
+					height: 150px;
+					margin-left: -2vw;
+				}
+
+				.temperature {
+					p {
+						font: 28px/1 $ikeaFontKo;
+						color: $fontColorBl;
+					}
+				}
+			}
+
+			.selectStoreDesc {
+				p {
+					font: 18px/1.6 $ikeaFontKo;
+					color: $fontColorBl;
+				}
 			}
 		}
 		.middleContainer {
