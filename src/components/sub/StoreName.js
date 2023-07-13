@@ -8,13 +8,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPhone } from '@fortawesome/free-solid-svg-icons';
 import { faClock } from '@fortawesome/free-regular-svg-icons';
 
-function StoreName() {
-	const [City, setCity] = useState('Goyang-si');
+function StoreName({ City, setCity, Index, setIndex }) {
 	const [Weather, setWeather] = useState('');
 	const [Icon, setIcon] = useState('');
 	const [Temp, setTemp] = useState(0);
 	const [value, onChange] = useState(new Date());
 	const path = process.env.PUBLIC_URL;
+
 	// 지점명: 영어 도시 이름 => 한글로 변경
 	const getCityLocation = (City) => {
 		switch (City) {
@@ -55,6 +55,22 @@ function StoreName() {
 		}
 	};
 
+	//지점명 :순서로 설정
+	const getCityIndex = (City) => {
+		switch (City) {
+			case 'Goyang-si':
+				return setIndex(0);
+			case 'Yongin':
+				return setIndex(1);
+			case 'Gyeonggi-do':
+				return setIndex(2);
+			case 'Busan':
+				return setIndex(3);
+			default:
+				return null;
+		}
+	};
+
 	//openWeather api 데이터 가져오기
 	const fetchWeather = async () => {
 		let cityName = City;
@@ -76,9 +92,10 @@ function StoreName() {
 		}
 	};
 
-	// useEffect(() => {
-	// 	fetchWeather();
-	// }, [City]);
+	useEffect(() => {
+		fetchWeather();
+		getCityIndex(City);
+	}, [City]);
 
 	//휴점
 	const holidayMarks = ['11-07-2023'];
@@ -90,13 +107,12 @@ function StoreName() {
 		'07-07-2023',
 		'08-07-2023',
 		'09-07-2023',
-		'14-07-2023',
 		'15-07-2023',
 		'15-07-2023',
 		'16-07-2023',
+		'21-07-2023',
 		'22-07-2023',
 		'23-07-2023',
-		'28-07-2023',
 		'29-07-2023',
 		'30-07-2023',
 	];

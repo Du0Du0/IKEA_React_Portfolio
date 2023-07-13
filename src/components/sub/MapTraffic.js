@@ -2,8 +2,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEarthAsia, faCaretDown } from '@fortawesome/free-solid-svg-icons';
 import { useState, useRef } from 'react';
 import { useEffect } from 'react';
+import StoreName from './StoreName';
 
-function MapTraffic() {
+function MapTraffic({ City, setCity, Index, setIndex }) {
 	const map = useRef(null);
 	const { kakao } = window;
 	const [Traffic, setTraffic] = useState(false);
@@ -40,10 +41,10 @@ function MapTraffic() {
 		},
 	];
 
-	const option = { center: info[0].latlng, level: 3 };
-	const imgSrc = info[0].imgSrc;
-	const imgSize = info[0].imgSize;
-	const imgPos = info[0].imgPos;
+	const option = { center: info[Index].latlng, level: 3 };
+	const imgSrc = `${process.env.PUBLIC_URL}/img/marker1.png`;
+	const imgSize = info[Index].imgSize;
+	const imgPos = info[Index].imgPos;
 	const markerImage = new kakao.maps.MarkerImage(imgSrc, imgSize, imgPos);
 	const marker = new kakao.maps.Marker({ latlng: option.center, image: markerImage });
 
@@ -51,7 +52,7 @@ function MapTraffic() {
 		const mapInstance = new kakao.maps.Map(map.current, option);
 		marker.setMap(mapInstance);
 		setLocation(mapInstance);
-	}, []);
+	}, [Index]);
 
 	useEffect(() => {
 		Traffic ? Location?.addOverlayMapTypeId(kakao.maps.MapTypeId.TRAFFIC) : Location?.removeOverlayMapTypeId(kakao.maps.MapTypeId.TRAFFIC);
@@ -78,7 +79,7 @@ function MapTraffic() {
 						<div className='addressDesc'>
 							<div className='leftside'>
 								<FontAwesomeIcon icon={faEarthAsia} className='loactionIcon' />
-								주소
+								{City}
 							</div>
 							<div className='rightside'>
 								<button onClick={() => setTraffic(!Traffic)}>
