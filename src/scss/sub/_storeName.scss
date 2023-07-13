@@ -1,15 +1,31 @@
 .topPopUp {
 	padding: 0px 15vw 150px;
 
+	.topBgWrap {
+		width: 100%;
+		height: 300px;
+		overflow: hidden;
+		position: relative;
+		z-index: -555;
+
+		img {
+			width: 100%;
+			height: 50%;
+			object-fit: cover;
+		}
+	}
 	.upperBanner {
 		width: 100%;
 		height: 60px;
-		background: $tableBtn;
+		background: rgba($ikeaBl, 0.6);
+		position: relative;
+		margin-top: -15vh;
 
 		p {
 			font: 18px/60px $ikeaFontKo;
 			color: $fontColorW;
 			padding-left: 32px;
+			opacity: 1;
 		}
 	}
 
@@ -17,6 +33,7 @@
 		width: 100%;
 		height: 450px;
 		display: flex;
+		position: relative;
 
 		.leftContainer {
 			width: calc(100% / 3);
@@ -43,6 +60,7 @@
 					border-bottom: 1px solid $borderLight;
 					background: transparent;
 					padding: 2px;
+					cursor: pointer;
 
 					&:focus {
 						outline: none;
@@ -92,19 +110,33 @@
 			flex-direction: column;
 
 			ul {
-				margin-bottom: 50px;
+				margin-bottom: 150px;
 				text-align: left;
 				li {
-					font: 14px/1.5 $ikeaFontKo;
+					font: 16px/1.5 $ikeaFontKo;
 					color: $fontColorBl;
+					margin-bottom: 10px;
+
+					&:nth-of-type(1) {
+						margin-bottom: 20px;
+					}
+
+					.fontAwesomeIcon {
+						margin-right: 20px;
+						font: 16px/1.8 $ikeaFontKo;
+						color: $fontColorGrC;
+					}
 				}
 			}
 			button {
-				width: 327px;
+				width: 100%;
 				height: 43px;
-				font: 14px/43px $ikeaFontKo;
+				font: 16px/43px $ikeaFontKo;
 				color: $fontColorBl;
 				margin: 0px auto;
+				background: transparent;
+				border: 1px solid $borderLight;
+				cursor: pointer;
 			}
 		}
 		.rightContainer {
@@ -122,8 +154,8 @@
 				max-width: 100%;
 				background: transparent;
 				border: none;
-				font-family: $ikeaFontKo;
-				line-height: 1.8em;
+				font: 18px/1.8em $ikeaFontKo;
+				color: $fontColorBl;
 			}
 
 			.react-calendar--doubleView {
@@ -167,6 +199,8 @@
 			.react-calendar__navigation button {
 				min-width: 44px;
 				background: none;
+				font: 15px/1.8em $ikeaFontKo;
+				color: $fontColorBl;
 			}
 
 			.react-calendar__navigation button:disabled {
@@ -209,6 +243,9 @@
 			.react-calendar__decade-view .react-calendar__tile,
 			.react-calendar__century-view .react-calendar__tile {
 				padding: 2em 0.5em;
+			}
+			.react-calendar__navigation__label {
+				pointer-events: none;
 			}
 
 			.react-calendar__tile {
@@ -296,7 +333,7 @@
 					gap: 30px;
 
 					li {
-						font: 12px/1 $ikeaFontKo;
+						font: 14px/1 $ikeaFontKo;
 						color: $fontColorBl;
 
 						&:nth-of-type(1):before {
@@ -335,8 +372,23 @@
 .descBanner {
 	display: flex;
 	justify-content: right;
+	margin-top: 25px;
+	gap: 8px;
+	font: 14px/1 $ikeaFontKo;
+	color: $fontColorGrC;
+
 	p {
 		font: 14px/1 $ikeaFontKo;
-		color: $fontColorBl;
+		color: $fontColorGrC;
+		text-decoration-line: underline;
+		text-decoration-color: $fontColorGrC;
+		text-decoration-thickness: 1.2px;
+		text-underline-offset: 2px;
+		text-underline-position: under;
+		cursor: pointer;
+
+		&:nth-of-type(4) {
+			text-decoration-color: transparent;
+		}
 	}
 }
