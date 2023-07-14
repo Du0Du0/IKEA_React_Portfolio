@@ -1,9 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import moment from 'moment';
-import Rain from './Rain';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPhone } from '@fortawesome/free-solid-svg-icons';
 import { faClock } from '@fortawesome/free-regular-svg-icons';
@@ -14,7 +13,9 @@ function StoreName({ City, setCity, Index, setIndex }) {
 	const [Temp, setTemp] = useState(0);
 	const [value, onChange] = useState(new Date());
 	const path = process.env.PUBLIC_URL;
-
+	const pageBg = useRef(null);
+	const banner = useRef(null);
+	const storeList = useRef(null);
 	// 지점명: 영어 도시 이름 => 한글로 변경
 	const getCityLocation = (City) => {
 		switch (City) {
@@ -97,6 +98,13 @@ function StoreName({ City, setCity, Index, setIndex }) {
 		getCityIndex(City);
 	}, [City]);
 
+	useEffect(() => {
+		window.scrollTo(0, 0);
+		pageBg.current.classList.add('on');
+		banner.current.classList.add('on');
+		storeList.current.classList.add('on');
+	}, []);
+
 	//휴점
 	const holidayMarks = ['11-07-2023'];
 
@@ -120,19 +128,19 @@ function StoreName({ City, setCity, Index, setIndex }) {
 	return (
 		<>
 			<div className='topBgWrap'>
-				<img src={path + '/img/ikeaBuilding.png'} />
+				<img src={path + '/img/ikeaBuilding.png'} className='back' ref={pageBg} />
 			</div>
 
 			<div className='topPopUp'>
 				{/* 상단 안내 소개 배너*/}
 
-				<div className='upperBanner'>
+				<div className='upperBanner' ref={banner}>
 					<p>김도현님, 이케아 홈페이지에 오신걸 환영합니다.</p>
 				</div>
 
 				{/* 상단 매장지점 정보란 / 스케쥴 / 달력 표시 */}
 
-				<div className='storeListContainer'>
+				<div className='storeListContainer' ref={storeList}>
 					<div className='leftContainer'>
 						<div className='storeNameWrap'>
 							<h2>{getCityLocation(City)}</h2>

@@ -5,7 +5,7 @@ import { faTwitter, faFacebookF } from '@fortawesome/free-brands-svg-icons';
 import { useState } from 'react';
 
 function Header({ type }) {
-	const [Menu, setMenu] = useState(false);
+	const [Menu, setMenu] = useState(true);
 	const [IsRgtOn, setIsRgtOn] = useState(false);
 
 	//when click the hamburger button, header is opened
@@ -27,8 +27,8 @@ function Header({ type }) {
 		// props로 전달되는 type값을 header의 class명으로 지정해서 스타일 분기처리
 		<header className={type}>
 			<div className='menu'>
-				<FontAwesomeIcon icon={faBarsStaggered} onClick={headerToggle} style={IsRgtOn ? { display: 'block' } : { display: 'none' }} />
-				<FontAwesomeIcon icon={faXmark} onClick={headerToggle} style={IsRgtOn ? { display: 'none' } : { display: 'block' }} />
+				<FontAwesomeIcon icon={faBarsStaggered} onClick={headerToggle} style={IsRgtOn ? { display: 'none' } : { display: 'block' }} />
+				<FontAwesomeIcon icon={faXmark} onClick={headerToggle} style={IsRgtOn ? { display: 'block' } : { display: 'none' }} />
 			</div>
 			<div className='logo'>
 				<h1>
