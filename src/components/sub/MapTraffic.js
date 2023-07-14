@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEarthAsia, faCaretDown } from '@fortawesome/free-solid-svg-icons';
+import { faEarthAsia, faCaretRight } from '@fortawesome/free-solid-svg-icons';
 import { useState, useRef } from 'react';
 import { useEffect } from 'react';
 import StoreName from './StoreName';
@@ -12,6 +12,7 @@ function MapTraffic({ City, setCity, Index, setIndex }) {
 	const { kakao } = window;
 	const [Traffic, setTraffic] = useState(false);
 	const [Location, setLocation] = useState(null);
+	const [ActiveBtn, setActiveBtn] = useState(0);
 
 	const info = [
 		{
@@ -76,7 +77,7 @@ function MapTraffic({ City, setCity, Index, setIndex }) {
 			subwayStationName: '광명사거리역역',
 			subwayStationDec: '광명사거리역 10번 게이트로 10분정도 소요됩니다.',
 			latlng: new kakao.maps.LatLng(37.42432343572819, 126.88286963577373),
-			imgSrc: `${process.env.PUBLIC_URL}/img/ico_subway_bundang.png`,
+			imgSrc: `${process.env.PUBLIC_URL}/img/marker1.png`,
 			imgSize: new kakao.maps.Size(110, 100),
 			imgPos: { offset: new kakao.maps.Point(55, 90) },
 
@@ -171,6 +172,28 @@ function MapTraffic({ City, setCity, Index, setIndex }) {
 		Traffic ? Location?.addOverlayMapTypeId(kakao.maps.MapTypeId.TRAFFIC) : Location?.removeOverlayMapTypeId(kakao.maps.MapTypeId.TRAFFIC);
 	}, [Traffic]);
 
+	const swtichTabButton = () => {
+		if (ActiveBtn === 0) return <ParkingInfo />;
+		if (ActiveBtn === 1) return <SubwayInfo subwayIcon={subwayIcon} subwayStationName={subwayStationName} subwayStationDec={subwayStationDec} />;
+		if (ActiveBtn === 2)
+			return (
+				<BusInfo
+					localBusIcon={localBusIcon}
+					localBusKo={localBusKo}
+					localBus={localBus}
+					trunkBusIcon={trunkBusIcon}
+					trunkBusKo={trunkBusKo}
+					trunkBus={trunkBus}
+					expressBusIcon={expressBusIcon}
+					expressBusKo={expressBusKo}
+					expressBus={expressBus}
+					seaterBusKo={seaterBusKo}
+					seaterBusIcon={seaterBusIcon}
+					seaterBus={seaterBus}
+				/>
+			);
+	};
+
 	return (
 		<div className='locationContainer'>
 			<div className='titWrap'>
@@ -178,9 +201,32 @@ function MapTraffic({ City, setCity, Index, setIndex }) {
 
 				<div className='tabMenu'>
 					<ul>
-						<li className='active'>주차안내</li>
-						<li>지하철</li>
-						<li>버스</li>
+						<li
+							className={ActiveBtn === 0 ? 'active' : ''}
+							onClick={() => {
+								setActiveBtn(0);
+							}}
+						>
+							주차안내
+						</li>
+						<li
+							className={ActiveBtn === 1 ? 'active' : ''}
+							onClick={(e) => {
+								setActiveBtn(1);
+								setActiveBtn(1) ? e.target.classList.add('active') : e.target.classList.remove('active');
+							}}
+						>
+							지하철
+						</li>
+						<li
+							className={ActiveBtn === 2 ? 'active' : ''}
+							onClick={(e) => {
+								setActiveBtn(2);
+								setActiveBtn(2) ? e.target.classList.add('active') : e.target.classList.remove('active');
+							}}
+						>
+							버스
+						</li>
 					</ul>
 				</div>
 
@@ -196,31 +242,13 @@ function MapTraffic({ City, setCity, Index, setIndex }) {
 							</div>
 							<div className='rightside'>
 								<button onClick={() => setTraffic(!Traffic)}>
-									{Traffic ? '교통정보 OFF' : '교통정보 ON'} <FontAwesomeIcon icon={faCaretDown} />
+									{Traffic ? '교통정보 OFF' : '교통정보 ON'} <FontAwesomeIcon icon={faCaretRight} />
 								</button>
 							</div>
 						</div>
 					</div>
 
-					<div className='rightInfo'>
-						{/* <ParkingInfo /> */}
-						{/* <SubwayInfo subwayIcon={subwayIcon} subwayStationName={subwayStationName} subwayStationDec={subwayStationDec} /> */}
-
-						<BusInfo
-							localBusIcon={localBusIcon}
-							localBusKo={localBusKo}
-							localBus={localBus}
-							trunkBusIcon={trunkBusIcon}
-							trunkBusKo={trunkBusKo}
-							trunkBus={trunkBus}
-							expressBusIcon={expressBusIcon}
-							expressBusKo={expressBusKo}
-							expressBus={expressBus}
-							seaterBusKo={seaterBusKo}
-							seaterBusIcon={seaterBusIcon}
-							seaterBus={seaterBus}
-						/>
-					</div>
+					<div className='rightInfo'>{swtichTabButton()}</div>
 				</div>
 			</div>
 		</div>

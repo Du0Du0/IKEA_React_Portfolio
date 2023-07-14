@@ -4,12 +4,11 @@ function SubwayInfo({ subwayIcon, subwayStationName, subwayStationDec }) {
 	return (
 		<div className='subwayInfoWrap'>
 			<div className='subwayTitWrap'>
-				<h3>
-					{subwayIcon}
-					{subwayStationName}
-				</h3>
+				<span>{subwayIcon}</span> <h3>{subwayStationName}</h3>
 			</div>
-			<p>{subwayStationDec} </p>
+			<div className='subwayTitDesc'>
+				<p>{subwayStationDec} </p>
+			</div>
 		</div>
 	);
 }

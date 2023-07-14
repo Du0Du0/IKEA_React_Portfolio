@@ -42,6 +42,10 @@ $openLong: rgba(128, 128, 128, 0.4);
 $today: #bea36f;
 $lightRed: #d80000;
 $contactBl: #2d2d2d;
+$localBus: #3d8825;
+$trunkBus: #2c5fca;
+$expressBus: #c44b3d;
+$seaterBus: #2c5fca;
 
 body {
 	overflow-x: hidden;
@@ -95,3 +99,5 @@ a:visited {
 @import 'sub/storeName';
 @import 'sub/mapTraffic';
 @import 'sub/parkingInfo';
+@import 'sub/subwayInfo';
+@import 'sub/busInfo';
