@@ -169,6 +169,15 @@ function MapTraffic({ City, setCity, Index, setIndex }) {
 		//지도인스턴스에 타입, 줌 컨트롤 추가
 		mapInstance.addControl(new kakao.maps.MapTypeControl(), kakao.maps.ControlPosition.TOPRIGHT);
 		mapInstance.addControl(new kakao.maps.ZoomControl(), kakao.maps.ControlPosition.RIGHT);
+		const setCenter = () => {
+			console.log('setCenter');
+			//setCetner가 호출시 내부적으로 Index state값에 의존하고 있기 떄문에
+			//useEffect안쪽에서 setCenter함수를 정의하고 호출
+			mapInstance.setCenter(info[Index].latlng);
+		};
+
+		window.addEventListener('resize', setCenter);
+		return () => window.removeEventListener('resize', setCenter);
 	}, [Index]);
 
 	useEffect(() => {
