@@ -59,7 +59,7 @@
 				width: 100%;
 				height: calc(100% / 4);
 				display: flex;
-				padding: 15px 10px 45px 10px;
+				padding: 15px 0px 45px 0px;
 				justify-content: space-between;
 
 				input[type='text'] {
@@ -113,6 +113,12 @@
 				display: flex;
 				justify-content: end;
 				padding: 30px;
+				gap: 30px;
+
+				p {
+					font: 15px/3 $ikeaFontKo;
+					color: $hoverBtn;
+				}
 
 				.submitBtn {
 					width: 150px;
