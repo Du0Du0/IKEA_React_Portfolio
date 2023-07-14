@@ -166,6 +166,9 @@ function MapTraffic({ City, setCity, Index, setIndex }) {
 		const mapInstance = new kakao.maps.Map(map.current, option);
 		marker.setMap(mapInstance);
 		setLocation(mapInstance);
+		//지도인스턴스에 타입, 줌 컨트롤 추가
+		mapInstance.addControl(new kakao.maps.MapTypeControl(), kakao.maps.ControlPosition.TOPRIGHT);
+		mapInstance.addControl(new kakao.maps.ZoomControl(), kakao.maps.ControlPosition.RIGHT);
 	}, [Index]);
 
 	useEffect(() => {
