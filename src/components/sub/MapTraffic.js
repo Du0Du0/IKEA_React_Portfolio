@@ -28,7 +28,7 @@ function MapTraffic({ City, setCity, Index, setIndex }) {
 			imgPos: { offset: new kakao.maps.Point(56, 80) },
 
 			localBusKo: '지선버스',
-			localBus: '730 , 733',
+			localBus: '730, 733',
 			localBusIcon: `${process.env.PUBLIC_URL}/img/localBus.png`,
 
 			trunkBusKo: '간선버스',
@@ -36,7 +36,7 @@ function MapTraffic({ City, setCity, Index, setIndex }) {
 			trunkBusIcon: `${process.env.PUBLIC_URL}/img/trunkBus.png`,
 
 			seaterBusKo: '좌석버스',
-			seaterBus: '1001 ,1003',
+			seaterBus: '1001, 1003',
 			seaterBusIcon: `${process.env.PUBLIC_URL}/img/seaterBus.png`,
 
 			expressBusKo: '광역버스',
@@ -105,15 +105,15 @@ function MapTraffic({ City, setCity, Index, setIndex }) {
 			subwayStationDec: '오시리아역 1번 게이트를 이용하시면 15분정도 소요됩니다.',
 
 			localBusKo: '지선버스',
-			localBus: '100 , 1003',
+			localBus: '100, 1003',
 			localBusIcon: `${process.env.PUBLIC_URL}/img/localBus.png`,
 
 			trunkBusKo: '간선버스',
-			trunkBus: '139 , 181 , 185',
+			trunkBus: '139, 181, 185',
 			trunkBusIcon: `${process.env.PUBLIC_URL}/img/trunkBus.png`,
 
 			seaterBusKo: '좌석버스',
-			seaterBus: '1001 ,1003',
+			seaterBus: '1001, 1003',
 			seaterBusIcon: `${process.env.PUBLIC_URL}/img/seaterBus.png`,
 
 			expressBusKo: '광역버스',
@@ -197,7 +197,7 @@ function MapTraffic({ City, setCity, Index, setIndex }) {
 	return (
 		<div className='locationContainer'>
 			<div className='titWrap'>
-				<h3>오시는 길</h3>
+				<h2>오시는 길</h2>
 
 				<div className='tabMenu'>
 					<ul>
