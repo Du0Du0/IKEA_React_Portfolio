@@ -37,7 +37,7 @@ function Gallery() {
 				++counter;
 
 				//로딩완료된 이미지수와 전체이미지수가 같아지면
-				if (counter === imgs.length) {
+				if (counter === imgs.length - 1) {
 					//로더 제거하고 이미지 갤러리 보임처리
 					setLoader(false);
 					frame.current.classList.add('on');
@@ -49,10 +49,7 @@ function Gallery() {
 	//아래 호출문으로 풍경이미지 검색되도록 함수 코드 수정
 	//getFlickr({type: 'search', tags: 'landscape'})
 
-	//아래 호출문으로 내 계정의 이미지 갤러리 호출되도록
-	//getFlickr({type: 'user', user: '내아이디'})
-	// useEffect(() => getFlickr({ type: 'user', user: '168950802@N02' }), []);
-	useEffect(() => getFlickr({ type: 'interest' }), []);
+	useEffect(() => getFlickr({ type: 'user', user: '168950802@N02' }), []);
 
 	return (
 		<Layout name1={'gallery'} name2={'갤러리'} video={'pexels.mp4'}>
@@ -84,14 +81,21 @@ function Gallery() {
 										<img src={`https://live.staticflickr.com/${item.server}/${item.id}_${item.secret}_m.jpg`} alt={item.title} />
 									</div>
 									<h2>{item.title}</h2>
-
 									<div className='profile'>
 										<img
 											src={`http://farm${item.farm}.staticflickr.com/${item.server}/buddyicons/${item.owner}.jpg`}
 											alt={item.owner}
 											onError={(e) => e.target.setAttribute('src', 'https://www.flickr.com/images/buddyicon.gif')}
 										/>
-										<span>{item.owner}</span>
+										<span
+											onClick={(e) => {
+												setLoader(true);
+												frame.current.classList.remove('on');
+												getFlickr({ type: 'user', user: e.target.innerText });
+											}}
+										>
+											{item.owner}
+										</span>
 									</div>
 								</div>
 							</article>
