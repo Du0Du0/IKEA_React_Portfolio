@@ -10,6 +10,9 @@ function Gallery() {
 	const [Loader, setLoader] = useState(true);
 
 	const getFlickr = async (opt) => {
+		//새롭게 data fetching이 실행되면 참조객체에 담겨있는 카운터 값을 다시 0으로 초기화
+		//useRef로 참조한 값은 컴포넌트가 재실행되더라도 일반 변수처럼 초기화되는 것이 아니라 직접 초기화해야됨
+		counter.current = 0;
 		const baseURL = 'https://www.flickr.com/services/rest/?format=json&nojsoncallback=1';
 		const key = '08e2b5a2a14d18ff9a849c7109134194';
 		const method_interest = 'flickr.interestingness.getList';
@@ -55,6 +58,24 @@ function Gallery() {
 
 	return (
 		<Layout name1={'gallery'} name2={'갤러리'} video={'pexels.mp4'}>
+			<button
+				onClick={() => {
+					setLoader(true);
+					frame.current.classList.remove('on');
+					getFlickr({ type: 'interest' });
+				}}
+			>
+				Interest Gallery
+			</button>
+			<button
+				onClick={() => {
+					setLoader(true);
+					frame.current.classList.remove('on');
+					getFlickr({ type: 'user', user: '164021883@N04' });
+				}}
+			>
+				My Gallery
+			</button>
 			<div className='frame' ref={frame}>
 				<Masonry elementType={'div'} options={{ transitionDuration: '0.5s' }}>
 					{Items.map((item, idx) => {
