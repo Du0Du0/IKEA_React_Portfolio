@@ -4,6 +4,7 @@ import axios from 'axios';
 import Masonry from 'react-masonry-component';
 
 function Gallery() {
+	const enableEvent = useRef(true);
 	const [Items, setItems] = useState([]);
 	const frame = useRef(null);
 	const [Loader, setLoader] = useState(true);
@@ -41,6 +42,10 @@ function Gallery() {
 					//로더 제거하고 이미지 갤러리 보임처리
 					setLoader(false);
 					frame.current.classList.add('on');
+
+					setTimeout(() => {
+						enableEvent.current = true;
+					}, 1000);
 				}
 			};
 		});
@@ -55,6 +60,8 @@ function Gallery() {
 		<Layout name1={'gallery'} name2={'갤러리'} video={'pexels.mp4'}>
 			<button
 				onClick={() => {
+					if (!enableEvent.current) return;
+					enableEvent.current = false;
 					setLoader(true);
 					frame.current.classList.remove('on');
 					getFlickr({ type: 'interest' });
@@ -64,6 +71,8 @@ function Gallery() {
 			</button>
 			<button
 				onClick={() => {
+					if (!enableEvent.current) return;
+					enableEvent.current = false;
 					setLoader(true);
 					frame.current.classList.remove('on');
 					getFlickr({ type: 'user', user: '164021883@N04' });
