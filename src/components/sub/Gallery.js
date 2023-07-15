@@ -6,13 +6,11 @@ import Masonry from 'react-masonry-component';
 function Gallery() {
 	const [Items, setItems] = useState([]);
 	const frame = useRef(null);
-	const counter = useRef(0);
 	const [Loader, setLoader] = useState(true);
 
 	const getFlickr = async (opt) => {
-		//새롭게 data fetching이 실행되면 참조객체에 담겨있는 카운터 값을 다시 0으로 초기화
-		//useRef로 참조한 값은 컴포넌트가 재실행되더라도 일반 변수처럼 초기화되는 것이 아니라 직접 초기화해야됨
-		counter.current = 0;
+		//getFlickr함수가 재실행될떄마다 어차피 counter값을 초기화되어야 하므로 useRef가 아닌 일반 지역변수로 설정
+		let counter = 0;
 		const baseURL = 'https://www.flickr.com/services/rest/?format=json&nojsoncallback=1';
 		const key = '08e2b5a2a14d18ff9a849c7109134194';
 		const method_interest = 'flickr.interestingness.getList';
@@ -36,10 +34,10 @@ function Gallery() {
 			//이미지요소에 load이벤트가 발생할때 (소스이미지까지 로딩이 완료될떄마다)
 			img.onload = () => {
 				//내부적으로 카운터값을 1씩 증가
-				++counter.current;
+				++counter;
 
 				//로딩완료된 이미지수와 전체이미지수가 같아지면
-				if (counter.current === imgs.length) {
+				if (counter === imgs.length) {
 					//로더 제거하고 이미지 갤러리 보임처리
 					setLoader(false);
 					frame.current.classList.add('on');
