@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye } from '@fortawesome/free-regular-svg-icons';
 import DaumPostcode from './DaumPostcode';
 import { useDaumPostcodePopup } from 'react-daum-postcode';
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect, useCallback } from 'react';
 import { useHistory } from 'react-router-dom';
 
 function Department() {
@@ -45,6 +45,7 @@ function Department() {
 
 	const [Val, setVal] = useState(initVal.current);
 	const [Submit, setSubmit] = useState(false);
+	const [Err, setErr] = useState({});
 
 	const handleChange = (e) => {
 		//현재 입력하고 있는 input요소의 name,value값을 비구조화할당으로 뽑아서 출력
@@ -81,12 +82,67 @@ function Department() {
 		console.log('현재 스테이트값', Val);
 		//check가 반환하는 인증 메세지가 있으면 해당 메세지를 화면에 출력하고 전송중지
 		//그렇지 않으면 인증 성공
-		// console.log(check(Val));
-		// setErr(check(Val));
+		console.log(check(Val));
+		setErr(check(Val));
 		setSubmit(true);
-		alert('가입완료되었습니다.');
-		history.push('/');
+
+		if (!setErr) {
+			alert('가입완료되었습니다.');
+			history.push('/');
+		}
 	};
+
+	const check = (value) => {
+		const errs = {};
+
+		// user id : 영문(소문자만가능), 숫자를 포함한 6~12자 조합
+		const idRegex = /^[a-z0-9]{6,12}$/;
+
+		//nickname : 한글,영문(대소문자가능), 숫자,공백을 포함한 1~12자 조합으로 입력해주세요.
+		const nickRegex = /^[a-zA-Zㄱ-힣0-9\s]{1,12}$/;
+
+		//password : 영문(대문자 1개이상 필수),숫자,특수문자(~!@#$%^&*)를 포함한 10~20자 조합으로 입력해 주세요.
+		const passWordRegex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%^&*]).{10,20}$/;
+
+		if (!idRegex.test(value.userid)) {
+			errs.userid = '영문(소문자만가능), 숫자를 포함한 6~12자 조합으로 입력하세요.';
+		}
+		if (!nickRegex.test(value.nickname)) {
+			errs.nickname = '한글,영문(대소문자가능), 숫자,공백을 포함한 1~12자 조합으로 입력해주세요.';
+		}
+		if (!passWordRegex.test(value.password)) {
+			errs.password = '영문(대문자필수),숫자,특수문자(~!@#$%^&*)를 포함한 10~20자 조합으로 입력해 주세요.';
+		}
+		if (value.password !== value.passwordCheck || !value.passwordCheck) {
+			errs.passwordCheck = '두 개의 비밀번호를 동일하게 입력하세요.';
+		}
+		if (value.emailId.length < 5) {
+			errs.email = '올바른 이메일 형식을 입력하세요.';
+		}
+		if (!value.zoneCode || !value.detailAddress || value.detailAddress.length < 6) {
+			errs.address = '올바른 우편번호와 주소를 입력해주세요.';
+		}
+		return errs;
+	};
+
+	const resetForm = useCallback(() => {
+		// const select = selectEl.current.options[0];
+		// const checks = checkGroup.current.querySelectorAll('input');
+		// const radios = radioGroup.current.querySelectorAll('input');
+		// select.selected = true;
+		// checks.forEach((el) => (el.checked = false));
+		// radios.forEach((el) => (el.checked = false));
+		setVal(initVal);
+	}, []);
+
+	useEffect(() => {
+		const len = Object.keys(Err).length;
+		if (len === 0 && Submit) {
+			alert('모든 인증을 통과했습니다.');
+			//history.push('/');
+			resetForm();
+		}
+	}, [Err, Submit, resetForm]);
 
 	//"비밀번호" 문자 보이기/숨기기 토글 기능
 	const passwordToggle1 = () => {
@@ -114,9 +170,9 @@ function Department() {
 
 		console.log(fullAddress); // e.g. '서울 성동구 왕십리로2길 20 (성수동1가)'
 
-		setZoneCode(data.zonecode);
-		setAddressValue(data.address);
-		setExtraAddress(data.bname);
+		setVal((prevVal) => ({ ...prevVal, zoneCode: data.zonecode }));
+		setVal((prevVal) => ({ ...prevVal, address: data.address }));
+		setVal((prevVal) => ({ ...prevVal, extraAddress: data.bname }));
 	};
 
 	/*
@@ -197,7 +253,9 @@ function Department() {
 										<td>
 											<input type='text' name='userid' id='userid' onChange={handleChange} value={Val.userid} autofocus />
 
-											<p className='idErr'>영문(소문자만가능), 숫자를 포함한 6~12자 조합으로 입력해주세요.</p>
+											<p className='idErr' style={{ color: Err.userid ? '#d80000' : 'initial' }}>
+												{Err.userid ? <span>{Err.userid}</span> : '영문(소문자만가능), 숫자를 포함한 6~12자 조합으로 입력하세요.'}
+											</p>
 										</td>
 									</tr>
 
@@ -209,7 +267,9 @@ function Department() {
 										<td>
 											<input type='text' name='nickname' id='nickname' onChange={handleChange} value={Val.nickname} />
 
-											<p className='nickErr'>한글,영문(대소문자가능), 숫자,공백을 포함한 1~12자 조합으로 입력해주세요.</p>
+											<p className='nickErr' style={{ color: Err.nickname ? '#d80000' : 'initial' }}>
+												{Err.nickname ? <span>{Err.nickname}</span> : '	한글,영문(대소문자가능), 숫자,공백을 포함한 1~12자 조합으로 입력해주세요.'}
+											</p>
 										</td>
 									</tr>
 
@@ -224,7 +284,9 @@ function Department() {
 											<br />
 
 											<progress max='4' value='0' id='meter'></progress>
-											<p className='pwdErr'>영문,숫자,특수문자(~!@#$%^&*)를 포함한 10~20자 조합으로 입력해 주세요.</p>
+											<p className='emailErr' style={{ color: Err.password ? '#d80000' : 'initial' }}>
+												{Err.password ? <span>{Err.password}</span> : '영문(대문자필수),숫자,특수문자(~!@#$%^&*)를 포함한 10~20자 조합으로 입력해 주세요.'}
+											</p>
 										</td>
 									</tr>
 
@@ -237,7 +299,9 @@ function Department() {
 											<input type={InputType2 ? 'password' : 'text'} name='passwordCheck' id='passwordCheck' placeholder='변경할 비밀번호 확인' onChange={handleChange} value={Val.passwordCheck} />
 											<FontAwesomeIcon icon={faEye} onClick={passwordToggle2} style={InputType2 ? { color: '#969696' } : { color: '#1b2539' }} />
 											<br />
-											<p className='pwdErr2'>비밀번호 확인을 위해 다시 한번 입력해 주세요.</p>
+											<p className='pwdErr2' style={{ color: Err.passwordCheck ? '#d80000' : 'initial' }}>
+												{Err.passwordCheck ? <span>{Err.passwordCheck}</span> : '비밀번호 확인을 위해 다시 한번 입력해 주세요.'}
+											</p>
 										</td>
 									</tr>
 
@@ -281,6 +345,10 @@ function Department() {
 												<option value='hanmail.net'>hanmail.net</option>
 												<option value='nate.com'>nate.com</option>
 											</select>
+											<br />
+											<p className='pwdErr2' style={{ color: Err.email ? '#d80000' : 'initial' }}>
+												{Err.email ? <span>{Err.email}</span> : '이메일을 입력해주세요.'}
+											</p>
 										</td>
 									</tr>
 								</tbody>
@@ -408,21 +476,25 @@ function Department() {
 										</th>
 										<td>
 											{/* post code */}
-											<input type='text' name='zoneCode' id='sample6_postcode' placeholder='우편번호' className='address' readonly value={(Val.zoneCode = ZoneCode)} onChange={handleChange} />
+											<input type='text' name='zoneCode' id='sample6_postcode' placeholder='우편번호' className='address' readonly value={Val.zoneCode} onChange={handleChange} />
 
 											{/* post code popup open button */}
 											<input type='button' id='sample6_execDaumPostcode' value='우편번호 찾기' className='addressBtn' onClick={handleClick} />
 											<br />
 
 											{/* address */}
-											<input type='text' name='address' id='sample6_address' placeholder='주소' className='address' value={(Val.address = AddressValue)} onChange={handleChange} />
+											<input type='text' name='address' id='sample6_address' placeholder='주소' className='address' value={Val.address} onChange={handleChange} />
 											<br />
 
 											{/* detail address */}
 											<input type='text' name='detailAddress' id='sample6_detailAddress' placeholder='상세주소' className='address' value={Val.detailAddress} onChange={handleChange} />
 
 											{/* extra address */}
-											<input type='text' name='extraAddress' id='sample6_extraAddress' placeholder='참고항목' className='address' value={(Val.extraAddress = ExtraAddress)} onChange={handleChange} />
+											<input type='text' name='extraAddress' id='sample6_extraAddress' placeholder='참고항목' className='address' value={Val.extraAddress} onChange={handleChange} />
+											<br />
+											<p className='pwdErr2' style={{ color: Err.address ? '#d80000' : 'initial' }}>
+												{Err.address ? <span>{Err.address}</span> : '우편번호와 주소를 입력해주세요.'}
+											</p>
 										</td>
 									</tr>
 								</tbody>
