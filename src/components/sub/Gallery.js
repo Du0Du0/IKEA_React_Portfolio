@@ -17,7 +17,24 @@ function Gallery() {
 			setItems(json.data.photos.photo);
 		});
 	}, []);
-	return <Layout name1={'gallery'} name2={'갤러리'} video={'pexels.mp4'}></Layout>;
+	return (
+		<Layout name1={'gallery'} name2={'갤러리'} video={'pexels.mp4'}>
+			<div className='frame'>
+				{Items.map((item, idx) => {
+					return (
+						<article key={idx}>
+							<div className='inner'>
+								<div className='pic'>
+									<img src={`https://live.staticflickr.com/${item.server}/${item.id}_${item.secret}_m.jpg`} alt={item.title} />
+								</div>
+								<h2>{item.title}</h2>
+							</div>
+						</article>
+					);
+				})}
+			</div>
+		</Layout>
+	);
 }
 
 export default Gallery;
