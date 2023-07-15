@@ -4,34 +4,101 @@ import { faEye } from '@fortawesome/free-regular-svg-icons';
 import DaumPostcode from './DaumPostcode';
 import { useDaumPostcodePopup } from 'react-daum-postcode';
 import { useState, useRef } from 'react';
+import { useHistory } from 'react-router-dom';
 
 function Department() {
 	const [IsOpen, setIsOpen] = useState(false);
 	const [AddressValue, setAddressValue] = useState('');
 	const [ExtraAddress, setExtraAddress] = useState('');
 	const [ZoneCode, setZoneCode] = useState('');
-	const introduce = useRef(null);
 	const [InputCount, setInputCount] = useState(0);
 	const [InputType1, setInputType1] = useState('password');
 	const [InputType2, setInputType2] = useState('password');
-	const [EmailAddress, setEmailAddress] = useState('');
-	const selectEmailAddress = useRef(null);
+	const history = useHistory();
 	const [IsDisabled, setIsDisabled] = useState(false);
-
 	const open = useDaumPostcodePopup('https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js');
+	const selectEmailAddress = useRef(null);
+	const hobby = useRef(null);
+	const city = useRef(null);
+	const isMail = useRef(null);
+	const isSMS = useRef(null);
+	const isKakao = useRef(null);
+	const initVal = useRef({
+		userid: '',
+		nickname: '',
+		password: '',
+		passwordCheck: '',
+		emailId: '',
+		emailAddress: '',
+		emailAddressSelect: '',
+		job: '',
+		introduce: '',
+		hobby: [],
+		zoneCode: '',
+		address: '',
+		detailAddress: '',
+		extraAddress: '',
+		mail: '',
+		sms: '',
+		kakao: '',
+	});
 
-	const selectEmail = () => {
-		setEmailAddress(selectEmailAddress.current.value);
+	const [Val, setVal] = useState(initVal.current);
+	const [Submit, setSubmit] = useState(false);
+
+	const handleChange = (e) => {
+		//현재 입력하고 있는 input요소의 name,value값을 비구조화할당으로 뽑아서 출력
+		const { name, value } = e.target;
+		//기존 초기 Val State값을 deep copy해서 현재 입력하고 있는 항목의 name값과 value값으로 기존 State를 덮어쓰기 해서 변경 (불변성 유지)
+		setVal({ ...Val, [name]: value });
 	};
 
+	const handleSelect = (e) => {
+		const { name, value } = e.target;
+		setVal({ ...Val, [name]: value });
+	};
+
+	const handleCheck = (e) => {
+		const { name } = e.target;
+		const inputs = e.target.parentElement.querySelectorAll('input');
+
+		//모든 체크박스를 반복돌면서 하나라도 체크되어 있는게 있으면 true값 반환
+		let checkArr = [];
+		inputs.forEach((el) => {
+			if (el.checked) checkArr.push(el.value);
+		});
+		setVal({ ...Val, [name]: checkArr });
+	};
+
+	const handleRadio = (e) => {
+		const { name, value } = e.target;
+
+		setVal({ ...Val, [name]: value });
+	};
+
+	const handleSubmit = (e) => {
+		e.preventDefault();
+		console.log('현재 스테이트값', Val);
+		//check가 반환하는 인증 메세지가 있으면 해당 메세지를 화면에 출력하고 전송중지
+		//그렇지 않으면 인증 성공
+		// console.log(check(Val));
+		// setErr(check(Val));
+		setSubmit(true);
+		alert('가입완료되었습니다.');
+		history.push('/');
+	};
+
+	//"비밀번호" 문자 보이기/숨기기 토글 기능
 	const passwordToggle1 = () => {
 		setInputType1((InputType1) => !InputType1);
 	};
+	//"비밀번호 확인" 문자 보이기/숨기기 토글 기능
 	const passwordToggle2 = () => {
 		setInputType2((InputType2) => !InputType2);
 	};
 
-	const handleComplete = (data) => {
+	//다음 우편 api 검색된 우편번호/주소/동 불러오는 함수
+	const handleComplete = async (data) => {
 		let fullAddress = data.address;
 		let extraAddress = '';
 
@@ -47,11 +114,15 @@ function Department() {
 
 		console.log(fullAddress); // e.g. '서울 성동구 왕십리로2길 20 (성수동1가)'
 
+		setZoneCode(data.zonecode);
 		setAddressValue(data.address);
 		setExtraAddress(data.bname);
-		setZoneCode(data.zonecode);
 	};
 
+	/*
+	다음 우편번호 팝업창 열기 기능
+	다음 우편번호 팝업창 style prop 설정 (스타일 및 화면 중앙 위치)
+	*/
 	const handleClick = () => {
 		var width = 500;
 		var height = 600;
@@ -74,11 +145,14 @@ function Department() {
 	return (
 		<>
 			<LayoutNone type={''} name1={'department'}>
+				{/* 회원가입 페이지 제목 */}
 				<div className='titTop'>
 					<h1>회원가입</h1>
 				</div>
 				<div className='titContainer'>
+					{/* 상단 회원가입 순서도 */}
 					<div className='timeLine'>
+						{/* 01. 약관동의 */}
 						<div className='timeLineNum'>
 							<h2>
 								01
@@ -87,6 +161,7 @@ function Department() {
 							</h2>
 						</div>
 
+						{/* 02. 정보입력 */}
 						<div className='timeLineNum'>
 							<h2>
 								02
@@ -95,6 +170,7 @@ function Department() {
 							</h2>
 						</div>
 
+						{/* 03. 가입완료 */}
 						<div className='timeLineNum'>
 							<h2>
 								03
@@ -105,41 +181,45 @@ function Department() {
 					</div>
 				</div>
 
+				{/* Info1. 필수정보입력 */}
 				<div className='info1'>
 					<h2>필수정보입력</h2>
-					<form action='result.html' method='get' id='signUp'>
+					<form method='get' id='signUp'>
 						<fieldset>
 							<legend className='h'>회원가입 폼 필수정보 항목</legend>
 							<table border='0'>
 								<tbody>
+									{/* user id */}
 									<tr>
 										<th scope='row'>
 											<label htmlFor='userid'>아이디</label>
 										</th>
 										<td>
-											<input type='text' name='userid' id='userid' autofocus />
+											<input type='text' name='userid' id='userid' onChange={handleChange} value={Val.userid} autofocus />
 
 											<p className='idErr'>영문(소문자만가능), 숫자를 포함한 6~12자 조합으로 입력해주세요.</p>
 										</td>
 									</tr>
 
+									{/* nick name */}
 									<tr>
 										<th scope='row'>
 											<label htmlFor='nickname'>닉네임</label>
 										</th>
 										<td>
-											<input type='text' name='nickname' id='nickname' />
+											<input type='text' name='nickname' id='nickname' onChange={handleChange} value={Val.nickname} />
 
 											<p className='nickErr'>한글,영문(대소문자가능), 숫자,공백을 포함한 1~12자 조합으로 입력해주세요.</p>
 										</td>
 									</tr>
 
+									{/* password */}
 									<tr>
 										<th>
 											<label htmlFor='password'>비밀번호</label>
 										</th>
 										<td>
-											<input type={InputType1 ? 'password' : 'text'} name='password' id='password' placeholder='새 비밀번호' autocomplete='off' />
+											<input type={InputType1 ? 'password' : 'text'} name='password' id='password' placeholder='새 비밀번호' autocomplete='off' onChange={handleChange} value={Val.password} />
 											<FontAwesomeIcon icon={faEye} onClick={passwordToggle1} style={InputType1 ? { color: '#969696' } : { color: '#1b2539' }} />
 											<br />
 
@@ -148,18 +228,20 @@ function Department() {
 										</td>
 									</tr>
 
+									{/* password check */}
 									<tr>
 										<th>
 											<label htmlFor='passwordCheck'>비밀번호 확인</label>
 										</th>
 										<td>
-											<input type={InputType2 ? 'password' : 'text'} name='passwordCheck' id='passwordCheck' placeholder='변경할 비밀번호 확인' />
+											<input type={InputType2 ? 'password' : 'text'} name='passwordCheck' id='passwordCheck' placeholder='변경할 비밀번호 확인' onChange={handleChange} value={Val.passwordCheck} />
 											<FontAwesomeIcon icon={faEye} onClick={passwordToggle2} style={InputType2 ? { color: '#969696' } : { color: '#1b2539' }} />
 											<br />
 											<p className='pwdErr2'>비밀번호 확인을 위해 다시 한번 입력해 주세요.</p>
 										</td>
 									</tr>
 
+									{/* email */}
 									<tr>
 										<th>
 											<label htmlFor='email'>이메일</label>
@@ -171,17 +253,21 @@ function Department() {
 											</label>
 										</th>
 										<td>
-											<input type='email' name='email' id='email' />
+											{/* email id */}
+											<input type='email' name='emailId' id='emailId' onChange={handleSelect} value={Val.emailId} />
 											&nbsp;<span>@</span>&nbsp;
+											{/* email address */}
 											<input
 												type='email'
 												name='emailAddress'
 												id='emailAddress'
-												value={EmailAddress === '' ? null : EmailAddress}
-												disabled={EmailAddress === '' ? false : true}
-												style={EmailAddress === '' ? { background: '#fff' } : { background: '#f4f5f6' }}
+												onChange={handleChange}
+												value={Val.emailAddressSelect === '' ? Val.emailAddress : Val.emailAddressSelect}
+												disabled={Val.emailAddressSelect === '' ? false : true}
+												style={Val.emailAddressSelect === '' ? { background: '#fff' } : { background: '#f4f5f6' }}
 											/>
-											<select name='emailAddressSelect' id='emailAddressSelect' ref={selectEmailAddress} onChange={selectEmail}>
+											{/* email select button */}
+											<select name='emailAddressSelect' id='emailAddressSelect' onChange={handleSelect} value={Val.emailAddressSelect} ref={selectEmailAddress}>
 												<option value=''>직접입력</option>
 												<option value='naver.com'>naver.com</option>
 												<option value='google.com'>google.com</option>
@@ -203,6 +289,7 @@ function Department() {
 					</form>
 				</div>
 
+				{/* Info2. 선택정보입력 */}
 				<div className='info2'>
 					<h2>선택정보입력</h2>
 					<form action='result.html' method='get' id='signUp2'>
@@ -210,15 +297,17 @@ function Department() {
 							<legend className='h'>회원가입 폼 선택정보 항목 </legend>
 							<table border='0'>
 								<tbody>
+									{/* job */}
 									<tr>
 										<th scope='row'>
 											<label htmlFor='job'>직업</label>
 										</th>
 										<td>
-											<input type='text' name='job' id='job' />
+											<input type='text' name='job' id='job' onChange={handleChange} value={Val.job} />
 										</td>
 									</tr>
 
+									{/* introduce */}
 									<tr>
 										<th scope='row'>
 											<label htmlFor='introduce'>프로필 소개</label>
@@ -232,59 +321,54 @@ function Department() {
 												rows='6'
 												className='introducehtmlForm'
 												maxLength={200}
-												ref={introduce}
-												onChange={(e) => {
-													if (e.target.value.length > e.target.maxLength) {
-														e.target.value = e.target.value.slice(0, e.target.maxLength);
-													}
-													setInputCount(e.target.value.length);
-												}}
-												onInput={(e) => {
-													if (e.target.value.length > e.target.maxLength) e.target.value = e.target.value.slice(0, e.target.maxLength);
-												}}
+												value={Val.introduce}
+												onChange={handleChange}
 											></textarea>
 											<br />
 											<span className='textareaCount'>
-												(<span>{InputCount}</span>/200)
+												<span>{Val.introduce.length}</span>/200
 											</span>
 										</td>
 									</tr>
 
+									{/* hobby */}
 									<tr>
 										<th scope='row'>취미</th>
-										<td>
-											<input type='checkbox' name='hobby' id='game' value='게임' />
+										<td ref={hobby}>
+											<input type='checkbox' name='hobby' id='game' value='게임' onChange={handleCheck} />
 											<label htmlFor='game'>게임</label>
 
-											<input type='checkbox' name='hobby' id='song' value='노래' />
+											<input type='checkbox' name='hobby' id='song' value='노래' onChange={handleCheck} />
 											<label htmlFor='song'>노래</label>
 
-											<input type='checkbox' name='hobby' id='hiking' value='등산' />
+											<input type='checkbox' name='hobby' id='hiking' value='등산' onChange={handleCheck} />
 											<label htmlFor='hiking'>등산</label>
 
-											<input type='checkbox' name='hobby' id='reading' value='읽기' />
+											<input type='checkbox' name='hobby' id='reading' value='읽기' onChange={handleCheck} />
 											<label htmlFor='reading'>읽기</label>
 
-											<input type='checkbox' name='hobby' id='etc' value='기타' />
+											<input type='checkbox' name='hobby' id='etc' value='기타' onChange={handleCheck} />
 											<label htmlFor='etc'>기타</label>
 										</td>
 									</tr>
 
+									{/* domain */}
 									<tr>
 										<th scope='row'>
 											<label htmlFor='domain'>홈페이지</label>
 										</th>
 										<td>
-											<input type='text' name='domain' id='domain' placeholder='홈페이지가 있는 경우 링크를 입력해주세요. 예)www.myhome.co.kr' />
+											<input type='text' name='domain' id='domain' placeholder='홈페이지가 있는 경우 링크를 입력해주세요. 예)www.myhome.co.kr' onChange={handleChange} value={Val.domain} />
 										</td>
 									</tr>
 
+									{/* city */}
 									<tr>
 										<th scope='row'>
 											<label htmlFor='city'>지역</label>
 										</th>
 										<td>
-											<select name='city' id='city'>
+											<select name='city' id='city' onChange={handleSelect} ref={city}>
 												<option value='서울'>서울</option>
 												<option value='경기'>경기</option>
 												<option value='광주'>광주</option>
@@ -306,6 +390,7 @@ function Department() {
 										</td>
 									</tr>
 
+									{/* post zonecode / address */}
 									<tr>
 										<th scope='row'>
 											<label htmlFor='sample6_postcode' className='h'>
@@ -322,14 +407,22 @@ function Department() {
 											</label>
 										</th>
 										<td>
-											<input type='text' name='postcode' id='sample6_postcode' placeholder='우편번호' className='address' readonly value={ZoneCode} />
-											<input type='button' onclick='sample6_execDaumPostcode()' value='우편번호 찾기' className='addressBtn' onClick={handleClick} />
+											{/* post code */}
+											<input type='text' name='zoneCode' id='sample6_postcode' placeholder='우편번호' className='address' readonly value={(Val.zoneCode = ZoneCode)} onChange={handleChange} />
+
+											{/* post code popup open button */}
+											<input type='button' id='sample6_execDaumPostcode' value='우편번호 찾기' className='addressBtn' onClick={handleClick} />
 											<br />
 
-											<input type='text' name='address' id='sample6_address' placeholder='주소' className='address' value={AddressValue} />
+											{/* address */}
+											<input type='text' name='address' id='sample6_address' placeholder='주소' className='address' value={(Val.address = AddressValue)} onChange={handleChange} />
 											<br />
-											<input type='text' name='detailAddress' id='sample6_detailAddress' placeholder='상세주소' className='address' />
-											<input type='text' name='extraAddress' id='sample6_extraAddress' placeholder='참고항목' className='address' value={ExtraAddress} />
+
+											{/* detail address */}
+											<input type='text' name='detailAddress' id='sample6_detailAddress' placeholder='상세주소' className='address' value={Val.detailAddress} onChange={handleChange} />
+
+											{/* extra address */}
+											<input type='text' name='extraAddress' id='sample6_extraAddress' placeholder='참고항목' className='address' value={(Val.extraAddress = ExtraAddress)} onChange={handleChange} />
 										</td>
 									</tr>
 								</tbody>
@@ -338,42 +431,43 @@ function Department() {
 					</form>
 				</div>
 
+				{/* Info3. 정보수신 동의 */}
 				<div className='info3'>
 					<h2>정보수신 동의</h2>
-					<form action='result.html' method='get' id='signUp3'>
+					<form>
 						<fieldset>
 							<legend className='h'>회원가입 폼 정보수신동의 항목</legend>
 							<table border='0'>
 								<tbody>
 									<tr>
 										<th scope='row'>메일수신</th>
-										<td>
-											<input type='radio' name='mail' id='agree1Y' value='Y' />
+										<td ref={isMail}>
+											<input type='radio' name='mail' id='agree1Y' value='Y' onChange={handleRadio} />
 											<label htmlFor='agree1Y'>받겠습니다.</label>
 
-											<input type='radio' name='mail' id='agree1N' value='N' />
+											<input type='radio' name='mail' id='agree1N' value='N' onChange={handleRadio} />
 											<label htmlFor='agree1N'>받지않겠습니다.</label>
 										</td>
 									</tr>
 
 									<tr>
 										<th scope='row'>SMS 수신</th>
-										<td>
-											<input type='radio' name='sms' id='agree2Y' value='Y' />
+										<td ref={isSMS}>
+											<input type='radio' name='sms' id='agree2Y' value='Y' onChange={handleRadio} />
 											<label htmlFor='agree2Y'>받겠습니다.</label>
 
-											<input type='radio' name='sms' id='agree2N' value='N' />
+											<input type='radio' name='sms' id='agree2N' value='N' onChange={handleRadio} />
 											<label htmlFor='agree2N'>받지않겠습니다.</label>
 										</td>
 									</tr>
 									{/* kakao */}
 									<tr>
 										<th scope='row'>알림톡 수신</th>
-										<td>
-											<input type='radio' name='kakao' id='agree3Y' value='Y' />
+										<td ref={isKakao}>
+											<input type='radio' name='kakao' id='agree3Y' value='Y' onChange={handleRadio} />
 											<label htmlFor='agree3Y'>받겠습니다.</label>
 
-											<input type='radio' name='kakao' id='agree3N' value='N' />
+											<input type='radio' name='kakao' id='agree3N' value='N' onChange={handleRadio} />
 											<label htmlFor='agree3N'>받지않겠습니다.</label>
 										</td>
 									</tr>
@@ -383,9 +477,10 @@ function Department() {
 					</form>
 				</div>
 
+				{/* 하단 취소버튼, 제출버튼 */}
 				<div className='btnSet'>
-					<input type='reset' value='취소' className='resetBtn' />
-					<input type='submit' value='제출' />
+					<input type='reset' value='취소' className='resetBtn' onClick={() => setVal(initVal)} />
+					<input type='submit' value='제출' onClick={handleSubmit} />
 				</div>
 			</LayoutNone>
 		</>
