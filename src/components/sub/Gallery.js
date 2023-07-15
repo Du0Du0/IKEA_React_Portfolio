@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import Layout from '../common/Layout';
 import axios from 'axios';
+import Masonry from 'react-masonry-component';
 
 function Gallery() {
 	const [Items, setItems] = useState([]);
@@ -28,23 +29,26 @@ function Gallery() {
 
 	//아래 호출문으로 내 계정의 이미지 갤러리 호출되도록
 	//getFlickr({type: 'user', user: '내아이디'})
-	useEffect(() => getFlickr({ type: 'user', user: '168950802@N02' }), []);
+	// useEffect(() => getFlickr({ type: 'user', user: '168950802@N02' }), []);
+	useEffect(() => getFlickr({ type: 'interest' }), []);
 
 	return (
 		<Layout name1={'gallery'} name2={'갤러리'} video={'pexels.mp4'}>
 			<div className='frame'>
-				{Items.map((item, idx) => {
-					return (
-						<article key={idx}>
-							<div className='inner'>
-								<div className='pic'>
-									<img src={`https://live.staticflickr.com/${item.server}/${item.id}_${item.secret}_m.jpg`} alt={item.title} />
+				<Masonry elementType={'div'} options={{ transitionDuration: '0.5s' }}>
+					{Items.map((item, idx) => {
+						return (
+							<article key={idx}>
+								<div className='inner'>
+									<div className='pic'>
+										<img src={`https://live.staticflickr.com/${item.server}/${item.id}_${item.secret}_m.jpg`} alt={item.title} />
+									</div>
+									<h2>{item.title}</h2>
 								</div>
-								<h2>{item.title}</h2>
-							</div>
-						</article>
-					);
-				})}
+							</article>
+						);
+					})}
+				</Masonry>
 			</div>
 		</Layout>
 	);
