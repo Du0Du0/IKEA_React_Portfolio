@@ -1,0 +1,36 @@
+.gallery {
+	.frame {
+		&::after {
+			content: '';
+			display: block;
+			clear: both;
+		}
+
+		article {
+			width: 25%;
+			padding: 10px;
+			float: left;
+
+			.inner {
+				width: 100%;
+				background: #fff;
+				padding: 14px;
+				box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.05);
+
+				.pic {
+					width: 100%;
+					img {
+						width: 100%;
+					}
+				}
+
+				h2 {
+					font: normal 14px/1.2 'arial';
+					color: #777;
+					margin-bottom: 30px;
+					margin-top: 10px;
+				}
+			}
+		}
+	}
+}
