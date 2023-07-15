@@ -1,10 +1,13 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import Layout from '../common/Layout';
 import axios from 'axios';
 import Masonry from 'react-masonry-component';
 
 function Gallery() {
 	const [Items, setItems] = useState([]);
+	const frame = useRef(null);
+	const counter = useRef(0);
+	const [Loader, setLoader] = useState(true);
 
 	const getFlickr = async (opt) => {
 		const baseURL = 'https://www.flickr.com/services/rest/?format=json&nojsoncallback=1';
@@ -12,7 +15,7 @@ function Gallery() {
 		const method_interest = 'flickr.interestingness.getList';
 		const method_user = 'flickr.people.getPhotos';
 		const method_search = 'flickr.photos.search';
-		const num = 500;
+		const num = 50;
 		//const myId = '168950802@N02';
 		let url = '';
 		if (opt.type === 'interest') url = `${baseURL}&api_key=${key}&method=${method_interest}&per_page=${num}`;
@@ -22,6 +25,24 @@ function Gallery() {
 		const result = await axios.get(url);
 		console.log(result.data.photos.photo);
 		setItems(result.data.photos.photo);
+
+		//외부데이터가 State에 담기고 DOM이 생성되는 순간
+		//모든 img요소를 찾아서 반복처리
+		const imgs = frame.current.querySelectorAll('img');
+		imgs.forEach((img) => {
+			//이미지요소에 load이벤트가 발생할때 (소스이미지까지 로딩이 완료될떄마다)
+			img.onload = () => {
+				//내부적으로 카운터값을 1씩 증가
+				++counter.current;
+
+				//로딩완료된 이미지수와 전체이미지수가 같아지면
+				if (counter.current === num * 2) {
+					//로더 제거하고 이미지 갤러리 보임처리
+					setLoader(false);
+					frame.current.classList.add('on');
+				}
+			};
+		});
 	};
 
 	//아래 호출문으로 풍경이미지 검색되도록 함수 코드 수정
@@ -34,7 +55,7 @@ function Gallery() {
 
 	return (
 		<Layout name1={'gallery'} name2={'갤러리'} video={'pexels.mp4'}>
-			<div className='frame'>
+			<div className='frame' ref={frame}>
 				<Masonry elementType={'div'} options={{ transitionDuration: '0.5s' }}>
 					{Items.map((item, idx) => {
 						return (
@@ -59,6 +80,7 @@ function Gallery() {
 					})}
 				</Masonry>
 			</div>
+			{Loader && <img className='loader' src={`${process.env.PUBLIC_URL}/img/loading.gif`} alt='loader' />}
 		</Layout>
 	);
 }
