@@ -87,7 +87,7 @@
 
 					&::placeholder {
 						font: 15px/1 $ikeaFontKo;
-						color: $fontColorBl;
+						color: $fontColorGrC;
 					}
 				}
 			}
@@ -97,9 +97,7 @@
 				height: calc(100% / 2);
 				display: flex;
 				justify-content: center;
-
 				textarea {
-					background: tran;
 					border: none;
 					border-radius: 5px;
 					padding: 20px;
@@ -112,7 +110,7 @@
 
 					&::placeholder {
 						font: 15px/1 $ikeaFontKo;
-						color: $fontColorBl;
+						color: $fontColorGrC;
 					}
 				}
 			}
@@ -130,23 +128,38 @@
 					color: $hoverBtn;
 				}
 
-				.submitBtn {
-					width: 150px;
-					height: 46px;
-					border: none;
-					border-radius: 5px;
-					font: 14px/1 $ikeaFontKo;
-					color: $fontColorBl;
-					background: radial-gradient(circle, #7f7fd5, #86a8e7, #91eae4);
+				.submitBg {
+					width: 155px;
+					height: 50px;
+					background: radial-gradient(circle, #f40000, #ff8a00 14.06%, #f9ad05 37.76%, #fc348c 62.77%, #b258cb 78.91%, #00c4b4);
+					position: relative;
+					border-radius: 10px;
 					background-size: 200%;
 					animation: animation 1.7s linear infinite;
 					margin-bottom: 15px;
 					cursor: pointer;
+					padding: 1px;
 
 					@keyframes animation {
 						to {
 							background-position: 200% center;
 						}
+					}
+
+					.submitBtn {
+						width: 152px;
+						height: 47px;
+						border-radius: 10px;
+						font: 14px/1 $ikeaFontKo;
+						color: $fontColorBl;
+						background: #fff;
+						position: relative;
+						margin: 0px auto;
+						border: none;
+						background-size: 200%;
+						animation: animation 1.7s linear infinite;
+						margin-bottom: 15px;
+						cursor: pointer;
 					}
 				}
 			}

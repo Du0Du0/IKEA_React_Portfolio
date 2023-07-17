@@ -67,9 +67,10 @@ function Contact() {
 						<div className='formBottomWrap'>
 							{/* 폼 메일 전송 성공시 알림 설정 */}
 							{Success && <p>메일이 성공적으로 발송되었습니다.</p>}
-
 							{/* 제출 버튼 */}
-							<input type='submit' value='보내기' className='submitBtn' />
+							<div className='submitBg'>
+								<input type='submit' value='보내기' className='submitBtn' />
+							</div>
 						</div>
 					</form>
 				</div>

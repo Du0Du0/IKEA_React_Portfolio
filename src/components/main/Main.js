@@ -9,11 +9,11 @@ import Promotion from './Promotion';
 import Museum from './Museum';
 import Notice from './Notice';
 
-function Main() {
+function Main({ menuRef }) {
 	return (
 		<main>
 			{/* 메인전용 라우터에는 main문자값을 전달 */}
-			<Header type={'sub'} />
+			<Header type={'sub'} menuRef={menuRef} />
 			<Visual />
 			<Products />
 			<Vids />

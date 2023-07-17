@@ -1,8 +1,20 @@
-function CommentModal({ NoticeModal, setNoticeModal }) {
+// function CommentModal({ NoticeModal, setNoticeModal }) {
+import { useImperativeHandle, useEffect, forwardRef, useState } from 'react';
+
+function CommentModal(props, ref) {
+	const [Open, setOpen] = useState(false);
 	console.log('child');
 
+	useImperativeHandle(ref, () => {
+		return { toggle: () => setOpen(!Open) };
+	});
+
+	useEffect(() => {
+		setOpen(true);
+	}, []);
+
 	return (
-		<aside id='commentModal' style={NoticeModal ? { display: 'none' } : { display: 'block' }}>
+		<aside id='commentModal' style={Open ? { display: 'none' } : { display: 'block' }}>
 			<h1>댓글남기기 작성 가이드</h1>
 			<ul>
 				<li>타인에게 불쾌감을 주는 욕설, 비방 등은 삼가주시기 바랍니다.</li>
@@ -11,7 +23,7 @@ function CommentModal({ NoticeModal, setNoticeModal }) {
 			</ul>
 			<button
 				onClick={(e) => {
-					setNoticeModal(!NoticeModal);
+					setOpen(true);
 				}}
 			>
 				닫기
@@ -20,4 +32,4 @@ function CommentModal({ NoticeModal, setNoticeModal }) {
 	);
 }
 
-export default CommentModal;
+export default forwardRef(CommentModal);

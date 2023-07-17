@@ -14,9 +14,8 @@ function Detail(props) {
 	const location = useLocation();
 	const [Posts, setPosts] = useState([]);
 	const [LikeBtn, setLikeBtn] = useState([0, 0, 0, 0, 0, 0, 0]);
-	const [NoticeModal, setNoticeModal] = useState(false);
 	let [InputCount, setInputCount] = useState(0);
-
+	const noticeModal = useRef(null);
 	const { idx } = location.state || {};
 	const comment = useRef(null);
 
@@ -133,10 +132,6 @@ function Detail(props) {
 		setInputCount(0);
 	};
 
-	const openModal = () => {
-		setNoticeModal((NoticeModal) => !NoticeModal);
-	};
-
 	return (
 		<LayoutNone type={''} name1={'detail'}>
 			<div className='listWrap'>
@@ -176,12 +171,17 @@ function Detail(props) {
 			<div className='commentWriteWrap'>
 				<div className='commentWriteTop'>
 					<h2>댓글 남기기</h2>
-					<h3 onClick={openModal}>
+					<h3
+						onClick={() => {
+							noticeModal.current.toggle();
+							console.log('noticeModal.current', noticeModal.current);
+						}}
+					>
 						<FontAwesomeIcon icon={faCircleExclamation} />
 						글 작성 시 유의사항
 						<FontAwesomeIcon icon={faAngleDown} />
 					</h3>
-					<CommentModal NoticeModal={NoticeModal} setNoticeModal={setNoticeModal} />
+					<CommentModal ref={noticeModal} />
 				</div>
 				<div className='commentWriteBottom'>
 					<textarea

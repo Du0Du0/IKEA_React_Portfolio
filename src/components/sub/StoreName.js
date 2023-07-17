@@ -135,7 +135,7 @@ function StoreName({ City, setCity, Index, setIndex }) {
 				{/* 상단 안내 소개 배너*/}
 
 				<div className='upperBanner' ref={banner}>
-					<p>김도현님, 이케아 홈페이지에 오신걸 환영합니다.</p>
+					<p>로그인해주세요.</p>
 				</div>
 
 				{/* 상단 매장지점 정보란 / 스케쥴 / 달력 표시 */}
