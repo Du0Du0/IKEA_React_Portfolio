@@ -2,14 +2,32 @@ import Layout from '../common/Layout';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import Parallax from 'react-rellax';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { setMembers } from '../../redux/action';
 
 function Member() {
 	const Members = useSelector((store) => store.memberReducer.members);
 
+	const dispatch = useDispatch();
+
 	const path = process.env.PUBLIC_URL;
 	return (
 		<Layout type={''} name1={'member'} name2={'멤버'} video={'memberFigure.mp4'}>
+			<button
+				onClick={() => {
+					//버튼 클릭시 기존 State값을 Deep copy
+					const newMembers = [...Members];
+					//Deep copy된 참조형 자료 State정보값을 변경후
+					newMembers[0].name = 'Emma';
+					//action생성함수의 인수로 넣어 새로운 액션객체 생성
+					const newAction = setMembers(newMembers);
+					console.log(newAction);
+					//그렇게 만들어진 액션객체를 dispatch를 통해 리듀서에 전달
+					dispatch(newAction);
+				}}
+			>
+				멤버 데이터 변경
+			</button>
 			{Members.map((member, idx) => {
 				return (
 					<>
