@@ -2,16 +2,10 @@ import Layout from '../common/Layout';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import Parallax from 'react-rellax';
+import { useSelector } from 'react-redux';
 
 function Member() {
-	const [Members, setMembers] = useState([]);
-	console.log(Members);
-
-	useEffect(() => {
-		axios.get(`${process.env.PUBLIC_URL}/DB/members.json`).then((data) => {
-			setMembers(data.data.members);
-		});
-	}, []);
+	const Members = useSelector((store) => store.memberReducer.members);
 
 	const path = process.env.PUBLIC_URL;
 	return (
