@@ -1,4 +1,8 @@
+import { useSelector } from 'react-redux';
+
 function FooterNone({ type }) {
+	const Designer = useSelector((store) => store.memberReducer.members[0].name);
+
 	return (
 		<footer id='footerNone' className={type}>
 			<div className='footerContainer'>
@@ -21,7 +25,7 @@ function FooterNone({ type }) {
 						<li>Privacy statment</li>
 					</ul>
 					<ul>
-						<li>© Inter IKEA Systems B.V. 1999 - 2023 (Optimized for Resolution: 1920x1080)</li>
+						<li>{`© Inter IKEA Systems B.V. 1999 - 2023 established by ${Designer} (Optimized for Resolution: 1920x1080)`}</li>
 					</ul>
 					<ul>
 						<li>Co-worker Login</li>
