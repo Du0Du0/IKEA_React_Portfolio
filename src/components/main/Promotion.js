@@ -1,3 +1,6 @@
+import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
 function Promotion() {
 	const path = process.env.PUBLIC_URL;
 	return (
@@ -29,7 +32,7 @@ function Promotion() {
 						{/* arrow button  */}
 						<div className='downRight'>
 							<a href='#'>
-								<i className='fa-solid fa-arrow-right'></i>
+								<FontAwesomeIcon icon={faArrowRight} />
 							</a>
 						</div>
 					</div>
@@ -117,7 +120,7 @@ function Promotion() {
 					</div>
 					<div className='snsGoBtn'>
 						<a href='#'>
-							바로가기&nbsp;&nbsp;&nbsp;<i className='fa-solid fa-arrow-right'></i>
+							바로가기&nbsp;&nbsp;&nbsp; <FontAwesomeIcon icon={faArrowRight} />
 						</a>
 					</div>
 				</div>

@@ -1,3 +1,6 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
+
 function Vids() {
 	return (
 		<section id='vids' class='myScroll'>
@@ -19,7 +22,7 @@ function Vids() {
 				<p>
 					<a href='video.html'>
 						바로가기 &nbsp;&nbsp;&nbsp;
-						<i class='fa-solid fa-arrow-right'></i>
+						<FontAwesomeIcon icon={faArrowRight} />
 					</a>
 				</p>
 			</div>
