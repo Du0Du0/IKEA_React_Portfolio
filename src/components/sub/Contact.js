@@ -19,9 +19,10 @@ function Contact() {
 	const sendEmail = (e) => {
 		e.preventDefault();
 
-		emailjs.sendForm('service_zxmrkcb', 'template_gtne1ai', form.current, '-2LQanwpgbk-qnYZG').then(
+		emailjs.sendForm('service_zxmrkcb', 'template_gtne1ai', form.current, 'sw27qSr38NkxI2uRB').then(
 			(result) => {
 				console.log(result.text);
+
 				setSuccess(true);
 				inputName.current.value = '';
 				inputEmail.current.value = '';

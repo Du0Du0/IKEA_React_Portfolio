@@ -3,6 +3,7 @@ function BusInfo({ localBusIcon, localBusKo, localBus, trunkBusIcon, trunkBusKo,
 		<div className='busInfoWrap'>
 			<div className='busTitWrap'>
 				<ul>
+					{/* 지선버스 */}
 					<li style={{ display: localBus === '' && 'none' }}>
 						<span>{localBusIcon}</span>
 						<h3>
@@ -10,6 +11,7 @@ function BusInfo({ localBusIcon, localBusKo, localBus, trunkBusIcon, trunkBusKo,
 						</h3>
 						<p>{localBus}</p>
 					</li>
+					{/* 간선버스 */}
 					<li style={{ display: trunkBus === '' && 'none' }}>
 						<span>{trunkBusIcon}</span>
 						<h3>
@@ -17,6 +19,7 @@ function BusInfo({ localBusIcon, localBusKo, localBus, trunkBusIcon, trunkBusKo,
 						</h3>
 						<p> {trunkBus}</p>
 					</li>
+					{/* 광역버스 */}
 					<li style={{ display: expressBus === '' && 'none' }}>
 						<span>{expressBusIcon}</span>
 						<h3>
@@ -24,6 +27,7 @@ function BusInfo({ localBusIcon, localBusKo, localBus, trunkBusIcon, trunkBusKo,
 						</h3>
 						<p> {expressBus}</p>
 					</li>
+					{/* 좌석버스 */}
 					<li style={{ display: seaterBus === '' && 'none' }}>
 						<span> {seaterBusIcon}</span>
 						<h3>

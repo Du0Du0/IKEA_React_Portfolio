@@ -1,8 +1,6 @@
 import { useEffect, useRef } from 'react';
 
 function LayoutNone({ name1, type, children }) {
-	const path = process.env.PUBLIC_URL;
-
 	const inner = useRef(null);
 
 	useEffect(() => {

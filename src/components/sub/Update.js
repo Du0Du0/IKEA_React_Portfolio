@@ -76,7 +76,7 @@ function Update() {
 		localStorage.setItem('post', JSON.stringify(updatedPosts)); //객체이기 때문에 문자열로 바꾸고 추가
 
 		history.push({
-			pathname: '/detail',
+			pathName: '/detail',
 			state: {
 				Posts: updatedPosts,
 			},

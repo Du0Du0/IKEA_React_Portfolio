@@ -137,10 +137,7 @@ header {
 
 					&:nth-of-type(1) {
 						li {
-							.active {
-								color: $hoverBtn;
-								cursor: pointer;
-							}
+							cursor: pointer;
 						}
 					}
 

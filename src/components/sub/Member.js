@@ -15,9 +15,30 @@ function Member() {
 
 	const path = process.env.PUBLIC_URL;
 	return (
-		<Layout type={'member'} name1={'member'} name2={''} video={'memberFigure.mp4'}>
-			<div className='container'>
-				<div className='titleContainer'>
+		<Layout type={''} name1={'member'} name2={'멤버'} video={'memberFigure.mp4'}>
+			{Members.map((member, idx) => {
+				return (
+					<>
+						<div className='membersBox' key={idx}>
+							<div className='membersName'>
+								<h1>{member.name}</h1>
+								<h3>{member.sub}</h3>
+							</div>
+							<div className='membersImg'>
+								<img src={`${process.env.PUBLIC_URL}/img/${member.pic}`} alt={member.name} />
+							</div>
+							<div className='membersDesc'>
+								<p>{member.description}</p>
+							</div>
+						</div>
+					</>
+				);
+			})}
+			<Parallax className='published' speed={5}>
+				<p>To create a better everyday life </p>
+			</Parallax>
+			<div className='rellaxContainer'>
+				<div className='rellaxWrap'>
 					<ul className='round'>
 						<Parallax className='rellax' speed={2}></Parallax>
 						<Parallax className='rellax'></Parallax>
@@ -36,23 +57,21 @@ function Member() {
 				</div>
 			</div>
 
-			<Parallax className='published' speed={3}>
+			<Parallax className='published' speed={3.75}>
 				<h3>
 					California <br /> San Fransico
 				</h3>
 			</Parallax>
+
 			<Parallax className='published' speed={4.3}>
 				<h2>
 					Incorporated - <br /> 1983
 					<br />
 					<br />
-					<br />
-					IKEA STORE
+					IKEA Store
 				</h2>
 			</Parallax>
-			<Parallax className='published' speed={10}>
-				<p>68°</p>
-			</Parallax>
+
 			<Parallax className='middleText' speed={1.5}>
 				<p>
 					“I hope people put their own energy and history onto the products, so that
@@ -60,25 +79,8 @@ function Member() {
 					<br /> pieces." – Trini Guzmán, designer
 				</p>
 			</Parallax>
-			{/* {Members.map((member, idx) => {
-				return (
-					<>
-						<div className='membersBox' key={idx}>
-							<div className='membersName'>
-								<h1>{member.name}</h1>
-								<h3>{member.sub}</h3>
-							</div>
-							<div className='membersImg'>
-								<img src={`${process.env.PUBLIC_URL}/img/${member.pic}`} alt={member.name} />
-							</div>
-							<div className='membersDesc'>
-								<p>{member.description}</p>
-							</div>
-						</div>
-					</>
-				);
-			})} */}
-			<div className='container'>
+
+			<div className='articleContainer'>
 				<div className='sticky-container'>
 					<div className='col-2'>
 						<div className='tile sticky'>
@@ -191,7 +193,10 @@ function Member() {
 				<div className='sticky-container'>
 					<div className='col-2'>
 						<div className='tile sticky'>
-							<h2>A new generation of homemakers</h2>
+							<h2>
+								A new generation of <br />
+								homemakers
+							</h2>
 							<br />
 							<br />
 							<br />

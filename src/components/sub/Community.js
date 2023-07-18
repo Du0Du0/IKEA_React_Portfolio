@@ -35,7 +35,7 @@ function Community() {
 		setSee(seeCopy);
 
 		history.push({
-			pathname: '/detail',
+			pathName: '/detail',
 			state: {
 				Posts: [...Posts],
 				idx: idx,

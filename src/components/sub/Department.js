@@ -126,12 +126,6 @@ function Department() {
 	};
 
 	const resetForm = useCallback(() => {
-		// const select = selectEl.current.options[0];
-		// const checks = checkGroup.current.querySelectorAll('input');
-		// const radios = radioGroup.current.querySelectorAll('input');
-		// select.selected = true;
-		// checks.forEach((el) => (el.checked = false));
-		// radios.forEach((el) => (el.checked = false));
 		setVal(initVal);
 	}, []);
 
@@ -145,11 +139,11 @@ function Department() {
 	}, [Err, Submit, resetForm]);
 
 	//"비밀번호" 문자 보이기/숨기기 토글 기능
-	const passwordToggle1 = () => {
+	const passwordToggle = () => {
 		setInputType1((InputType1) => !InputType1);
 	};
 	//"비밀번호 확인" 문자 보이기/숨기기 토글 기능
-	const passwordToggle2 = () => {
+	const passwordCheckToggle = () => {
 		setInputType2((InputType2) => !InputType2);
 	};
 
@@ -251,7 +245,7 @@ function Department() {
 											<label htmlFor='userid'>아이디</label>
 										</th>
 										<td>
-											<input type='text' name='userid' id='userid' onChange={handleChange} value={Val.userid} autofocus />
+											<input type='text' name='userid' id='userid' onChange={handleChange} value={Val.userid} autoFocus={true} />
 
 											<p className='idErr' style={{ color: Err.userid ? '#d80000' : 'initial' }}>
 												{Err.userid ? <span>{Err.userid}</span> : '영문(소문자만가능), 숫자를 포함한 6~12자 조합으로 입력하세요.'}
@@ -279,8 +273,8 @@ function Department() {
 											<label htmlFor='password'>비밀번호</label>
 										</th>
 										<td>
-											<input type={InputType1 ? 'password' : 'text'} name='password' id='password' placeholder='새 비밀번호' autocomplete='off' onChange={handleChange} value={Val.password} />
-											<FontAwesomeIcon icon={faEye} onClick={passwordToggle1} style={InputType1 ? { color: '#969696' } : { color: '#1b2539' }} />
+											<input type={InputType1 ? 'password' : 'text'} name='password' id='password' placeholder='새 비밀번호' autoComplete={'off'} onChange={handleChange} value={Val.password} />
+											<FontAwesomeIcon icon={faEye} onClick={passwordToggle} style={InputType1 ? { color: '#969696' } : { color: '#1b2539' }} />
 											<br />
 
 											<progress max='4' value='0' id='meter'></progress>
@@ -296,8 +290,16 @@ function Department() {
 											<label htmlFor='passwordCheck'>비밀번호 확인</label>
 										</th>
 										<td>
-											<input type={InputType2 ? 'password' : 'text'} name='passwordCheck' id='passwordCheck' placeholder='변경할 비밀번호 확인' onChange={handleChange} value={Val.passwordCheck} />
-											<FontAwesomeIcon icon={faEye} onClick={passwordToggle2} style={InputType2 ? { color: '#969696' } : { color: '#1b2539' }} />
+											<input
+												type={InputType2 ? 'password' : 'text'}
+												name='passwordCheck'
+												id='passwordCheck'
+												placeholder='변경할 비밀번호 확인'
+												autoComplete={'off'}
+												onChange={handleChange}
+												value={Val.passwordCheck}
+											/>
+											<FontAwesomeIcon icon={faEye} onClick={passwordCheckToggle} style={InputType2 ? { color: '#969696' } : { color: '#1b2539' }} />
 											<br />
 											<p className='pwdErr2' style={{ color: Err.passwordCheck ? '#d80000' : 'initial' }}>
 												{Err.passwordCheck ? <span>{Err.passwordCheck}</span> : '비밀번호 확인을 위해 다시 한번 입력해 주세요.'}
@@ -476,21 +478,21 @@ function Department() {
 										</th>
 										<td>
 											{/* post code */}
-											<input type='text' name='zoneCode' id='sample6_postcode' placeholder='우편번호' className='address' readonly value={Val.zoneCode} onChange={handleChange} />
+											<input type='text' name='zoneCode' id='sample6_postcode' placeholder='우편번호' className='address' readOnly={true} value={Val.zoneCode} onChange={handleChange} />
 
 											{/* post code popup open button */}
 											<input type='button' id='sample6_execDaumPostcode' value='우편번호 찾기' className='addressBtn' onClick={handleClick} />
 											<br />
 
 											{/* address */}
-											<input type='text' name='address' id='sample6_address' placeholder='주소' className='address' value={Val.address} onChange={handleChange} />
+											<input type='text' name='address' id='sample6_address' placeholder='주소' className='address' readOnly={true} value={Val.address} onChange={handleChange} />
 											<br />
 
 											{/* detail address */}
 											<input type='text' name='detailAddress' id='sample6_detailAddress' placeholder='상세주소' className='address' value={Val.detailAddress} onChange={handleChange} />
 
 											{/* extra address */}
-											<input type='text' name='extraAddress' id='sample6_extraAddress' placeholder='참고항목' className='address' value={Val.extraAddress} onChange={handleChange} />
+											<input type='text' name='extraAddress' id='sample6_extraAddress' placeholder='참고항목' className='address' readOnly={true} value={Val.extraAddress} onChange={handleChange} />
 											<br />
 											<p className='pwdErr2' style={{ color: Err.address ? '#d80000' : 'initial' }}>
 												{Err.address ? <span>{Err.address}</span> : '우편번호와 주소를 입력해주세요.'}

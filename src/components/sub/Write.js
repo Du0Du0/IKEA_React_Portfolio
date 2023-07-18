@@ -44,7 +44,7 @@ function Write() {
 		localStorage.setItem('post', JSON.stringify(updatedData));
 
 		history.push({
-			pathname: '/community',
+			pathName: '/community',
 			state: {
 				Posts: updatedData,
 			},

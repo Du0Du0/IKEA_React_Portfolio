@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
@@ -16,41 +17,18 @@ function StoreName({ City, setCity, Index, setIndex }) {
 	const pageBg = useRef(null);
 	const banner = useRef(null);
 	const storeList = useRef(null);
-	// 지점명: 영어 도시 이름 => 한글로 변경
-	const getCityLocation = (City) => {
-		switch (City) {
-			case 'Goyang-si':
-				console.log('고양점');
-				return <h2>고양점</h2>;
-			case 'Yongin':
-				console.log('기흥점');
-				return <h2>기흥점</h2>;
-			case 'Gyeonggi-do':
-				console.log('광명점');
-				return <h2>광명점</h2>;
-			case 'Busan':
-				console.log('동부산점');
-				return <h2>동부산점</h2>;
-			default:
-				return null;
-		}
-	};
 
-	//지점명 :영어 도시 이름 => 한글로 변경 (맨 하단 배너)
-	const getCityNameBanner = (City) => {
+	//지점명: 영어 도시 이름 => 한글로 변경
+	const getCityNameKo = (City) => {
 		switch (City) {
 			case 'Goyang-si':
-				console.log('고양점');
-				return <p>고양점</p>;
+				return '고양점';
 			case 'Yongin':
-				console.log('기흥점');
-				return <p>기흥점</p>;
+				return '기흥점';
 			case 'Gyeonggi-do':
-				console.log('광명점');
-				return <p>광명점</p>;
+				return '광명점';
 			case 'Busan':
-				console.log('동부산점');
-				return <p>동부산점</p>;
+				return '동부산점';
 			default:
 				return null;
 		}
@@ -76,17 +54,13 @@ function StoreName({ City, setCity, Index, setIndex }) {
 	const fetchWeather = async () => {
 		let cityName = City;
 		const apiKey = '3bc1f51ea0960a95958152e47fb71800';
-		const url = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=3bc1f51ea0960a95958152e47fb71800&units=metric`;
+		const url = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}&units=metric`;
 
 		try {
 			const result = await axios.get(url);
-
-			console.log(result);
 			setCity(result.data.name);
-			console.log('result.data.name', result.data.name);
 			setWeather(result.data.weather[0].main);
 			setIcon(result.data.weather[0].icon);
-			console.log('Icon', Icon);
 			setTemp(result.data.main.temp + '℃');
 		} catch (error) {
 			console.error('Error fetching weather:', error);
@@ -99,7 +73,6 @@ function StoreName({ City, setCity, Index, setIndex }) {
 	}, [City]);
 
 	useEffect(() => {
-		window.scrollTo(0, 0);
 		pageBg.current.classList.add('on');
 		banner.current.classList.add('on');
 		storeList.current.classList.add('on');
@@ -128,22 +101,20 @@ function StoreName({ City, setCity, Index, setIndex }) {
 	return (
 		<>
 			<div className='topBgWrap'>
-				<img src={path + '/img/ikeaBuilding.png'} className='back' ref={pageBg} />
+				<img src={path + '/img/ikeaBuilding.png'} className='back' ref={pageBg} alt='' />
 			</div>
 
 			<div className='topPopUp'>
 				{/* 상단 안내 소개 배너*/}
-
 				<div className='upperBanner' ref={banner}>
-					<p>로그인해주세요.</p>
+					<p>점포 안내</p>
 				</div>
 
 				{/* 상단 매장지점 정보란 / 스케쥴 / 달력 표시 */}
-
 				<div className='storeListContainer' ref={storeList}>
 					<div className='leftContainer'>
 						<div className='storeNameWrap'>
-							<h2>{getCityLocation(City)}</h2>
+							<h2>{getCityNameKo(City)}</h2>
 							<select
 								name='storeName'
 								id='storeName'
@@ -159,7 +130,7 @@ function StoreName({ City, setCity, Index, setIndex }) {
 						</div>
 						<div className='weatherWrap'>
 							{/* {Weather} */}
-							<img src={` https://openweathermap.org/img/wn/${Icon}@2x.png`} />
+							<img src={` https://openweathermap.org/img/wn/${Icon}@2x.png`} alt='weatherIcon' />
 							<div className='temperature'>
 								<p>{Temp}</p>
 							</div>
@@ -187,7 +158,11 @@ function StoreName({ City, setCity, Index, setIndex }) {
 								연장영업 10:30 ~ 20:30
 							</li>
 						</ul>
-						<button>쇼핑 정보 바로가기</button>
+						<button>
+							<a href='#' target='_blank' rel='noopener noreferrer'>
+								쇼핑 정보 바로가기
+							</a>
+						</button>
 					</div>
 
 					<div className='rightContainer'>
@@ -203,8 +178,7 @@ function StoreName({ City, setCity, Index, setIndex }) {
 							tileClassName={({ date, view }) => {
 								if (holidayMarks.find((x) => x === moment(date).format('DD-MM-YYYY'))) {
 									return 'highlight';
-								}
-								if (openLongMarks.find((x) => x === moment(date).format('DD-MM-YYYY'))) {
+								} else if (openLongMarks.find((x) => x === moment(date).format('DD-MM-YYYY'))) {
 									return 'openLong';
 								}
 							}}
@@ -221,7 +195,10 @@ function StoreName({ City, setCity, Index, setIndex }) {
 
 				{/* 하단 요약 배너 */}
 				<div className='descBanner'>
-					<p>HOME</p>/<p>점포안내</p>/<p>{getCityNameBanner(City)}</p>/<p>한눈에 보기</p>
+					<Link to='/'>
+						<p>HOME</p>
+					</Link>
+					/<p>점포안내</p>/<p>{getCityNameKo(City)}</p>/<p>한눈에 보기</p>
 				</div>
 			</div>
 		</>

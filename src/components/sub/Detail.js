@@ -86,7 +86,7 @@ function Detail(props) {
 	//게시물 수정하기 버튼 클릭 시
 	const goToUpdate = (idx) => {
 		history.push({
-			pathname: '/update',
+			pathName: '/update',
 			state: {
 				...Posts,
 			},

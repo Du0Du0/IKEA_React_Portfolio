@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, NavLink } from 'react-router-dom';
-import { useState, useRef, useEffect, forwardRef } from 'react';
+import { useState, useEffect, forwardRef } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import { faTwitter, faFacebookF } from '@fortawesome/free-brands-svg-icons';
@@ -8,60 +8,64 @@ import { useImperativeHandle } from 'react';
 
 // props와 ref를 인자로 받음
 function Menu(props, ref) {
-	const [Open, setOpen] = useState(false);
+	const [IsOpen, setIsOpen] = useState(false);
 
 	// 1번인자 : ref
 	// 2번인자 : toggle 함수를 useImperativeHandle을 사용하여 ref로 전달
 	useImperativeHandle(ref, () => {
-		return { toggle: () => setOpen(!Open) };
+		return { toggle: () => setIsOpen(!IsOpen) };
 	});
 
 	useEffect(() => {
-		setOpen(false);
+		setIsOpen(false);
 	}, []);
-
+	const active = { color: '#17809b' };
 	return (
 		<React.Fragment>
 			{/* header left side bar  */}
-			{Open && (
+			{IsOpen && (
 				<>
-					<div className={Open ? 'leftBar lft' : 'leftBar'}>
+					<div className={IsOpen ? 'leftBar lft' : 'leftBar'}>
 						<div className='leftBarWrap'>
 							{/* header left side title */}
 							<div className='leftBarTit'>
-								<h2>IKEA Category</h2>
+								<Link to='/'>
+									<h2>IKEA Category</h2>
+								</Link>
 							</div>
 							{/* header left side category list  */}
 							<div className='leftBarList'>
 								<div className='listLine'></div>
 								<ul>
 									<li>
-										<NavLink to='/youtube' activeClass='active'>
+										<NavLink to='/youtube' activeStyle={active}>
 											Youtube
 										</NavLink>
 									</li>
 									<li>
-										<NavLink to='/community' activeClass='active'>
+										<NavLink to='/community' activeStyle={active}>
 											Community
 										</NavLink>
 									</li>
 									<li>
-										<NavLink to='/member' activeClass='active'>
+										<NavLink to='/member' activeStyle={active}>
 											Members
 										</NavLink>
 									</li>
 									<li>
-										<NavLink to='/contact' activeClass='active'>
+										<NavLink to='/contact' activeStyle={active}>
 											Contact
 										</NavLink>
 									</li>
 									<li>
-										<NavLink to='/gallery' activeClass='active'>
+										<NavLink to='/gallery' activeStyle={active}>
 											Gallery
 										</NavLink>
 									</li>
 									<li>
-										<NavLink to='/department'>Department</NavLink>
+										<NavLink to='/department' activeStyle={active}>
+											Department
+										</NavLink>
 									</li>
 								</ul>
 								<ul>
@@ -88,7 +92,7 @@ function Menu(props, ref) {
 						</div>
 					</div>
 
-					<div className={Open ? 'rightBar rgt' : 'rightBar'}></div>
+					<div className={IsOpen ? 'rightBar rgt' : 'rightBar'}></div>
 				</>
 			)}
 		</React.Fragment>
