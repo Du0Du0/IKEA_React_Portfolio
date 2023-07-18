@@ -1,2 +1,9 @@
-//reducer로 전달되는 액션객체 생성함수
-//컴포넌트에서 reducer에 데이터 변경요청을 할 때 쓰이는 특별한 객체 {type: '타입', payload : '데이터'}
+//인수에 전달 된 값을 payload에 담아서 액션객체를 반환하는 함수 export
+//해당 액션생성함수는 추후 컴포넌트에서 호출될 예정
+
+export const setMembers = (data) => {
+	return {
+		type: 'SET_MEMBERS',
+		payload: data,
+	};
+};
