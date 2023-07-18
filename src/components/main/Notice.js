@@ -1,52 +1,85 @@
+import { useState } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowRight, faBlog } from '@fortawesome/free-solid-svg-icons';
+import { faSquareInstagram, faFacebookF, faYoutube } from '@fortawesome/free-brands-svg-icons';
+import { Link } from 'react-router-dom';
+
 function Notice() {
+	const getLocalData = () => {
+		const data = localStorage.getItem('post');
+		return JSON.parse(data);
+	};
+
+	const [Posts] = useState(getLocalData());
+
 	return (
 		<section id='notice' class='myScroll'>
 			<div class='noticeContainer'>
 				{/* left part   */}
 				<div class='noticeWrap'>
 					{/* section notice title  */}
-					<h4>공지사항</h4>
+					<h4>커뮤니티</h4>
 					{/* go button start */}
 					<div class='goBtn'>
-						<a href='#' target='_self' title='현재창-공지사항'>
+						<Link to='/community'>
 							<p>
 								바로가기&nbsp;&nbsp;&nbsp;
 								<span>
-									<i class='fa-solid fa-arrow-right' aria-hidden='true'></i>
+									<FontAwesomeIcon icon={faArrowRight} aria-hidden='true' />
 								</span>
 							</p>
-						</a>
+						</Link>
 					</div>
-					{/* icon container start */}
+					{/* ipost.content post.contenttainer start */}
 					<p class='iconWrap'>
 						{/* facebook  */}
 						<span>
-							<a href='https://www.facebook.com/IKEA.kr/?locale=ko_KR' target='_blank' title='새창-이케아 코리아 페이스북'>
-								<i class='fa-brands fa-facebook-f'></i>
+							<a href='https://www.facebook.com/IKEA.kr/?locale=ko_KR' target='_blank' title='새창-이케아 코리아 페이스북' rel='noreferrer'>
+								<FontAwesomeIcon icon={faFacebookF} />
 							</a>
 						</span>
 						{/* youtube  */}
 						<span>
-							<a href='https://www.youtube.com/channel/UCvt32qJUh606U-W_hr-EF7A' target='_blank' title='새창-이케아 코리아 유튜브'>
-								<i class='fa-brands fa-youtube'></i>
+							<a href='https://www.youtube.com/channel/UCvt32qJUh606U-W_hr-EF7A' target='_blank' title='새창-이케아 코리아 유튜브' rel='noreferrer'>
+								<FontAwesomeIcon icon={faYoutube} />
 							</a>
 						</span>
 						{/* instagram  */}
 						<span>
-							<a href='https://www.instagram.com/ikeakr/' target='_blank' title='새창-이케아 코리아 인스타그램'>
-								<i class='fa-brands fa-square-instagram'></i>
+							<a href='https://www.instagram.com/ikeakr/' target='_blank' title='새창-이케아 코리아 인스타그램' rel='noreferrer'>
+								<FontAwesomeIcon icon={faSquareInstagram} />
 							</a>
 						</span>
 						{/* blog  */}
 						<span>
-							<a href='https://lifeathome.ikea.com/blog/' target='_blank' title='새창-이케아 미국 블로그'>
-								<i class='fa-solid fa-blog'></i>
+							<a href='https://lifeathome.ikea.com/blog/' target='_blank' title='새창-이케아 미국 블로그' rel='noreferrer'>
+								<FontAwesomeIcon icon={faBlog} />
 							</a>
 						</span>
 					</p>
 				</div>
 				{/* right part  */}
-				<div class='noticeWrap'></div>
+				<div class='noticeWrap'>
+					{Posts.map((post, idx) => {
+						if (idx >= 4) return null;
+						return (
+							<>
+								<div class='contentWrap' key={idx}>
+									<div class='topic'>
+										<p>{post.topic}</p>
+									</div>
+									<div class='titleWrap'>
+										<h2>{post.title.length > 6 ? post.title.split(' ').splice(0, 6).join(' ') : post.title}</h2>
+										<p>{`${post.date}`.substr(0, 10)}</p>
+									</div>
+									<div class='content'>
+										<p>{post.content.length > 23 ? post.content.split(' ').splice(0, 23).join(' ') : post.content}</p>
+									</div>
+								</div>
+							</>
+						);
+					})}
+				</div>
 			</div>
 		</section>
 	);
