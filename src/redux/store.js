@@ -1,2 +1,6 @@
-//전역으로 관리 할 데이터가 저장될 전역 객체를 생성
-//어떤 컴포넌트에서든 자유롭게 데이터를 공유할 수 있게 컴포넌트 외부에 있는 독립적인 전역 데이터 공간
+import { createStore } from 'redux';
+import reducers from './reducer';
+
+//store공간을 생성한 다음 reducer가 반환된 전역 데이터 저장
+const store = createStore(reducers);
+export default store;
