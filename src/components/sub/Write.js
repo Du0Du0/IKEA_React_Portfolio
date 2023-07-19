@@ -33,7 +33,7 @@ function Write() {
 			userId: userId.current.value,
 			topic: topic.current.value,
 			title: title.current.value,
-			keyword: keyword.current.value,
+			keyword: [keyword.current.value],
 			content: content.current.value,
 			date: new Date(),
 		};

@@ -18,8 +18,28 @@ import Youtube from './components/sub/Youtube';
 import Write from './components/sub/Write';
 import Detail from './components/sub/Detail';
 import Update from './components/sub/Update';
+import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import { setYoutube } from './redux/action';
+import { useEffect } from 'react';
 
 function App() {
+	const dispatch = useDispatch();
+
+	const fetchYoutube = async () => {
+		const key = 'AIzaSyCKs11Yu98hp6fq7N54tY2iWSY9qvTh4cM';
+		const list = 'PLWgHnOZUp_4FJWdMzYeEAM4Waf8IhnZCB';
+		const num = 8;
+		const url = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=${list}&key=${key}&maxResults=${num}`;
+
+		const result = await axios.get(url);
+		dispatch(setYoutube(result.data.items));
+		console.log('result.data.items', result.data.items);
+	};
+
+	useEffect(() => {
+		fetchYoutube();
+	}, []);
 	return (
 		<>
 			{/* Switch는 내부에 중복되는 라우트 경로가 있을때 더 먼저 나오는 라우터를 채택하고 나머지는 무시 */}

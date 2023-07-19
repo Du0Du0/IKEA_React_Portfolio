@@ -32,7 +32,6 @@ function Detail(props) {
 		if (dataComment) return JSON.parse(dataComment);
 		else return dummyComments;
 	};
-
 	const [Comments, setComments] = useState(getLocalComment());
 
 	useEffect(() => {
@@ -151,15 +150,15 @@ function Detail(props) {
 					<p>
 						{Posts &&
 							Posts.keyword &&
-							Object.values(Posts.keyword.split(',')).map((word, index) => (
-								<span key={index} className='keywordMap'>
-									{word.trim()}{' '}
-								</span>
-							))}
+							Object.values(Posts.keyword)
+								.join(',')
+								.split(',')
+								.map((word, index) => (
+									<span key={index} className='keywordMap'>
+										{word}{' '}
+									</span>
+								))}
 					</p>
-					{/* <p>
-						<FontAwesomeIcon icon={faHeart} />0
-					</p> */}
 				</div>
 				<div className='buttonWrap'>
 					<button onClick={deletePost}>삭제</button>

@@ -50,10 +50,6 @@ const memberReducer = (state = initMember, action) => {
 	}
 };
 
-//해당 변형자 함수가 반환하는 객체값을 하나의 객체로 합쳐서 외부로 export
-const reducers = combineReducers({ memberReducer, youtubeReducer });
-export default reducers;
-
 const youtubeReducer = (state = { youtube: [] }, action) => {
 	switch (action.type) {
 		case 'SET_YOUTUBE':
@@ -65,3 +61,7 @@ const youtubeReducer = (state = { youtube: [] }, action) => {
 			return state;
 	}
 };
+
+//해당 변형자 함수가 반환하는 객체값을 하나의 객체로 합쳐서 외부로 export
+const reducers = combineReducers({ memberReducer, youtubeReducer });
+export default reducers;

@@ -11,6 +11,6 @@ export const setMembers = (data) => {
 export const setYoutube = (data) => {
 	return {
 		type: 'SET_YOUTUBE',
-		patload: data,
+		payload: data,
 	};
 };

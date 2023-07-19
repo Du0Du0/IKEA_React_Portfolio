@@ -1,7 +1,11 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
+import { useSelector } from 'react-redux';
 
 function Vids() {
+	const youtube = useSelector((store) => store.youtubeReducer.youtube);
+	console.log(youtube);
+
 	return (
 		<section id='vids' class='myScroll'>
 			<div class='vidsContainer'>
@@ -17,8 +21,15 @@ function Vids() {
 					</div>
 				</div>
 				{/* video list start  */}
-				<div class='vidsVideoWrap'></div>
+				<div class='vidsVideoWrap'>
+					{youtube.map((vid, idx) => {
+						// if (idx >= 4) return null;
+
+						return <img key={vid.id} src={vid.snippet.thumbnails.medium.url} alt={vid.snippet.title} />;
+					})}
+				</div>
 				{/* video "see more video" button  */}
+
 				<p>
 					<a href='video.html'>
 						바로가기 &nbsp;&nbsp;&nbsp;

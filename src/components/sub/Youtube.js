@@ -1,36 +1,21 @@
 import Layout from '../common/Layout';
-import axios from 'axios';
-import { useEffect, useState, useRef } from 'react';
+import { useState, useRef } from 'react';
+import { useSelector } from 'react-redux';
 import Modal from '../common/Modal';
-import { useSelector, useDispatch } from 'react-redux';
-import { setYoutube } from '../../redux/action';
 
 function Youtube() {
-	const dispatch = useDispatch();
 	const Vids = useSelector((store) => store.youtubeReducer.youtube);
+	console.log(Vids);
+	const [Index, setIndex] = useState(0);
+	const modal = useRef(null);
 
 	const handleOpenNewTab = (url) => {
 		window.open(url, '_blank', 'noopener, noreferrer');
 	};
 	const path = process.env.PUBLIC_URL;
-	const [Index, setIndex] = useState(0);
-	const modal = useRef(null);
 	const [ImgNum, setImgNum] = useState(1);
 	const imgBox = useRef(null);
 	const [ImgSrc, setImgSrc] = useState(process.env.PUBLIC_URL + '/img/imgBoxGroup1.png');
-
-	const fetchYoutube = async () => {
-		const key = 'AIzaSyCKs11Yu98hp6fq7N54tY2iWSY9qvTh4cM';
-		const list = 'PLWgHnOZUp_4FJWdMzYeEAM4Waf8IhnZCB';
-		const num = 8;
-		const url = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=${list}&key=${key}&maxResults=${num}`;
-
-		const result = await axios.get(url);
-		dispatch(setYoutube(result.data.items));
-	};
-	useEffect(() => fetchYoutube(), []);
-
-	//imgBox 클릭하면 순서보여주는 기능
 
 	const ImgBoxClick = () => {
 		const imgBoxGroups = ['imgBoxGroup1.png', 'imgBoxGroup2.png', 'imgBoxGroup3.png', 'imgBoxGroup4.png', 'imgBoxGroup5.png'];
