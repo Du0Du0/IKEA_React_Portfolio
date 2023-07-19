@@ -7,3 +7,10 @@ export const setMembers = (data) => {
 		payload: data,
 	};
 };
+
+export const setYoutube = (data) => {
+	return {
+		type: 'SET_YOUTUBE',
+		patload: data,
+	};
+};
