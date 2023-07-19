@@ -2,13 +2,17 @@ import Layout from '../common/Layout';
 import axios from 'axios';
 import { useEffect, useState, useRef } from 'react';
 import Modal from '../common/Modal';
+import { useSelector, useDispatch } from 'react-redux';
+import { setYoutube } from '../../redux/action';
 
 function Youtube() {
+	const dispatch = useDispatch();
+	const Vids = useSelector((store) => store.youtubeReducer.youtube);
+
 	const handleOpenNewTab = (url) => {
 		window.open(url, '_blank', 'noopener, noreferrer');
 	};
 	const path = process.env.PUBLIC_URL;
-	const [Vids, setVids] = useState([]);
 	const [Index, setIndex] = useState(0);
 	const modal = useRef(null);
 	const [ImgNum, setImgNum] = useState(1);
@@ -22,7 +26,7 @@ function Youtube() {
 		const url = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=${list}&key=${key}&maxResults=${num}`;
 
 		const result = await axios.get(url);
-		setVids(result.data.items);
+		dispatch(setYoutube(result.data.items));
 	};
 	useEffect(() => fetchYoutube(), []);
 
