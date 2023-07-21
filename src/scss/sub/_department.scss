@@ -368,7 +368,7 @@
 				}
 
 				select {
-					padding: 10px;
+					padding: 8px;
 					width: 15%;
 					height: 40px;
 					border-radius: 5px;
@@ -406,6 +406,7 @@
 					}
 					&:nth-of-type(5) {
 						width: 46.5%;
+						margin-bottom: 15px;
 					}
 				}
 

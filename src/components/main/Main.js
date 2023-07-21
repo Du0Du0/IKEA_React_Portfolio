@@ -1,5 +1,5 @@
 import React from 'react';
-import Footer from '../common/Footer';
+import FooterNone from '../common/FooterNone';
 import Header from '../common/Header';
 import Visual from './Visual';
 import Products from './Products';
@@ -21,7 +21,7 @@ function Main({ menuRef }) {
 			<Promotion />
 			<Museum />
 			<MainCommunity />
-			<Footer type={'sub'} imgBg={'footerW'} />
+			<FooterNone type={'sub'} imgBg={''} />
 		</main>
 	);
 }

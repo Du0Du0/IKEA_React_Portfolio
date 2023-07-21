@@ -1,21 +1,15 @@
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { useRef } from 'react';
-
-// Import Swiper styles
-
+import SwiperCore, { Navigation, Pagination, Scrollbar } from 'swiper';
 import 'swiper/swiper-bundle.min.css';
 import 'swiper/swiper.min.css';
 import 'swiper/components/navigation/navigation.min.css';
 import 'swiper/components/pagination/pagination.min.css';
-import { useEffect } from 'react';
-import axios from 'axios';
-import { useState } from 'react';
-import SwiperCore, { Autoplay, Navigation, Pagination, Scrollbar, EffectFade } from 'swiper';
 
 SwiperCore.use([Navigation, Pagination, Scrollbar]);
 
 function Museum() {
-	const path = process.env.PUBLIC_URL;
 	const backgroundStyle = {
 		backgroundImage: `url(${process.env.PUBLIC_URL + '/img/smartHome1.png'})`,
 		backgroundRepeat: 'no-repeat',
@@ -23,6 +17,31 @@ function Museum() {
 		backgroundSize: 'cover',
 	};
 	const [Museums, setMuseums] = useState([]);
+	const titleLists = ['MÄVINN', 'Hej Ingvar', 'Our Roots', 'Democratic Design', 'Us & Our Planet', 'Story of IKEA', 'Existence Maximum'];
+	const [CurrentIdx, setCurrentIdx] = useState(0);
+	const [Clickable, setClickable] = useState(true);
+
+	const prevButtonShowList = () => {
+		if (Clickable) {
+			setClickable(false);
+			setCurrentIdx((prevIdx) => (prevIdx - 1 + titleLists.length) % titleLists.length);
+
+			setTimeout(() => {
+				setClickable(true);
+			}, 500);
+		}
+	};
+
+	const nextButtonShowList = () => {
+		if (Clickable) {
+			setClickable(false);
+			setCurrentIdx((prevIdx) => (prevIdx + 1) % titleLists.length);
+
+			setTimeout(() => {
+				setClickable(true);
+			}, 500);
+		}
+	};
 
 	useEffect(() => {
 		axios.get(`${process.env.PUBLIC_URL}/DB/museum.json`).then((data) => {
@@ -30,25 +49,21 @@ function Museum() {
 		});
 	}, []);
 
-	console.log(window.innerWidth);
-
 	return (
-		<section id='museum' class='myScroll'>
+		<section id='museum' className='myScroll'>
 			{/* left background */}
-			<div class='bgLeft' style={backgroundStyle}>
+			<div className='bgLeft' style={backgroundStyle}>
 				{/* left titleList  */}
-				<h2 class='leftTxt'>Existence Maximum</h2>
+				<h2 className='leftTxt'>{titleLists[(CurrentIdx - 3 + titleLists.length) % titleLists.length]}</h2>
 			</div>
 			{/* right background  */}
-			<div class='bgRight'>
+			<div className='bgRight'>
 				{/* right titleList  */}
-				<h2 class='rightTxt'>Our Roots</h2>
+				<h2 className='rightTxt'>{titleLists[CurrentIdx % titleLists.length]}</h2>
 			</div>
-			<div class='container'>
-				{/* Slider main container */}
-				<div class='swiper-container second'>
-					{/* Additional required wrapper  */}
-					<div class='swiper-wrapper '>
+			<div className='container'>
+				<div className='swiper-container second'>
+					<div className='swiper-wrapper '>
 						<Swiper
 							className='second'
 							loop={true}
@@ -58,7 +73,7 @@ function Museum() {
 							}}
 							slidesPerView={2}
 							clickable={true}
-							touchRatio={1}
+							touchRatio={0}
 							breakpoints={{
 								1920: {
 									slidesPerView: 2,
@@ -148,16 +163,14 @@ function Museum() {
 								},
 							}}
 						>
-							{/* 슬라이드 내용 */}
-
 							{Museums.map((museum, i) => {
 								return (
 									<>
 										<SwiperSlide className='swiper-slide second' key={i}>
 											<h3>{museum.topic}</h3>
-											<h2>{museum.length > 7 ? museum.tit.split(' ').splice(0, 7).join(' ') : museum.tit}</h2>
-											<p class='con'>{museum.content.length > 10 ? museum.content.split(' ').splice(0, 10).join(' ') + '...' : museum.content}</p>
-											<p class='date'>{museum.date}&nbsp;&nbsp;| &nbsp;&nbsp;Exhibition</p>
+											<h2>{museum.title.length > 7 ? museum.title.split(' ').splice(0, 7).join(' ') : museum.title}</h2>
+											<p className='con'>{museum.content.length > 8 ? museum.content.split(' ').splice(0, 8).join(' ') + '...' : museum.content}</p>
+											<p className='date'>{museum.date}&nbsp;&nbsp;| &nbsp;&nbsp;Exhibition</p>
 										</SwiperSlide>
 									</>
 								);
@@ -166,8 +179,8 @@ function Museum() {
 					</div>
 
 					{/* navigation buttons  */}
-					<div class='swiper-button-prev swiper-button-white'></div>
-					<div class='swiper-button-next swiper-button-white'></div>
+					<div className='swiper-button-prev swiper-button-white' onClick={prevButtonShowList} style={{ 'display': Clickable ? 'block' : 'none', '--swiper-navigation-size': '25px' }}></div>
+					<div className='swiper-button-next swiper-button-white' onClick={nextButtonShowList} style={{ 'display': Clickable ? 'block' : 'none', '--swiper-navigation-size': '25px' }}></div>
 				</div>
 			</div>
 		</section>
