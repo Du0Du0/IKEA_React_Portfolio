@@ -20,26 +20,45 @@ import Detail from './components/sub/Detail';
 import Update from './components/sub/Update';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
-import { setYoutube } from './redux/action';
+import { setSubYoutube } from './redux/action';
+import { setMainYoutube } from './redux/action';
 import { useEffect } from 'react';
 
 function App() {
 	const dispatch = useDispatch();
 
-	const fetchYoutube = async () => {
-		const key = 'AIzaSyCKs11Yu98hp6fq7N54tY2iWSY9qvTh4cM';
-		const list = 'PLWgHnOZUp_4FJWdMzYeEAM4Waf8IhnZCB';
-		const num = 8;
-		const url = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=${list}&key=${key}&maxResults=${num}`;
+	//서브페이지 유투브 데이터
+	const fetchSubYoutube = async () => {
+		const key1 = 'AIzaSyCKs11Yu98hp6fq7N54tY2iWSY9qvTh4cM';
+		const list1 = 'PLWgHnOZUp_4FJWdMzYeEAM4Waf8IhnZCB';
+		const num1 = 8;
+		const url1 = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=${list1}&key=${key1}&maxResults=${num1}`;
 
-		const result = await axios.get(url);
-		dispatch(setYoutube(result.data.items));
-		console.log('result.data.items', result.data.items);
+		const result1 = await axios.get(url1);
+		dispatch(setSubYoutube(result1.data.items));
+		console.log('result1.data.items', result1.data.items);
 	};
 
 	useEffect(() => {
-		fetchYoutube();
+		fetchSubYoutube();
 	}, []);
+
+	//메인페이지 유투브 데이터
+	const fetchMainYoutube = async () => {
+		const key2 = 'AIzaSyCKs11Yu98hp6fq7N54tY2iWSY9qvTh4cM';
+		const list2 = 'PLWgHnOZUp_4H3oyXBnWAhhQhWulLsuoPO';
+		const num2 = 5;
+		const url2 = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=${list2}&key=${key2}&maxResults=${num2}`;
+
+		const result2 = await axios.get(url2);
+		dispatch(setMainYoutube(result2.data.items));
+		console.log('result2.data.items', result2.data.items);
+	};
+
+	useEffect(() => {
+		fetchMainYoutube();
+	}, []);
+
 	return (
 		<>
 			{/* Switch는 내부에 중복되는 라우트 경로가 있을때 더 먼저 나오는 라우터를 채택하고 나머지는 무시 */}

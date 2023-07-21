@@ -202,8 +202,6 @@
 					border-radius: 10px;
 					width: 250px;
 					height: 3px;
-
-					/*            box-shadow: inset 3px 3px 10px #ccc;*/
 				}
 				#meter::-webkit-progress-value {
 					border-radius: 10px;
@@ -251,6 +249,7 @@
 					font: 16px/1 $ikeaFontKo;
 					color: $fontColorBl;
 					transform: translate(0, -1%);
+					margin-bottom: 15px;
 
 					&:focus {
 						outline: 1px solid #12a8ce;
@@ -415,6 +414,20 @@
 						content: '*';
 						font: bold 18px/1 $ikeaFontKo;
 						color: red;
+					}
+				}
+
+				p {
+					font: 16px/1 $ikeaFontKo;
+					color: $fontColorBl;
+
+					&::before {
+						content: '\f00c';
+						display: inline-block;
+						font-family: 'Font Awesome 5 Free';
+						color: $fontColorGrC;
+						font-weight: 900;
+						margin-right: 5px;
 					}
 				}
 			}

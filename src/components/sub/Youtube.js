@@ -4,8 +4,8 @@ import { useSelector } from 'react-redux';
 import Modal from '../common/Modal';
 
 function Youtube() {
-	const Vids = useSelector((store) => store.youtubeReducer.youtube);
-	console.log(Vids);
+	const SubVids = useSelector((store) => store.subYoutubeReducer.subYoutube);
+	console.log(SubVids);
 	const [Index, setIndex] = useState(0);
 	const modal = useRef(null);
 
@@ -144,7 +144,7 @@ function Youtube() {
 
 					<div className='videoListContainer myScroll'>
 						<div className='container'>
-							{Vids.map((vid, idx) => {
+							{SubVids.map((subVid, idx) => {
 								return (
 									<div className='videoBox1' key={idx}>
 										<div
@@ -154,11 +154,11 @@ function Youtube() {
 												setIndex(idx);
 											}}
 										>
-											<img src={vid.snippet.thumbnails.maxres.url} alt={vid.snippet.title} data-video-id={vid.snippet.resourceId.videoId} data-cursor='link' data-name='Show Video' />
+											<img src={subVid.snippet.thumbnails.maxres.url} alt={subVid.snippet.title} data-video-id={subVid.snippet.resourceId.videoId} data-cursor='link' data-name='Show Video' />
 										</div>
 										<div className='textBox'>
-											<span className='listTitle'>{vid.snippet.title.length > 4 ? vid.snippet.title.split(' ').splice(0, 4).join(' ') : vid.snippet.title}</span>
-											<p>{vid.snippet.publishedAt.substr(0, 10)}</p>
+											<span className='listTitle'>{subVid.snippet.title.length > 4 ? subVid.snippet.title.split(' ').splice(0, 4).join(' ') : subVid.snippet.title}</span>
+											<p>{subVid.snippet.publishedAt.substr(0, 10)}</p>
 										</div>
 									</div>
 								);
@@ -172,7 +172,7 @@ function Youtube() {
 				</section>
 			</Layout>
 			<Modal ref={modal}>
-				<iframe title={Vids[Index]?.id} src={`https://www.youtube.com/embed/${Vids[Index]?.snippet.resourceId.videoId}`}></iframe>
+				<iframe title={SubVids[Index]?.id} src={`https://www.youtube.com/embed/${SubVids[Index]?.snippet.resourceId.videoId}`}></iframe>
 			</Modal>
 		</>
 	);

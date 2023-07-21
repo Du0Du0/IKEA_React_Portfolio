@@ -3,15 +3,15 @@ import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { useSelector } from 'react-redux';
 
 function Vids() {
-	const youtube = useSelector((store) => store.youtubeReducer.youtube);
-	console.log(youtube);
+	const MainPageYoutube = useSelector((store) => store.mainYoutubeReducer.mainYoutube);
+	console.log(MainPageYoutube);
 
 	return (
-		<section id='vids' class='myScroll'>
-			<div class='vidsContainer'>
-				<div class='vidsTextWrap'>
+		<section id='vids' className='myScroll'>
+			<div className='vidsContainer'>
+				<div className='vidsTextWrap'>
 					{/* video page title  */}
-					<div class='vidsTit'>
+					<div className='vidsTit'>
 						<h2>비디오</h2>
 					</div>
 					{/* video page description  */}
@@ -21,11 +21,25 @@ function Vids() {
 					</div>
 				</div>
 				{/* video list start  */}
-				<div class='vidsVideoWrap'>
-					{youtube.map((vid, idx) => {
+				<div className='vidsVideoWrap'>
+					{MainPageYoutube.map((mainVid, idx) => {
 						// if (idx >= 4) return null;
 
-						return <img key={vid.id} src={vid.snippet.thumbnails.medium.url} alt={vid.snippet.title} />;
+						return (
+							<div className={`video ${idx === 0 ? 'on' : ''}`} data-video-id={mainVid.snippet.resourceId.videoId} style={{ backgroundImage: `url(${mainVid.snippet.thumbnails.maxres.url})` }}>
+								<div className='vidsNum'>{mainVid.snippet.position + 1}</div>
+								<div className='vidsBarTit'>{(mainVid.snippet.title.length > 15 ? mainVid.snippet.title.substr(0, 20) : mainVid.snippet.title) + '...'}</div>
+
+								<span className='vidsOnSpan' style={{ display: 'none' }}>
+									<h4>{(mainVid.snippet.position + 1).toString().padStart(2, 0)}.</h4>
+									<h2>{(mainVid.snippet.title.length > 50 ? mainVid.snippet.title.substr(0, 50) : mainVid.snippet.title) + '...'}</h2>
+									<p>{(mainVid.snippet.description.length > 50 ? mainVid.snippet.description.substr(0, 250) : mainVid.snippet.description) + '...'}</p>
+								</span>
+								<button className='discoverBtn' style={{ display: 'none' }}>
+									Discover Now
+								</button>
+							</div>
+						);
 					})}
 				</div>
 				{/* video "see more video" button  */}

@@ -50,12 +50,24 @@ const memberReducer = (state = initMember, action) => {
 	}
 };
 
-const youtubeReducer = (state = { youtube: [] }, action) => {
+const subYoutubeReducer = (state = { subYoutube: [] }, action) => {
 	switch (action.type) {
-		case 'SET_YOUTUBE':
+		case 'SET_SUBYOUTUBE':
 			return {
 				...state,
-				youtube: action.payload,
+				subYoutube: action.payload,
+			};
+		default:
+			return state;
+	}
+};
+
+const mainYoutubeReducer = (state = { mainYoutube: [] }, action) => {
+	switch (action.type) {
+		case 'SET_MAINYOUTUBE':
+			return {
+				...state,
+				mainYoutube: action.payload,
 			};
 		default:
 			return state;
@@ -63,5 +75,5 @@ const youtubeReducer = (state = { youtube: [] }, action) => {
 };
 
 //해당 변형자 함수가 반환하는 객체값을 하나의 객체로 합쳐서 외부로 export
-const reducers = combineReducers({ memberReducer, youtubeReducer });
+const reducers = combineReducers({ memberReducer, subYoutubeReducer, mainYoutubeReducer });
 export default reducers;

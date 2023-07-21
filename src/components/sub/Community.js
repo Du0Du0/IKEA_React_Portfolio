@@ -26,14 +26,8 @@ function Community() {
 		else return dummy;
 	};
 	const [Posts, setPosts] = useState(getLocalData());
-	console.log('Postsㄴㄴ', Posts);
-	const [See, setSee] = useState([0, 0, 0, 0, 0, 0]);
 
 	const goToDetail = (idx) => {
-		let seeCopy = [...See];
-		seeCopy[idx] = seeCopy[idx] + 1;
-		setSee(seeCopy);
-
 		history.push({
 			pathname: '/detail',
 			state: {
@@ -86,10 +80,8 @@ function Community() {
 						onKeyDown={(e) => {
 							if (e.key === 'Enter') {
 								const searchWord = e.target.value;
-								console.log('searchWord', searchWord);
 								let copy = [...Posts];
 								const newFilter = copy.filter((el) => el.title.includes(searchWord));
-								console.log('newFilter', newFilter);
 								setPosts(newFilter);
 							} else return;
 						}}
@@ -110,22 +102,16 @@ function Community() {
 						className='arrayBtn'
 						onClick={(e) => {
 							if (e.target.value === '오름차순') {
-								console.log('오름차순');
 								const copyPosts = [...Posts];
 								const ascArr = copyPosts.sort((a, b) => a.title.localeCompare(b.title));
-								console.log('오름차순정렬');
 								setPosts(ascArr);
 							} else if (e.target.value === '내림차순') {
-								console.log('내림차순');
 								const copyPosts = [...Posts];
 								const descArr = copyPosts.sort((a, b) => a.title.localeCompare(b.title)).reverse();
-								console.log('내림차순정렬');
 								setPosts(descArr);
 							} else if (e.target.value === '최신순') {
-								console.log('최신순');
 								const copyPosts = [...Posts];
 								const ascDate = copyPosts.sort((a, b) => a.date.localeCompare(b.date)).reverse();
-								console.log('최신순정렬');
 								setPosts(ascDate);
 							}
 						}}

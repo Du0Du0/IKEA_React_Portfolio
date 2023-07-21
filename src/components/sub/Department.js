@@ -348,7 +348,7 @@ function Department() {
 												<option value='nate.com'>nate.com</option>
 											</select>
 											<br />
-											<p className='pwdErr2' style={{ color: Err.email ? '#d80000' : 'initial' }}>
+											<p className='emailErr' style={{ color: Err.email ? '#d80000' : 'initial' }}>
 												{Err.email ? <span>{Err.email}</span> : '이메일을 입력해주세요.'}
 											</p>
 										</td>

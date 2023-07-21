@@ -8,9 +8,16 @@ export const setMembers = (data) => {
 	};
 };
 
-export const setYoutube = (data) => {
+export const setSubYoutube = (data) => {
 	return {
-		type: 'SET_YOUTUBE',
+		type: 'SET_SUBYOUTUBE',
+		payload: data,
+	};
+};
+
+export const setMainYoutube = (data) => {
+	return {
+		type: 'SET_MAINYOUTUBE',
 		payload: data,
 	};
 };

@@ -7,7 +7,7 @@ import Vids from './Vids';
 import SmartHome from './SmartHome';
 import Promotion from './Promotion';
 import Museum from './Museum';
-import Notice from './Notice';
+import MainCommunity from './MainCommunity';
 
 function Main({ menuRef }) {
 	return (
@@ -20,7 +20,7 @@ function Main({ menuRef }) {
 			<SmartHome />
 			<Promotion />
 			<Museum />
-			<Notice />
+			<MainCommunity />
 			<Footer type={'sub'} imgBg={'footerW'} />
 		</main>
 	);
