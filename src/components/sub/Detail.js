@@ -1,20 +1,18 @@
 import React from 'react';
-import Community from './Community';
 import { useHistory, useLocation } from 'react-router-dom';
-import { faHeart, faEye } from '@fortawesome/free-regular-svg-icons';
+import { faHeart } from '@fortawesome/free-regular-svg-icons';
 import { faAngleDown, faCircleExclamation } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import LayoutNone from '../common/LayoutNone';
 import { useEffect, useState, useRef } from 'react';
-import Write from './Write';
 import CommentModal from './CommentModal';
 
-function Detail(props) {
+function Detail() {
 	const history = useHistory();
 	const location = useLocation();
 	const [Posts, setPosts] = useState([]);
 	const [LikeBtn, setLikeBtn] = useState([0, 0, 0, 0, 0, 0, 0]);
-	let [InputCount, setInputCount] = useState(0);
+	const [InputCount, setInputCount] = useState(0);
 	const noticeModal = useRef(null);
 	const { idx } = location.state || {};
 	const comment = useRef(null);
@@ -37,11 +35,9 @@ function Detail(props) {
 	useEffect(() => {
 		const data = localStorage.getItem('post');
 		const posts = JSON.parse(data);
-		console.log(data);
 		const { idx } = location.state || {};
 
 		if (idx === undefined && localStorage.getItem('idx')) {
-			// 새로고침 후에도 idx 값을 유지하기 위해 localStorage에서 가져옴
 			const storedIdx = localStorage.getItem('idx');
 
 			if (storedIdx >= '0' && storedIdx < posts.length) {
@@ -50,7 +46,6 @@ function Detail(props) {
 				history.push('/community');
 			}
 		} else {
-			console.log('idx', idx);
 			const selectedPost = posts && posts[idx];
 			setPosts(selectedPost);
 			// 처음 페이지 들어올 때 idx 값을 localStorage에 저장
@@ -67,7 +62,7 @@ function Detail(props) {
 		const result = window.confirm('정말로 삭제하시겠습니까?');
 		const data = localStorage.getItem('post');
 		const posts = JSON.parse(data);
-		console.log('posts는', posts);
+
 		if (result) {
 			const { idx } = location.state || {};
 			console.log('index는', idx);
@@ -84,14 +79,18 @@ function Detail(props) {
 
 	//게시물 수정하기 버튼 클릭 시
 	const goToUpdate = (idx) => {
-		history.push({
-			pathname: '/update',
-			state: {
-				...Posts,
-			},
-		});
-		console.log(Posts);
-		console.log(idx);
+		try {
+			history.push({
+				pathname: '/update',
+				state: {
+					...Posts,
+				},
+			});
+			console.log(Posts);
+			console.log(idx);
+		} catch (err) {
+			console.log('goToUpdateErr', err);
+		}
 	};
 
 	// 댓글 초기화
