@@ -1,10 +1,9 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import LayoutNone from '../common/LayoutNone';
 import { useHistory, useLocation } from 'react-router-dom';
 import Pagination from 'react-js-pagination';
-import RecentArticle from './RecentArticle';
 
 function Community() {
 	const history = useHistory();
@@ -12,6 +11,8 @@ function Community() {
 	const [postPerPage] = useState(8);
 	const indexOfLastPost = Currentpage * postPerPage;
 	const indexOfFirstPost = indexOfLastPost - postPerPage;
+	const startDateRef = useRef(null);
+	const endDateRef = useRef(null);
 
 	const dummy = [
 		{
@@ -256,8 +257,10 @@ function Community() {
 		if (data) return JSON.parse(data);
 		else return dummy;
 	};
+
 	const [Posts, setPosts] = useState(getLocalData());
 	const currentPosts = Posts.slice(indexOfFirstPost, indexOfLastPost);
+
 	const goToDetail = (idx) => {
 		history.push({
 			pathname: '/detail',
@@ -274,8 +277,26 @@ function Community() {
 		localStorage.setItem('post', JSON.stringify(Posts));
 	}, []);
 
-	const handlePageChange = (page) => {
+	const pageChange = (page) => {
 		setCurrentpage(page);
+	};
+
+	//검색1. 시작날짜, 마지막날짜 설정 후 맞는 조건 게시물 필터링
+	const searchDateInput = () => {
+		const startDate = startDateRef.current.value;
+		const endDate = endDateRef.current.value;
+
+		if (startDate && endDate) {
+			const matchDatePosts = Posts.filter((post) => {
+				// post.date 값을 Date 객체로 변환하여 검색 날짜와 비교
+				const postDate = new Date(post.date);
+				const start = new Date(startDate);
+				const end = new Date(endDate);
+				return postDate >= start && postDate <= end;
+			});
+
+			setPosts(matchDatePosts);
+		}
 	};
 
 	return (
@@ -287,11 +308,9 @@ function Community() {
 				<div className='searchBarTop'>
 					<input type='checkBox' name='nonDate' />
 					<label htmlFor='nonDate'>날짜 미지정</label>
-
-					<input type='date' className='dateInput' />
+					<input type='date' className='dateInput' ref={startDateRef} />
 					<span>-</span>
-					<input type='date' className='dateInput' />
-
+					<input type='date' className='dateInput' ref={endDateRef} />
 					<div className='dateBtnWrap'>
 						<button>1주일</button>
 						<button>1개월</button>
@@ -325,7 +344,7 @@ function Community() {
 							} else return;
 						}}
 					/>
-					<FontAwesomeIcon icon={faMagnifyingGlass} />
+					<FontAwesomeIcon icon={faMagnifyingGlass} onClick={searchDateInput} />
 				</div>
 			</div>
 			<div className='btnContainer'>
@@ -384,9 +403,8 @@ function Community() {
 						);
 					})}
 			</div>
-			<Pagination activePage={Currentpage} itemsCountPerPage={8} totalItemsCount={450} pageRangeDisplayed={3} prevPageText={'‹'} nextPageText={'›'} onChange={handlePageChange} />;
 			<div className='horzienLine2' />
-			<RecentArticle />
+			<Pagination activePage={Currentpage} itemsCountPerPage={8} totalItemsCount={30} pageRangeDisplayed={3} prevPageText={'‹'} nextPageText={'›'} onChange={pageChange} />;
 		</LayoutNone>
 	);
 }
