@@ -4,6 +4,7 @@ import { useEffect, useState, useRef } from 'react';
 import LayoutNone from '../common/LayoutNone';
 import { useHistory, useLocation } from 'react-router-dom';
 import Pagination from 'react-js-pagination';
+import moment from 'moment';
 
 function Community() {
 	const history = useHistory();
@@ -300,6 +301,18 @@ function Community() {
 		}
 	};
 
+	// 오늘 날짜 구하기
+	const today = moment();
+
+	// 일주일 전 날짜 구하기
+	const oneWeekAgo = moment().subtract(1, 'weeks');
+
+	// 한 달 전 날짜 구하기
+	const oneMonthAgo = moment().subtract(1, 'months');
+
+	// 세 달 전 날짜 구하기
+	const threeMonthsAgo = moment().subtract(3, 'months');
+
 	return (
 		<LayoutNone type={''} name1={'community'}>
 			<div className='titTop'>
@@ -316,13 +329,34 @@ function Community() {
 						}}
 					/>
 					<label htmlFor='nonDate'>날짜 미지정</label>
-					<input type='date' className='dateInput' ref={startDateRef} disabled={IgnoreCheck ? false : true} />
+					<input type='date' className='dateInput' ref={startDateRef} disabled={IgnoreCheck ? true : false} />
 					<span>-</span>
-					<input type='date' className='dateInput' ref={endDateRef} disabled={IgnoreCheck ? false : true} />
+					<input type='date' className='dateInput' ref={endDateRef} disabled={IgnoreCheck ? true : false} />
 					<div className='dateBtnWrap'>
-						<button>1주일</button>
-						<button>1개월</button>
-						<button>3개월</button>
+						<button
+							onClick={() => {
+								startDateRef.current.value = oneWeekAgo.format('YYYY-MM-DD');
+								endDateRef.current.value = today.format('YYYY-MM-DD');
+							}}
+						>
+							1주일
+						</button>
+						<button
+							onClick={() => {
+								startDateRef.current.value = oneMonthAgo.format('YYYY-MM-DD');
+								endDateRef.current.value = today.format('YYYY-MM-DD');
+							}}
+						>
+							1개월
+						</button>
+						<button
+							onClick={() => {
+								startDateRef.current.value = threeMonthsAgo.format('YYYY-MM-DD');
+								endDateRef.current.value = today.format('YYYY-MM-DD');
+							}}
+						>
+							3개월
+						</button>
 					</div>
 				</div>
 				<div className='searchBarBottom'>
