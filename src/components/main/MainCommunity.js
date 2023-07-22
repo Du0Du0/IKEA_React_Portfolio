@@ -105,7 +105,7 @@ function MainCommunity() {
 										<p>{`${post.date}`.substr(0, 10)}</p>
 									</div>
 									<div className='articleContent'>
-										<p onClick={() => goToDetail(idx)}>{post.content.length > 23 ? post.content.split(' ').splice(0, 23).join(' ') : post.content}</p>
+										<p onClick={() => goToDetail(idx)}>{post.content.length > 21 ? post.content.split(' ').splice(0, 21).join(' ') + '...' : post.content}</p>
 									</div>
 								</div>
 							</>

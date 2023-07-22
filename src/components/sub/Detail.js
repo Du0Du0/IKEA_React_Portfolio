@@ -1,6 +1,6 @@
 import React from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
-import { faHeart } from '@fortawesome/free-regular-svg-icons';
+import { faHeart, faClock } from '@fortawesome/free-regular-svg-icons';
 import { faAngleDown, faCircleExclamation } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import LayoutNone from '../common/LayoutNone';
@@ -50,6 +50,19 @@ function Detail() {
 			setPosts(selectedPost);
 			// 처음 페이지 들어올 때 idx 값을 localStorage에 저장
 			localStorage.setItem('idx', idx);
+
+			// 기존에 저장된 'recent' 데이터 가져오기
+			const recentData = localStorage.getItem('recent');
+			let recentPosts = [];
+			if (recentData) {
+				recentPosts = JSON.parse(recentData);
+			}
+
+			// 새로운 데이터를 기존 데이터 배열에 추가
+			recentPosts.push(selectedPost);
+
+			// 최신 데이터를 다시 'recent'에 저장
+			localStorage.setItem('recent', JSON.stringify(recentPosts));
 		}
 	}, [history, location.state, idx]);
 
@@ -140,7 +153,12 @@ function Detail() {
 					<div className='titBottom'>
 						<p>{Posts && Posts.userId}</p>
 						<p>{Posts && Posts.topic}</p>
-						<p>{`${Posts && Posts.date}`.substr(0, 10)}</p>
+						<p>
+							{' '}
+							<FontAwesomeIcon icon={faClock} />
+							&nbsp;&nbsp;
+							{`${Posts && Posts.date}`.substr(0, 10)}
+						</p>
 					</div>
 				</div>
 
@@ -154,7 +172,7 @@ function Detail() {
 								.split(',')
 								.map((word, index) => (
 									<span key={index} className='keywordMap'>
-										{word}{' '}
+										{'#' + word}{' '}
 									</span>
 								))}
 					</p>
