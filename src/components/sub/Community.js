@@ -16,6 +16,9 @@ function Community() {
 	const endDateRef = useRef(null);
 	const ignoreDateRef = useRef(null);
 	const [IgnoreCheck, setIgnoreCheck] = useState(false);
+	const searchTopic = useRef(null);
+	const searchWhat = useRef(null);
+	const searchInput = useRef(null);
 	const dummy = [
 		{
 			userId: 'ikeastyle',
@@ -360,14 +363,14 @@ function Community() {
 					</div>
 				</div>
 				<div className='searchBarBottom'>
-					<select className='searchTopic'>
+					<select className='searchTopic' ref={searchTopic}>
 						<option value=''>분류 전체</option>
-						<option vlaue='문의'>문의</option>
-						<option vlaue='요청'>요청</option>
-						<option vlaue='전시'>전시</option>
-						<option vlaue='이벤트'>이벤트</option>
+						<option value='문의'>문의</option>
+						<option value='요청'>요청</option>
+						<option value='전시'>전시</option>
+						<option value='이벤트'>이벤트</option>
 					</select>
-					<select className='searchWhat'>
+					<select className='searchWhat' ref={searchWhat}>
 						<option value=''>전체</option>
 						<option value='제목'>제목</option>
 						<option value='내용'>내용</option>
@@ -375,15 +378,29 @@ function Community() {
 					</select>
 					<input
 						type='text'
+						ref={searchInput}
 						placeholder='검색어를 입력하세요'
-						className='searchBar' // 입력시킨 검색 단어와 일치하는 값 찾아주는 기능
+						className='searchBar'
 						onKeyDown={(e) => {
-							if (e.key === 'Enter') {
-								const searchWord = e.target.value;
+							let copy = [...Posts];
+							const selectedTopic = copy.filter((el) => el.topic.includes(searchTopic.current.value));
+							setPosts(selectedTopic);
+
+							if ((e.key === 'Enter' && searchWhat.current.value === '') || (e.key === 'Enter' && searchWhat.current.value === '제목')) {
 								let copy = [...Posts];
-								const newFilter = copy.filter((el) => el.title.includes(searchWord));
+								const newFilter = copy.filter((el) => el.title.includes(searchInput.current.value));
 								setPosts(newFilter);
-							} else return;
+							}
+							if (e.key === 'Enter' && searchWhat.current.value === '내용') {
+								let copy = [...Posts];
+								const newFilter = copy.filter((el) => el.content.includes(searchInput.current.value));
+								setPosts(newFilter);
+							}
+							if (e.key === 'Enter' && searchWhat.current.value === '작성자') {
+								let copy = [...Posts];
+								const newFilter = copy.filter((el) => el.userId.includes(searchInput.current.value));
+								setPosts(newFilter);
+							}
 						}}
 					/>
 					<FontAwesomeIcon icon={faMagnifyingGlass} onClick={searchDateInput} />
