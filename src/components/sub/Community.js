@@ -13,7 +13,8 @@ function Community() {
 	const indexOfFirstPost = indexOfLastPost - postPerPage;
 	const startDateRef = useRef(null);
 	const endDateRef = useRef(null);
-
+	const ignoreDateRef = useRef(null);
+	const [IgnoreCheck, setIgnoreCheck] = useState(false);
 	const dummy = [
 		{
 			userId: 'ikeastyle',
@@ -306,11 +307,18 @@ function Community() {
 			</div>
 			<div className='searchBarWrap'>
 				<div className='searchBarTop'>
-					<input type='checkBox' name='nonDate' />
+					<input
+						type='checkBox'
+						name='nonDate'
+						ref={ignoreDateRef}
+						onClick={() => {
+							setIgnoreCheck((IgnoreCheck) => !IgnoreCheck);
+						}}
+					/>
 					<label htmlFor='nonDate'>날짜 미지정</label>
-					<input type='date' className='dateInput' ref={startDateRef} />
+					<input type='date' className='dateInput' ref={startDateRef} disabled={IgnoreCheck ? false : true} />
 					<span>-</span>
-					<input type='date' className='dateInput' ref={endDateRef} />
+					<input type='date' className='dateInput' ref={endDateRef} disabled={IgnoreCheck ? false : true} />
 					<div className='dateBtnWrap'>
 						<button>1주일</button>
 						<button>1개월</button>
