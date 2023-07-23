@@ -1,5 +1,5 @@
 import Layout from '../common/Layout';
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import Modal from '../common/Modal';
 
@@ -15,18 +15,47 @@ function Youtube() {
 	const path = process.env.PUBLIC_URL;
 	const [ImgNum, setImgNum] = useState(1);
 	const imgBox = useRef(null);
-	const [ImgSrc, setImgSrc] = useState(process.env.PUBLIC_URL + '/img/imgBoxGroup1.png');
+	const [ImgSrc, setImgSrc] = useState('');
+	const [IsPlay1, setIsPlay1] = useState(false);
+	const [IsPlay2, setIsPlay2] = useState(false);
+	const subTitVid = useRef(null);
+	const vidImgBox = useRef(null);
+
+	useEffect(() => {
+		const imgBoxGroups = ['imgBoxGroup1.png', 'imgBoxGroup2.png', 'imgBoxGroup3.png', 'imgBoxGroup4.png', 'imgBoxGroup5.png'];
+		setImgSrc(process.env.PUBLIC_URL + `/img/${imgBoxGroups[ImgNum - 1]}`);
+	}, [ImgNum]);
 
 	const ImgBoxClick = () => {
 		const imgBoxGroups = ['imgBoxGroup1.png', 'imgBoxGroup2.png', 'imgBoxGroup3.png', 'imgBoxGroup4.png', 'imgBoxGroup5.png'];
 
-		if (ImgNum > imgBoxGroups.length - 1) {
-			setImgNum(1);
-		} else {
-			setImgNum(ImgNum + 1);
-		}
+		setImgNum((prevImgNum) => {
+			if (prevImgNum >= imgBoxGroups.length) {
+				return 1;
+			} else {
+				return prevImgNum + 1;
+			}
+		});
 
 		setImgSrc(process.env.PUBLIC_URL + `/img/${imgBoxGroups[ImgNum]}`);
+	};
+
+	const videoPlayToggle1 = () => {
+		setIsPlay1((IsPlay1) => !IsPlay1);
+		if (IsPlay1) {
+			subTitVid.current.play();
+		} else {
+			subTitVid.current.pause();
+		}
+	};
+
+	const videoPlayToggle2 = () => {
+		setIsPlay2((IsPlay2) => !IsPlay2);
+		if (IsPlay2) {
+			vidImgBox.current.play();
+		} else {
+			vidImgBox.current.pause();
+		}
 	};
 
 	return (
@@ -50,17 +79,17 @@ function Youtube() {
 						<figure className='subRight'>
 							<div className='videoBtnContainer'>
 								<span>
-									<button className='pauseBtn'>
+									<button className='pauseBtn' onClick={videoPlayToggle1} style={{ display: IsPlay1 ? 'none' : 'block' }}>
 										<img src={path + '/img/pauseWhite.png'} alt='video pause button' />
 									</button>
 								</span>
 								<span>
-									<button className='playBtn'>
+									<button className='playBtn' onClick={videoPlayToggle1} style={{ display: IsPlay1 ? 'block' : 'none' }}>
 										<img src={path + '/img/playWhite.png'} alt='video play button' />
 									</button>
 								</span>
 							</div>
-							<video className='vidSubTit' autoPlay muted loop data-name='Pause'>
+							<video className='vidSubTit' autoPlay muted loop data-name='Pause' ref={subTitVid}>
 								<source src={path + '/img/SHM.mp4'} type='video/mp4' />
 							</video>
 						</figure>
@@ -79,17 +108,17 @@ function Youtube() {
 						<figure className='imgBoxLeft'>
 							<div className='videoBtnContainer2'>
 								<span>
-									<button className='pauseBtn2'>
+									<button className='pauseBtn2' onClick={videoPlayToggle2} style={{ display: IsPlay2 ? 'none' : 'block' }}>
 										<img src={path + '/img/pauseWhite.png'} alt='video pause button' />
 									</button>
 								</span>
 								<span>
-									<button className='playBtn2'>
-										<img src={path + '/img/pauseWhite.png'} alt='video play button' />
+									<button className='playBtn2' onClick={videoPlayToggle2} style={{ display: IsPlay2 ? 'block' : 'none' }}>
+										<img src={path + '/img/playWhite.png'} alt='video play button' />
 									</button>
 								</span>
 							</div>
-							<video className='vidImgBox' autoPlay muted loop data-name='Pause'>
+							<video className='vidImgBox' autoPlay muted loop data-name='Pause' ref={vidImgBox}>
 								<source src={path + '/img/imgBoxRight_video.mp4'} />
 							</video>
 						</figure>
