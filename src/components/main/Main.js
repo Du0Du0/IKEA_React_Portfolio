@@ -8,6 +8,8 @@ import SmartHome from './SmartHome';
 import Promotion from './Promotion';
 import Museum from './Museum';
 import MainCommunity from './MainCommunity';
+import Scroll_navi from '../common/Scroll_navi';
+import TopButton from '../common/TopButton';
 
 function Main({ menuRef }) {
 	return (
@@ -21,6 +23,8 @@ function Main({ menuRef }) {
 			<Promotion />
 			<Museum />
 			<MainCommunity />
+			<Scroll_navi />
+			<TopButton />
 			<FooterNone type={'sub'} imgBg={''} />
 		</main>
 	);

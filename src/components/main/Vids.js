@@ -2,6 +2,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { useSelector } from 'react-redux';
 import { useState, useRef } from 'react';
+import { Link } from 'react-router-dom/cjs/react-router-dom';
 
 function Vids() {
 	const MainPageYoutube = useSelector((store) => store.mainYoutubeReducer.mainYoutube);
@@ -59,10 +60,10 @@ function Vids() {
 				{/* video "see more video" button  */}
 
 				<p>
-					<a href='video.html'>
+					<Link to='/youtube'>
 						바로가기 &nbsp;&nbsp;&nbsp;
 						<FontAwesomeIcon icon={faArrowRight} />
-					</a>
+					</Link>
 				</p>
 			</div>
 		</section>

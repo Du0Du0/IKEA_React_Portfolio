@@ -23,6 +23,7 @@ import { useDispatch } from 'react-redux';
 import { setSubYoutube } from './redux/action';
 import { setMainYoutube } from './redux/action';
 import { useEffect } from 'react';
+import TopButton from './components/common/TopButton';
 
 function App() {
 	const dispatch = useDispatch();

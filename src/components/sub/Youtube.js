@@ -2,6 +2,7 @@ import Layout from '../common/Layout';
 import { useState, useRef, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import Modal from '../common/Modal';
+import TopButton from '../common/TopButton';
 
 function Youtube() {
 	const SubVids = useSelector((store) => store.subYoutubeReducer.subYoutube);
@@ -196,8 +197,7 @@ function Youtube() {
 					</div>
 
 					<div className='cursor'></div>
-
-					<button className='goTopBtn'> Go Top </button>
+					<TopButton />
 				</section>
 			</Layout>
 			<Modal ref={modal}>

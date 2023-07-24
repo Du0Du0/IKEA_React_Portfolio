@@ -14,6 +14,8 @@ $fontColorBl: #333;
 $fontColorGr: #b5b5b5;
 $fontColorGrC: #10101099;
 $fontColorGrT: #cacaca;
+$pageScrollMain: #1b2539;
+$pageScrollBl: #333;
 
 //members
 $tableBg: #f4f5f6;
@@ -76,6 +78,8 @@ a:visited {
 @import 'common/layout';
 @import 'common/modal';
 @import 'common/footerNone';
+@import 'common/scroll_navi';
+@import 'common/topButton';
 
 //main
 @import 'main/visual';
