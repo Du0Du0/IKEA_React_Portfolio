@@ -12,6 +12,7 @@ import Scroll_navi from '../common/Scroll_navi';
 import TopButton from '../common/TopButton';
 
 function Main({ menuRef }) {
+	const mainIndicatorLists = ['Menu', 'video', 'Living', 'Event', 'Exhibit', 'Notice'];
 	return (
 		<main>
 			{/* 메인전용 라우터에는 main문자값을 전달 */}
@@ -23,7 +24,7 @@ function Main({ menuRef }) {
 			<Promotion />
 			<Museum />
 			<MainCommunity />
-			<Scroll_navi />
+			<Scroll_navi type={'w'} pageLists={mainIndicatorLists} />
 			<TopButton />
 			<FooterNone type={'sub'} imgBg={''} />
 		</main>

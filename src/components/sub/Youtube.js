@@ -3,6 +3,7 @@ import { useState, useRef, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import Modal from '../common/Modal';
 import TopButton from '../common/TopButton';
+import Scroll_navi from '../common/Scroll_navi';
 
 function Youtube() {
 	const SubVids = useSelector((store) => store.subYoutubeReducer.subYoutube);

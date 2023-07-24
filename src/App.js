@@ -24,9 +24,11 @@ import { setSubYoutube } from './redux/action';
 import { setMainYoutube } from './redux/action';
 import { useEffect } from 'react';
 import TopButton from './components/common/TopButton';
+import Scroll_navi from './components/common/Scroll_navi';
 
 function App() {
 	const dispatch = useDispatch();
+	const youtubeIndicatorLists = ['Title', 'About', 'Photo', 'Video', 'List'];
 
 	//서브페이지 유투브 데이터
 	const fetchSubYoutube = async () => {
@@ -155,6 +157,7 @@ function App() {
 					render={() => (
 						<>
 							<Youtube />
+							<Scroll_navi type={''} pageLists={youtubeIndicatorLists} />
 							<Footer type={'bl'} imgBg={'footerBl'} />
 						</>
 					)}

@@ -1,12 +1,10 @@
 import { useRef, useState, useEffect } from 'react';
 
-function Scroll_navi() {
+function Scroll_navi({ type, pageLists }) {
 	const btnRef = useRef(null);
 	const position = useRef([]);
 	const [ActiveIdx, setActiveIdx] = useState(0);
 	const [Num, setNum] = useState(0);
-
-	const mainIndicatorLists = ['Menu', 'video', 'Living', 'Event', 'Exhibit', 'Notice'];
 
 	const getPosition = () => {
 		const sections = btnRef.current.parentElement.querySelectorAll('.myScroll');
@@ -39,7 +37,7 @@ function Scroll_navi() {
 	}, []);
 
 	return (
-		<ul id='scroll_navi' className='w' ref={btnRef}>
+		<ul id='scroll_navi' className={type} ref={btnRef}>
 			{Array(Num)
 				.fill()
 				.map((_, idx) => {
@@ -48,7 +46,7 @@ function Scroll_navi() {
 
 					return (
 						<li key={idx} className={defaultClass} onClick={() => setActiveIdx(idx)}>
-							{mainIndicatorLists[idx]}
+							{pageLists[idx]}
 						</li>
 					);
 				})}
