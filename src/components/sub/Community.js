@@ -5,6 +5,7 @@ import LayoutNone from '../common/LayoutNone';
 import { useHistory, useLocation } from 'react-router-dom';
 import Pagination from 'react-js-pagination';
 import moment from 'moment';
+import { Switch } from 'react-router-dom/cjs/react-router-dom';
 
 function Community() {
 	const history = useHistory();
@@ -19,6 +20,12 @@ function Community() {
 	const searchTopic = useRef(null);
 	const searchWhat = useRef(null);
 	const searchInput = useRef(null);
+	const [IsListType, setIsListType] = useState(false);
+	const today = moment();
+	const oneWeekAgo = moment().subtract(1, 'weeks');
+	const oneMonthAgo = moment().subtract(1, 'months');
+	const threeMonthsAgo = moment().subtract(3, 'months');
+
 	const dummy = [
 		{
 			userId: 'ikeastyle',
@@ -262,7 +269,6 @@ function Community() {
 		if (data) return JSON.parse(data);
 		else return dummy;
 	};
-
 	const [Posts, setPosts] = useState(getLocalData());
 	const currentPosts = Posts.slice(indexOfFirstPost, indexOfLastPost);
 
@@ -304,17 +310,10 @@ function Community() {
 		}
 	};
 
-	// 오늘 날짜 구하기
-	const today = moment();
-
-	// 일주일 전 날짜 구하기
-	const oneWeekAgo = moment().subtract(1, 'weeks');
-
-	// 한 달 전 날짜 구하기
-	const oneMonthAgo = moment().subtract(1, 'months');
-
-	// 세 달 전 날짜 구하기
-	const threeMonthsAgo = moment().subtract(3, 'months');
+	const changeListType = () => {
+		setIsListType((IsListType) => !IsListType);
+		console.log('IsListType', IsListType);
+	};
 
 	return (
 		<LayoutNone type={''} name1={'community'}>
@@ -437,11 +436,26 @@ function Community() {
 						<option value='오름차순'>오름차순</option>
 						<option value='내림차순'>내림차순</option>
 						<option value='최신순'>최신순</option>
-					</select>
+					</select>{' '}
+					&nbsp;
+					<svg xmlns='http://www.w3.org/2000/svg' width='20' height='18' viewBox='0 0 20 18' onClick={changeListType}>
+						<path
+							id='align_card'
+							d='M22-11v7a.966.966,0,0,1-.29.71A.966.966,0,0,1,21-3H13v-8ZM11-11v8H3a.966.966,0,0,1-.71-.29A.966.966,0,0,1,2-4v-7Zm0-10v8H2v-7a.966.966,0,0,1,.29-.71A.966.966,0,0,1,3-21Zm10,0a.966.966,0,0,1,.71.29A.966.966,0,0,1,22-20v7H13v-8Z'
+							transform='translate(-2 21)'
+						></path>
+					</svg>
+					<svg xmlns='http://www.w3.org/2000/svg' width='20' height='18' viewBox='0 0 20 18' onClick={changeListType}>
+						<path
+							id='align_row'
+							d='M22-11v7a.966.966,0,0,1-.29.71A.966.966,0,0,1,21-3H13v-8Zm-9,0v8H3a.966.966,0,0,1-.71-.29A.966.966,0,0,1,2-4v-7Zm0-10v8H2v-7a.966.966,0,0,1,.29-.71A.966.966,0,0,1,3-21Zm8,0a.966.966,0,0,1,.71.29A.966.966,0,0,1,22-20v7H13v-8Z'
+							transform='translate(-2 21)'
+						></path>
+					</svg>
 				</div>
 			</div>
 			<div className='horzienLine' />
-			<div className='listWrap'>
+			<div className={!IsListType ? 'listWrap roomy' : 'listWrap'}>
 				{Posts &&
 					currentPosts.map((post, idx) => {
 						return (
@@ -453,7 +467,7 @@ function Community() {
 								}}
 							>
 								<h3>{post.topic}</h3>
-								<h2>{`${post.title}`.length > 18 ? `${post.title}`.substr(0, 18) + '...' : `${post.title}`}</h2>
+								<h2>{!IsListType && `${post.title}`.length > 18 ? `${post.title}`.substr(0, 18) + '...' : `${post.title}`}</h2>
 								<div className='bottomWrap'>
 									<p>{`${post.date}`.substr(0, 10)}</p>
 									<p>{`${post.userId}`.substr(0, 3).replace(/^(.)(.*)$/, '$1**')}</p>

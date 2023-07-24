@@ -19,14 +19,20 @@ const SnsShareModal = forwardRef((props, ref) => {
 		script.src = '//developers.kakao.com/sdk/js/kakao.min.js';
 		script.async = true;
 		document.body.appendChild(script);
-		// Kakao SDK 초기화
-
-		Kakao.init('be0e6a448d5b266e02a1457647324d73');
 
 		// 컴포넌트가 언마운트될 때 스크립트 제거
 		return () => {
 			document.body.removeChild(script);
 		};
+	}, []);
+
+	useEffect(() => {
+		if (window.Kakao) {
+			const kakao = window.Kakao;
+			if (!kakao.isInitialized()) {
+				Kakao.init('be0e6a448d5b266e02a1457647324d73'); // 카카오에서 제공받은 javascript key를 넣어줌 -> .env파일에서 호출시킴
+			}
+		}
 	}, []);
 
 	const shareKakao = () => {
