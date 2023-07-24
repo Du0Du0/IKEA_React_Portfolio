@@ -28,7 +28,15 @@ function Main({ menuRef }) {
 	};
 
 	// 쿠키팝업창 닫을 시 뒷 배경 스크롤 가능하도록(스크롤 보이는 채)
-	const containerEnableScroll = () => {};
+	// 쿠키팝업창 닫을 시 뒷 배경 스크롤 가능하도록(스크롤 보이는 채)
+	function containerEnableScroll() {
+		const container = document.querySelector('.bodyContainer');
+		const scrollPosition = Math.abs(parseInt(container.style.top));
+
+		container.removeAttribute('style');
+		window.scrollTo(0, scrollPosition);
+		document.body.removeAttribute('style');
+	}
 
 	return (
 		<>

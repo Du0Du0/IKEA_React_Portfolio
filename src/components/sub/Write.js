@@ -60,7 +60,7 @@ function Write() {
 		<>
 			<LayoutNone type={''} name1={'write'}>
 				<div className='titTop'>
-					<h1>1:1문의</h1>
+					<h1>커뮤니티</h1>
 				</div>
 				<table>
 					<tbody>
