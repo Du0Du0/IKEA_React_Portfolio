@@ -1,17 +1,17 @@
 import { useState, forwardRef, useImperativeHandle, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark, faCopy } from '@fortawesome/free-solid-svg-icons';
+import { FacebookShareButton, FacebookIcon, TwitterIcon, TwitterShareButton } from 'react-share';
 
 const SnsShareModal = forwardRef((props, ref) => {
 	const [Open, setOpen] = useState(false);
+	const currentUrl = 'http://naver.com';
+	const path = process.env.PUBLIC_URL;
+	const { Kakao } = window;
 
 	useImperativeHandle(ref, () => {
 		return { open: () => setOpen(true) };
 	});
-
-	const path = process.env.PUBLIC_URL;
-
-	const { Kakao } = window;
 
 	useEffect(() => {
 		// Kakao SDK 스크립트 로드
@@ -19,18 +19,14 @@ const SnsShareModal = forwardRef((props, ref) => {
 		script.src = '//developers.kakao.com/sdk/js/kakao.min.js';
 		script.async = true;
 		document.body.appendChild(script);
+		// Kakao SDK 초기화
+
+		Kakao.init('be0e6a448d5b266e02a1457647324d73');
 
 		// 컴포넌트가 언마운트될 때 스크립트 제거
 		return () => {
 			document.body.removeChild(script);
 		};
-	}, []);
-
-	useEffect(() => {
-		// Kakao SDK 초기화
-		if (!Kakao.isInitialized()) {
-			Kakao.init('be0e6a448d5b266e02a1457647324d73');
-		}
 	}, []);
 
 	const shareKakao = () => {
@@ -78,12 +74,12 @@ const SnsShareModal = forwardRef((props, ref) => {
 						<button onClick={shareKakao}>
 							<img src={path + '/img/icon-kakao.png'} />
 						</button>
-						<button>
-							<img src={path + '/img/icon-facebook.png'} />
-						</button>
-						<button>
-							<img src={path + '/img/icon-twitter.png'} />
-						</button>
+						<FacebookShareButton url={currentUrl}>
+							<FacebookIcon size={59} round={true} borderRadius={24}></FacebookIcon>
+						</FacebookShareButton>
+						<TwitterShareButton url={currentUrl}>
+							<TwitterIcon size={59} round={true} borderRadius={24}></TwitterIcon>
+						</TwitterShareButton>
 					</div>
 					<div className='snsShareLinkCopy'>
 						<input type='text' defaultValue='https://munjang.or.kr/' readOnly />

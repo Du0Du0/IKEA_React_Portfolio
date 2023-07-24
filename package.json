@@ -27,6 +27,7 @@
     "react-rellax": "^1.0.3",
     "react-router-dom": "^5.3.4",
     "react-scripts": "5.0.1",
+    "react-share": "^4.4.1",
     "redux": "^4.2.1",
     "sass": "^1.63.6",
     "swiper": "^6.8.4",
