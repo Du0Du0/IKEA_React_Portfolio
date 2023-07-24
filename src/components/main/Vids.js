@@ -1,9 +1,10 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
+import { faArrowRight, faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons';
 import { useSelector } from 'react-redux';
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom/cjs/react-router-dom';
 import Modal from '../common/Modal';
+import SnsShareModal from './SnsShareModal';
 
 function Vids() {
 	const MainVids = useSelector((store) => store.mainYoutubeReducer.mainYoutube);
@@ -11,7 +12,9 @@ function Vids() {
 	const [Index, setIndex] = useState(0);
 	const [SelectedIdx, setSelectedIdx] = useState(0);
 	const videoRefs = useRef(null);
-	const modal = useRef(null);
+	const videoModal = useRef(null);
+	const snsShareModal = useRef(null);
+	const path = process.env.PUBLIC_URL;
 
 	return (
 		<>
@@ -20,7 +23,15 @@ function Vids() {
 					<div className='vidsTextWrap'>
 						{/* video page title  */}
 						<div className='vidsTit'>
-							<h2>비디오</h2>
+							<h2>
+								비디오{' '}
+								<img
+									src={path + '/img/share.png'}
+									onClick={() => {
+										snsShareModal.current.open();
+									}}
+								/>
+							</h2>
 						</div>
 						{/* video page description  */}
 						<div class='vidsSub'>
@@ -57,7 +68,7 @@ function Vids() {
 										className='discoverBtn'
 										style={{ display: SelectedIdx === idx ? 'block' : 'none' }}
 										onClick={() => {
-											modal.current.open();
+											videoModal.current.open();
 											setIndex(idx);
 										}}
 									>
@@ -75,7 +86,8 @@ function Vids() {
 					</p>
 				</div>
 			</section>
-			<Modal ref={modal}>
+			<SnsShareModal ref={snsShareModal} />
+			<Modal ref={videoModal}>
 				<iframe title={MainVids[Index]?.id} src={`https://www.youtube.com/embed/${MainVids[Index]?.snippet.resourceId.videoId}`}></iframe>
 			</Modal>
 		</>

@@ -11,6 +11,7 @@ import Scroll_navi from '../common/Scroll_navi';
 import TopButton from '../common/TopButton';
 import CookiePop from './CookiePop';
 import { useState, useRef } from 'react';
+import SnsShareModal from './SnsShareModal';
 
 function Main({ menuRef }) {
 	const mainIndicatorLists = ['Menu', 'video', 'Living', 'Event', 'Exhibit', 'Notice'];
