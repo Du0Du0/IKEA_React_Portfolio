@@ -5,6 +5,7 @@ import DaumPostcode from './DaumPostcode';
 import { useDaumPostcodePopup } from 'react-daum-postcode';
 import { useState, useRef, useEffect, useCallback } from 'react';
 import { useHistory } from 'react-router-dom';
+import PasswordStrengthBar from 'react-password-strength-bar';
 
 function Department() {
 	const [IsOpen, setIsOpen] = useState(false);
@@ -273,7 +274,7 @@ function Department() {
 											<FontAwesomeIcon icon={faEye} onClick={passwordToggle} style={InputType1 ? { color: '#969696' } : { color: '#1b2539' }} />
 											<br />
 
-											<progress max='4' value='0' id='meter'></progress>
+											<PasswordStrengthBar className='pwdStrength' password={Val.password} shortScoreWord={false} />
 											<p className='emailErr' style={{ color: Err.password ? '#d80000' : 'initial' }}>
 												{Err.password ? <span>{Err.password}</span> : '영문(대문자필수),숫자,특수문자(~!@#$%^&*)를 포함한 10~20자 조합으로 입력해 주세요.'}
 											</p>
