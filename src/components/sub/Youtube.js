@@ -10,10 +10,7 @@ function Youtube() {
 	console.log(SubVids);
 	const [Index, setIndex] = useState(0);
 	const modal = useRef(null);
-
-	const handleOpenNewTab = (url) => {
-		window.open(url, '_blank', 'noopener, noreferrer');
-	};
+	const customCursor = useRef(null);
 	const path = process.env.PUBLIC_URL;
 	const [ImgNum, setImgNum] = useState(1);
 	const imgBox = useRef(null);
@@ -22,6 +19,55 @@ function Youtube() {
 	const [IsPlay2, setIsPlay2] = useState(false);
 	const subTitVid = useRef(null);
 	const vidImgBox = useRef(null);
+	const [cursorStyle, setCursorStyle] = useState({ top: 0, left: 0 });
+	const [clicking, setClicking] = useState(false);
+	const [cursorText, setCursorText] = useState('');
+
+	const handleOpenNewTab = (url) => {
+		window.open(url, '_blank', 'noopener, noreferrer');
+	};
+
+	const handleCursorMouseOver = (e) => {
+		// 이벤트가 발생한 요소의 data-name 속성 값을 가져옵니다.
+		const dataName = e.target.getAttribute('data-name');
+
+		// 커서 텍스트를 업데이트합니다.
+		setCursorText(dataName);
+
+		// customCursor 요소의 텍스트를 변경합니다.
+		if (customCursor.current) {
+			customCursor.current.innerText = dataName;
+		}
+	};
+
+	const handleCursorMouseLeave = () => {
+		setCursorText('');
+	};
+
+	useEffect(() => {
+		const handleMouseMove = (e) => {
+			setCursorStyle({ top: e.pageY - 50, left: e.pageX - 50 });
+		};
+
+		const handleClick = (e) => {
+			console.log(e.target);
+			setClicking(true);
+
+			setTimeout(() => {
+				setClicking(false);
+			}, 500);
+		};
+
+		document.addEventListener('mousemove', handleMouseMove);
+		document.addEventListener('mouseover', handleCursorMouseOver);
+		document.addEventListener('click', handleClick);
+
+		return () => {
+			document.removeEventListener('mousemove', handleMouseMove);
+			document.removeEventListener('mouseleave', handleCursorMouseLeave);
+			document.removeEventListener('click', handleClick);
+		};
+	}, []);
 
 	useEffect(() => {
 		const imgBoxGroups = ['imgBoxGroup1.png', 'imgBoxGroup2.png', 'imgBoxGroup3.png', 'imgBoxGroup4.png', 'imgBoxGroup5.png'];
@@ -81,17 +127,17 @@ function Youtube() {
 						<figure className='subRight'>
 							<div className='videoBtnContainer'>
 								<span>
-									<button className='pauseBtn' onClick={videoPlayToggle1} style={{ display: IsPlay1 ? 'none' : 'block' }}>
+									<button className='pauseBtn' onClick={videoPlayToggle1} style={{ display: IsPlay1 ? 'none' : 'block' }} data-name='Pause'>
 										<img src={path + '/img/pauseWhite.png'} alt='video pause button' />
 									</button>
 								</span>
 								<span>
-									<button className='playBtn' onClick={videoPlayToggle1} style={{ display: IsPlay1 ? 'block' : 'none' }}>
+									<button className='playBtn' onClick={videoPlayToggle1} style={{ display: IsPlay1 ? 'block' : 'none' }} data-name='Play'>
 										<img src={path + '/img/playWhite.png'} alt='video play button' />
 									</button>
 								</span>
 							</div>
-							<video className='vidSubTit' autoPlay muted loop data-name='Pause' ref={subTitVid}>
+							<video className='vidSubTit' autoPlay muted loop ref={subTitVid}>
 								<source src={path + '/img/SHM.mp4'} type='video/mp4' />
 							</video>
 						</figure>
@@ -101,7 +147,7 @@ function Youtube() {
 							Almost every musician – even Swedish House Mafia – started out at home. Maybe with just a guitar in the garage, a voice in front of the mirror, or on a laptop in the living room. With
 							the new OBEGRÄNSAD collection, on sale around the world from 1 October, it has never been simpler to make room for creativity in the space you already have.
 						</p>
-						<button className='btnWrap' data-name='Collections' onClick={() => handleOpenNewTab('https://www.ikea.com/kr/ko/cat/collection-collections/')}>
+						<button className='btnWrap' data-name='Go site' onClick={() => handleOpenNewTab('https://www.ikea.com/kr/ko/cat/collection-collections/')}>
 							See all collections at IKEA.kr
 						</button>
 					</div>
@@ -110,25 +156,25 @@ function Youtube() {
 						<figure className='imgBoxLeft'>
 							<div className='videoBtnContainer2'>
 								<span>
-									<button className='pauseBtn2' onClick={videoPlayToggle2} style={{ display: IsPlay2 ? 'none' : 'block' }}>
+									<button className='pauseBtn2' onClick={videoPlayToggle2} style={{ display: IsPlay2 ? 'none' : 'block' }} data-name='Pause'>
 										<img src={path + '/img/pauseWhite.png'} alt='video pause button' />
 									</button>
 								</span>
 								<span>
 									<button className='playBtn2' onClick={videoPlayToggle2} style={{ display: IsPlay2 ? 'block' : 'none' }}>
-										<img src={path + '/img/playWhite.png'} alt='video play button' />
+										<img src={path + '/img/playWhite.png'} alt='video play button' data-name='Play' />
 									</button>
 								</span>
 							</div>
-							<video className='vidImgBox' autoPlay muted loop data-name='Pause' ref={vidImgBox}>
+							<video className='vidImgBox' autoPlay muted loop ref={vidImgBox}>
 								<source src={path + '/img/imgBoxRight_video.mp4'} />
 							</video>
 						</figure>
 
 						<div className='imgBoxRight'>
 							<div className='imgBoxTop'>
-								<div className='imgBox1' data-name='Click' ref={imgBox} onClick={ImgBoxClick}>
-									<img className='changeImg' src={ImgSrc} alt='Black OBEGRÄNSAD armchair on a black background.' />
+								<div className='imgBox1' ref={imgBox} onClick={ImgBoxClick}>
+									<img className='changeImg' src={ImgSrc} alt='Black OBEGRÄNSAD armchair on a black background.' data-name='Click' />
 
 									<button>
 										<span id='result'>{ImgNum}</span>&nbsp;/&nbsp;5
@@ -164,11 +210,11 @@ function Youtube() {
 								allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
 								allowFullScreen
 							></iframe>
-							<div className='cursorOverlay' data-name='Pause'></div>
+							<div className='cursorOverlay'></div>
 						</div>
 					</div>
 					<div className=' btnContainer'>
-						<button data-name='Collections' onClick={() => handleOpenNewTab('https://www.ikea.com/kr/ko/cat/collection-collections/')}>
+						<button data-name='Go site' onClick={() => handleOpenNewTab('https://www.ikea.com/kr/ko/cat/collection-collections/')}>
 							See all collections at IKEA.kr
 						</button>
 					</div>
@@ -185,7 +231,7 @@ function Youtube() {
 												setIndex(idx);
 											}}
 										>
-											<img src={subVid.snippet.thumbnails.maxres.url} alt={subVid.snippet.title} data-video-id={subVid.snippet.resourceId.videoId} data-cursor='link' data-name='Show Video' />
+											<img src={subVid.snippet.thumbnails.maxres.url} alt={subVid.snippet.title} data-video-id={subVid.snippet.resourceId.videoId} data-name='Watch' />
 										</div>
 										<div className='textBox'>
 											<span className='listTitle'>{subVid.snippet.title.length > 4 ? subVid.snippet.title.split(' ').splice(0, 4).join(' ') : subVid.snippet.title}</span>
@@ -197,7 +243,7 @@ function Youtube() {
 						</div>
 					</div>
 
-					<div className='cursor'></div>
+					<div className={`cursor ${clicking ? 'click' : ''}`} style={cursorStyle} ref={customCursor} />
 					<TopButton />
 				</section>
 			</Layout>
