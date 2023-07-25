@@ -19,6 +19,7 @@ function Department() {
 	const open = useDaumPostcodePopup('https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js');
 	const selectEmailAddress = useRef(null);
 	const hobby = useRef(null);
+	const introduce = useRef(null);
 	const city = useRef(null);
 	const isMail = useRef(null);
 	const isSMS = useRef(null);
@@ -85,11 +86,6 @@ function Department() {
 		console.log(check(Val));
 		setErr(check(Val));
 		setSubmit(true);
-
-		if (!setErr) {
-			alert('가입완료되었습니다.');
-			history.push('/');
-		}
 	};
 
 	const check = (value) => {
@@ -116,7 +112,7 @@ function Department() {
 		if (value.password !== value.passwordCheck || !value.passwordCheck) {
 			errs.passwordCheck = '두 개의 비밀번호를 동일하게 입력하세요.';
 		}
-		if (value.emailId.length < 5) {
+		if (!value.emailId) {
 			errs.email = '올바른 이메일 형식을 입력하세요.';
 		}
 		if (!value.zoneCode || !value.detailAddress || value.detailAddress.length < 6) {
@@ -133,7 +129,7 @@ function Department() {
 		const len = Object.keys(Err).length;
 		if (len === 0 && Submit) {
 			alert('모든 인증을 통과했습니다.');
-			//history.push('/');
+			history.push('/');
 			resetForm();
 		}
 	}, [Err, Submit, resetForm]);
@@ -393,10 +389,11 @@ function Department() {
 												maxLength={200}
 												value={Val.introduce}
 												onChange={handleChange}
+												ref={introduce}
 											></textarea>
 											<br />
 											<span className='textareaCount'>
-												<span>{Val.introduce.length}</span>/200
+												<span>{introduce.current !== null ? introduce.current.value.length : 0}</span>/200
 											</span>
 										</td>
 									</tr>
