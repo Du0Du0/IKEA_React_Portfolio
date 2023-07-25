@@ -3,44 +3,38 @@ import { useState, useRef, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import Modal from '../common/Modal';
 import TopButton from '../common/TopButton';
-import Scroll_navi from '../common/Scroll_navi';
 
 function Youtube() {
-	const SubVids = useSelector((store) => store.subYoutubeReducer.subYoutube);
-	console.log(SubVids);
-	const [Index, setIndex] = useState(0);
-	const modal = useRef(null);
-	const customCursor = useRef(null);
 	const path = process.env.PUBLIC_URL;
-	const [ImgNum, setImgNum] = useState(1);
-	const imgBox = useRef(null);
+	const SubVids = useSelector((store) => store.subYoutubeReducer.subYoutube);
+	const [Index, setIndex] = useState(0);
 	const [ImgSrc, setImgSrc] = useState('');
 	const [IsPlay1, setIsPlay1] = useState(false);
 	const [IsPlay2, setIsPlay2] = useState(false);
+	const [ImgNum, setImgNum] = useState(1);
+	const [CursorStyle, setCursorStyle] = useState({ top: 0, left: 0 });
+	const [Clicking, setClicking] = useState(false);
+	const [CursorText, setCursorText] = useState('');
+	const modal = useRef(null);
+	const customCursor = useRef(null);
+	const imgBox = useRef(null);
 	const subTitVid = useRef(null);
 	const vidImgBox = useRef(null);
-	const [cursorStyle, setCursorStyle] = useState({ top: 0, left: 0 });
-	const [clicking, setClicking] = useState(false);
-	const [cursorText, setCursorText] = useState('');
 
-	const handleOpenNewTab = (url) => {
+	const openNewTab = (url) => {
 		window.open(url, '_blank', 'noopener, noreferrer');
 	};
 
-	const handleCursorMouseOver = (e) => {
-		// 이벤트가 발생한 요소의 data-name 속성 값을 가져옵니다.
+	const cursorMouseOver = (e) => {
 		const dataName = e.target.getAttribute('data-name');
-
-		// 커서 텍스트를 업데이트합니다.
 		setCursorText(dataName);
 
-		// customCursor 요소의 텍스트를 변경합니다.
 		if (customCursor.current) {
 			customCursor.current.innerText = dataName;
 		}
 	};
 
-	const handleCursorMouseLeave = () => {
+	const cursorMouseLeave = () => {
 		setCursorText('');
 	};
 
@@ -59,12 +53,12 @@ function Youtube() {
 		};
 
 		document.addEventListener('mousemove', handleMouseMove);
-		document.addEventListener('mouseover', handleCursorMouseOver);
+		document.addEventListener('mouseover', cursorMouseOver);
 		document.addEventListener('click', handleClick);
 
 		return () => {
 			document.removeEventListener('mousemove', handleMouseMove);
-			document.removeEventListener('mouseleave', handleCursorMouseLeave);
+			document.removeEventListener('mouseleave', cursorMouseLeave);
 			document.removeEventListener('click', handleClick);
 		};
 	}, []);
@@ -147,7 +141,7 @@ function Youtube() {
 							Almost every musician – even Swedish House Mafia – started out at home. Maybe with just a guitar in the garage, a voice in front of the mirror, or on a laptop in the living room. With
 							the new OBEGRÄNSAD collection, on sale around the world from 1 October, it has never been simpler to make room for creativity in the space you already have.
 						</p>
-						<button className='btnWrap' data-name='Go site' onClick={() => handleOpenNewTab('https://www.ikea.com/kr/ko/cat/collection-collections/')}>
+						<button className='btnWrap' data-name='Go site' onClick={() => openNewTab('https://www.ikea.com/kr/ko/cat/collection-collections/')}>
 							See all collections at IKEA.kr
 						</button>
 					</div>
@@ -214,7 +208,7 @@ function Youtube() {
 						</div>
 					</div>
 					<div className=' btnContainer'>
-						<button data-name='Go site' onClick={() => handleOpenNewTab('https://www.ikea.com/kr/ko/cat/collection-collections/')}>
+						<button data-name='Go site' onClick={() => openNewTab('https://www.ikea.com/kr/ko/cat/collection-collections/')}>
 							See all collections at IKEA.kr
 						</button>
 					</div>
@@ -243,7 +237,7 @@ function Youtube() {
 						</div>
 					</div>
 
-					<div className={`cursor ${clicking ? 'click' : ''}`} style={cursorStyle} ref={customCursor} />
+					<div className={`cursor ${Clicking ? 'click' : ''}   ${CursorText ? 'hover' : ''}`} style={CursorStyle} ref={customCursor} />
 					<TopButton />
 				</section>
 			</Layout>
