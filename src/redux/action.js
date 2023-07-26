@@ -8,6 +8,13 @@ export const setMembers = (data) => {
 	};
 };
 
+export const setMuseum = (data) => {
+	return {
+		type: 'SET_MUSEUM',
+		payload: data,
+	};
+};
+
 export const setSubYoutube = (data) => {
 	return {
 		type: 'SET_SUBYOUTUBE',

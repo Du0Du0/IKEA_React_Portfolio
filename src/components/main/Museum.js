@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useSelector, dispatch, useDispatch } from 'react-redux';
 import axios from 'axios';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore, { Navigation, Pagination, Scrollbar } from 'swiper';
@@ -43,23 +44,27 @@ function Museum() {
 		}
 	};
 
-	useEffect(() => {
-		axios.get(`${process.env.PUBLIC_URL}/DB/museum.json`).then((data) => {
-			setMuseums(data.data.museum);
-		});
-	}, []);
+	// useEffect(() => {
+	// 	axios.get(`${process.env.PUBLIC_URL}/DB/museum.json`).then((data) => {
+	// 		setMuseums(data.data.museum);
+	// 	});
+	// }, []);
+
+	const Museum = useSelector((store) => store.museumReducer.museum);
+
+	const dispatch = useDispatch();
 
 	return (
 		<section id='museum' className='myScroll'>
 			{/* left background */}
 			<div className='bgLeft' style={backgroundStyle}>
 				{/* left titleList  */}
-				<h2 className='leftTxt'>{titleLists[(CurrentIdx - 3 + titleLists.length) % titleLists.length]}</h2>
+				<h2 className='leftTxt'>{titleLists[(CurrentIdx - 1 + titleLists.length) % titleLists.length]}</h2>
 			</div>
 			{/* right background  */}
 			<div className='bgRight'>
 				{/* right titleList  */}
-				<h2 className='rightTxt'>{titleLists[CurrentIdx % titleLists.length]}</h2>
+				<h2 className='rightTxt'>{titleLists[(CurrentIdx + 2 + titleLists.length) % titleLists.length]}</h2>
 			</div>
 			<div className='container'>
 				<div className='swiper-container second'>
@@ -163,7 +168,7 @@ function Museum() {
 								},
 							}}
 						>
-							{Museums.map((museum, i) => {
+							{Museum.map((museum, i) => {
 								return (
 									<>
 										<SwiperSlide className='swiper-slide second' key={i}>

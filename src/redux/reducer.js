@@ -35,8 +35,59 @@ const initMember = {
 	],
 };
 
-//초기 데이터값을 state로 지정하고 추후 action객체가 넘어오면 action의 타입에 따라 해당 데이터를 변경해주는
-//변형자 함수 생성
+const initMuseum = {
+	museum: [
+		{
+			topic: 'IKEA Museum',
+			title: 'MÄVINN',
+			content:
+				'Enjoy some virtually unknown and amazing stories about how IKEA was born, how it grew, and how it goes on expanding around the world. There are examples of innovations and insights, magnificent catastrophes, fantastic ideas and innovative designs. The exhibition also shows some of the very first furniture sold by IKEA.',
+			date: '2023.06.10',
+		},
+		{
+			topic: 'IKEA Museum',
+			title: 'Hej Ingvar!',
+			content:
+				'In this exhibition, we ask some of the people who worked closely with Ingvar Kamprad to talk about him and the qualities that made him one of the greatest businessmen of all time. Stories, myths and anecdotes about the Småland drive, curiosity and creativity, and the ability to see opportunities where others saw problems.',
+			date: '2023.06.01',
+		},
+		{
+			topic: 'IKEA Museum',
+			title: 'Our Roots',
+			content:
+				'In Our Roots, it becomes clear how thrifty Småland creativity, Swedish modernism and Småland entrepreneurialism formed the very embryo of IKEA. We look at what it was like to live in Småland and Sweden in the old days, and how the landscape made its own demands and shaped the people, their character and their actions. About a continuous striving to keep hunger and poverty at bay.',
+			date: '2023.05.30',
+		},
+		{
+			topic: 'IKEA Museum',
+			title: 'Democratic Design',
+			content:
+				'The exhibition takes you on an interactive journey through the five dimensions of Democratic Design: form, function, quality, sustainability and low price. It is an opportunity to discover and explore design challenges in life at home, and get an insight into just how product development on the factory floor can make a difference. Young visitors can explore the SAGOSKATT children’s elements, and the curious can learn more about the design process at IKEA.',
+			date: '2023.05.20',
+		},
+		{
+			topic: 'IKEA Museum',
+			title: 'Us & Our Planet',
+			content:
+				'Since the 1950s, IKEA has been visiting people’s homes with the aim of improving life at home for the many people. The exhibition and book entitled Us & Our Planet are based on home visits, focusing on the social and environmental challenges faced by society. You will get to know homes, workplaces and shared spaces from Mexico to Moscow, from Bali to Beirut, to inspire improvements in the way we live. The exhibition highlights the small things we can all do to make the world a little better.',
+			date: '2023.05.10',
+		},
+		{
+			topic: 'IKEA Museum',
+			title: 'The Story of IKEA',
+			content:
+				'Enjoy some virtually unknown and amazing stories about how IKEA was born, how it grew, and how it goes on expanding around the world. There are examples of innovations and insights, magnificent catastrophes, fantastic ideas and innovative designs. The exhibition also shows some of the very first furniture sold by IKEA.',
+			date: '2023.04.30',
+		},
+		{
+			topic: 'IKEA Museum',
+			title: 'Existence Maximum',
+			content:
+				'Living big in small spaces is not exactly new to us. Even back in 1995, IKEA had an exhibition in Älmhult called ‘Small Space Living’. Now the future is here, and the majority of the world’s population live in cities, where the need for smart solutions is at its maximum and spaces at their minimum. Existence Maximum includes 14 rooms with inspirational solutions for widely differing purposes – and the rooms also change character depending on need and activity. The visitor can literally see how square metres are turned into cubed metres.',
+			date: '2023.04.10',
+		},
+	],
+};
 
 const memberReducer = (state = initMember, action) => {
 	switch (action.type) {
@@ -44,6 +95,18 @@ const memberReducer = (state = initMember, action) => {
 			return {
 				...state,
 				member: action.payload,
+			};
+		default:
+			return state;
+	}
+};
+
+const museumReducer = (state = initMuseum, action) => {
+	switch (action.type) {
+		case 'SET_MUSEUM':
+			return {
+				...state,
+				museum: action.payload,
 			};
 		default:
 			return state;
@@ -75,5 +138,5 @@ const mainYoutubeReducer = (state = { mainYoutube: [] }, action) => {
 };
 
 //해당 변형자 함수가 반환하는 객체값을 하나의 객체로 합쳐서 외부로 export
-const reducers = combineReducers({ memberReducer, subYoutubeReducer, mainYoutubeReducer });
+const reducers = combineReducers({ memberReducer, subYoutubeReducer, mainYoutubeReducer, museumReducer });
 export default reducers;
