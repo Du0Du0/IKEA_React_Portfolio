@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import LayoutNone from '../common/LayoutNone';
 import { useEffect, useState, useRef } from 'react';
 import CommentModal from './CommentModal';
+import { Helmet } from 'react-helmet-async';
 
 function Detail() {
 	const history = useHistory();
@@ -144,139 +145,143 @@ function Detail() {
 	};
 
 	return (
-		<LayoutNone type={''} name1={'detail'}>
-			<div className='listWrap'>
-				<div className='titWrap'>
-					<div className='titTop'>
-						<h1>{Posts && Posts.title}</h1>
-					</div>
-					<div className='titBottom'>
-						<p>{Posts && Posts.userId}</p>
-						<p>{Posts && Posts.topic}</p>
-						<p>
-							{' '}
-							<FontAwesomeIcon icon={faClock} />
-							&nbsp;&nbsp;
-							{`${Posts && Posts.date}`.substr(0, 10)}
-						</p>
-					</div>
-				</div>
-
-				<div className='contentWrap'>
-					<p>{Posts && Posts.content}</p>
-					<p>
-						{Posts &&
-							Posts.keyword &&
-							Object.values(Posts.keyword)
-								.join(',')
-								.split(',')
-								.map((word, index) => (
-									<span key={index} className='keywordMap'>
-										{'#' + word}{' '}
-									</span>
-								))}
-					</p>
-				</div>
-				<div className='buttonWrap'>
-					<button onClick={deletePost}>삭제</button>
-					<button onClick={goToUpdate}>수정</button>
-					<button onClick={() => history.push('/community')}>목록</button>
-				</div>
-			</div>
-
-			<div className='commentWriteWrap'>
-				<div className='commentWriteTop'>
-					<h2>댓글 남기기</h2>
-					<h3
-						onClick={() => {
-							noticeModal.current.toggle();
-							console.log('noticeModal.current', noticeModal.current);
-						}}
-					>
-						<FontAwesomeIcon icon={faCircleExclamation} />
-						글 작성 시 유의사항
-						<FontAwesomeIcon icon={faAngleDown} />
-					</h3>
-					<CommentModal ref={noticeModal} />
-				</div>
-				<div className='commentWriteBottom'>
-					<textarea
-						cols='30'
-						rows='6'
-						placeholder='로그인 후 남길 수 있어요. 문의사항을 댓글로 알려주세요! 욕설 및 인신공격성 글은 삭제될 수 있습니다.'
-						maxLength={1500}
-						ref={comment}
-						onChange={(e) => {
-							if (e.target.value.length > e.target.maxLength) {
-								e.target.value = e.target.value.slice(0, e.target.maxLength);
-							}
-							setInputCount(e.target.value.length);
-						}}
-						onInput={(e) => {
-							if (e.target.value.length > e.target.maxLength) e.target.value = e.target.value.slice(0, e.target.maxLength);
-						}}
-					></textarea>
-					<div className='textareaBottom'>
-						<p>{InputCount}/1500</p>
-						<button onClick={creatComment}>남기기</button>
-					</div>
-				</div>
-				<div className='commentShowWrap'>
-					<div className='commentShowTop'>
-						<h3>
-							댓글 <span>{Comments.length}</span>건
-						</h3>
-
-						<div className='commentSortBtn'>
-							<button
-								className='active'
-								onClick={() => {
-									const copyPosts = [...Comments];
-									const ascDate = copyPosts.sort((a, b) => a - b);
-									console.log('댓글최신순정렬');
-									setComments(ascDate);
-								}}
-							>
-								최신순
-							</button>
-							<button>공감순</button>
+		<>
+			<Helmet>
+				<title>{Posts.title}</title>
+			</Helmet>
+			<LayoutNone type={''} name1={'detail'}>
+				<div className='listWrap'>
+					<div className='titWrap'>
+						<div className='titTop'>
+							<h1>{Posts && Posts.title}</h1>
+						</div>
+						<div className='titBottom'>
+							<p>{Posts && Posts.userId}</p>
+							<p>{Posts && Posts.topic}</p>
+							<p>
+								<FontAwesomeIcon icon={faClock} />
+								&nbsp;&nbsp;
+								{`${Posts && Posts.date}`.substr(0, 10)}
+							</p>
 						</div>
 					</div>
 
-					{Comments.map((comment, i) => {
-						return (
-							<>
-								<div className='commentList' key={i}>
-									<div className='commentListTop'>
-										<p>{comment.comment}</p>
-									</div>
-									<div className='commentListBottom'>
-										<div className='leftWrap'>
-											<p>{`${Posts && Posts.date}`.substr(0, 10)}</p>
-											<p>수정</p>
-											<p onClick={(e) => deleteComment(i)}>삭제</p>
-										</div>
-
-										<div className='rightWrap'>
-											<FontAwesomeIcon
-												icon={faHeart}
-												onClick={(e) => {
-													e.stopPropagation();
-													let copy = [...LikeBtn];
-													copy[i] = copy[i] + 1;
-													setLikeBtn(copy);
-												}}
-											/>
-											<span>{LikeBtn[i]}</span>
-										</div>
-									</div>
-								</div>
-							</>
-						);
-					})}
+					<div className='contentWrap'>
+						<p>{Posts && Posts.content}</p>
+						<p>
+							{Posts &&
+								Posts.keyword &&
+								Object.values(Posts.keyword)
+									.join(',')
+									.split(',')
+									.map((word, index) => (
+										<span key={index} className='keywordMap'>
+											{'#' + word}{' '}
+										</span>
+									))}
+						</p>
+					</div>
+					<div className='buttonWrap'>
+						<button onClick={deletePost}>삭제</button>
+						<button onClick={goToUpdate}>수정</button>
+						<button onClick={() => history.push('/community')}>목록</button>
+					</div>
 				</div>
-			</div>
-		</LayoutNone>
+
+				<div className='commentWriteWrap'>
+					<div className='commentWriteTop'>
+						<h2>댓글 남기기</h2>
+						<h3
+							onClick={() => {
+								noticeModal.current.toggle();
+								console.log('noticeModal.current', noticeModal.current);
+							}}
+						>
+							<FontAwesomeIcon icon={faCircleExclamation} />
+							글 작성 시 유의사항
+							<FontAwesomeIcon icon={faAngleDown} />
+						</h3>
+						<CommentModal ref={noticeModal} />
+					</div>
+					<div className='commentWriteBottom'>
+						<textarea
+							cols='30'
+							rows='6'
+							placeholder='로그인 후 남길 수 있어요. 문의사항을 댓글로 알려주세요! 욕설 및 인신공격성 글은 삭제될 수 있습니다.'
+							maxLength={1500}
+							ref={comment}
+							onChange={(e) => {
+								if (e.target.value.length > e.target.maxLength) {
+									e.target.value = e.target.value.slice(0, e.target.maxLength);
+								}
+								setInputCount(e.target.value.length);
+							}}
+							onInput={(e) => {
+								if (e.target.value.length > e.target.maxLength) e.target.value = e.target.value.slice(0, e.target.maxLength);
+							}}
+						></textarea>
+						<div className='textareaBottom'>
+							<p>{InputCount}/1500</p>
+							<button onClick={creatComment}>남기기</button>
+						</div>
+					</div>
+					<div className='commentShowWrap'>
+						<div className='commentShowTop'>
+							<h3>
+								댓글 <span>{Comments.length}</span>건
+							</h3>
+
+							<div className='commentSortBtn'>
+								<button
+									className='active'
+									onClick={() => {
+										const copyPosts = [...Comments];
+										const ascDate = copyPosts.sort((a, b) => a - b);
+										console.log('댓글최신순정렬');
+										setComments(ascDate);
+									}}
+								>
+									최신순
+								</button>
+								<button>공감순</button>
+							</div>
+						</div>
+
+						{Comments.map((comment, i) => {
+							return (
+								<>
+									<div className='commentList' key={i}>
+										<div className='commentListTop'>
+											<p>{comment.comment}</p>
+										</div>
+										<div className='commentListBottom'>
+											<div className='leftWrap'>
+												<p>{`${Posts && Posts.date}`.substr(0, 10)}</p>
+												<p>수정</p>
+												<p onClick={(e) => deleteComment(i)}>삭제</p>
+											</div>
+
+											<div className='rightWrap'>
+												<FontAwesomeIcon
+													icon={faHeart}
+													onClick={(e) => {
+														e.stopPropagation();
+														let copy = [...LikeBtn];
+														copy[i] = copy[i] + 1;
+														setLikeBtn(copy);
+													}}
+												/>
+												<span>{LikeBtn[i]}</span>
+											</div>
+										</div>
+									</div>
+								</>
+							);
+						})}
+					</div>
+				</div>
+			</LayoutNone>
+		</>
 	);
 }
 
