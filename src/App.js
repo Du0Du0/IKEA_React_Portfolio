@@ -1,5 +1,7 @@
 import { Route, Switch } from 'react-router-dom';
 import './scss/style.scss';
+import { Helmet } from 'react-helmet-async';
+
 //common
 import Footer from './components/common/Footer';
 import FooterNone from './components/common/FooterNone';
@@ -64,6 +66,9 @@ function App() {
 
 	return (
 		<>
+			<Helmet>
+				<title>이케아 코리아(대표)</title>
+			</Helmet>
 			{/* Switch는 내부에 중복되는 라우트 경로가 있을때 더 먼저 나오는 라우터를 채택하고 나머지는 무시 */}
 			<Switch>
 				<Route exact path='/' component={Main}></Route>
