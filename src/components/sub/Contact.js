@@ -1,10 +1,10 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMobile } from '@fortawesome/free-solid-svg-icons';
-import { useState, useRef } from 'react';
+import { useState, useRef, useCallback } from 'react';
 import LayoutNone from '../common/LayoutNone';
 import StoreName from './StoreName';
 import MapTraffic from './MapTraffic';
 import emailjs from '@emailjs/browser';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faMobile } from '@fortawesome/free-solid-svg-icons';
 
 function Contact() {
 	const [City, setCity] = useState('Goyang-si');
@@ -16,13 +16,12 @@ function Contact() {
 	const inputMsg = useRef('');
 
 	//폼메일 전송하는 기능
-	const sendEmail = (e) => {
+	const sendEmail = useCallback((e) => {
 		e.preventDefault();
 
 		emailjs.sendForm('service_zxmrkcb', 'template_gtne1ai', form.current, 'sw27qSr38NkxI2uRB').then(
 			(result) => {
 				console.log(result.text);
-
 				setSuccess(true);
 				inputName.current.value = '';
 				inputEmail.current.value = '';
@@ -33,7 +32,7 @@ function Contact() {
 				setSuccess(false);
 			}
 		);
-	};
+	}, []);
 
 	return (
 		<LayoutNone type={''} name1={'contact'}>
@@ -78,7 +77,7 @@ function Contact() {
 			</div>
 
 			{/* 하단 지도 / 주차안내 / 지하철 / 버스 정보란*/}
-			<MapTraffic City={City} setCity={setCity} Index={Index} setIndex={setIndex} />
+			<MapTraffic Index={Index} />
 		</LayoutNone>
 	);
 }
