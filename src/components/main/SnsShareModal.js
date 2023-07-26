@@ -1,3 +1,4 @@
+import React from 'react';
 import { useState, forwardRef, useImperativeHandle, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark, faCopy } from '@fortawesome/free-solid-svg-icons';
@@ -14,25 +15,33 @@ const SnsShareModal = forwardRef((props, ref) => {
 	});
 
 	useEffect(() => {
-		// Kakao SDK 스크립트 로드
-		const script = document.createElement('script');
-		script.src = '//developers.kakao.com/sdk/js/kakao.min.js';
-		script.async = true;
-		document.body.appendChild(script);
+		const initKakao = async () => {
+			const script = document.createElement('script');
+			script.src = 'https://developers.kakao.com/sdk/js/kakao.min.js';
+			script.async = true;
+			document.body.appendChild(script);
 
-		// 컴포넌트가 언마운트될 때 스크립트 제거
-		return () => {
-			document.body.removeChild(script);
+			script.onload = async () => {
+				if (window.Kakao) {
+					if (!window.Kakao.isInitialized()) {
+						try {
+							await window.Kakao.init('be0e6a448d5b266e02a1457647324d73');
+							console.log('Kakao initialized');
+						} catch (error) {
+							console.error('Error initializing Kakao:', error);
+						}
+					}
+				}
+			};
 		};
-	}, []);
 
-	useEffect(() => {
-		if (window.Kakao) {
-			const kakao = window.Kakao;
-			if (!kakao.isInitialized()) {
-				Kakao.init('be0e6a448d5b266e02a1457647324d73'); // 카카오에서 제공받은 javascript key를 넣어줌 -> .env파일에서 호출시킴
+		initKakao();
+
+		return () => {
+			if (window.Kakao) {
+				window.Kakao.cleanup();
 			}
-		}
+		};
 	}, []);
 
 	const shareKakao = () => {
@@ -65,6 +74,7 @@ const SnsShareModal = forwardRef((props, ref) => {
 			console.log('err', err);
 		}
 	};
+
 	return (
 		<>
 			<div className='snsModalContainer' ref={ref} style={{ display: Open ? 'block' : 'none' }}>
@@ -78,7 +88,7 @@ const SnsShareModal = forwardRef((props, ref) => {
 
 					<div className='snsShareBtns'>
 						<button onClick={shareKakao}>
-							<img src={path + '/img/icon-kakao.png'} />
+							<img src={path + '/img/icon-kakao.png'} alt={'kakao share icon'} />
 						</button>
 						<FacebookShareButton url={currentUrl}>
 							<FacebookIcon size={59} round={true} borderRadius={24}></FacebookIcon>
@@ -103,4 +113,4 @@ const SnsShareModal = forwardRef((props, ref) => {
 	);
 });
 
-export default SnsShareModal;
+export default React.memo(SnsShareModal);
