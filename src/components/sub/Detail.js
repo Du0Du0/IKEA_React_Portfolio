@@ -1,5 +1,5 @@
 import React from 'react';
-import { useHistory, useLocation } from 'react-router-dom';
+import { useHistory, useLocation, useParams } from 'react-router-dom';
 import { faHeart, faClock } from '@fortawesome/free-regular-svg-icons';
 import { faAngleDown, faCircleExclamation } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -15,7 +15,7 @@ function Detail() {
 	const [LikeBtn, setLikeBtn] = useState([0, 0, 0, 0, 0, 0, 0]);
 	const [InputCount, setInputCount] = useState(0);
 	const noticeModal = useRef(null);
-	const { idx } = location.state || {};
+	const { idx } = useParams();
 	const comment = useRef(null);
 
 	const dummyComments = [
@@ -184,7 +184,7 @@ function Detail() {
 					<div className='buttonWrap'>
 						<button onClick={deletePost}>삭제</button>
 						<button onClick={goToUpdate}>수정</button>
-						<button onClick={() => history.push('/community')}>목록</button>
+						<button onClick={() => history.push('/community/articles')}>목록</button>
 					</div>
 				</div>
 

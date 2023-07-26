@@ -5,7 +5,8 @@ import LayoutNone from '../common/LayoutNone';
 import { useHistory, useLocation } from 'react-router-dom';
 import Pagination from 'react-js-pagination';
 import moment from 'moment';
-import { Switch } from 'react-router-dom/cjs/react-router-dom';
+import { Helmet } from 'react-helmet-async';
+import { Link } from 'react-router-dom';
 
 function Community() {
 	const history = useHistory();
@@ -274,7 +275,7 @@ function Community() {
 
 	const goToDetail = (idx) => {
 		history.push({
-			pathname: '/detail',
+			pathname: `/community/articles/${idx}`,
 			state: {
 				Posts: [...Posts],
 				idx: idx,
@@ -316,169 +317,174 @@ function Community() {
 	};
 
 	return (
-		<LayoutNone type={''} name1={'community'}>
-			<div className='titTop'>
-				<h1>커뮤니티</h1>
-			</div>
-			<div className='searchBarWrap'>
-				<div className='searchBarTop'>
-					<input
-						type='checkBox'
-						name='nonDate'
-						ref={ignoreDateRef}
-						onClick={() => {
-							setIgnoreCheck((IgnoreCheck) => !IgnoreCheck);
-						}}
-					/>
-					<label htmlFor='nonDate'>날짜 미지정</label>
-					<input type='date' className='dateInput' ref={startDateRef} disabled={IgnoreCheck ? true : false} />
-					<span>-</span>
-					<input type='date' className='dateInput' ref={endDateRef} disabled={IgnoreCheck ? true : false} />
-					<div className='dateBtnWrap'>
-						<button
-							onClick={() => {
-								startDateRef.current.value = oneWeekAgo.format('YYYY-MM-DD');
-								endDateRef.current.value = today.format('YYYY-MM-DD');
-							}}
-						>
-							1주일
-						</button>
-						<button
-							onClick={() => {
-								startDateRef.current.value = oneMonthAgo.format('YYYY-MM-DD');
-								endDateRef.current.value = today.format('YYYY-MM-DD');
-							}}
-						>
-							1개월
-						</button>
-						<button
-							onClick={() => {
-								startDateRef.current.value = threeMonthsAgo.format('YYYY-MM-DD');
-								endDateRef.current.value = today.format('YYYY-MM-DD');
-							}}
-						>
-							3개월
-						</button>
-					</div>
+		<>
+			<Helmet>
+				<title>커뮤니티</title>
+			</Helmet>
+			<LayoutNone type={''} name1={'community'}>
+				<div className='titTop'>
+					<h1>커뮤니티</h1>
 				</div>
-				<div className='searchBarBottom'>
-					<select className='searchTopic' ref={searchTopic}>
-						<option value=''>분류 전체</option>
-						<option value='문의'>문의</option>
-						<option value='요청'>요청</option>
-						<option value='전시'>전시</option>
-						<option value='이벤트'>이벤트</option>
-					</select>
-					<select className='searchWhat' ref={searchWhat}>
-						<option value=''>전체</option>
-						<option value='제목'>제목</option>
-						<option value='내용'>내용</option>
-						<option value='작성자'>작성자</option>
-					</select>
-					<input
-						type='text'
-						ref={searchInput}
-						placeholder='검색어를 입력하세요'
-						className='searchBar'
-						onKeyDown={(e) => {
-							let copy = [...Posts];
-							const selectedTopic = copy.filter((el) => el.topic.includes(searchTopic.current.value));
-							setPosts(selectedTopic);
-
-							if ((e.key === 'Enter' && searchWhat.current.value === '') || (e.key === 'Enter' && searchWhat.current.value === '제목')) {
-								let copy = [...Posts];
-								const newFilter = copy.filter((el) => el.title.includes(searchInput.current.value));
-								setPosts(newFilter);
-							}
-							if (e.key === 'Enter' && searchWhat.current.value === '내용') {
-								let copy = [...Posts];
-								const newFilter = copy.filter((el) => el.content.includes(searchInput.current.value));
-								setPosts(newFilter);
-							}
-							if (e.key === 'Enter' && searchWhat.current.value === '작성자') {
-								let copy = [...Posts];
-								const newFilter = copy.filter((el) => el.userId.includes(searchInput.current.value));
-								setPosts(newFilter);
-							}
-						}}
-					/>
-					<FontAwesomeIcon icon={faMagnifyingGlass} onClick={searchDateInput} />
-				</div>
-			</div>
-			<div className='btnContainer'>
-				<button className='writeBtn' onClick={() => history.push('/Write')}>
-					글쓰기
-				</button>
-
-				<div className='rightBtnWrap'>
-					<p>
-						전체 <span>{Posts.length}</span>건
-					</p>
-					<select
-						className='arrayBtn'
-						onClick={(e) => {
-							if (e.target.value === '오름차순') {
-								const copyPosts = [...Posts];
-								const ascArr = copyPosts.sort((a, b) => a.title.localeCompare(b.title));
-								setPosts(ascArr);
-							} else if (e.target.value === '내림차순') {
-								const copyPosts = [...Posts];
-								const descArr = copyPosts.sort((a, b) => a.title.localeCompare(b.title)).reverse();
-								setPosts(descArr);
-							} else if (e.target.value === '최신순') {
-								const copyPosts = [...Posts];
-								const ascDate = copyPosts.sort((a, b) => a.date.localeCompare(b.date)).reverse();
-								setPosts(ascDate);
-							}
-						}}
-					>
-						<option value=''>정렬하기</option>
-						<option value='오름차순'>오름차순</option>
-						<option value='내림차순'>내림차순</option>
-						<option value='최신순'>최신순</option>
-					</select>{' '}
-					&nbsp;
-					<svg xmlns='http://www.w3.org/2000/svg' width='20' height='18' viewBox='0 0 20 18' onClick={changeListType}>
-						<path
-							id='align_card'
-							d='M22-11v7a.966.966,0,0,1-.29.71A.966.966,0,0,1,21-3H13v-8ZM11-11v8H3a.966.966,0,0,1-.71-.29A.966.966,0,0,1,2-4v-7Zm0-10v8H2v-7a.966.966,0,0,1,.29-.71A.966.966,0,0,1,3-21Zm10,0a.966.966,0,0,1,.71.29A.966.966,0,0,1,22-20v7H13v-8Z'
-							transform='translate(-2 21)'
-						></path>
-					</svg>
-					<svg xmlns='http://www.w3.org/2000/svg' width='20' height='18' viewBox='0 0 20 18' onClick={changeListType}>
-						<path
-							id='align_row'
-							d='M22-11v7a.966.966,0,0,1-.29.71A.966.966,0,0,1,21-3H13v-8Zm-9,0v8H3a.966.966,0,0,1-.71-.29A.966.966,0,0,1,2-4v-7Zm0-10v8H2v-7a.966.966,0,0,1,.29-.71A.966.966,0,0,1,3-21Zm8,0a.966.966,0,0,1,.71.29A.966.966,0,0,1,22-20v7H13v-8Z'
-							transform='translate(-2 21)'
-						></path>
-					</svg>
-				</div>
-			</div>
-			<div className='horzienLine' />
-			<div className={!IsListType ? 'listWrap roomy' : 'listWrap'}>
-				{Posts &&
-					currentPosts.map((post, idx) => {
-						return (
-							<div
-								className='list'
-								key={idx}
+				<div className='searchBarWrap'>
+					<div className='searchBarTop'>
+						<input
+							type='checkBox'
+							name='nonDate'
+							ref={ignoreDateRef}
+							onClick={() => {
+								setIgnoreCheck((IgnoreCheck) => !IgnoreCheck);
+							}}
+						/>
+						<label htmlFor='nonDate'>날짜 미지정</label>
+						<input type='date' className='dateInput' ref={startDateRef} disabled={IgnoreCheck ? true : false} />
+						<span>-</span>
+						<input type='date' className='dateInput' ref={endDateRef} disabled={IgnoreCheck ? true : false} />
+						<div className='dateBtnWrap'>
+							<button
 								onClick={() => {
-									goToDetail(idx);
+									startDateRef.current.value = oneWeekAgo.format('YYYY-MM-DD');
+									endDateRef.current.value = today.format('YYYY-MM-DD');
 								}}
 							>
-								<h3>{post.topic}</h3>
-								<h2>{!IsListType && `${post.title}`.length > 18 ? `${post.title}`.substr(0, 18) + '...' : `${post.title}`}</h2>
-								<div className='bottomWrap'>
-									<p>{`${post.date}`.substr(0, 10)}</p>
-									<p>{`${post.userId}`.substr(0, 3).replace(/^(.)(.*)$/, '$1**')}</p>
+								1주일
+							</button>
+							<button
+								onClick={() => {
+									startDateRef.current.value = oneMonthAgo.format('YYYY-MM-DD');
+									endDateRef.current.value = today.format('YYYY-MM-DD');
+								}}
+							>
+								1개월
+							</button>
+							<button
+								onClick={() => {
+									startDateRef.current.value = threeMonthsAgo.format('YYYY-MM-DD');
+									endDateRef.current.value = today.format('YYYY-MM-DD');
+								}}
+							>
+								3개월
+							</button>
+						</div>
+					</div>
+					<div className='searchBarBottom'>
+						<select className='searchTopic' ref={searchTopic}>
+							<option value=''>분류 전체</option>
+							<option value='문의'>문의</option>
+							<option value='요청'>요청</option>
+							<option value='전시'>전시</option>
+							<option value='이벤트'>이벤트</option>
+						</select>
+						<select className='searchWhat' ref={searchWhat}>
+							<option value=''>전체</option>
+							<option value='제목'>제목</option>
+							<option value='내용'>내용</option>
+							<option value='작성자'>작성자</option>
+						</select>
+						<input
+							type='text'
+							ref={searchInput}
+							placeholder='검색어를 입력하세요'
+							className='searchBar'
+							onKeyDown={(e) => {
+								let copy = [...Posts];
+								const selectedTopic = copy.filter((el) => el.topic.includes(searchTopic.current.value));
+								setPosts(selectedTopic);
+
+								if ((e.key === 'Enter' && searchWhat.current.value === '') || (e.key === 'Enter' && searchWhat.current.value === '제목')) {
+									let copy = [...Posts];
+									const newFilter = copy.filter((el) => el.title.includes(searchInput.current.value));
+									setPosts(newFilter);
+								}
+								if (e.key === 'Enter' && searchWhat.current.value === '내용') {
+									let copy = [...Posts];
+									const newFilter = copy.filter((el) => el.content.includes(searchInput.current.value));
+									setPosts(newFilter);
+								}
+								if (e.key === 'Enter' && searchWhat.current.value === '작성자') {
+									let copy = [...Posts];
+									const newFilter = copy.filter((el) => el.userId.includes(searchInput.current.value));
+									setPosts(newFilter);
+								}
+							}}
+						/>
+						<FontAwesomeIcon icon={faMagnifyingGlass} onClick={searchDateInput} />
+					</div>
+				</div>
+				<div className='btnContainer'>
+					<button className='writeBtn' onClick={() => history.push('/Write')}>
+						글쓰기
+					</button>
+
+					<div className='rightBtnWrap'>
+						<p>
+							전체 <span>{Posts.length}</span>건
+						</p>
+						<select
+							className='arrayBtn'
+							onClick={(e) => {
+								if (e.target.value === '오름차순') {
+									const copyPosts = [...Posts];
+									const ascArr = copyPosts.sort((a, b) => a.title.localeCompare(b.title));
+									setPosts(ascArr);
+								} else if (e.target.value === '내림차순') {
+									const copyPosts = [...Posts];
+									const descArr = copyPosts.sort((a, b) => a.title.localeCompare(b.title)).reverse();
+									setPosts(descArr);
+								} else if (e.target.value === '최신순') {
+									const copyPosts = [...Posts];
+									const ascDate = copyPosts.sort((a, b) => a.date.localeCompare(b.date)).reverse();
+									setPosts(ascDate);
+								}
+							}}
+						>
+							<option value=''>정렬하기</option>
+							<option value='오름차순'>오름차순</option>
+							<option value='내림차순'>내림차순</option>
+							<option value='최신순'>최신순</option>
+						</select>{' '}
+						&nbsp;
+						<svg xmlns='http://www.w3.org/2000/svg' width='20' height='18' viewBox='0 0 20 18' onClick={changeListType}>
+							<path
+								id='align_card'
+								d='M22-11v7a.966.966,0,0,1-.29.71A.966.966,0,0,1,21-3H13v-8ZM11-11v8H3a.966.966,0,0,1-.71-.29A.966.966,0,0,1,2-4v-7Zm0-10v8H2v-7a.966.966,0,0,1,.29-.71A.966.966,0,0,1,3-21Zm10,0a.966.966,0,0,1,.71.29A.966.966,0,0,1,22-20v7H13v-8Z'
+								transform='translate(-2 21)'
+							></path>
+						</svg>
+						<svg xmlns='http://www.w3.org/2000/svg' width='20' height='18' viewBox='0 0 20 18' onClick={changeListType}>
+							<path
+								id='align_row'
+								d='M22-11v7a.966.966,0,0,1-.29.71A.966.966,0,0,1,21-3H13v-8Zm-9,0v8H3a.966.966,0,0,1-.71-.29A.966.966,0,0,1,2-4v-7Zm0-10v8H2v-7a.966.966,0,0,1,.29-.71A.966.966,0,0,1,3-21Zm8,0a.966.966,0,0,1,.71.29A.966.966,0,0,1,22-20v7H13v-8Z'
+								transform='translate(-2 21)'
+							></path>
+						</svg>
+					</div>
+				</div>
+				<div className='horzienLine' />
+				<div className={!IsListType ? 'listWrap roomy' : 'listWrap'}>
+					{Posts &&
+						currentPosts.map((post, idx) => {
+							return (
+								<div
+									className='list'
+									key={idx}
+									onClick={() => {
+										goToDetail(idx);
+									}}
+								>
+									<h3>{post.topic}</h3>
+									<h2>{!IsListType && `${post.title}`.length > 18 ? `${post.title}`.substr(0, 18) + '...' : `${post.title}`}</h2>
+									<div className='bottomWrap'>
+										<p>{`${post.date}`.substr(0, 10)}</p>
+										<p>{`${post.userId}`.substr(0, 3).replace(/^(.)(.*)$/, '$1**')}</p>
+									</div>
 								</div>
-							</div>
-						);
-					})}
-			</div>
-			<div className='horzienLine2' />
-			<Pagination activePage={Currentpage} itemsCountPerPage={8} totalItemsCount={30} pageRangeDisplayed={3} prevPageText={'‹'} nextPageText={'›'} onChange={pageChange} />;
-		</LayoutNone>
+							);
+						})}
+				</div>
+				<div className='horzienLine2' />
+				<Pagination activePage={Currentpage} itemsCountPerPage={8} totalItemsCount={30} pageRangeDisplayed={3} prevPageText={'‹'} nextPageText={'›'} onChange={pageChange} />;
+			</LayoutNone>
+		</>
 	);
 }
 

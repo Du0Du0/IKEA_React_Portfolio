@@ -118,7 +118,8 @@ function App() {
 				></Route>
 
 				<Route
-					path='/community'
+					exact
+					path='/community/articles'
 					render={() => (
 						<>
 							<Community />
@@ -138,7 +139,7 @@ function App() {
 				></Route>
 
 				<Route
-					path='/detail'
+					path='/community/articles/:idx'
 					render={() => (
 						<>
 							<Detail />
