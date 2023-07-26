@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useSelector, dispatch, useDispatch } from 'react-redux';
 import axios from 'axios';
+import { useHistory, useParams } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore, { Navigation, Pagination, Scrollbar } from 'swiper';
 import 'swiper/swiper-bundle.min.css';
@@ -21,6 +22,7 @@ function Museum() {
 	const titleLists = ['MÄVINN', 'Hej Ingvar', 'Our Roots', 'Democratic Design', 'Us & Our Planet', 'Story of IKEA', 'Existence Maximum'];
 	const [CurrentIdx, setCurrentIdx] = useState(0);
 	const [Clickable, setClickable] = useState(true);
+	const { idx } = useParams();
 
 	const prevButtonShowList = () => {
 		if (Clickable) {
@@ -53,6 +55,18 @@ function Museum() {
 	const Museum = useSelector((store) => store.museumReducer.museum);
 
 	const dispatch = useDispatch();
+	const history = useHistory();
+
+	const goToDetail = (idx) => {
+		history.push({
+			pathname: `/museum/articles/${idx}`,
+			state: {
+				idx: idx,
+			},
+		});
+		localStorage.setItem('index', parseInt(idx));
+		console.log(idx);
+	};
 
 	return (
 		<section id='museum' className='myScroll'>
@@ -171,7 +185,7 @@ function Museum() {
 							{Museum.map((museum, i) => {
 								return (
 									<>
-										<SwiperSlide className='swiper-slide second' key={i}>
+										<SwiperSlide className='swiper-slide second' key={i} onClick={() => goToDetail(i)}>
 											<h3>{museum.topic}</h3>
 											<h2>{museum.title.length > 7 ? museum.title.split(' ').splice(0, 7).join(' ') : museum.title}</h2>
 											<p className='con'>{museum.content.length > 8 ? museum.content.split(' ').splice(0, 8).join(' ') + '...' : museum.content}</p>
