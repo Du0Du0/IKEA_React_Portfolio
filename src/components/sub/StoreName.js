@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import Calendar from 'react-calendar';
@@ -19,7 +19,7 @@ function StoreName({ City, setCity, Index, setIndex }) {
 	const storeList = useRef(null);
 
 	//지점명: 영어 도시 이름 => 한글로 변경
-	const getCityNameKo = (City) => {
+	const getCityNameKo = useCallback((City) => {
 		switch (City) {
 			case 'Goyang-si':
 				return '고양점';
@@ -32,26 +32,29 @@ function StoreName({ City, setCity, Index, setIndex }) {
 			default:
 				return null;
 		}
-	};
+	}, []);
 
 	//지점명 :순서로 설정
-	const getCityIndex = (City) => {
-		switch (City) {
-			case 'Goyang-si':
-				return setIndex(0);
-			case 'Yongin':
-				return setIndex(1);
-			case 'Gyeonggi-do':
-				return setIndex(2);
-			case 'Busan':
-				return setIndex(3);
-			default:
-				return null;
-		}
-	};
+	const getCityIndex = useCallback(
+		(City) => {
+			switch (City) {
+				case 'Goyang-si':
+					return setIndex(0);
+				case 'Yongin':
+					return setIndex(1);
+				case 'Gyeonggi-do':
+					return setIndex(2);
+				case 'Busan':
+					return setIndex(3);
+				default:
+					return null;
+			}
+		},
+		[setIndex]
+	);
 
 	//openWeather api 데이터 가져오기
-	const fetchWeather = async () => {
+	const fetchWeather = useCallback(async () => {
 		let cityName = City;
 		const apiKey = '3bc1f51ea0960a95958152e47fb71800';
 		const url = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}&units=metric`;
@@ -65,12 +68,12 @@ function StoreName({ City, setCity, Index, setIndex }) {
 		} catch (error) {
 			console.error('Error fetching weather:', error);
 		}
-	};
+	}, [setCity, City]);
 
 	useEffect(() => {
 		fetchWeather();
 		getCityIndex(City);
-	}, [City]);
+	}, [City, setCity, Index, setIndex, fetchWeather, getCityIndex]);
 
 	useEffect(() => {
 		pageBg.current.classList.add('on');
