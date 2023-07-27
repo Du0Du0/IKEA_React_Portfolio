@@ -2,11 +2,27 @@ import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useSelector, dispatch, useDispatch } from 'react-redux';
 import React from 'react';
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
 function Promotion() {
+	const history = useHistory();
 	const path = process.env.PUBLIC_URL;
 	const Promotion = useSelector((store) => store.promotionReducer.promotion);
 	const dispatch = useDispatch();
+
+	const goToDetail = (idx) => {
+		try {
+			history.push({
+				pathname: `/promotion/articles/${idx}`,
+				state: {
+					idx: idx,
+				},
+			});
+			console.log('idx', idx);
+		} catch (err) {
+			console.log('goToDetailErr', err);
+		}
+	};
 
 	return (
 		<section id='promotion' className='myScroll'>
@@ -54,8 +70,8 @@ function Promotion() {
 						{Promotion.map((promotion, idx) => {
 							return (
 								<React.Fragment key={idx}>
-									<h3>{promotion.title}</h3>
-									<h4>{promotion.content.length > 150 ? `${promotion.content}`.split(' ').splice(0, 43).join(' ') + '...' : promotion.content}</h4>
+									<h3 onClick={() => goToDetail(idx)}>{promotion.title}</h3>
+									<h4 onClick={() => goToDetail(idx)}>{promotion.content.length > 150 ? `${promotion.content}`.split(' ').splice(0, 43).join(' ') + '...' : promotion.content}</h4>
 									<p>
 										{promotion.date}ㆍ{promotion.user}
 									</p>

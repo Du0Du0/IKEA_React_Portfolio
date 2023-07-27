@@ -17,7 +17,7 @@ function MainCommunity() {
 	const goToDetail = (idx) => {
 		try {
 			history.push({
-				pathname: '/detail',
+				pathname: `/community/articles/${idx}`,
 				state: {
 					Posts: [...Posts],
 					idx: idx,
@@ -41,7 +41,7 @@ function MainCommunity() {
 				<div className='mainCommTitWrap'>
 					<h4>커뮤니티</h4>
 					<div className='goBtn'>
-						<Link to='/community'>
+						<Link to='/community/articles'>
 							<p>
 								바로가기&nbsp;&nbsp;&nbsp;
 								<span>

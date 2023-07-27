@@ -28,6 +28,7 @@ import { useEffect } from 'react';
 import TopButton from './components/common/TopButton';
 import Scroll_navi from './components/common/Scroll_navi';
 import MuseumDetail from './components/sub/MuseumDetail';
+import PromotionDetail from './components/sub/PromotionDetail';
 
 function App() {
 	const dispatch = useDispatch();
@@ -165,6 +166,17 @@ function App() {
 					render={() => (
 						<>
 							<MuseumDetail />
+							<FooterNone type={'sub'} imgBg={'footerW'} />
+						</>
+					)}
+				></Route>
+
+				<Route
+					exact
+					path='/promotion/articles/:idx'
+					render={() => (
+						<>
+							<PromotionDetail />
 							<FooterNone type={'sub'} imgBg={'footerW'} />
 						</>
 					)}
