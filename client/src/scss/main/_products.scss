@@ -1,0 +1,458 @@
+#products {
+	width: 100vw;
+	height: 600px;
+	background: $bgW;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 150px 10vw 150px;
+	margin-top: 0px;
+	background-repeat: no-repeat;
+	background-position: top fixed;
+	background-size: cover;
+
+	.productsContainer {
+		width: 100%;
+		height: 100%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+
+		.productsTit {
+			width: 100%;
+			height: 100%;
+			flex: 2;
+
+			h2 {
+				font: bold 70px/1 $ikeaFontKo;
+				color: $fontColorBl;
+				animation-duration: 0.5s;
+				animation: slide 1s ease-out;
+
+				@keyframes slide {
+					from {
+						margin-left: -400px;
+						opacity: 0;
+					}
+					to {
+						left: 400px;
+						opacity: 1;
+					}
+				}
+
+				@keyframes slideBack {
+					from {
+						left: 400px;
+						opacity: 1;
+					}
+					to {
+						margin-left: -400px;
+						opacity: 0;
+					}
+				}
+			}
+		}
+
+		.productsSub {
+			width: 74%;
+			height: 100%;
+			flex: 1;
+			display: flex;
+			flex-wrap: wrap;
+			flex-direction: column;
+			padding: 0px 0vw 0px;
+
+			.slideContainer {
+				width: 100%;
+				overflow: hidden;
+				display: flex;
+				height: calc(100% / 2);
+				flex: 2.5;
+				position: relative;
+
+				.slideWrap {
+					gap: 20px;
+					display: flex;
+					// animation: moveRe 20s linear infinite;
+					animation-delay: 0s;
+					justify-content: center;
+					transition: 0.5s;
+
+					.slideItem {
+						width: 214px;
+						height: 100%;
+						background: #f7f7f7;
+						border: 1px solid rgba(229, 229, 229, 0.7);
+						cursor: pointer;
+
+						.productsImg {
+							display: flex;
+							justify-content: center;
+							img {
+								width: 150px;
+								height: 150px;
+							}
+						}
+						.productsName {
+							text-align: center;
+							font: 18px/25px $ikeaFontKo;
+							color: $fontColorBl;
+							margin-top: auto;
+						}
+
+						&:hover {
+							background: #fff;
+						}
+					}
+				}
+			}
+			// products 하단 버튼 메뉴들
+			.btnWrap {
+				width: 100%;
+				height: calc(100% / 1);
+				flex: 1.2;
+				display: flex;
+				gap: 0px;
+
+				.arrowBtns {
+					width: 208.11px;
+					height: 100%;
+					display: flex;
+					text-align: center;
+					justify-content: center;
+
+					// products 왼쪽 화살표
+					.leftArrowBtn {
+						width: 100%;
+						height: 100%;
+						display: flex;
+						justify-content: center;
+						align-items: center;
+						flex: 1;
+						background: #cacaca;
+						border: none;
+						font: 26px $ikeaFontKo;
+						color: $fontColorW;
+						cursor: pointer;
+						transition: 0.5s;
+					}
+
+					//  products 오른쪽 화살표
+					.rigtArrowBtn {
+						width: 100%;
+						height: 100%;
+						display: flex;
+						border: none;
+						justify-content: center;
+						align-items: center;
+						flex: 1;
+						background: $ikeaBl;
+						font: 26px/5px $ikeaFontKo;
+						color: $fontColorW;
+						cursor: pointer;
+						transition: 0.5s;
+					}
+				}
+
+				// products 모든 카테고리 바로가기
+				.hyperBtns {
+					width: 208.11px;
+					height: 100%;
+					font: 16px/1 $ikeaFontKo;
+					color: $fontColorBl;
+					display: flex;
+					margin-left: 70px;
+					padding: 0px 0vw 0px;
+					justify-content: left;
+					align-items: center;
+					cursor: pointer;
+				}
+			}
+		}
+	}
+}
+
+@media screen and (max-width: $tablet) {
+	#products {
+		width: 100vw;
+		height: 580px;
+		background: $bgW;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		padding: 96px 5vw 96px;
+
+		.productsContainer {
+			width: 100%;
+			height: 100%;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+
+			.productsTit {
+				width: 100%;
+				height: 100%;
+				flex: 2;
+				background: $bgW;
+				margin-bottom: 50px;
+
+				h2 {
+					font: bold 56px/1 $ikeaFontKo;
+					color: $fontColorBl;
+				}
+			}
+
+			.productsSub {
+				width: 100%;
+				height: 100%;
+				flex: 14;
+				display: flex;
+				flex-wrap: wrap;
+				flex-direction: column;
+				padding: 0px 0vw 0px;
+
+				.slideContainer {
+					width: 100%;
+					height: 100%;
+					display: flex;
+					height: calc(100% / 2);
+					flex: 10;
+					position: relative;
+
+					.slideWrap {
+						gap: 20px;
+						display: flex;
+						animation-delay: 0s;
+						justify-content: center;
+
+						.slideItem {
+							width: 214px;
+							height: 100%;
+							background: $boxGrey;
+
+							.productsImg {
+								display: flex;
+								justify-content: center;
+								img {
+									width: 150px;
+									height: 150px;
+								}
+							}
+							.productsName {
+								text-align: center;
+								font: 16px/25px $ikeaFontKo;
+								color: $fontColorBl;
+								margin-top: auto;
+							}
+
+							&:hover {
+								background: #e9e9e9;
+							}
+						}
+					}
+				}
+				// products 하단 버튼 메뉴들
+				.btnWrap {
+					width: 100%;
+					height: calc(100% / 1);
+					flex: 4;
+					display: flex;
+					gap: 0px;
+
+					.arrowBtns {
+						width: 208.11px;
+						height: 100%;
+						display: flex;
+						text-align: center;
+						justify-content: center;
+
+						// products 왼쪽 화살표
+						.leftArrowBtn {
+							width: 100%;
+							height: 100%;
+							display: flex;
+							justify-content: center;
+							align-items: center;
+							flex: 1;
+							background: $ikeaBl;
+							font: 26px $ikeaFontKo;
+							color: $fontColorW;
+							cursor: pointer;
+						}
+
+						//  products 오른쪽 화살표
+						.rigtArrowBtn {
+							width: 100%;
+							height: 100%;
+							display: flex;
+							justify-content: center;
+							align-items: center;
+							flex: 1;
+							background: $ikeaBl;
+							font: 26px/5px $ikeaFontKo;
+							color: $fontColorW;
+							cursor: pointer;
+						}
+					}
+
+					// products 모든 카테고리 바로가기
+					.hyperBtns {
+						width: 208.11px;
+						height: 100%;
+						font: 14.4px/1 $ikeaFontKo;
+						color: $fontColorBl;
+						display: flex;
+						margin-left: 85px;
+						padding: 0px 0vw 0px;
+						justify-content: left;
+						align-items: center;
+						cursor: pointer;
+					}
+				}
+			}
+		}
+	}
+}
+
+@media screen and (max-width: $mobile) {
+	#products {
+		width: 100vw;
+		height: 580px;
+		background: $bgW;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		padding: 96px 5vw 96px;
+
+		.productsContainer {
+			width: 100%;
+			height: 100%;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+
+			.productsTit {
+				width: 100%;
+				height: 100%;
+				flex: 2;
+				background: $bgW;
+				margin-bottom: 50px;
+
+				h2 {
+					font: bold 49px/1 $ikeaFontKo;
+					color: $fontColorBl;
+				}
+			}
+
+			.productsSub {
+				width: 100%;
+				height: 100%;
+				flex: 14;
+				display: flex;
+				flex-wrap: wrap;
+				flex-direction: column;
+				padding: 0px 0vw 0px;
+
+				.slideContainer {
+					width: 100%;
+					height: 100%;
+					display: flex;
+					height: calc(100% / 2);
+					flex: 10;
+					position: relative;
+
+					.slideWrap {
+						gap: 20px;
+						display: flex;
+						justify-content: center;
+
+						.slideItem {
+							width: 214px;
+							height: 100%;
+							background: $boxGrey;
+
+							.productsImg {
+								display: flex;
+								justify-content: center;
+								img {
+									width: 150px;
+									height: 150px;
+								}
+							}
+							.productsName {
+								text-align: center;
+								font: 14.4px/25px $ikeaFontKo;
+								color: $fontColorBl;
+								margin-top: auto;
+							}
+
+							&:hover {
+								background: #e9e9e9;
+							}
+						}
+					}
+				}
+				// products 하단 버튼 메뉴들
+				.btnWrap {
+					width: 100%;
+					height: calc(100% / 1);
+					flex: 4;
+					display: flex;
+					gap: 0px;
+
+					.arrowBtns {
+						width: 208.11px;
+						height: 100%;
+						display: flex;
+						text-align: center;
+						justify-content: center;
+
+						// products 왼쪽 화살표
+						.leftArrowBtn {
+							width: 100%;
+							height: 100%;
+							display: flex;
+							justify-content: center;
+							align-items: center;
+							flex: 1;
+							background: $ikeaBl;
+							font: 26px $ikeaFontKo;
+							color: $fontColorW;
+							cursor: pointer;
+						}
+
+						//  products 오른쪽 화살표
+						.rigtArrowBtn {
+							width: 100%;
+							height: 100%;
+							display: flex;
+							justify-content: center;
+							align-items: center;
+							flex: 1;
+							background: $ikeaBl;
+							font: 26px/5px $ikeaFontKo;
+							color: $fontColorW;
+							cursor: pointer;
+						}
+					}
+
+					// products 모든 카테고리 바로가기
+					.hyperBtns {
+						width: 208.11px;
+						height: 100%;
+						font: 12.6px/1 $ikeaFontKo;
+						color: $fontColorBl;
+						display: flex;
+						padding: 0px 0vw 0px;
+						justify-content: center;
+						align-items: center;
+						cursor: pointer;
+						margin-left: 25px;
+					}
+				}
+			}
+		}
+	}
+}

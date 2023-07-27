@@ -1,0 +1,55 @@
+.pagination {
+	display: flex;
+	justify-content: center;
+	margin-bottom: 80px;
+}
+
+ul {
+	list-style: none;
+	padding: 0;
+}
+
+ul.pagination li {
+	display: inline-block;
+	width: 30px;
+	height: 30px;
+	border: none;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+ul.pagination li:first-child {
+	border-radius: 5px 0 0 5px;
+}
+
+ul.pagination li:last-child {
+	border-radius: 0 5px 5px 0;
+}
+
+ul.pagination li a {
+	text-decoration: none;
+	color: $fontColorBl;
+	font: bold 1rem/1 $ikeaFontKo;
+}
+
+ul.pagination li.active a {
+	color: #f13131;
+	font: bold 1rem/1 $ikeaFontKo;
+}
+
+ul.pagination li.active {
+	background-color: none;
+}
+
+ul.pagination li a:hover,
+ul.pagination li a.active {
+	color: $fontColorBl;
+	font: bold 1rem/1 $ikeaFontKo;
+}
+
+.page-selection {
+	width: 70px;
+	height: 70px;
+	color: #337ab7;
+}

@@ -1,0 +1,189 @@
+#visual {
+	width: 100vw;
+	height: 100vh;
+	position: relative;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+
+	// visual bg
+	img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		object-position: center;
+	}
+
+	//visual grid line
+	.visualWrap {
+		width: 100%;
+		height: 100%;
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		display: grid;
+		grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 2fr;
+		grid-template-rows: 0.8fr 1.7fr 1.7fr 3fr;
+		backdrop-filter: brightness(0.6);
+
+		.bg {
+			height: 100%;
+			border: 1px solid rgba(#9f9f9f, 0.5);
+
+			&:nth-of-type(2) {
+				grid-column: span 3;
+			}
+
+			&:nth-of-type(7) {
+				grid-column: span 3;
+			}
+
+			// Main pointBox1 (none color box)
+			&:nth-of-type(8) {
+				padding: 15px 1vw 0px;
+				font: 19px/1 $ikeaFontKo;
+				color: $grey;
+				border: 1px solid $fontColorW;
+				cursor: pointer;
+
+				&.on {
+					box-shadow: 0 0 50px 15px rgba($ikeaYellow, 0.45);
+					background: $ikeaYellow;
+					color: $ikeaBl;
+					border: none;
+				}
+			}
+
+			&:nth-of-type(9) {
+				padding: 170px 1vw 15px;
+				font: 19px/1 $ikeaFontKo;
+				color: $fontColorGr;
+				text-align: start;
+			}
+
+			&:nth-of-type(11) {
+				grid-row: span 2;
+			}
+
+			//text Box
+			&:nth-of-type(12) {
+				grid-column: span 4;
+				grid-row: span 4;
+				padding: 60px 0vw 0px;
+
+				h1 {
+					width: 60%;
+					font: 27px/1 $ikeaFontKo;
+					color: $fontColorGrT;
+					text-align: justify;
+					word-break: break-all;
+				}
+
+				p {
+					font: 19px/1 $ikeaFontKo;
+					color: $fontColorGr;
+					text-align: justify;
+					word-break: break-all;
+					margin-bottom: 20px;
+				}
+			}
+
+			// Main pointBox2 (yellow box)
+			&:nth-of-type(13) {
+				text-align: end;
+				padding: 170px 1vw 15px;
+				font: 19px/1 $ikeaFontKo;
+				color: $grey;
+				border: 1px solid $fontColorW;
+				cursor: pointer;
+
+				&.on {
+					box-shadow: 0 0 50px 15px rgba($ikeaYellow, 0.45);
+					background: $ikeaYellow;
+					border: none;
+					color: $ikeaBl;
+					cursor: pointer;
+				}
+			}
+
+			&:nth-of-type(14) {
+				grid-row: span 2;
+			}
+		}
+	}
+}
+
+@media screen and (max-width: $tablet) {
+	#visual {
+		height: 100vh;
+
+		.visualWrap {
+			grid-template-columns: 0.6fr 0fr 0fr 1fr 1fr 1fr 0.6fr;
+
+			.bg {
+				// Main pointBox1 (none color box)
+				&:nth-of-type(8) {
+					padding: 20px 2vw 0px;
+				}
+
+				&:nth-of-type(9) {
+					padding: 170px 2vw 15px;
+				}
+
+				&:nth-of-type(12) {
+					h1 {
+						width: 90%;
+						font: 28px/1 $ikeaFontKo;
+					}
+				}
+
+				// Main pointBox2 (yellow box)
+				&:nth-of-type(13) {
+					padding: 170px 2vw 15px;
+				}
+			}
+		}
+	}
+}
+
+@media screen and (max-width: $mobile) {
+	#visual {
+		height: 80vh;
+
+		.visualWrap {
+			grid-template-columns: 0.1fr 0fr 0fr 0fr 1fr 1fr 0.1fr;
+			grid-template-rows: 7fr 1.5fr 1.5fr 3fr;
+
+			.bg {
+				// Main pointBox1 (none color box)
+				&:nth-of-type(8) {
+					padding: 15px 3vw 170px;
+				}
+
+				&:nth-of-type(9) {
+					padding: 170px 3vw 10px;
+				}
+
+				&:nth-of-type(12) {
+					grid-column: span 4;
+					grid-row: span 4;
+					padding: 60px 0vw 0px;
+
+					h1 {
+						display: none;
+					}
+
+					p {
+						display: none;
+					}
+				}
+
+				// Main pointBox2 (yellow box)
+				&:nth-of-type(13) {
+					padding: 170px 3vw 15px;
+				}
+			}
+		}
+	}
+}

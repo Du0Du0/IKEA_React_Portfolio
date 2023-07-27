@@ -1,0 +1,765 @@
+.videoSub {
+	width: 100vw;
+	min-height: calc(100vh - 400px);
+	background: $videoBgBl;
+	cursor: none;
+
+	.subtitle {
+		width: 100%;
+		height: 500px;
+		padding: 0px 15vw 50px;
+		display: flex;
+		flex-wrap: wrap;
+
+		.subLeft {
+			width: 50%;
+			height: 100%;
+			position: relative;
+			padding-right: 100px;
+
+			h3 {
+				font: 26px/1 $ikeaFontKo;
+				color: $fontColorW;
+				margin-bottom: 20px;
+			}
+
+			.title {
+				margin-bottom: 15px;
+
+				h2 {
+					font: bold 51px/1.3 $ikeaFontKo;
+					background: radial-gradient(circle, #7f7fd5, #86a8e7, #91eae4);
+					background-size: 200%;
+					-webkit-background-clip: text;
+					color: transparent;
+					animation: animation 1.7s linear infinite;
+				}
+
+				@keyframes animation {
+					to {
+						background-position: 200% center;
+					}
+				}
+			}
+
+			p {
+				font: 16px/1.6 $ikeaFontKo;
+				color: $fontColorW;
+				text-align: justify;
+				word-break: break-all;
+				width: 95%;
+				margin-top: -0.7vw;
+			}
+
+			img {
+				transform: translate(-15%, 5%);
+				width: 238px;
+				height: 238px;
+			}
+		}
+
+		.subRight {
+			width: 50%;
+			height: 200%;
+			margin-top: -395px;
+			position: relative;
+
+			video {
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+				cursor: none;
+			}
+
+			.pauseBtn {
+				width: 30px;
+				height: 30px;
+				background: transparent;
+				position: absolute;
+				z-index: 44;
+				bottom: 30px;
+				left: 30px;
+				border: none;
+				cursor: none;
+
+				img {
+					width: 100%;
+					height: 100%;
+					object-fit: cover;
+					cursor: none;
+				}
+			}
+
+			.playBtn {
+				width: 30px;
+				height: 30px;
+				background: transparent;
+				position: absolute;
+				z-index: 44;
+				bottom: 30px;
+				left: 30px;
+				border: none;
+				cursor: none;
+
+				img {
+					width: 100%;
+					height: 100%;
+					object-fit: cover;
+					cursor: none;
+				}
+			}
+		}
+	}
+
+	.middleText {
+		width: 100%;
+		height: auto;
+		background: $videoBgBl;
+		display: flex;
+		flex-direction: column;
+		padding: 96px 14.9vw 96px;
+		z-index: 2;
+
+		p {
+			font: 36px/1.3 $ikeaFontKo;
+			color: $fontColorW;
+			margin-bottom: 96px;
+			text-align: justify;
+			word-wrap: break-word;
+			padding-top: 36px;
+		}
+
+		button {
+			width: 259px;
+			height: 56px;
+			font: 15px/1 $ikeaFontKo;
+			color: $ikeaBl;
+			border-radius: 50px;
+			margin: 0px auto;
+			margin-bottom: 50px;
+			background: radial-gradient(circle, #7f7fd5, #86a8e7, #91eae4);
+			background-size: 200%;
+			border: none;
+			animation: animation 1.7s linear infinite;
+			cursor: none;
+
+			a {
+				cursor: none;
+			}
+
+			@keyframes animation {
+				to {
+					background-position: 200% center;
+				}
+			}
+		}
+	}
+
+	.imgBoxContainer {
+		width: 100%;
+		height: 900px;
+		display: flex;
+		flex-wrap: wrap;
+
+		padding: 0px 15vw 150px;
+
+		.imgBoxLeft {
+			width: 50%;
+			height: 100%;
+			position: relative;
+
+			video {
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+				object-position: center;
+				cursor: none;
+			}
+
+			.pauseBtn2 {
+				width: 30px;
+				height: 30px;
+				background: transparent;
+				position: absolute;
+				z-index: 44;
+				bottom: 30px;
+				left: 30px;
+				border: none;
+				cursor: none;
+
+				img {
+					width: 100%;
+					height: 100%;
+					object-fit: cover;
+					cursor: none;
+				}
+			}
+
+			.playBtn2 {
+				width: 30px;
+				height: 30px;
+				background: transparent;
+				position: absolute;
+				z-index: 44;
+				bottom: 30px;
+				left: 30px;
+				border: none;
+				cursor: none;
+
+				img {
+					width: 100%;
+					height: 100%;
+					object-fit: cover;
+					cursor: none;
+				}
+			}
+		}
+
+		.imgBoxRight {
+			width: 50%;
+			height: 100%;
+			display: flex;
+			flex-direction: column;
+
+			.imgBoxTop {
+				width: 100%;
+				height: 50%;
+				display: flex;
+
+				.imgBox1 {
+					flex: 1;
+					width: calc(100% / 2);
+					height: 100%;
+					overflow: hidden;
+					position: relative;
+
+					img {
+						width: 100%;
+						height: 100%;
+						object-fit: cover;
+						object-position: center;
+					}
+
+					button {
+						width: 80px;
+						height: 80px;
+						background: #dcdcdc;
+						border-radius: 50%;
+						border: none;
+						position: absolute;
+						top: 20px;
+						right: 20px;
+						font: bold 16px /1 $ikeaFontKo;
+						color: $fontColorBl;
+					}
+				}
+				.imgBox2 {
+					flex: 1;
+					width: calc(100% / 2);
+					height: 100%;
+					background: rgb(89, 135, 150);
+					overflow: hidden;
+
+					img {
+						width: 100%;
+						height: 100%;
+						object-fit: cover;
+						object-position: center;
+					}
+				}
+			}
+
+			.imgBoxDown {
+				width: 100%;
+				height: 50%;
+				display: flex;
+				overflow: hidden;
+
+				img {
+					width: 100%;
+					height: 100%;
+					object-fit: cover;
+					object-position: center;
+				}
+			}
+		}
+	}
+
+	.imbedVideoContainer {
+		width: 100%;
+		height: 453.39px;
+		padding: 0px 15vw 0px;
+		display: flex;
+
+		.imbedText {
+			flex: 0.6;
+			width: calc(100% / 2);
+			height: 100%;
+			background: #1b1b1b;
+			padding: 42px;
+
+			h2 {
+				margin-top: 5vw;
+				font: bold 26px/1 $ikeaFontKo;
+				color: $fontColorW;
+			}
+
+			p {
+				margin-top: 3vw;
+				font: 16px/1.5 $ikeaFontKo;
+				color: $fontColorW;
+			}
+		}
+
+		.imbedVideo {
+			flex: 1;
+			width: calc(100% / 2);
+			height: 100%;
+			overflow: hidden;
+			position: relative;
+			height: 0;
+			padding-bottom: 56.25%;
+			z-index: 1;
+
+			iframe {
+				width: 100%;
+				z-index: 1;
+			}
+
+			.cursorOverlay {
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 60%;
+			}
+		}
+	}
+
+	.btnContainer {
+		width: 100%;
+		height: auto;
+		display: flex;
+		padding: 96px 15vw 0px;
+
+		button {
+			width: 259px;
+			height: 56px;
+			background-color: $bgW;
+			font: 15px/1 $ikeaFontKo;
+			color: $ikeaBl;
+			border-radius: 50px;
+			margin: 0px auto;
+			border: none;
+			background: radial-gradient(circle, #7f7fd5, #86a8e7, #91eae4);
+			background-size: 200%;
+			animation: animation 1.7s linear infinite;
+			z-index: 99;
+			cursor: none;
+
+			a {
+				cursor: none;
+			}
+
+			@keyframes animation {
+				to {
+					background-position: 200% center;
+				}
+			}
+		}
+	}
+
+	.videoListContainer {
+		width: 100%;
+		height: auto;
+		padding: 150px 15vw 100px;
+		flex-direction: row;
+
+		.container {
+			width: 100%;
+			height: 100%;
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: center;
+			gap: 40px;
+
+			.videoBox1 {
+				width: 300px;
+				height: 300px;
+				position: relative;
+				margin-bottom: 50px;
+
+				.textBox {
+					width: 50%;
+					height: 100%;
+					position: absolute;
+					top: 0;
+					right: 0;
+					border: 1px solid;
+					padding: 16px;
+					background-position: center;
+					background-size: cover;
+					background-repeat: no-repeat;
+					overflow: hidden;
+					background: $videoBgBl;
+
+					.listTitle {
+						font: bold 20px/1.2 $ikeaFontKo;
+						text-align: start;
+						color: $fontColorW;
+					}
+
+					p {
+						margin-top: 3vw;
+						font: 16px/1.5 $ikeaFontKo;
+						color: $grey;
+						text-align: justify;
+						word-break: break-all;
+					}
+				}
+			}
+
+			.videoCircle {
+				width: 100%;
+				height: 100%;
+				background-color: $bgW;
+				border-radius: 50%;
+
+				img {
+					object-fit: cover;
+					object-position: center;
+					width: 100%;
+					height: 100%;
+					border-radius: 50%;
+				}
+
+				&:hover {
+					animation: rotate 1.7s linear infinite;
+					color: transparent;
+
+					@keyframes rotate {
+						to {
+							transform: rotate(360deg);
+						}
+					}
+				}
+			}
+		}
+	}
+
+	.cursor {
+		pointer-events: none;
+		position: absolute;
+		width: 80px;
+		height: 80px;
+		background: radial-gradient(circle, #fff 0%, #fff 3.99%, #000 4%, #000 68.99%, #fff 70%, #fff 100%);
+		border-radius: 50%;
+		text-align: center;
+		align-items: center;
+		color: white;
+		font: 18px/80px $ikeaFontKo;
+		z-index: 99999;
+		transition: all 0.1s;
+		transition-delay: width, height 1s;
+		overflow: hidden;
+
+		&.hover {
+			width: 120px;
+			height: 120px;
+			font: 18px/120px $ikeaFontKo;
+			background: radial-gradient(circle, #000 4%, #000 68.99%, #fff 70%, #fff 100%);
+			overflow: hidden;
+		}
+
+		&.hoverPageIndicator {
+			width: 0px;
+			height: 0px;
+			font: 18px/150px $ikeaFontKo;
+			background: radial-gradient(circle, #000 4%, #000 68.99%, #fff 70%, #fff 100%);
+			overflow: hidden;
+		}
+
+		&.click {
+			animation: click 0.3s ease-in-out;
+
+			@keyframes click {
+				0% {
+					transform: scale(1);
+				}
+				5% {
+					transform: scale(1.3);
+				}
+				100% {
+					transform: scale(1);
+				}
+			}
+		}
+	}
+}
+
+@media screen and (max-width: $tablet) {
+	.videoSub {
+		.subtitle {
+			height: auto;
+			padding: 150px 10vw 50px;
+
+			.subLeft {
+				order: 2;
+				width: 100%;
+				padding-top: 450px;
+			}
+
+			.subRight {
+				width: 100%;
+				height: 500px;
+				margin-top: -16vw;
+
+				video {
+					width: 100%;
+					height: 900px;
+				}
+			}
+		}
+
+		.middleText {
+			padding: 0px 10vw 26px;
+
+			p {
+				margin-bottom: 66px;
+			}
+		}
+
+		.imgBoxContainer {
+			padding: 35px 10vw 90px;
+		}
+
+		.imbedVideoContainer {
+			height: 676px;
+			padding: 0px 10vw 0px;
+			flex-direction: column;
+
+			.imbedText {
+				flex: 0.2;
+				width: 100%;
+				height: 197px;
+				padding: 42px;
+
+				h2 {
+					margin-top: 0;
+				}
+				p {
+					margin-top: 2vw;
+				}
+			}
+
+			.imbedVideo {
+				flex: 1;
+				width: 100%;
+				height: 479px;
+			}
+		}
+
+		.btnContainer {
+			width: 100%;
+			height: auto;
+			display: flex;
+			padding: 86px 15vw 0px;
+		}
+
+		.videoListContainer {
+			padding: 96px 10vw 150px;
+
+			.container {
+				gap: 40px;
+
+				.videoBox1 {
+					margin-bottom: 10px;
+
+					.textBox {
+						padding: 30px;
+
+						h3 {
+							font: bold 26px/1.5 $ikeaFontKo;
+							color: $fontColorW;
+						}
+
+						p {
+							margin-top: 3vw;
+							font: 16px/1.5 $ikeaFontKo;
+							color: $grey;
+						}
+					}
+				}
+
+				.videoCircle {
+					width: 100%;
+					height: 100%;
+					background-color: $bgW;
+					border-radius: 50%;
+				}
+			}
+		}
+	}
+}
+
+@media screen and (max-width: $mobile) {
+	.videoSub {
+		.subtitle {
+			height: auto;
+			padding: 0px 5vw 50px;
+
+			.subLeft {
+				padding-top: 56px;
+
+				h3 {
+					font: 25px/1 $ikeaFontKo;
+					white-space: nowrap;
+				}
+
+				.title {
+					h2 {
+						font: bold 36px/1.3 $ikeaFontKo;
+					}
+				}
+
+				p {
+					font: 16px/1.6 $ikeaFontKo;
+					width: 120%;
+				}
+
+				img {
+					width: 130px;
+					height: 130px;
+				}
+			}
+
+			.subRight {
+				width: 100%;
+				height: 500px;
+				margin-top: -10vw;
+
+				video {
+					width: 100%;
+					height: 100%;
+				}
+			}
+		}
+
+		.middleText {
+			padding: 0px 5vw 26px;
+
+			p {
+				font: 16px/1.6 $ikeaFontKo;
+				margin-bottom: 66px;
+			}
+
+			button {
+				width: 215px;
+				height: 40px;
+				font: 12px/1 $ikeaFontKo;
+				border: none;
+			}
+		}
+
+		.imgBoxContainer {
+			width: 100%;
+			height: auto;
+			padding: 0px 5vw 50px;
+
+			.imgBoxLeft {
+				width: 100%;
+				height: 500px;
+
+				video {
+					width: 100%;
+					height: 100%;
+					object-fit: cover;
+					object-position: center;
+				}
+			}
+
+			.imgBoxRight {
+				width: 100%;
+				height: 100%;
+
+				.imgBoxTop {
+					width: 100;
+					height: 100%;
+					display: block;
+
+					.imgBox1 {
+						width: 100%;
+						height: 368px;
+
+						img {
+							width: 100%;
+						}
+					}
+					.imgBox2 {
+						width: 100%;
+						height: 368px;
+					}
+				}
+
+				.imgBoxDown {
+					width: 100%;
+					height: 368px;
+				}
+			}
+		}
+
+		.imbedVideoContainer {
+			height: 460px;
+			padding: 0px 5vw 0px;
+
+			.imbedText {
+				width: 100%;
+				height: 217px;
+			}
+
+			.imbedVideo {
+				width: 100%;
+				height: 100%;
+				padding-bottom: 0;
+
+				iframe {
+					width: 100%;
+					height: 100%;
+				}
+			}
+		}
+
+		.btnContainer {
+			padding: 55px 5vw 0px;
+
+			button {
+				width: 215px;
+				height: 40px;
+				font: 12px/1 $ikeaFontKo;
+			}
+		}
+
+		.videoListContainer {
+			padding: 80px 5vw 150px;
+
+			.container {
+				.videoBox1 {
+					.textBox {
+						padding: 30px;
+
+						h3 {
+							font: 25px/1.5 $ikeaFontKo;
+						}
+					}
+				}
+
+				.videoCircle {
+					width: 100%;
+					height: 100%;
+					background-color: $bgW;
+					border-radius: 50%;
+				}
+			}
+		}
+	}
+}

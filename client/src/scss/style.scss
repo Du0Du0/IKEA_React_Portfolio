@@ -1,0 +1,110 @@
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+@import 'https://use.fontawesome.com/releases/v5.8.2/css/all.css';
+$ikeaBlue: #0058ab;
+$ikeaYellow: #fec202;
+$ikeaBl: #171717;
+$black: #010001;
+$grey: #e9e9e9;
+$boxGrey: #f0f0f0;
+$carotBtn: #cccccc;
+$bgW: #f9f9f9;
+$fontColorW: #eee;
+$ikeaFont: 'Work Sans';
+$fontColorBl: #333;
+$fontColorGr: #b5b5b5;
+$fontColorGrC: #10101099;
+$fontColorGrT: #cacaca;
+$pageScrollMain: #1b2539;
+$pageScrollBl: #333;
+
+//members
+$tableBg: #f4f5f6;
+$tableBtn: #1b2539;
+$tableCheckBox: #1b2539;
+$inputBorder: #cfcfcf;
+$ikeaFontKo: 'Pretendard';
+
+//video
+$videoBgBl: #090909;
+
+//signUp
+$errRed: #d80000;
+
+//community
+$border: rgba(128, 128, 128, 0.4);
+$hoverBtn: #17809b;
+$tablet: 1199px;
+$mobile: 759px;
+
+//contact
+$borderLight: rgba(128, 128, 128, 0.4);
+$lightGrey: #f6f6f6;
+$holiday: #d80000;
+$openLong: rgba(128, 128, 128, 0.4);
+$today: #bea36f;
+$lightRed: #d80000;
+$contactBl: #2d2d2d;
+$localBus: #3d8825;
+$trunkBus: #2c5fca;
+$expressBus: #c44b3d;
+$seaterBus: #2c5fca;
+
+$swiper-navigation-size: 30px;
+body {
+	overflow-x: hidden;
+}
+
+a:link {
+	color: inherit; /* 링크의 기본 색상을 상속받음 */
+	text-decoration: none; /* 밑줄 제거 */
+}
+
+a:visited {
+	color: inherit; /* 방문한 링크의 색상을 상속받음 */
+}
+
+.h {
+	position: absolute;
+	z-index: -999999999;
+	top: 0;
+	left: 0;
+	visibility: hidden;
+}
+
+//common
+@import 'common/reset';
+@import 'common/header';
+@import 'common/footer';
+@import 'common/layout';
+@import 'common/modal';
+@import 'common/footerNone';
+@import 'common/scroll_navi';
+@import 'common/topButton';
+
+//main
+@import 'main/visual';
+@import 'main/products';
+@import 'main/vids';
+@import 'main/promotion';
+@import 'main/museum';
+@import 'main/mainCommunity';
+@import 'main/cookiePop';
+@import 'main/snsShareModal';
+
+//sub
+@import 'sub/youtube';
+@import 'sub/member';
+@import 'sub/gallery';
+@import 'sub/contact';
+@import 'sub/department';
+@import 'sub/community';
+@import 'sub/write';
+@import 'sub/detail';
+@import 'sub/update';
+@import 'sub/commentModal';
+@import 'sub/storeName';
+@import 'sub/mapTraffic';
+@import 'sub/parkingInfo';
+@import 'sub/subwayInfo';
+@import 'sub/busInfo';
+@import 'sub/paging';

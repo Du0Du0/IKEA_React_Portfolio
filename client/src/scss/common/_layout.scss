@@ -1,0 +1,137 @@
+.content {
+	.subVisual {
+		width: 100%;
+		height: 480px;
+		position: relative;
+		overflow: hidden;
+
+		video {
+			object-fit: contain;
+			object-position: 0vw -28vw;
+		}
+
+		.background {
+			width: 50%;
+			height: 80px;
+			background: #fff;
+			position: absolute;
+			bottom: 0;
+			left: 0;
+		}
+	}
+
+	.titContainer {
+		width: 100%;
+		height: 300px;
+		padding: 150px 15vw 246px;
+
+		h1 {
+			text-align: left;
+			font: bold 70px/1 $ikeaFontKo;
+			color: $fontColorBl;
+			margin-top: 20px;
+			margin-bottom: 96px;
+			opacity: 0;
+			transform: translateY(200px);
+			transition: 1s 0.5s;
+
+			&.on {
+				opacity: 1;
+				transform: translateY(0px);
+			}
+		}
+	}
+
+	.inner {
+		min-height: 600px;
+	}
+}
+
+.content.bl {
+	background: $videoBgBl;
+
+	.background {
+		background: $videoBgBl;
+	}
+
+	.titContainer {
+		h1 {
+			color: $fontColorW;
+		}
+	}
+}
+
+.content.member {
+	.subVisual {
+		width: 100%;
+		height: 480px;
+		position: relative;
+		overflow: hidden;
+
+		video {
+			object-fit: contain;
+			object-position: 0vw -28vw;
+		}
+
+		.background {
+			width: 50%;
+			height: 80px;
+			background: #fff;
+			position: absolute;
+			bottom: 0;
+			left: 0;
+		}
+	}
+	.titContainer {
+		display: none;
+	}
+
+	.inner {
+		min-height: 600px;
+	}
+}
+
+@media screen and (max-width: $tablet) {
+	.content {
+		.subVisual {
+			height: 380px;
+
+			video {
+				object-fit: contain;
+				object-position: -55vw -48vw;
+			}
+		}
+
+		.titContainer {
+			padding: 150px 10vw 246px;
+
+			h1 {
+				font: bold 70px/1 $ikeaFontKo;
+				margin-top: 20px;
+				margin-bottom: 96px;
+			}
+		}
+	}
+}
+
+@media screen and (max-width: $mobile) {
+	.content {
+		.subVisual {
+			height: 300px;
+
+			video {
+				object-position: -205vw -110vw;
+			}
+		}
+
+		.titContainer {
+			padding: 96px 5vw 0px;
+
+			h1 {
+				font: bold 36px/1 $ikeaFontKo;
+				margin-top: 20px;
+				margin-bottom: 0px;
+			}
+		}
+	}
+}
