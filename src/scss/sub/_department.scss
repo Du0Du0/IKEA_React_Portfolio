@@ -187,30 +187,20 @@
 					}
 				}
 
+				.pwdStrength {
+					width: 30%;
+					margin-bottom: 15px;
+					p {
+						&::before {
+							content: none;
+						}
+					}
+				}
 				.fa-eye {
 					position: relative;
 					right: 30px;
 					color: $fontColorGr;
 					cursor: pointer;
-				}
-
-				#meter {
-					appearance: none;
-				}
-				#meter::-webkit-progress-bar {
-					background: #d9d9d9;
-					border-radius: 10px;
-					width: 250px;
-					height: 3px;
-				}
-				#meter::-webkit-progress-value {
-					border-radius: 10px;
-					background: var(--c, red);
-				}
-
-				#meter[value]::-webkit-progress-value {
-					transition: width 0.5s;
-					width: 300px;
 				}
 
 				input[placeholder] {

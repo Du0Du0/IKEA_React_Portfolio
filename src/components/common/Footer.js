@@ -24,7 +24,7 @@ function Footer({ type, imgBg }) {
 						<li>Privacy statment</li>
 					</ul>
 					<ul>
-						<li>© Inter IKEA Systems B.V. 1999 - 2023</li>
+						<li>© Inter IKEA Systems B.V. 1999 - 2023 (Optimized for Resolution: 1920x1080)</li>
 					</ul>
 					<ul>
 						<li>Co-worker Login</li>

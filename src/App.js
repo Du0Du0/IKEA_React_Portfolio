@@ -27,6 +27,7 @@ import { setMainYoutube } from './redux/action';
 import { useEffect } from 'react';
 import TopButton from './components/common/TopButton';
 import Scroll_navi from './components/common/Scroll_navi';
+import MuseumDetail from './components/sub/MuseumDetail';
 
 function App() {
 	const dispatch = useDispatch();
@@ -153,6 +154,17 @@ function App() {
 					render={() => (
 						<>
 							<Update />
+							<FooterNone type={'sub'} imgBg={'footerW'} />
+						</>
+					)}
+				></Route>
+
+				<Route
+					exact
+					path='/museum/articles/:idx'
+					render={() => (
+						<>
+							<MuseumDetail />
 							<FooterNone type={'sub'} imgBg={'footerW'} />
 						</>
 					)}

@@ -1,4 +1,6 @@
 import { useState, forwardRef, useImperativeHandle } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faXmark } from '@fortawesome/free-solid-svg-icons';
 
 const Modal = forwardRef((props, ref) => {
 	const [Open, setOpen] = useState(false);
@@ -11,10 +13,10 @@ const Modal = forwardRef((props, ref) => {
 		<>
 			{Open && (
 				<aside className='modal' ref={ref}>
+					<div className='close' onClick={() => setOpen(false)} data-name='close'>
+						<FontAwesomeIcon icon={faXmark} />
+					</div>
 					<div className='con'>{props.children}</div>
-					<span className='close' onClick={() => setOpen(false)}>
-						close
-					</span>
 				</aside>
 			)}
 		</>

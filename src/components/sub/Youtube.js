@@ -3,6 +3,7 @@ import { useState, useRef, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import Modal from '../common/Modal';
 import TopButton from '../common/TopButton';
+import { Helmet } from 'react-helmet-async';
 
 function Youtube() {
 	const path = process.env.PUBLIC_URL;
@@ -102,6 +103,9 @@ function Youtube() {
 
 	return (
 		<>
+			<Helmet>
+				<title>유투브</title>
+			</Helmet>
 			<Layout type={'bl'} name1={'youtube'} name2={'유투브'} video={'pexels.mp4'}>
 				<section className='contents videoSub'>
 					{/* youtube page subtitle left side*/}

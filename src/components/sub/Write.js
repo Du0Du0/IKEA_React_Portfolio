@@ -1,7 +1,7 @@
 import LayoutNone from '../common/LayoutNone';
 import { useHistory } from 'react-router-dom';
 import { useEffect, useState, useRef } from 'react';
-import Community from './Community';
+import { Helmet } from 'react-helmet-async';
 
 function Write() {
 	const history = useHistory();
@@ -58,6 +58,9 @@ function Write() {
 
 	return (
 		<>
+			<Helmet>
+				<title>글쓰기</title>
+			</Helmet>
 			<LayoutNone type={''} name1={'write'}>
 				<div className='titTop'>
 					<h1>커뮤니티</h1>

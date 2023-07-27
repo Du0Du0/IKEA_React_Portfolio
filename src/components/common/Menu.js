@@ -43,7 +43,7 @@ function Menu(props, ref) {
 										</NavLink>
 									</li>
 									<li>
-										<NavLink to='/community' activeStyle={active}>
+										<NavLink to='/community/articles' activeStyle={active}>
 											Community
 										</NavLink>
 									</li>

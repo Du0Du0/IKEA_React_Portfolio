@@ -6,6 +6,7 @@ import { useDaumPostcodePopup } from 'react-daum-postcode';
 import { useState, useRef, useEffect, useCallback } from 'react';
 import { useHistory } from 'react-router-dom';
 import PasswordStrengthBar from 'react-password-strength-bar';
+import { Helmet } from 'react-helmet-async';
 
 function Department() {
 	const [IsOpen, setIsOpen] = useState(false);
@@ -191,6 +192,9 @@ function Department() {
 
 	return (
 		<>
+			<Helmet>
+				<title>회원가입</title>
+			</Helmet>
 			<LayoutNone type={''} name1={'department'}>
 				{/* 회원가입 페이지 제목 */}
 				<div className='titTop'>

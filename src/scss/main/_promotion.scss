@@ -72,14 +72,14 @@
 					display: flex;
 
 					.downLeft {
-						flex: 1;
+						flex: 0.7;
 						width: 50%;
 						height: 100%;
 						cursor: pointer;
 
 						h3 {
 							font: 24px/1 $ikeaFontKo;
-							color: $fontColorW;
+							color: rgb(196, 196, 255);
 							margin-bottom: 10px;
 						}
 
@@ -90,12 +90,21 @@
 					}
 
 					.downRight {
-						flex: 0.1;
-						width: 50%;
+						flex: 0.3;
+						width: 100%;
 						height: 100%;
-						font: 22px/1 $ikeaFontKo;
-						color: $fontColorW;
 						text-align: end;
+
+						.fa-arrow-right {
+							font: 22px/1 $ikeaFontKo;
+							color: $fontColorW;
+							transition: 0.5s;
+							margin-right: 5px;
+
+							&:hover {
+								transform: translateX(5px);
+							}
+						}
 					}
 				}
 			}
@@ -111,8 +120,7 @@
 					writing-mode: vertical-rl;
 					white-space: wrap;
 					word-spacing: -55px;
-					letter-spacing: 5px;
-
+					letter-spacing: -5px;
 					font: bold 70px/1 $ikeaFontKo;
 					color: transparent;
 					-webkit-text-stroke: 1px $fontColorW;
@@ -176,7 +184,7 @@
 					margin-top: 20px;
 					cursor: pointer;
 
-					i {
+					.fa-arrow-right {
 						transition: 0.5s;
 						&:hover {
 							transform: translateX(5px);

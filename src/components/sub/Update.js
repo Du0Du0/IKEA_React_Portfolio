@@ -3,6 +3,7 @@ import { useHistory, useLocation } from 'react-router-dom';
 import { useEffect, useState, useRef } from 'react';
 import Community from './Community';
 import Detail from './Detail';
+import { Helmet } from 'react-helmet-async';
 
 function Update() {
 	const history = useHistory();
@@ -85,6 +86,9 @@ function Update() {
 
 	return (
 		<>
+			<Helmet>
+				<title>글 수정</title>
+			</Helmet>
 			<LayoutNone type={''} name1={'update'}>
 				<div className='titTop'>
 					<h1>커뮤니티</h1>

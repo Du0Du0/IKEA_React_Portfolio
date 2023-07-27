@@ -46,6 +46,9 @@ function Products() {
 		slideWrap.current.style.transform = `translateX(-${(Count - 1) * 400}px)`;
 	};
 
+	const openNewTab = (url) => {
+		window.open(url, '_blank', 'noopener, noreferrer');
+	};
 	return (
 		<section id='products' className='myScroll' style={backgroundStyle}>
 			<div className='productsContainer'>
@@ -85,13 +88,11 @@ function Products() {
 							</button>
 						</div>
 						{/* products "all category" button */}
-						<div className='hyperBtns'>
-							<a herf='#' target='_blank' title='모든 카테고리 보기'>
-								<p>
-									All Categories&nbsp;&nbsp;
-									<FontAwesomeIcon icon={faChevronRight} />
-								</p>
-							</a>
+						<div className='hyperBtns' onClick={() => openNewTab('#')}>
+							<p>
+								All Categories&nbsp;&nbsp;
+								<FontAwesomeIcon icon={faChevronRight} />
+							</p>
 						</div>
 					</div>
 				</div>

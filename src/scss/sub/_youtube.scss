@@ -1,8 +1,8 @@
 .videoSub {
 	width: 100vw;
-	// cursor: none;
 	min-height: calc(100vh - 400px);
 	background: $videoBgBl;
+	cursor: none;
 
 	.subtitle {
 		width: 100%;
@@ -68,6 +68,7 @@
 				width: 100%;
 				height: 100%;
 				object-fit: cover;
+				cursor: none;
 			}
 
 			.pauseBtn {
@@ -79,12 +80,13 @@
 				bottom: 30px;
 				left: 30px;
 				border: none;
-				// cursor: none;
+				cursor: none;
 
 				img {
 					width: 100%;
 					height: 100%;
 					object-fit: cover;
+					cursor: none;
 				}
 			}
 
@@ -97,12 +99,13 @@
 				bottom: 30px;
 				left: 30px;
 				border: none;
-				// cursor: none;
+				cursor: none;
 
 				img {
 					width: 100%;
 					height: 100%;
 					object-fit: cover;
+					cursor: none;
 				}
 			}
 		}
@@ -123,7 +126,6 @@
 			margin-bottom: 96px;
 			text-align: justify;
 			word-wrap: break-word;
-
 			padding-top: 36px;
 		}
 
@@ -135,14 +137,14 @@
 			border-radius: 50px;
 			margin: 0px auto;
 			margin-bottom: 50px;
-			// cursor: none;
 			background: radial-gradient(circle, #7f7fd5, #86a8e7, #91eae4);
 			background-size: 200%;
 			border: none;
 			animation: animation 1.7s linear infinite;
+			cursor: none;
 
 			a {
-				// cursor: none;
+				cursor: none;
 			}
 
 			@keyframes animation {
@@ -171,6 +173,7 @@
 				height: 100%;
 				object-fit: cover;
 				object-position: center;
+				cursor: none;
 			}
 
 			.pauseBtn2 {
@@ -182,12 +185,13 @@
 				bottom: 30px;
 				left: 30px;
 				border: none;
-				// cursor: none;
+				cursor: none;
 
 				img {
 					width: 100%;
 					height: 100%;
 					object-fit: cover;
+					cursor: none;
 				}
 			}
 
@@ -200,12 +204,13 @@
 				bottom: 30px;
 				left: 30px;
 				border: none;
-				// cursor: none;
+				cursor: none;
 
 				img {
 					width: 100%;
 					height: 100%;
 					object-fit: cover;
+					cursor: none;
 				}
 			}
 		}
@@ -227,7 +232,6 @@
 					height: 100%;
 					overflow: hidden;
 					position: relative;
-					// cursor: none;
 
 					img {
 						width: 100%;
@@ -247,7 +251,6 @@
 						right: 20px;
 						font: bold 16px /1 $ikeaFontKo;
 						color: $fontColorBl;
-						// cursor: none;
 					}
 				}
 				.imgBox2 {
@@ -347,15 +350,15 @@
 			color: $ikeaBl;
 			border-radius: 50px;
 			margin: 0px auto;
-			// cursor: none;
 			border: none;
 			background: radial-gradient(circle, #7f7fd5, #86a8e7, #91eae4);
 			background-size: 200%;
 			animation: animation 1.7s linear infinite;
 			z-index: 99;
+			cursor: none;
 
 			a {
-				// cursor: none;
+				cursor: none;
 			}
 
 			@keyframes animation {
@@ -421,7 +424,6 @@
 				height: 100%;
 				background-color: $bgW;
 				border-radius: 50%;
-				// cursor: none;
 
 				img {
 					object-fit: cover;
@@ -462,12 +464,13 @@
 		overflow: hidden;
 
 		&.hover {
-			width: 150px;
-			height: 150px;
-			font: 18px/150px $ikeaFontKo;
+			width: 120px;
+			height: 120px;
+			font: 18px/120px $ikeaFontKo;
 			background: radial-gradient(circle, #000 4%, #000 68.99%, #fff 70%, #fff 100%);
 			overflow: hidden;
 		}
+
 		&.hoverPageIndicator {
 			width: 0px;
 			height: 0px;
@@ -475,33 +478,21 @@
 			background: radial-gradient(circle, #000 4%, #000 68.99%, #fff 70%, #fff 100%);
 			overflow: hidden;
 		}
+
 		&.click {
 			animation: click 0.3s ease-in-out;
-		}
-		@keyframes click {
-			0% {
-				transform: scale(1);
-			}
-			5% {
-				transform: scale(1.3);
-			}
-			100% {
-				transform: scale(1);
-			}
-		}
-	}
 
-	@keyframes animateBorder {
-		0% {
-			background-position: 0% 50%;
-		}
-
-		50% {
-			background-position: 100% 50%;
-		}
-
-		100% {
-			background-position: 0% 50%;
+			@keyframes click {
+				0% {
+					transform: scale(1);
+				}
+				5% {
+					transform: scale(1.3);
+				}
+				100% {
+					transform: scale(1);
+				}
+			}
 		}
 	}
 }

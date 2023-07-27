@@ -1,8 +1,13 @@
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useSelector, dispatch, useDispatch } from 'react-redux';
+import React from 'react';
 
 function Promotion() {
 	const path = process.env.PUBLIC_URL;
+	const Promotion = useSelector((store) => store.promotionReducer.promotion);
+	const dispatch = useDispatch();
+
 	return (
 		<section id='promotion' className='myScroll'>
 			<div className='promotionContainer'>
@@ -25,8 +30,8 @@ function Promotion() {
 						{/* imbed video description  */}
 						<div className='downLeft'>
 							<a href='#'>
-								<h3>Lorem ipsum dolor, sit amet consectetur </h3>
-								<h2>Lorem ipsum dolor </h2>
+								<h3>참나무 앞판을 사용한 포근한 주방</h3>
+								<h2>VEDHAMN 베드함 참나무 주방 가이드</h2>
 							</a>
 						</div>
 						{/* arrow button  */}
@@ -46,77 +51,19 @@ function Promotion() {
 				{/* promotion 오른쪽 sns 영역  */}
 				<div className='promotionWrap'>
 					<div className='sns'>
-						<h3>Introducing our new floor lamp with WiFi speaker</h3>
-						<h4>
-							The latest addition to our popular SYMFONISK series, this striking floor lamp with bamboo shade will bring a warm, rustic charm to any room. Developed as part of the collaboration
-							between IKEA and Sonos, it will effortlessly fill your room with beautiful light and your favourite sounds.
-						</h4>
-						<p>2023.05.03ㆍDavid </p>
-						<br />
-						<br />
-
-						<h3>Lorem, ipsum dolor.</h3>
-						<h4>
-							Lorem ipsum dolor sit, amet consectetur adipisicing elit. Recusandae, nesciunt vero aliquam dicta unde blanditiis quis. Harum animi a, saepe at eveniet vel architecto ipsum, iste velit
-							ut aliquid nostrum?
-						</h4>
-						<p>2023.05.03ㆍDavid </p>
-						<br />
-						<br />
-
-						<h3>Lorem, ipsum dolor.</h3>
-						<h4>
-							Lorem ipsum dolor sit, amet consectetur adipisicing elit. Recusandae, nesciunt vero aliquam dicta unde blanditiis quis. Harum animi a, saepe at eveniet vel architecto ipsum, iste velit
-							ut aliquid nostrum?
-						</h4>
-						<p>2023.05.03ㆍDavid </p>
-						<br />
-						<br />
-
-						<h3>Lorem, ipsum dolor.</h3>
-						<h4>
-							Lorem ipsum dolor sit, amet consectetur adipisicing elit. Recusandae, nesciunt vero aliquam dicta unde blanditiis quis. Harum animi a, saepe at eveniet vel architecto ipsum, iste velit
-							ut aliquid nostrum?
-						</h4>
-						<p>2023.05.03ㆍDavid </p>
-						<br />
-						<br />
-
-						<h3>Lorem, ipsum dolor.</h3>
-						<h4>
-							Lorem ipsum dolor sit, amet consectetur adipisicing elit. Recusandae, nesciunt vero aliquam dicta unde blanditiis quis. Harum animi a, saepe at eveniet vel architecto ipsum, iste velit
-							ut aliquid nostrum?
-						</h4>
-						<p>2023.05.03ㆍDavid </p>
-						<br />
-						<br />
-
-						<h3>Lorem, ipsum dolor.</h3>
-						<h4>
-							Lorem ipsum dolor sit, amet consectetur adipisicing elit. Recusandae, nesciunt vero aliquam dicta unde blanditiis quis. Harum animi a, saepe at eveniet vel architecto ipsum, iste velit
-							ut aliquid nostrum?
-						</h4>
-						<p>2023.05.03ㆍDavid </p>
-						<br />
-						<br />
-
-						<h3>Lorem, ipsum dolor.</h3>
-						<h4>
-							Lorem ipsum dolor sit, amet consectetur adipisicing elit. Recusandae, nesciunt vero aliquam dicta unde blanditiis quis. Harum animi a, saepe at eveniet vel architecto ipsum, iste velit
-							ut aliquid nostrum?
-						</h4>
-						<p>2023.05.03ㆍDavid </p>
-						<br />
-						<br />
-
-						<h3>Lorem, ipsum dolor.</h3>
-						<h4>
-							Lorem ipsum dolor sit, amet consectetur adipisicing elit. Recusandae, nesciunt vero aliquam dicta unde blanditiis quis. Harum animi a, saepe at eveniet vel architecto ipsum, iste velit
-							ut aliquid nostrum?
-						</h4>
-						<p>2023.05.03ㆍDavid </p>
-						<br />
-						<br />
+						{Promotion.map((promotion, idx) => {
+							return (
+								<React.Fragment key={idx}>
+									<h3>{promotion.title}</h3>
+									<h4>{promotion.content.length > 150 ? `${promotion.content}`.split(' ').splice(0, 43).join(' ') + '...' : promotion.content}</h4>
+									<p>
+										{promotion.date}ㆍ{promotion.user}
+									</p>
+									<br />
+									<br />
+								</React.Fragment>
+							);
+						})}
 					</div>
 					<div className='snsGoBtn'>
 						<a href='#'>

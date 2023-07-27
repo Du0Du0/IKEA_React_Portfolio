@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowRight, faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons';
+import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { useSelector } from 'react-redux';
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef } from 'react';
 import { Link } from 'react-router-dom/cjs/react-router-dom';
 import Modal from '../common/Modal';
 import SnsShareModal from './SnsShareModal';
@@ -24,17 +24,20 @@ function Vids() {
 						{/* video page title  */}
 						<div className='vidsTit'>
 							<h2>
-								비디오{' '}
-								<img
-									src={path + '/img/share.png'}
-									onClick={() => {
-										snsShareModal.current.open();
-									}}
-								/>
+								비디오
+								<button>
+									<img
+										src={path + '/img/share.png'}
+										onClick={() => {
+											snsShareModal.current.open();
+										}}
+										alt={'sns share icon'}
+									/>
+								</button>
 							</h2>
 						</div>
 						{/* video page description  */}
-						<div class='vidsSub'>
+						<div className='vidsSub'>
 							Lorem ipsum dolor sit amet consectetur <strong>adipisicing</strong> elit. Atque,
 							<strong>suscipit?</strong> Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque, suscipit?Lorem ipsu
 						</div>
@@ -51,6 +54,7 @@ function Vids() {
 									style={{ backgroundImage: `url(${mainVid.snippet.thumbnails.maxres.url})` }}
 									onClick={() => setSelectedIdx(idx)}
 									ref={videoRefs}
+									key={idx}
 								>
 									<div className='vidsNum' style={{ display: SelectedIdx === idx ? 'none' : 'block' }}>
 										{mainVid.snippet.position + 1}

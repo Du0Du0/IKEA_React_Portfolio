@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import Calendar from 'react-calendar';
@@ -208,4 +209,4 @@ function StoreName({ City, setCity, Index, setIndex }) {
 	);
 }
 
-export default StoreName;
+export default React.memo(StoreName);

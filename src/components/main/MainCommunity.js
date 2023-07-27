@@ -45,7 +45,7 @@ function MainCommunity() {
 							<p>
 								바로가기&nbsp;&nbsp;&nbsp;
 								<span>
-									<FontAwesomeIcon icon={faArrowRight} ariaHidden={true} />
+									<FontAwesomeIcon icon={faArrowRight} aria-hidden={true} />
 								</span>
 							</p>
 						</Link>

@@ -134,6 +134,7 @@
 						font: 26px $ikeaFontKo;
 						color: $fontColorW;
 						cursor: pointer;
+						transition: 0.5s;
 					}
 
 					//  products 오른쪽 화살표
@@ -149,6 +150,7 @@
 						font: 26px/5px $ikeaFontKo;
 						color: $fontColorW;
 						cursor: pointer;
+						transition: 0.5s;
 					}
 				}
 
@@ -164,14 +166,6 @@
 					justify-content: left;
 					align-items: center;
 					cursor: pointer;
-
-					i {
-						transition: 0.5s;
-
-						&:hover {
-							transform: translateX(5px);
-						}
-					}
 				}
 			}
 		}

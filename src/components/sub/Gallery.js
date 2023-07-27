@@ -2,6 +2,7 @@ import { useEffect, useState, useRef } from 'react';
 import Layout from '../common/Layout';
 import axios from 'axios';
 import Masonry from 'react-masonry-component';
+import { Helmet } from 'react-helmet-async';
 
 function Gallery() {
 	const enableEvent = useRef(true);
@@ -57,63 +58,68 @@ function Gallery() {
 	useEffect(() => getFlickr({ type: 'user', user: '168950802@N02' }), []);
 
 	return (
-		<Layout name1={'gallery'} name2={'갤러리'} video={'pexels.mp4'}>
-			<button
-				onClick={() => {
-					if (!enableEvent.current) return;
-					enableEvent.current = false;
-					setLoader(true);
-					frame.current.classList.remove('on');
-					getFlickr({ type: 'interest' });
-				}}
-			>
-				Interest Gallery
-			</button>
-			<button
-				onClick={() => {
-					if (!enableEvent.current) return;
-					enableEvent.current = false;
-					setLoader(true);
-					frame.current.classList.remove('on');
-					getFlickr({ type: 'user', user: '164021883@N04' });
-				}}
-			>
-				My Gallery
-			</button>
-			<div className='frame' ref={frame}>
-				<Masonry elementType={'div'} options={{ transitionDuration: '0.5s' }}>
-					{Items.map((item, idx) => {
-						return (
-							<article key={idx}>
-								<div className='inner'>
-									<div className='pic'>
-										<img src={`https://live.staticflickr.com/${item.server}/${item.id}_${item.secret}_m.jpg`} alt={item.title} />
+		<>
+			<Helmet>
+				<title>갤러리</title>
+			</Helmet>
+			<Layout name1={'gallery'} name2={'갤러리'} video={'pexels.mp4'}>
+				<button
+					onClick={() => {
+						if (!enableEvent.current) return;
+						enableEvent.current = false;
+						setLoader(true);
+						frame.current.classList.remove('on');
+						getFlickr({ type: 'interest' });
+					}}
+				>
+					Interest Gallery
+				</button>
+				<button
+					onClick={() => {
+						if (!enableEvent.current) return;
+						enableEvent.current = false;
+						setLoader(true);
+						frame.current.classList.remove('on');
+						getFlickr({ type: 'user', user: '164021883@N04' });
+					}}
+				>
+					My Gallery
+				</button>
+				<div className='frame' ref={frame}>
+					<Masonry elementType={'div'} options={{ transitionDuration: '0.5s' }}>
+						{Items.map((item, idx) => {
+							return (
+								<article key={idx}>
+									<div className='inner'>
+										<div className='pic'>
+											<img src={`https://live.staticflickr.com/${item.server}/${item.id}_${item.secret}_m.jpg`} alt={item.title} />
+										</div>
+										<h2>{item.title}</h2>
+										<div className='profile'>
+											<img
+												src={`http://farm${item.farm}.staticflickr.com/${item.server}/buddyicons/${item.owner}.jpg`}
+												alt={item.owner}
+												onError={(e) => e.target.setAttribute('src', 'https://www.flickr.com/images/buddyicon.gif')}
+											/>
+											<span
+												onClick={(e) => {
+													setLoader(true);
+													frame.current.classList.remove('on');
+													getFlickr({ type: 'user', user: e.target.innerText });
+												}}
+											>
+												{item.owner}
+											</span>
+										</div>
 									</div>
-									<h2>{item.title}</h2>
-									<div className='profile'>
-										<img
-											src={`http://farm${item.farm}.staticflickr.com/${item.server}/buddyicons/${item.owner}.jpg`}
-											alt={item.owner}
-											onError={(e) => e.target.setAttribute('src', 'https://www.flickr.com/images/buddyicon.gif')}
-										/>
-										<span
-											onClick={(e) => {
-												setLoader(true);
-												frame.current.classList.remove('on');
-												getFlickr({ type: 'user', user: e.target.innerText });
-											}}
-										>
-											{item.owner}
-										</span>
-									</div>
-								</div>
-							</article>
-						);
-					})}
-				</Masonry>
-			</div>
-			{Loader && <img className='loader' src={`${process.env.PUBLIC_URL}/img/loading.gif`} alt='loader' />}
-		</Layout>
+								</article>
+							);
+						})}
+					</Masonry>
+				</div>
+				{Loader && <img className='loader' src={`${process.env.PUBLIC_URL}/img/loading.gif`} alt='loader' />}
+			</Layout>
+		</>
 	);
 }
 

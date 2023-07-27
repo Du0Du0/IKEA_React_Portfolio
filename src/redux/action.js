@@ -15,6 +15,13 @@ export const setMuseum = (data) => {
 	};
 };
 
+export const setPromotion = (data) => {
+	return {
+		type: 'SET_PROMOTION',
+		payload: data,
+	};
+};
+
 export const setSubYoutube = (data) => {
 	return {
 		type: 'SET_SUBYOUTUBE',
