@@ -3,6 +3,7 @@ import { Link, NavLink } from 'react-router-dom';
 import { useState, useEffect, forwardRef } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
+import { faUser } from '@fortawesome/free-regular-svg-icons';
 import { faTwitter, faFacebookF } from '@fortawesome/free-brands-svg-icons';
 import { useImperativeHandle } from 'react';
 
@@ -29,10 +30,18 @@ function Menu(props, ref) {
 						<div className='leftBarWrap'>
 							{/* header left side title */}
 							<div className='leftBarTit'>
-								<Link to='/'>
-									<h2>IKEA Category</h2>
-								</Link>
+								<div className='titWrap'>
+									<Link to='/'>
+										<h2>IKEA Category</h2>
+									</Link>
+									<br />
+									<NavLink to='/login' activeStyle={active}>
+										<FontAwesomeIcon icon={faUser} />
+										&nbsp;&nbsp;<span>Login</span>
+									</NavLink>
+								</div>
 							</div>
+
 							{/* header left side category list  */}
 							<div className='leftBarList'>
 								<div className='listLine'></div>

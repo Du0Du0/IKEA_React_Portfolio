@@ -1,11 +1,18 @@
 import { Route, Switch } from 'react-router-dom';
 import './scss/style.scss';
 import { Helmet } from 'react-helmet-async';
+import { useDispatch } from 'react-redux';
+import { setSubYoutube } from './redux/action';
+import { setMainYoutube } from './redux/action';
+import { useEffect } from 'react';
+import axios from 'axios';
 
 //common
 import Footer from './components/common/Footer';
 import FooterNone from './components/common/FooterNone';
 import Header from './components/common/Header';
+import TopButton from './components/common/TopButton';
+import Scroll_navi from './components/common/Scroll_navi';
 
 //main
 import Main from './components/main/Main';
@@ -20,15 +27,9 @@ import Youtube from './components/sub/Youtube';
 import Write from './components/sub/Write';
 import Detail from './components/sub/Detail';
 import Update from './components/sub/Update';
-import axios from 'axios';
-import { useDispatch } from 'react-redux';
-import { setSubYoutube } from './redux/action';
-import { setMainYoutube } from './redux/action';
-import { useEffect } from 'react';
-import TopButton from './components/common/TopButton';
-import Scroll_navi from './components/common/Scroll_navi';
 import MuseumDetail from './components/sub/MuseumDetail';
 import PromotionDetail from './components/sub/PromotionDetail';
+import Login from './components/sub/Login';
 
 function App() {
 	const dispatch = useDispatch();
@@ -84,7 +85,7 @@ function App() {
 					render={() => (
 						<>
 							<Gallery />
-							<Footer type={'sub'} imgBg={'footerW'} />
+							<FooterNone type={'sub'} imgBg={'footerW'} />
 						</>
 					)}
 				></Route>
@@ -177,6 +178,16 @@ function App() {
 					render={() => (
 						<>
 							<PromotionDetail />
+							<FooterNone type={'sub'} imgBg={'footerW'} />
+						</>
+					)}
+				></Route>
+
+				<Route
+					path='/login'
+					render={() => (
+						<>
+							<Login />
 							<FooterNone type={'sub'} imgBg={'footerW'} />
 						</>
 					)}
