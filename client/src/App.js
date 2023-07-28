@@ -30,6 +30,7 @@ import Update from './components/sub/Update';
 import MuseumDetail from './components/sub/MuseumDetail';
 import PromotionDetail from './components/sub/PromotionDetail';
 import Login from './components/sub/Login';
+import GlobalStyle from './GlobalStyle';
 
 function App() {
 	const dispatch = useDispatch();
@@ -72,6 +73,7 @@ function App() {
 			<Helmet>
 				<title>이케아 코리아(대표)</title>
 			</Helmet>
+			<GlobalStyle />
 			{/* Switch는 내부에 중복되는 라우트 경로가 있을때 더 먼저 나오는 라우터를 채택하고 나머지는 무시 */}
 			<Switch>
 				<Route exact path='/' component={Main}></Route>
