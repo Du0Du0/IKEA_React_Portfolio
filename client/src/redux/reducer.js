@@ -212,6 +212,27 @@ const mainYoutubeReducer = (state = { mainYoutube: [] }, action) => {
 	}
 };
 
+const initialState = { displayName: '', uid: '' };
+
+const userReducer = (state = initialState, action) => {
+	switch (action.type) {
+		case 'SET_LOGIN_USER':
+			return {
+				...state,
+				displayName: action.payload.displayName,
+				uid: action.payload.uid,
+			};
+		case 'SET_LOGOUT_USER':
+			return {
+				...state,
+				displayName: '',
+				uid: '',
+			};
+		default:
+			return state;
+	}
+};
+
 //해당 변형자 함수가 반환하는 객체값을 하나의 객체로 합쳐서 외부로 export
-const reducers = combineReducers({ memberReducer, subYoutubeReducer, mainYoutubeReducer, museumReducer, promotionReducer });
+const reducers = combineReducers({ memberReducer, subYoutubeReducer, mainYoutubeReducer, museumReducer, promotionReducer, userReducer });
 export default reducers;

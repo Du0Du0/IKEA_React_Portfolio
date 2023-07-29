@@ -6,10 +6,14 @@ import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import { faUser } from '@fortawesome/free-regular-svg-icons';
 import { faTwitter, faFacebookF } from '@fortawesome/free-brands-svg-icons';
 import { useImperativeHandle } from 'react';
+import { useSelector } from 'react-redux';
+import firebase from '../../firebase';
 
 // props와 ref를 인자로 받음
 function Menu(props, ref) {
 	const [IsOpen, setIsOpen] = useState(false);
+	const user = useSelector((store) => store.user);
+	console.log(user);
 
 	// 1번인자 : ref
 	// 2번인자 : toggle 함수를 useImperativeHandle을 사용하여 ref로 전달
@@ -21,6 +25,10 @@ function Menu(props, ref) {
 		setIsOpen(false);
 	}, []);
 	const active = { color: '#17809b' };
+
+	// useSelector를 사용하여 Redux 상태에서 displayName 가져오기
+	const displayName = useSelector((state) => state.userReducer.displayName);
+
 	return (
 		<React.Fragment>
 			{/* header left side bar  */}
@@ -35,10 +43,19 @@ function Menu(props, ref) {
 										<h2>IKEA Category</h2>
 									</Link>
 									<br />
-									<NavLink to='/login' activeStyle={active}>
+									<div className='loginStatus'>
 										<FontAwesomeIcon icon={faUser} />
-										&nbsp;&nbsp;<span>로그인</span>
-									</NavLink>
+										<span>
+											{displayName ? (
+												`${displayName}` + '님,  안녕하세요.'
+											) : (
+												<NavLink to='/login' activeStyle={active}>
+													<button>로그인</button>
+												</NavLink>
+											)}
+										</span>
+										<span>{displayName ? <button onClick={() => firebase.auth().signOut()}>로그아웃</button> : ''}</span>
+									</div>
 								</div>
 							</div>
 

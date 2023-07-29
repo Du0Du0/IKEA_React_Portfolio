@@ -66,67 +66,64 @@ header {
 
 		.leftBarWrap {
 			width: 100%;
+			height: auto;
 
 			.leftBarTit {
-				height: 20px;
 				text-align: left;
 				display: flex;
 				justify-content: end;
 				flex-direction: column;
 				padding: 0px 10vw 0px;
 				flex-direction: column;
+				animation: appear 0.5s linear;
+				animation-fill-mode: backwards;
+				animation-delay: 0.5s;
+				opacity: 1;
+
+				@keyframes appear {
+					from {
+						opacity: 0;
+					}
+					to {
+						opacity: 1;
+					}
+				}
 
 				.titWrap {
 					h2 {
 						font: 70px/1 $ikeaFontKo;
 						color: $grey;
-						animation: appear 0.5s linear;
-						animation-fill-mode: backwards;
-						animation-delay: 0.5s;
-						opacity: 1;
-
-						@keyframes appear {
-							from {
-								opacity: 0;
-							}
-							to {
-								opacity: 1;
-							}
-						}
 					}
-					.fa-user {
-						font: 24px/1 $ikeaFontKo;
-						color: $fontColorGr;
-						margin-top: 20px;
-						animation: appear 0.5s linear;
-						animation-fill-mode: backwards;
-						animation-delay: 0.5s;
-						opacity: 1;
 
-						@keyframes appear {
-							from {
-								opacity: 0;
-							}
-							to {
-								opacity: 1;
-							}
+					.loginStatus {
+						width: 100%;
+						height: 24px;
+						display: flex;
+						align-items: center;
+
+						.fa-user {
+							font: 18px/1 $ikeaFontKo;
+							color: $fontColorGr;
+							margin-top: 20px;
+							transform: translateY(-10px);
 						}
-					}
-					span {
-						font: 24px/1 $ikeaFontKo;
-						color: $fontColorGr;
-						animation: appear 0.5s linear;
-						animation-fill-mode: backwards;
-						animation-delay: 0.5s;
-						opacity: 1;
 
-						@keyframes appear {
-							from {
-								opacity: 0;
-							}
-							to {
-								opacity: 1;
-							}
+						span {
+							font: 18px/1 $ikeaFontKo;
+							color: $fontColorGr;
+							margin-left: 10px;
+						}
+
+						button {
+							width: 70px;
+							height: 30px;
+							background: transparent;
+							border: 1px solid $fontColorGr;
+							font: 14px/1 $ikeaFontKo;
+							color: $fontColorGr;
+							padding: 2px;
+							border-radius: 5px;
+							cursor: pointer;
 						}
 					}
 				}

@@ -8,6 +8,8 @@ import { useHistory } from 'react-router-dom';
 import PasswordStrengthBar from 'react-password-strength-bar';
 import { Helmet } from 'react-helmet-async';
 import firebase from '../../firebase';
+import { setLoginUser, setLogoutUser } from '../../redux/action';
+import { useDispatch } from 'react-redux';
 
 function Department() {
 	const [IsOpen, setIsOpen] = useState(false);
@@ -50,6 +52,7 @@ function Department() {
 	const [Val, setVal] = useState(initVal.current);
 	const [Submit, setSubmit] = useState(false);
 	const [Err, setErr] = useState({});
+	const dispatch = useDispatch();
 
 	const handleChange = (e) => {
 		//현재 입력하고 있는 input요소의 name,value값을 비구조화할당으로 뽑아서 출력
@@ -91,11 +94,23 @@ function Department() {
 		const isValid = Object.keys(errors).length === 0;
 		if (isValid) {
 			try {
-				const userCredential = await firebase.auth().createUserWithEmailAndPassword(Val.emailId + '@' + `${Val.emailAddress === '' && Val.emailAddressSelect}`, Val.password);
+				const email = Val.emailId + '@' + (Val.emailAddress === '' ? Val.emailAddressSelect : Val.emailAddress);
+				const password = Val.password;
 
+				const userCredential = await firebase.auth().createUserWithEmailAndPassword(email, password);
+
+				// displayName 추가가 완료된 후에 리덕스 스테이트를 업데이트합니다.
 				await userCredential.user.updateProfile({
 					displayName: Val.userid,
 				});
+
+				// 리덕스 스테이트를 업데이트합니다.
+				dispatch(
+					setLoginUser({
+						displayName: Val.userid,
+						uid: userCredential.user.uid,
+					})
+				);
 
 				alert('회원가입이 성공적으로 이루어졌습니다.');
 				history.push('/login');
@@ -147,15 +162,6 @@ function Department() {
 		const len = Object.keys(Err).length;
 		if (len === 0 && Submit) {
 			alert('모든 인증을 통과했습니다.');
-
-			let createdUser = firebase.auth().createUserWithEmailAndPassword(Val.Email, Val.userid);
-
-			createdUser.user.updateProfile({
-				displayName: Val.userid,
-			});
-			console.log(createdUser.user);
-			history.push('/');
-			resetForm();
 		}
 	}, [Err, Submit, resetForm]);
 

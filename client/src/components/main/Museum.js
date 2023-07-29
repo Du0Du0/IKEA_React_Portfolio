@@ -19,11 +19,11 @@ function Museum() {
 		backgroundSize: 'cover',
 	};
 	const [Museums, setMuseums] = useState([]);
-	const titleLists = ['MÄVINN', 'Hej Ingvar', 'Our Roots', 'Democratic Design', 'Us & Our Planet', 'Story of IKEA', 'Existence Maximum'];
 	const [CurrentIdx, setCurrentIdx] = useState(0);
 	const [Clickable, setClickable] = useState(true);
 	const { idx } = useParams();
 	const path = process.env.PUBLIC_URL;
+	const titleLists = ['MÄVINN', 'Hej Ingvar', 'Our Roots', 'Democratic Design', 'Us & Our Planet', 'Story of IKEA', 'Existence Maximum'];
 
 	const prevButtonShowList = () => {
 		if (Clickable) {
@@ -74,7 +74,7 @@ function Museum() {
 			{/* left background */}
 			<div className='bgLeft' style={backgroundStyle}>
 				{/* left titleList  */}
-				<h2 className='leftTxt'>{titleLists[(CurrentIdx - 1 + titleLists.length) % titleLists.length]}</h2>
+				<h2 className='leftTxt'> {titleLists[(CurrentIdx - 1 + titleLists.length) % titleLists.length]}</h2>
 			</div>
 
 			{/* right background  */}

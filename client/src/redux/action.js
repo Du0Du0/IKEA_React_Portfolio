@@ -35,3 +35,16 @@ export const setMainYoutube = (data) => {
 		payload: data,
 	};
 };
+
+export const setLoginUser = (data) => {
+	return {
+		type: 'SET_LOGIN_USER',
+		payload: data,
+	};
+};
+
+export const setLogoutUser = () => {
+	return {
+		type: 'SET_LOGOUT_USER',
+	};
+};

@@ -6,6 +6,8 @@ import { setSubYoutube } from './redux/action';
 import { setMainYoutube } from './redux/action';
 import { useEffect } from 'react';
 import axios from 'axios';
+import { setLoginUser, setLogoutUser } from './redux/action';
+import firebase from './firebase';
 
 //common
 import Footer from './components/common/Footer';
@@ -66,6 +68,18 @@ function App() {
 
 	useEffect(() => {
 		fetchMainYoutube();
+	}, []);
+
+	useEffect(() => {
+		firebase.auth().onAuthStateChanged((userInfo) => {
+			console.log('userInfo', userInfo);
+			if (userInfo === null) dispatch(setLogoutUser());
+			else dispatch(setLoginUser(userInfo.multiFactor.user));
+		});
+	}, [dispatch]);
+
+	useEffect(() => {
+		//firebase.auth().signOut();
 	}, []);
 
 	return (
