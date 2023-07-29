@@ -33,6 +33,7 @@ import MuseumDetail from './components/sub/MuseumDetail';
 import PromotionDetail from './components/sub/PromotionDetail';
 import Login from './components/sub/Login';
 import GlobalStyle from './GlobalStyle';
+import FindPassword from './components/sub/FindPassword';
 
 function App() {
 	const dispatch = useDispatch();
@@ -204,6 +205,16 @@ function App() {
 					render={() => (
 						<>
 							<Login />
+							<FooterNone type={'sub'} imgBg={'footerW'} />
+						</>
+					)}
+				></Route>
+
+				<Route
+					path='/passwordSearch'
+					render={() => (
+						<>
+							<FindPassword />
 							<FooterNone type={'sub'} imgBg={'footerW'} />
 						</>
 					)}

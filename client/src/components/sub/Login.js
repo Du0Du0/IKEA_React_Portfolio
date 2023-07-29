@@ -17,6 +17,7 @@ function Login() {
 
 		try {
 			await firebase.auth().signInWithEmailAndPassword(Email, Pwd);
+			alert('로그인 되었습니다.');
 			history.push('/');
 		} catch (err) {
 			console.log(err.code);
@@ -50,7 +51,7 @@ function Login() {
 
 						<LoginCategoryContainer>
 							<CategoryLists>
-								<NavLink to='#'>
+								<NavLink to='/passwordSearch'>
 									<CategoryList>비밀번호 찾기</CategoryList>
 								</NavLink>
 								<CategoryListAfter>|</CategoryListAfter>
