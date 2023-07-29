@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import axios from 'axios';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
@@ -8,6 +8,8 @@ import moment from 'moment';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPhone } from '@fortawesome/free-solid-svg-icons';
 import { faClock } from '@fortawesome/free-regular-svg-icons';
+import { useSelector } from 'react-redux';
+import firebase from '../../firebase';
 
 function StoreName({ City, setCity, Index, setIndex }) {
 	const [Weather, setWeather] = useState('');
@@ -102,6 +104,8 @@ function StoreName({ City, setCity, Index, setIndex }) {
 		'30-07-2023',
 	];
 
+	const displayName = useSelector((state) => state.userReducer.displayName);
+
 	return (
 		<>
 			<div className='topBgWrap'>
@@ -112,6 +116,16 @@ function StoreName({ City, setCity, Index, setIndex }) {
 				{/* 상단 안내 소개 배너*/}
 				<div className='upperBanner' ref={banner}>
 					<p>점포 안내</p>
+					<span>
+						{displayName ? (
+							`${displayName}` + '님,  안녕하세요.'
+						) : (
+							<NavLink to='/login'>
+								<button>로그인</button>
+							</NavLink>
+						)}
+					</span>
+					<span>{displayName ? <button onClick={() => firebase.auth().signOut()}>로그아웃</button> : ''}</span>
 				</div>
 
 				{/* 상단 매장지점 정보란 / 스케쥴 / 달력 표시 */}

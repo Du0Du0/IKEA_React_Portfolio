@@ -25,6 +25,7 @@
 		margin-top: -15vh;
 		transform: translateY(200px);
 		transition: 1s 0.5s;
+		display: flex;
 
 		&.on {
 			transform: translateY(0px);
@@ -34,7 +35,32 @@
 			font: 18px/60px $ikeaFontKo;
 			color: $fontColorW;
 			padding-left: 32px;
-			opacity: 1;
+
+			&::after {
+				content: '|';
+				font: 18px/1 $ikeaFontKo;
+				color: $fontColorW;
+				margin-left: 10px;
+				margin-right: 10px;
+			}
+		}
+
+		span {
+			font: 18px/60px $ikeaFontKo;
+			color: $fontColorW;
+
+			button {
+				margin-left: 10px;
+				width: 70px;
+				height: 30px;
+				background: $ikeaBl;
+				border: 1px solid $fontColorGr;
+				font: 14px/1 $ikeaFontKo;
+				color: $fontColorW;
+				padding: 2px;
+				border-radius: 5px;
+				cursor: pointer;
+			}
 		}
 	}
 

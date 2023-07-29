@@ -24,6 +24,7 @@ function Menu(props, ref) {
 	useEffect(() => {
 		setIsOpen(false);
 	}, []);
+
 	const active = { color: '#17809b' };
 
 	// useSelector를 사용하여 Redux 상태에서 displayName 가져오기
