@@ -157,29 +157,76 @@
 							font: 24px/1 $ikeaFontKo;
 							text-align: left;
 							margin-bottom: 10px;
+							animation: appear 0.5s linear;
+							animation-fill-mode: backwards;
+							animation-delay: 0.5s;
+							opacity: 1;
+							transition: 0.5s;
+
+							@keyframes appear {
+								from {
+									opacity: 0;
+									display: none;
+								}
+								to {
+									opacity: 1;
+									display: block;
+								}
+							}
 						}
 
 						h2 {
 							color: $fontColorW;
-							width: 550px;
 							font: 24px/1.2 $ikeaFontKo;
 							text-align: left;
 							z-index: 999;
 							text-align: justify;
 							word-break: break-all;
+							animation: appear 0.5s linear;
+							animation-fill-mode: backwards;
+							animation-delay: 0.5s;
+							opacity: 1;
+							transition: 0.5s;
+
+							@keyframes appear {
+								from {
+									opacity: 0;
+									display: none;
+								}
+								to {
+									opacity: 1;
+									display: block;
+								}
+							}
 						}
 
 						p {
 							color: $grey;
-							width: 550px;
 							text-align: justify;
 							word-break: break-all;
 							font: 18px/1.5 $ikeaFontKo;
 							text-align: left;
 							margin-top: 2vw;
 							margin-bottom: 96px;
+							animation: appear 0.5s linear;
+							animation-fill-mode: backwards;
+							animation-delay: 1s;
+							opacity: 1;
+							transition: 0.5s;
+
+							@keyframes appear {
+								from {
+									opacity: 0;
+									display: none;
+								}
+								to {
+									opacity: 1;
+									display: block;
+								}
+							}
 						}
 					}
+
 					.discoverBtn {
 						content: 'Discover Now';
 						position: absolute;
@@ -194,6 +241,8 @@
 						color: $grey;
 						cursor: pointer;
 						align-items: flex-end;
+						transition: 0.5s;
+
 						&:hover {
 							background: $ikeaYellow;
 							color: $ikeaBl;

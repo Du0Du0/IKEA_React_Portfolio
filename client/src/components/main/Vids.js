@@ -66,7 +66,7 @@ function Vids() {
 									<span className='vidsOnSpan' style={{ display: SelectedIdx === idx ? 'block' : 'none' }}>
 										<h4>{(mainVid.snippet.position + 1).toString().padStart(2, 0)}.</h4>
 										<h2>{mainVid.snippet.title}</h2>
-										<p>{(mainVid.snippet.description.length > 50 ? mainVid.snippet.description.substr(0, 250) : mainVid.snippet.description) + '...'}</p>
+										<p>{(mainVid.snippet.description.length > 50 ? mainVid.snippet.description.substr(0, 150) : mainVid.snippet.description) + '...'}</p>
 									</span>
 									<button
 										className='discoverBtn'

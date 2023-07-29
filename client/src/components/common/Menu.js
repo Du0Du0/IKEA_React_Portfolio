@@ -37,7 +37,7 @@ function Menu(props, ref) {
 									<br />
 									<NavLink to='/login' activeStyle={active}>
 										<FontAwesomeIcon icon={faUser} />
-										&nbsp;&nbsp;<span>Login</span>
+										&nbsp;&nbsp;<span>로그인</span>
 									</NavLink>
 								</div>
 							</div>

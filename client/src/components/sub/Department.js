@@ -98,7 +98,7 @@ function Department() {
 				});
 
 				alert('회원가입이 성공적으로 이루어졌습니다.');
-				history.push('/');
+				history.push('/login');
 				resetForm();
 			} catch (error) {
 				console.error('회원가입 오류:', error.message);

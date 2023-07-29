@@ -34,6 +34,11 @@
 		height: 100%;
 		background: #4881c2;
 
+		img {
+			z-index: 1;
+			position: absolute;
+		}
+
 		.rightTxt {
 			height: 100%;
 			float: right;
@@ -50,6 +55,7 @@
 			writing-mode: vertical-rl;
 			white-space: pre-wrap;
 			word-spacing: 5px;
+			z-index: 55;
 		}
 	}
 
@@ -83,7 +89,7 @@
 				background-size: cover;
 				text-align: left;
 				position: relative;
-				padding: 120px 100px;
+				padding: 100px 100px;
 				text-align: justify;
 				word-break: break-all;
 				cursor: pointer;

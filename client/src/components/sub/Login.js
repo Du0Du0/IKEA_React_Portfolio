@@ -1,14 +1,12 @@
 import LayoutNone from '../common/LayoutNone';
 import styled from 'styled-components';
-import { Autoplay } from 'swiper';
-import { firebaseInstance, authService } from '../../firebase';
-import { auth } from '../../firebase';
-import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
-import { useState } from 'react';
+import { Link, NavLink, useHistory } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import firebase from '../../firebase';
 
 function Login() {
 	const path = process.env.PUBLIC_URL;
-	const [UserData, setUserData] = useState(null);
+	const history = useHistory();
 
 	const LoginContainer = styled.div`
 		width: 100vw;
@@ -20,8 +18,8 @@ function Login() {
 	`;
 
 	const LoginWrap = styled.div`
-		width: 576px;
-		height: 780px;
+		width: 530px;
+		height: 650px;
 		background: #f4f5f8;
 		border-radius: 10px;
 	`;
@@ -32,6 +30,7 @@ function Login() {
 		display: flex;
 		justify-content: center;
 		padding: 30px;
+		margin-top: 20px;
 		margin-bottom: 40px;
 	`;
 
@@ -50,37 +49,48 @@ function Login() {
 	`;
 
 	const UserIdInput = styled.input`
-		width: 500px;
+		width: 460px;
 		height: 49px;
 		padding: 11px 12px;
 		border-radius: 5px;
 		margin-bottom: 15px;
 		border: 1px solid #cfcfcf;
+		outline: none;
 
 		&::placeholder {
 			font: 16px/1 'Pretendard';
 			color: #090909;
+		}
+
+		&:focus {
+			outline: 1px solid #12a8ce;
 		}
 	`;
 
 	const PasswordInput = styled.input`
-		width: 500px;
+		width: 460px;
 		height: 49px;
 		padding: 11px 12px;
 		border-radius: 5px;
 		border: 1px solid #cfcfcf;
+		outline: none;
+		margin-bottom: 20px;
 
 		&::placeholder {
 			font: 16px/1 'Pretendard';
 			color: #090909;
 		}
+
+		&:focus {
+			outline: 1px solid #12a8ce;
+		}
 	`;
 
 	const HorizenLine = styled.div`
-		width: 500px;
+		width: 460px;
 		height: 1px;
 		background: #cfcfcf;
-		margin: 30px auto 30px;
+		margin: 20px auto 30px;
 	`;
 
 	const LoginBtnWrap = styled.div`
@@ -91,20 +101,32 @@ function Login() {
 	`;
 
 	const LoginBtn = styled.button`
-		width: 500px;
+		width: 460px;
 		height: 70px;
 		border-radius: 10px;
 		background: linear-gradient(to left, #e34891, #1877f2);
-		font: bold 20px/1 'Pretendard';
+		font: 20px/1 'Pretendard';
 		color: #fff;
 		border: none;
 		cursor: pointer;
+
+		&:hover {
+			background: linear-gradient(to left, #1877f2, #e34891);
+		}
+	`;
+
+	const ErrCode = styled.p`
+		font: 14px/1 'Pretendard';
+		color: #d80000;
+		justify-content: left;
+		align-items: left;
+		margin-left: 35px;
 	`;
 
 	const LoginCategoryContainer = styled.div`
 		width: 100%;
 		height: auto;
-		padding: 20px 5vw 50px;
+		padding: 20px 5vw 60px;
 		display: flex;
 		justify-content: center;
 	`;
@@ -119,14 +141,21 @@ function Login() {
 		color: #555555;
 		cursor: pointer;
 
-		&:nth-of-type(1) {
-			&::after {
-				content: '|';
-				margin-right: 10px;
-				margin-left: 10px;
-				color: #ddd;
-			}
+		&:hover {
+			color: #090909;
+			text-decoration-line: underline;
+			text-decoration-color: #090909;
+			text-decoration-thickness: 1px;
+			text-underline-offset: 3px;
+			text-underline-position: under;
 		}
+	`;
+
+	const CategoryListAfter = styled.span`
+		font: 16px/1 'Pretendard';
+		color: #ddd;
+		margin-right: 5px;
+		margin-left: 5px;
 	`;
 
 	const SnsLoginContainer = styled.div`
@@ -144,10 +173,10 @@ function Login() {
 		margin-bottom: 40px;
 	`;
 
-	const GoolgLoginBtn = styled.button`
-		width: 382px;
-		height: 92px;
-		background: none;
+	const SocialLoginBtn = styled.button`
+		width: 68px;
+		height: 68px;
+		border-radius: 50%;
 		border: none;
 
 		img {
@@ -156,17 +185,49 @@ function Login() {
 		}
 	`;
 
-	const goToGoogleLogin = () => {
-		const provider = new GoogleAuthProvider(); // provider를 구글로 설정
-		signInWithPopup(auth, provider) // popup을 이용한 signup
-			.then((data) => {
-				setUserData(data.user); // user data 설정
-				console.log(data); // console로 들어온 데이터 표시
-			})
-			.catch((err) => {
-				console.log(err);
-			});
+	const SocialLoginBtnWrap = styled.div`
+		display: flex;
+		gap: 50px;
+	`;
+
+	const NaverWrap = styled.div`
+		display: flex;
+		gap: 20px;
+		align-items: center;
+	`;
+
+	const SocialLoginDesc = styled.p`
+		font: bold 18px/1.2 'Pretendard';
+		color: #090909;
+	`;
+
+	const KakaoWrap = styled.div`
+		display: flex;
+		gap: 20px;
+		align-items: center;
+	`;
+
+	const [Email, setEmail] = useState('');
+	const [Pwd, setPwd] = useState('');
+	const [Err, setErr] = useState('');
+
+	const handleLogin = async () => {
+		if (!(Email && Pwd)) return alert('모든 값을 입력하세요.');
+
+		try {
+			await firebase.auth().signInWithEmailAndPassword(Email, Pwd);
+			history.push('/');
+		} catch (err) {
+			console.log(err.code);
+			if (err.code === 'auth/user-not-found') setErr('존재하지 않는 이메일입니다.');
+			else if (err.code === 'auth/wrong-password') setErr('비밀번호 정보가 일치하지 않습니다.');
+			else setErr('로그인에 실패했습니다.');
+		}
 	};
+
+	useEffect(() => {
+		console.log(Err);
+	}, [Err]);
 
 	return (
 		<>
@@ -177,33 +238,49 @@ function Login() {
 							<Title>ID로그인</Title>
 						</TitleWrap>
 						<FormWrap>
-							<UserIdInput placeholder='아이디' />
-							<PasswordInput placeholder='비밀번호' />
+							<UserIdInput type='email' placeholder='이메일' autoFocus={true} value={Email} onChange={(e) => setEmail(e.target.value)} />
+							<PasswordInput type='password' placeholder='비밀번호' value={Pwd} onChange={(e) => setPwd(e.target.value)} />
 						</FormWrap>
+						{Err !== '' && <ErrCode>{Err}</ErrCode>}
 						<HorizenLine />
 						<LoginBtnWrap>
-							<LoginBtn>로그인</LoginBtn>
+							<LoginBtn onClick={handleLogin}>로그인</LoginBtn>
 						</LoginBtnWrap>
 
 						<LoginCategoryContainer>
 							<CategoryLists>
-								<CategoryList>비밀번호 찾기</CategoryList>
-								<CategoryList>회원가입</CategoryList>
+								<NavLink to='#'>
+									<CategoryList>비밀번호 찾기</CategoryList>
+								</NavLink>
+								<CategoryListAfter>|</CategoryListAfter>
+								<NavLink to='/department'>
+									<CategoryList>회원가입</CategoryList>
+								</NavLink>
 							</CategoryLists>
 						</LoginCategoryContainer>
 
 						<SnsLoginContainer>
 							<SnsLoginTitle>SNS 간편로그인</SnsLoginTitle>
-							<ul>
-								<li>네이버 로그인</li>
-								<li>카카오 로그인</li>
-								<li>
-									<GoolgLoginBtn>
-										<img src={path + '/img/googleLoginBtn.png'} alt='google login' onClick={goToGoogleLogin} />
-									</GoolgLoginBtn>
-								</li>
-								<li>페이스북</li>
-							</ul>
+							<SocialLoginBtnWrap>
+								<NaverWrap>
+									<SocialLoginBtn>
+										<img src={`${path + '/img/naverLogin.png'}`} alt='naver login button' />
+									</SocialLoginBtn>
+									<SocialLoginDesc>
+										네이버 <br />
+										로그인
+									</SocialLoginDesc>
+								</NaverWrap>
+								<KakaoWrap>
+									<SocialLoginBtn>
+										<img src={`${path + '/img/kakaoLogin.png'}`} alt='kakao login button' />
+									</SocialLoginBtn>
+									<SocialLoginDesc>
+										카카오
+										<br /> 로그인
+									</SocialLoginDesc>
+								</KakaoWrap>
+							</SocialLoginBtnWrap>
 						</SnsLoginContainer>
 					</LoginWrap>
 				</LoginContainer>
