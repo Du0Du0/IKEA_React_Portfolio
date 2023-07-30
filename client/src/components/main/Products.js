@@ -2,6 +2,8 @@ import { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 function Products() {
 	const backgroundStyle = {
@@ -49,10 +51,61 @@ function Products() {
 	const openNewTab = (url) => {
 		window.open(url, '_blank', 'noopener, noreferrer');
 	};
+
+	gsap.registerPlugin(ScrollTrigger);
+
+	const ref = useRef(null);
+
+	useEffect(() => {
+		const element = ref.current;
+		gsap.fromTo(
+			element.querySelector('.productsTit'),
+			{
+				opacity: 0.1,
+				x: -450,
+			},
+			{
+				opacity: 1,
+				x: 0,
+
+				ease: 'power2.out',
+				scrollTrigger: {
+					trigger: element.querySelector('.first'),
+					start: '260',
+					end: '400',
+					scrub: true,
+				},
+			}
+		);
+	}, []);
+
+	useEffect(() => {
+		const element = ref.current;
+		gsap.fromTo(
+			element.querySelector('.productsSub'),
+			{
+				opacity: 0,
+				y: 200,
+			},
+			{
+				opacity: 1,
+				y: 0,
+				ease: 'power2.out',
+				scrollTrigger: {
+					trigger: element.querySelector('.first'),
+					start: '380',
+					end: '500',
+					scrub: true,
+				},
+			}
+		);
+	}, []);
+
 	return (
-		<section id='products' className='myScroll' style={backgroundStyle}>
+		<section id='products' className='myScroll' style={backgroundStyle} ref={ref}>
 			<div className='productsContainer'>
 				{/* products title (right side) */}
+
 				<div className='productsTit'>
 					<h2>제품</h2>
 				</div>

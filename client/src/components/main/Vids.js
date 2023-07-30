@@ -1,15 +1,16 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { useSelector } from 'react-redux';
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom/cjs/react-router-dom';
 import Modal from '../common/Modal';
 import SnsShareModal from './SnsShareModal';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 function Vids() {
 	const MainVids = useSelector((store) => store.mainYoutubeReducer.mainYoutube);
 
-	console.log(MainVids);
 	const [Index, setIndex] = useState(0);
 	const [SelectedIdx, setSelectedIdx] = useState(0);
 	const videoRefs = useRef(null);
@@ -17,14 +18,91 @@ function Vids() {
 	const snsShareModal = useRef(null);
 	const path = process.env.PUBLIC_URL;
 
+	gsap.registerPlugin(ScrollTrigger);
+
+	const ref = useRef(null);
+
+	useEffect(() => {
+		const element = ref.current;
+		gsap.fromTo(
+			element.querySelector('.title'),
+			{
+				opacity: 0.1,
+				x: -450,
+			},
+			{
+				opacity: 1,
+				x: 0,
+				ease: 'power2.out',
+				scrollTrigger: {
+					trigger: element.querySelector('.first'),
+					start: '660',
+					end: '1200',
+					scrub: true,
+				},
+			}
+		);
+	}, []);
+
+	useEffect(() => {
+		const element = ref.current;
+		gsap.fromTo(
+			element.querySelector('.vidsSub'),
+			{
+				opacity: 0,
+			},
+			{
+				opacity: 1,
+				ease: 'power2.out',
+				scrollTrigger: {
+					trigger: element.querySelector('.first'),
+					start: '900',
+					end: 'center center',
+					scrub: true,
+				},
+			}
+		);
+	}, []);
+
+	useEffect(() => {
+		const element = ref.current;
+		gsap.fromTo(
+			element.querySelector('.vidsVideoWrap'),
+			{
+				opacity: 0,
+				y: 200,
+			},
+			{
+				opacity: 1,
+				y: 0,
+				duration: 0.5,
+				ease: 'power2.out',
+
+				scrollTrigger: {
+					trigger: element.querySelector('.first'),
+					start: '1100',
+					end: '1600',
+					scrub: true,
+				},
+			}
+		);
+	}, []);
+
+	const backgroundStyle = {
+		backgroundImage: `url(${process.env.PUBLIC_URL + '/img/smartHomeBg5.png'})`,
+		backgroundRepeat: 'no-repeat',
+		backgroundPosition: 'center ',
+		backgroundSize: 'cover',
+	};
+
 	return (
 		<>
-			<section id='vids' className='myScroll'>
+			<section id='vids' className='myScroll' ref={ref} style={backgroundStyle}>
 				<div className='vidsContainer'>
 					<div className='vidsTextWrap'>
 						{/* video page title  */}
 						<div className='vidsTit'>
-							<h2>
+							<h2 className='title'>
 								비디오
 								<button>
 									<img
@@ -37,6 +115,7 @@ function Vids() {
 								</button>
 							</h2>
 						</div>
+
 						{/* video page description  */}
 						<div className='vidsSub'>
 							Lorem ipsum dolor sit amet consectetur <strong>adipisicing</strong> elit. Atque,

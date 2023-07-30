@@ -1,8 +1,11 @@
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useSelector, dispatch, useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import React from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 function Promotion() {
 	const history = useHistory();
@@ -23,9 +26,32 @@ function Promotion() {
 			console.log('goToDetailErr', err);
 		}
 	};
+	gsap.registerPlugin(ScrollTrigger);
+	const ref = useRef(null);
+
+	useEffect(() => {
+		const element = ref.current;
+		gsap.fromTo(
+			element.querySelector('.top'),
+			{
+				opacity: 0,
+				y: 200,
+			},
+			{
+				opacity: 1,
+				y: 0,
+				ease: 'power2.out',
+				scrollTrigger: {
+					start: '1900',
+					end: '2400',
+					scrub: true,
+				},
+			}
+		);
+	}, []);
 
 	return (
-		<section id='promotion' className='myScroll'>
+		<section id='promotion' className='myScroll' ref={ref}>
 			<div className='promotionContainer'>
 				<img className='circleText' src={path + '/img/textCircle2.png'} alt='' />
 
@@ -36,7 +62,7 @@ function Promotion() {
 						<iframe
 							src='https://www.youtube-nocookie.com/embed/_5SyZ0TXPH0?color=white&rel=0&modestbranding=1'
 							title='YouTube video player'
-							frameborder='0'
+							frameBorder='0'
 							showInfo='0'
 							allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
 							allowfullscreen

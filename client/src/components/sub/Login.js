@@ -1,19 +1,21 @@
 import LayoutNone from '../common/LayoutNone';
 import styled from 'styled-components';
-import { Link, NavLink, useHistory } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import firebase from '../../firebase';
+import { getAuth } from 'firebase/auth';
 
 function Login() {
 	const path = process.env.PUBLIC_URL;
 	const history = useHistory();
+	const auth = getAuth();
 
 	const [Email, setEmail] = useState('');
 	const [Pwd, setPwd] = useState('');
 	const [Err, setErr] = useState('');
 
 	const handleLogin = async () => {
-		if (!(Email && Pwd)) return alert('모든 값을 입력하세요.');
+		if (!(Email && Pwd)) return setErr('이메일과 비밀번호를 입력해주세요.');
 
 		try {
 			await firebase.auth().signInWithEmailAndPassword(Email, Pwd);
