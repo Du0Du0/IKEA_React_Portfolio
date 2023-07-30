@@ -30,3 +30,9 @@ app.get('*', (req, res) => {
 	//어떤 URL에서 접속하더라도 화면이 뜨도록 설정
 	res.sendFile(path.join(__dirname, '../client/build/index.html'));
 });
+
+//리액트로부터 전달된 요청 라우터
+app.post('/api/send', (req, res) => {
+	console.log(req.body);
+	res.json({ success: true, result: req.body.name + '2' });
+});
