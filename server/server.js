@@ -13,7 +13,7 @@ app.use(express.static(path.join(__dirname, './client/build')));
 
 app.listen(port, () => {
 	mongoose
-		.connect('mongodb+srv://du0du0:!abcd1234@cluster0.5goswz5.mongodb.net/?retryWrites=true&w=majority')
+		.connect('mongodb+srv://du0du0:!abcd1234@cluster0.5goswz5.mongodb.net/?retryWrites=true&w=majority', { useUnifiedTopology: true })
 
 		//접속 성공시
 		.then(() => console.log(`Server app listening on port ${port} with MongoDB`))
@@ -29,10 +29,4 @@ app.get('/', (req, res) => {
 app.get('*', (req, res) => {
 	//어떤 URL에서 접속하더라도 화면이 뜨도록 설정
 	res.sendFile(path.join(__dirname, '../client/build/index.html'));
-});
-
-//리액트로부터 전달된 요청 라우터
-app.post('/api/send', (req, res) => {
-	console.log(req.body);
-	res.json({ success: true, result: req.body.name + '2' });
 });
