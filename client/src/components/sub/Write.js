@@ -2,6 +2,7 @@ import LayoutNone from '../common/LayoutNone';
 import { useHistory } from 'react-router-dom';
 import { useEffect, useState, useRef } from 'react';
 import { Helmet } from 'react-helmet-async';
+import axios from 'axios';
 
 function Write() {
 	const history = useHistory();
@@ -18,6 +19,9 @@ function Write() {
 	const keyword = useRef(null);
 	const content = useRef(null);
 
+	const [Tit, setTit] = useState('');
+	const [Con, setCon] = useState('');
+
 	//작성글 초기화
 	const resetForm = () => {
 		userId.current.value = '';
@@ -26,6 +30,16 @@ function Write() {
 		keyword.current.value = '';
 		content.current.value = '';
 	};
+
+	const handleCreate = () => {
+		const item = { title: Tit, content: Con };
+		axios
+			.post('/api/create', item)
+			.then((res) => console.log(res))
+			.catch((err) => console.log(err));
+	};
+
+	useEffect(() => {}, []);
 
 	//게시물 생성
 	const creatPost = async () => {
@@ -99,7 +113,7 @@ function Write() {
 								<label htmlFor='title'>제목</label>
 							</th>
 							<td>
-								<input type='text' placeholder='제목을 입력하세요.' ref={title} />
+								<input type='text' placeholder='제목을 입력하세요.' ref={title} value={Tit} onChange={(e) => setTit(e.target.value)} />
 							</td>
 						</tr>
 
@@ -119,7 +133,7 @@ function Write() {
 								<label htmlFor='content'>내용</label>
 							</th>
 							<td>
-								<textarea placeholder='내용을 작성해주세요.' ref={content} />
+								<textarea placeholder='내용을 작성해주세요.' ref={content} value={Con} onChange={(e) => setCon(e.target.value)} />
 							</td>
 						</tr>
 					</tbody>
@@ -130,7 +144,7 @@ function Write() {
 					<button type='submit' onClick={() => history.goBack()}>
 						취소
 					</button>
-					<button type='submit' onClick={creatPost}>
+					<button type='submit' onClick={handleCreate}>
 						등록
 					</button>
 				</div>
