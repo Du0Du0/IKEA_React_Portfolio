@@ -34,6 +34,7 @@ import PromotionDetail from './components/sub/PromotionDetail';
 import Login from './components/sub/Login';
 import GlobalStyle from './GlobalStyle';
 import FindPassword from './components/sub/FindPassword';
+import Mongo from './components/sub/Mongo';
 
 function App() {
 	const dispatch = useDispatch();
@@ -143,6 +144,17 @@ function App() {
 					render={() => (
 						<>
 							<Community />
+							<FooterNone type={'sub'} imgBg={'footerW'} />
+						</>
+					)}
+				></Route>
+
+				<Route
+					exact
+					path='/mongos'
+					render={() => (
+						<>
+							<Mongo />
 							<FooterNone type={'sub'} imgBg={'footerW'} />
 						</>
 					)}
