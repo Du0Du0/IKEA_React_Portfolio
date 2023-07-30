@@ -56,15 +56,70 @@ function Promotion() {
 			element.querySelector('.pageTit'),
 			{
 				opacity: 0,
-				y: 200,
 			},
 			{
 				opacity: 1,
-				y: 0,
 				ease: 'power2.out',
 				scrollTrigger: {
-					start: '1900',
+					start: '2200',
 					end: '2400',
+					scrub: true,
+				},
+			}
+		);
+	}, []);
+
+	useEffect(() => {
+		const element = ref.current;
+		gsap.fromTo(
+			element.querySelector('.iframeDesc'),
+			{
+				opacity: 0,
+			},
+			{
+				opacity: 1,
+				ease: 'power2.out',
+				scrollTrigger: {
+					start: '2200',
+					end: '2400',
+					scrub: true,
+				},
+			}
+		);
+	}, []);
+
+	useEffect(() => {
+		const element = ref.current;
+		gsap.fromTo(
+			element.querySelector('.downRight'),
+			{
+				opacity: 0,
+			},
+			{
+				opacity: 1,
+				ease: 'power2.out',
+				scrollTrigger: {
+					start: '2200',
+					end: '2400',
+					scrub: true,
+				},
+			}
+		);
+	}, []);
+
+	useEffect(() => {
+		const element = ref.current;
+		gsap.fromTo(
+			element.querySelector('.iframeTit'),
+			{
+				opacity: 0,
+			},
+			{
+				opacity: 1,
+				ease: 'power2.out',
+				scrollTrigger: {
+					start: '2300',
+					end: '2500',
 					scrub: true,
 				},
 			}
@@ -86,6 +141,25 @@ function Promotion() {
 				scrollTrigger: {
 					start: '1900',
 					end: '2400',
+					scrub: true,
+				},
+			}
+		);
+	}, []);
+
+	useEffect(() => {
+		const element = ref.current;
+		gsap.fromTo(
+			element.querySelector('.snsGoBtn'),
+			{
+				opacity: 0,
+			},
+			{
+				opacity: 1,
+				ease: 'power2.out',
+				scrollTrigger: {
+					start: '2300',
+					end: '2500',
 					scrub: true,
 				},
 			}
@@ -115,8 +189,8 @@ function Promotion() {
 						{/* imbed video description  */}
 						<div className='downLeft'>
 							<a href='#'>
-								<h3>참나무 앞판을 사용한 포근한 주방</h3>
-								<h2>VEDHAMN 베드함 참나무 주방 가이드</h2>
+								<h3 className='iframeDesc'>참나무 앞판을 사용한 포근한 주방</h3>
+								<h2 className='iframeTit'>VEDHAMN 베드함 참나무 주방 가이드</h2>
 							</a>
 						</div>
 						{/* arrow button  */}

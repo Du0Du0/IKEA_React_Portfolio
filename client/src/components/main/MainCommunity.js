@@ -1,8 +1,10 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useHistory, Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight, faBlog } from '@fortawesome/free-solid-svg-icons';
 import { faSquareInstagram, faFacebookF, faYoutube } from '@fortawesome/free-brands-svg-icons';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 function MainCommunity() {
 	const history = useHistory();
@@ -34,12 +36,100 @@ function MainCommunity() {
 		window.open(url, '_blank', 'noopener, noreferrer');
 	};
 
+	gsap.registerPlugin(ScrollTrigger);
+	const ref = useRef(null);
+
+	useEffect(() => {
+		const element = ref.current;
+		gsap.fromTo(
+			element.querySelector('.goBtn'),
+			{
+				opacity: 0,
+				x: -450,
+			},
+			{
+				opacity: 1,
+				x: 0,
+				ease: 'power2.out',
+				scrollTrigger: {
+					start: '3500',
+					end: '3800',
+					scrub: true,
+				},
+			}
+		);
+	}, []);
+
+	useEffect(() => {
+		const element = ref.current;
+		gsap.fromTo(
+			element.querySelector('.pageTit'),
+			{
+				opacity: 0,
+				x: -450,
+			},
+			{
+				opacity: 1,
+				x: 0,
+				ease: 'power2.out',
+				scrollTrigger: {
+					start: '3500',
+					end: '3800',
+					scrub: true,
+				},
+			}
+		);
+	}, []);
+
+	useEffect(() => {
+		const element = ref.current;
+		gsap.fromTo(
+			element.querySelector('.iconWrap'),
+			{
+				opacity: 0,
+				x: -450,
+			},
+			{
+				opacity: 1,
+				x: 0,
+				ease: 'power2.out',
+				duration: 1,
+				scrollTrigger: {
+					start: '3600',
+					end: '3900',
+					scrub: true,
+				},
+			}
+		);
+	}, []);
+
+	useEffect(() => {
+		const element = ref.current;
+		gsap.fromTo(
+			element.querySelector('.articleLists'),
+			{
+				opacity: 0,
+				Y: 200,
+			},
+			{
+				opacity: 1,
+				Y: 0,
+				ease: 'power2.out',
+				scrollTrigger: {
+					start: '3400',
+					end: '3700',
+					scrub: true,
+				},
+			}
+		);
+	}, []);
+
 	return (
-		<section id='mainCommunity' className='myScroll'>
+		<section id='mainCommunity' className='myScroll' ref={ref}>
 			<div className='mainCommContainer'>
 				{/* left part   */}
 				<div className='mainCommTitWrap'>
-					<h4>커뮤니티</h4>
+					<h4 className='pageTit'>커뮤니티</h4>
 					<div className='goBtn'>
 						<Link to='/community/articles'>
 							<p>
@@ -51,7 +141,7 @@ function MainCommunity() {
 						</Link>
 					</div>
 					{/* icons */}
-					<p className='iconWrap'>
+					<div className='iconWrap'>
 						{/* facebook  */}
 						<span>
 							<FontAwesomeIcon
@@ -88,7 +178,7 @@ function MainCommunity() {
 								}}
 							/>
 						</span>
-					</p>
+					</div>
 				</div>
 				{/* right part  */}
 				<div className='articleLists'>

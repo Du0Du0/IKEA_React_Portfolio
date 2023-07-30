@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useSelector, dispatch, useDispatch } from 'react-redux';
 import axios from 'axios';
 import { useHistory, useParams } from 'react-router-dom';
@@ -8,6 +8,8 @@ import 'swiper/swiper-bundle.min.css';
 import 'swiper/swiper.min.css';
 import 'swiper/components/navigation/navigation.min.css';
 import 'swiper/components/pagination/pagination.min.css';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 SwiperCore.use([Navigation, Pagination, Scrollbar]);
 
@@ -69,8 +71,112 @@ function Museum() {
 		console.log(idx);
 	};
 
+	gsap.registerPlugin(ScrollTrigger);
+	const ref = useRef(null);
+
+	useEffect(() => {
+		const element = ref.current;
+		gsap.fromTo(
+			element.querySelector('.swiper-wrapper'),
+			{
+				opacity: 0,
+				y: 200,
+			},
+			{
+				opacity: 1,
+				y: 0,
+				ease: 'power2.out',
+				scrollTrigger: {
+					start: '2700',
+					end: '3000',
+					scrub: true,
+				},
+			}
+		);
+	}, []);
+
+	useEffect(() => {
+		const element = ref.current;
+		gsap.fromTo(
+			element.querySelector('.leftTxt'),
+			{
+				opacity: 0,
+				y: 200,
+			},
+			{
+				opacity: 1,
+				y: 0,
+				ease: 'power2.out',
+				scrollTrigger: {
+					start: '2700',
+					end: '3000',
+					scrub: true,
+				},
+			}
+		);
+	}, []);
+
+	useEffect(() => {
+		const element = ref.current;
+		gsap.fromTo(
+			element.querySelector('.rightTxt'),
+			{
+				opacity: 0,
+				y: 200,
+			},
+			{
+				opacity: 1,
+				y: 0,
+				ease: 'power2.out',
+				scrollTrigger: {
+					start: '2700',
+					end: '3000',
+					scrub: true,
+				},
+			}
+		);
+	}, []);
+
+	useEffect(() => {
+		const element = ref.current;
+		gsap.fromTo(
+			element.querySelector('.swiper-button-prev '),
+			{
+				opacity: 0,
+			},
+			{
+				opacity: 1,
+				ease: 'power2.out',
+				scrollTrigger: {
+					start: '2800',
+					end: '3000',
+					scrub: true,
+				},
+			}
+		);
+	}, []);
+
+	useEffect(() => {
+		const element = ref.current;
+		gsap.fromTo(
+			element.querySelector('.swiper-button-next '),
+			{
+				opacity: 0,
+			},
+			{
+				opacity: 1,
+				ease: 'power2.out',
+				scrollTrigger: {
+					start: '2800',
+					end: '3000',
+					scrub: true,
+				},
+			}
+		);
+	}, []);
+
 	return (
-		<section id='museum' className='myScroll'>
+		<section id='museum' className='myScroll' ref={ref}>
 			{/* left background */}
 			<div className='bgLeft' style={backgroundStyle}>
 				{/* left titleList  */}

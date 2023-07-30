@@ -34,11 +34,10 @@ function Write() {
 	const handleCreate = () => {
 		const item = { title: Tit, content: Con };
 		axios
+			.post('/api/community/create', item)
 			.then((res) => {
 				console.log(res);
 				alert('글 저장에 성공했습니다.');
-				setTit('');
-				setCon('');
 			})
 			.catch((err) => {
 				console.log(err);

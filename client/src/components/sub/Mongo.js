@@ -29,6 +29,7 @@ function Mongo() {
 					return (
 						<article key={post._id}>
 							<h2>{post.title}</h2>
+							<h2>{post.content}</h2>
 						</article>
 					);
 				})}
