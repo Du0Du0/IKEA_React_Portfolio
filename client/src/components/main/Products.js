@@ -67,7 +67,6 @@ function Products() {
 			{
 				opacity: 1,
 				x: 0,
-
 				ease: 'power2.out',
 				scrollTrigger: {
 					trigger: element.querySelector('.first'),
@@ -85,11 +84,9 @@ function Products() {
 			element.querySelector('.productsSub'),
 			{
 				opacity: 0,
-				y: 200,
 			},
 			{
 				opacity: 1,
-				y: 0,
 				ease: 'power2.out',
 				scrollTrigger: {
 					trigger: element.querySelector('.first'),

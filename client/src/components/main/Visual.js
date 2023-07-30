@@ -1,7 +1,22 @@
+import { useRef, useEffect } from 'react';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
 function Visual() {
 	const path = process.env.PUBLIC_URL;
+	const ref = useRef(null);
+	gsap.registerPlugin(ScrollTrigger);
+
+	const visualDesc1 = useRef(null);
+	const visualDesc2 = useRef(null);
+
+	useEffect(() => {
+		visualDesc1.current.classList.add('on');
+		visualDesc2.current.classList.add('on');
+	}, []);
+
 	return (
-		<section id='visual'>
+		<section id='visual' ref={ref}>
 			<img src={path + '/img/visual2.png'} alt='Main Kitchen' />
 			<div className='visualWrap'>
 				<div className='bg'></div>
@@ -14,21 +29,20 @@ function Visual() {
 
 				{/* Main pointBox(text) */}
 				<div className='bg'>
-					Lorem <br />
-					ipsum dolor sit
+					Like <br /> a new life
 				</div>
-				<div className='bg'>Lorem</div>
+				<div className='bg'>Ikea Home</div>
 				<div className='bg'></div>
 				<div className='bg'></div>
 				<div className='bg'>
-					<p>Lorem ipsum dolor sit amet.</p>
-					<h1>Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta, fuga? orem ipsum Lorem ipsum dolor sit amet consectetur</h1>
+					<p ref={visualDesc1}>Good for me, Good for my home</p>
+					<h1 ref={visualDesc2}>IKEA wants more people to experience IKEA home furnishing with products of good quality and practical designs.</h1>
 				</div>
 
 				{/* Main pointBox2 (text)  */}
 				<div className='bg on '>
-					Lorem
-					<br /> ipsum dolor sit
+					Make
+					<br /> Home Happen.
 				</div>
 				<div className='bg'></div>
 				<div className='bg'></div>

@@ -78,6 +78,12 @@
 					color: $fontColorGrT;
 					text-align: justify;
 					word-break: break-all;
+					opacity: 0;
+					transition: 0.5s;
+
+					&.on {
+						opacity: 1;
+					}
 				}
 
 				p {
@@ -86,6 +92,12 @@
 					text-align: justify;
 					word-break: break-all;
 					margin-bottom: 20px;
+					opacity: 0;
+					transition: 0.5s;
+
+					&.on {
+						opacity: 1;
+					}
 				}
 			}
 

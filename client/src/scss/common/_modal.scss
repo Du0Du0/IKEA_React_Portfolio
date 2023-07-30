@@ -6,16 +6,16 @@
 	left: 0;
 	z-index: 5;
 	background: rgba(0, 0, 0, 0.9);
-	padding: 6vw;
+	padding: 5vw 10vw 10vw 10vw;
+	z-index: 5555;
 
 	.close {
-		top: 30px;
 		right: 30px;
 		cursor: pointer;
-		margin-bottom: 15px;
+		margin-bottom: 30px;
 
 		.fa-xmark {
-			font: bold 24px/1 $ikeaFontKo;
+			font: bold 30px/1 $ikeaFontKo;
 			color: $fontColorW;
 		}
 	}

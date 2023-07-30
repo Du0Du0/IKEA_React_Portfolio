@@ -50,6 +50,48 @@ function Promotion() {
 		);
 	}, []);
 
+	useEffect(() => {
+		const element = ref.current;
+		gsap.fromTo(
+			element.querySelector('.pageTit'),
+			{
+				opacity: 0,
+				y: 200,
+			},
+			{
+				opacity: 1,
+				y: 0,
+				ease: 'power2.out',
+				scrollTrigger: {
+					start: '1900',
+					end: '2400',
+					scrub: true,
+				},
+			}
+		);
+	}, []);
+
+	useEffect(() => {
+		const element = ref.current;
+		gsap.fromTo(
+			element.querySelector('.sns'),
+			{
+				opacity: 0,
+				y: 200,
+			},
+			{
+				opacity: 1,
+				y: 0,
+				ease: 'power2.out',
+				scrollTrigger: {
+					start: '1900',
+					end: '2400',
+					scrub: true,
+				},
+			}
+		);
+	}, []);
+
 	return (
 		<section id='promotion' className='myScroll' ref={ref}>
 			<div className='promotionContainer'>
@@ -88,7 +130,7 @@ function Promotion() {
 
 				{/* promotion 중앙 제목 영역  */}
 				<div className='promotionWrap'>
-					<h4>진행중이벤트</h4>
+					<h4 className='pageTit'>진행중이벤트</h4>
 				</div>
 
 				{/* promotion 오른쪽 sns 영역  */}

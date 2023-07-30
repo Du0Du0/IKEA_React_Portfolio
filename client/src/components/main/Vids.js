@@ -172,7 +172,7 @@ function Vids() {
 			</section>
 			<SnsShareModal ref={snsShareModal} />
 			<Modal ref={videoModal}>
-				<iframe title={MainVids[Index]?.id} src={`https://www.youtube.com/embed/${MainVids[Index]?.snippet.resourceId.videoId}`}></iframe>
+				<iframe title={MainVids[Index]?.id} src={`https://www.youtube.com/embed/${MainVids[Index]?.snippet.resourceId.videoId}`} frameBorder='0'></iframe>
 			</Modal>
 		</>
 	);
