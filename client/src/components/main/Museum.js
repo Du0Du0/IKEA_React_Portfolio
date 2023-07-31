@@ -19,7 +19,9 @@ function Museum() {
 		backgroundRepeat: 'no-repeat',
 		backgroundPosition: 'center ',
 		backgroundSize: 'cover',
+		zIndex: 0,
 	};
+
 	const [Museums, setMuseums] = useState([]);
 	const [CurrentIdx, setCurrentIdx] = useState(0);
 	const [Clickable, setClickable] = useState(true);
