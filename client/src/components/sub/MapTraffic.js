@@ -131,7 +131,7 @@ function MapTraffic({ Index }) {
 
 	const title = info[Index].title;
 	const address = info[Index].address;
-	const option = useMemo(() => ({ center: info[Index].latlng, level: 3 }), [info, Index]);
+	const option = { center: info[Index].latlng, level: 3 };
 
 	//지역버스 정보
 	const localBusKo = useMemo(() => info[Index].localBusKo, [info, Index]);
@@ -158,11 +158,12 @@ function MapTraffic({ Index }) {
 	const subwayStationName = useMemo(() => info[Index].subwayStationName, [info, Index]);
 	const subwayStationDec = useMemo(() => info[Index].subwayStationDec, [info, Index]);
 
-	const imgSrc = info[Index].imgSrc;
-	const imgSize = info[Index].imgSize;
-	const imgPos = info[Index].imgPos;
-	const markerImage = useMemo(() => new kakao.maps.MarkerImage(imgSrc, imgSize, imgPos), [imgSrc, imgSize, imgPos, kakao.maps.MarkerImage]);
-	const marker = useMemo(() => new kakao.maps.Marker({ position: option.center, image: markerImage }), [kakao.maps.Marker, option.center, markerImage]);
+	const marker = useMemo(() => {
+		new kakao.maps.Marker({
+			position: option.center,
+			image: new kakao.maps.MarkerImage(info[Index].imgSrc, info[Index].imgSize, info[Index].imgPos),
+		});
+	}, [Index, kakao]);
 
 	useEffect(() => {
 		const mapInstance = new kakao.maps.Map(map.current, option);
@@ -180,11 +181,11 @@ function MapTraffic({ Index }) {
 
 		window.addEventListener('resize', setCenter);
 		return () => window.removeEventListener('resize', setCenter);
-	}, [option, info, Index]);
+	}, [Index, kakao, marker]);
 
 	useEffect(() => {
 		Traffic ? Location?.addOverlayMapTypeId(kakao.maps.MapTypeId.TRAFFIC) : Location?.removeOverlayMapTypeId(kakao.maps.MapTypeId.TRAFFIC);
-	}, [Traffic]);
+	}, [Traffic, Location, kakao]);
 
 	const swtichTabButton = useCallback(() => {
 		if (ActiveBtn === 0) return <ParkingInfo />;
