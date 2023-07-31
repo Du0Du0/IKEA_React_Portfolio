@@ -35,6 +35,8 @@ function ProductsDetail() {
 		setItems(result.data.photos.photo);
 
 		const imgs = frame.current.querySelectorAll('img');
+		if (!imgs) return;
+
 		imgs.forEach((img) => {
 			//이미지요소에 load이벤트가 발생할때 (소스이미지까지 로딩이 완료될떄마다)
 			img.onload = () => {

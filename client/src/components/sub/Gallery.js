@@ -32,6 +32,9 @@ function Gallery() {
 		//외부데이터가 State에 담기고 DOM이 생성되는 순간
 		//모든 img요소를 찾아서 반복처리
 		const imgs = frame.current.querySelectorAll('img');
+		//만약 imgs에 받아지는 값이 없으면 밑에 반복문이 실행안되도록 return으로 강제 종료
+		if (!imgs) return;
+
 		imgs.forEach((img) => {
 			//이미지요소에 load이벤트가 발생할때 (소스이미지까지 로딩이 완료될떄마다)
 			img.onload = () => {
