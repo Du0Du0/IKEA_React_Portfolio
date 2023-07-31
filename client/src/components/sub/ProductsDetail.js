@@ -4,14 +4,17 @@ import Layout from '../common/Layout';
 import axios from 'axios';
 import Masonry from 'react-masonry-component';
 import { Helmet } from 'react-helmet-async';
+import Modal from '../common/Modal';
 
 function ProductsDetail() {
 	const path = process.env.PUBLIC_URL;
 	const [Items, setItems] = useState([]);
 	const [Loader, setLoader] = useState(true);
+	const [Index, setIndex] = useState(0);
 	const enableEvent = useRef(true);
 	const frame = useRef(null);
 	const loader = useRef(null);
+	const openModal = useRef(null);
 
 	const getFlickr = async (opt) => {
 		let counter = 0;
@@ -20,7 +23,7 @@ function ProductsDetail() {
 		const method_interest = 'flickr.interestingness.getList';
 		const method_user = 'flickr.people.getPhotos';
 		const method_search = 'flickr.photos.search';
-		const num = 500;
+		const num = 100;
 
 		let url = '';
 		if (opt.type === 'interest') url = `${baseURL}&api_key=${key}&method=${method_interest}&per_page=${num}`;
@@ -147,7 +150,13 @@ function ProductsDetail() {
 											</span>
 										</div>
 
-										<div className='pic'>
+										<div
+											className='pic'
+											onClick={() => {
+												openModal.current.open();
+												setIndex(idx);
+											}}
+										>
 											<img src={`https://live.staticflickr.com/${item.server}/${item.id}_${item.secret}_m.jpg`} alt={item.title} />
 										</div>
 									</div>
@@ -158,6 +167,10 @@ function ProductsDetail() {
 				</div>
 				{Loader && <img className='loader' src={`${process.env.PUBLIC_URL}/img/loadingBar350.gif`} alt='loader' ref={loader} />}
 			</Layout>
+
+			<Modal ref={openModal}>
+				<img src={`https://live.staticflickr.com/${Items[Index]?.server}/${Items[Index]?.id}_${Items[Index]?.secret}_b.jpg`} alt={Items[Index]?.title} />
+			</Modal>
 		</>
 	);
 }
