@@ -1,4 +1,5 @@
 import { useRef, useState, useEffect } from 'react';
+import Anime from '../../asset/anime';
 
 function Scroll_navi({ type, pageLists }) {
 	const btnRef = useRef(null);
@@ -7,6 +8,7 @@ function Scroll_navi({ type, pageLists }) {
 	const [Num, setNum] = useState(0);
 
 	const getPosition = () => {
+		position.current = [];
 		const sections = btnRef.current.parentElement.querySelectorAll('.myScroll');
 		position.current = Array.from(sections).map((sec) => sec.offsetTop);
 		setNum(position.current.length);
@@ -45,7 +47,17 @@ function Scroll_navi({ type, pageLists }) {
 					if (ActiveIdx === idx) defaultClass = 'on';
 
 					return (
-						<li key={idx} className={defaultClass} onClick={() => setActiveIdx(idx)}>
+						<li
+							key={idx}
+							className={defaultClass}
+							onClick={() => {
+								new Anime(window, {
+									prop: 'scroll',
+									value: position.current[idx],
+									duration: 500,
+								});
+							}}
+						>
 							{pageLists[idx]}
 						</li>
 					);
