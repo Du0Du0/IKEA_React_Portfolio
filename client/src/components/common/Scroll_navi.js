@@ -32,9 +32,15 @@ function Scroll_navi({ type, pageLists }) {
 
 	useEffect(() => {
 		getPosition();
+		window.addEventListener('resize', getPosition);
 		window.addEventListener('scroll', activeIndicator);
+		//리액트는 SPA이기 때문에 페이지가 변경된다고 하더라도 스크롤 위치값이 초기화 되지 않으므로 마운트시마다 스크롤값을 초기화함
+		window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+
 		return () => {
+			window.removeEventListener('resize', getPosition);
 			window.removeEventListener('scroll', activeIndicator);
+			window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
 		};
 	}, []);
 
