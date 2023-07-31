@@ -4,6 +4,7 @@ import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useHistory } from 'react-router-dom';
 
 function Products() {
 	const backgroundStyle = {
@@ -15,12 +16,16 @@ function Products() {
 	};
 	const [Products, setProducts] = useState([]);
 	const [Count, setCount] = useState(0);
+	const [NextPreventClick, setNextPreventClick] = useState(false);
+	const [PrevPreventClick, setPrevPreventClick] = useState(true);
 	const slideItems = useRef(null);
 	const slideWrap = useRef(null);
 	const prevBtn = useRef(null);
 	const nextBtn = useRef(null);
-	const [NextPreventClick, setNextPreventClick] = useState(false);
-	const [PrevPreventClick, setPrevPreventClick] = useState(true);
+	const ref = useRef(null);
+	const history = useHistory();
+
+	gsap.registerPlugin(ScrollTrigger);
 
 	useEffect(() => {
 		axios.get(`${process.env.PUBLIC_URL}/DB/products.json`).then((data) => {
@@ -52,9 +57,37 @@ function Products() {
 		window.open(url, '_blank', 'noopener, noreferrer');
 	};
 
-	gsap.registerPlugin(ScrollTrigger);
+	const [SelectedCategory, setSelectedCategory] = useState('');
+	const [SelectedSearch, setSelectedSearch] = useState('');
+	const [SelectedTit, setSelectedTit] = useState('');
+	const [SelectedMainPic, setSelectedMainPic] = useState('');
+	const [SelectedSubPic, setSelectedSubPic] = useState('');
 
-	const ref = useRef(null);
+	const goToDetail = (idx) => {
+		const SelectedProduct = Products[idx];
+		setSelectedCategory(SelectedProduct.category);
+		setSelectedSearch(SelectedProduct.search);
+		setSelectedTit(SelectedProduct.title);
+		setSelectedMainPic(SelectedProduct.mainPic);
+		setSelectedSubPic(SelectedProduct.subPic);
+		setSelectedSubPic(SelectedProduct.subDesc);
+
+		history.push({
+			pathname: '/products/detail',
+			state: {
+				Topic: SelectedProduct.category,
+				Search: SelectedProduct.search,
+				Title: SelectedProduct.title,
+				Desc: SelectedProduct.desc,
+				MainPic: SelectedProduct.mainPic,
+				SubPic: SelectedProduct.subPic,
+				SubDesc: SelectedProduct.subDesc,
+				idx: idx,
+			},
+		});
+		console.log('Topic', SelectedProduct.category);
+		console.log(idx);
+	};
 
 	useEffect(() => {
 		const element = ref.current;
@@ -69,7 +102,6 @@ function Products() {
 				x: 0,
 				ease: 'power2.out',
 				scrollTrigger: {
-					trigger: element.querySelector('.first'),
 					start: '260',
 					end: '400',
 					scrub: true,
@@ -89,7 +121,6 @@ function Products() {
 				opacity: 1,
 				ease: 'power2.out',
 				scrollTrigger: {
-					trigger: element.querySelector('.first'),
 					start: '380',
 					end: '500',
 					scrub: true,
@@ -104,7 +135,7 @@ function Products() {
 				{/* products title (right side) */}
 
 				<div className='productsTit'>
-					<h2>제품</h2>
+					<h2>카테고리</h2>
 				</div>
 				{/* products left side  */}
 				<div className='productsSub'>
@@ -114,7 +145,7 @@ function Products() {
 							{Products.map((product, i) => {
 								return (
 									<>
-										<div className='slideItem' key={i} ref={slideItems}>
+										<div className='slideItem' key={i} ref={slideItems} onClick={() => goToDetail(i)}>
 											<div className='productsImg'>
 												<img src={`${process.env.PUBLIC_URL}/img/${product.pic}`} alt={product.name} />
 											</div>

@@ -35,6 +35,7 @@ import Login from './components/sub/Login';
 import GlobalStyle from './GlobalStyle';
 import FindPassword from './components/sub/FindPassword';
 import Mongo from './components/sub/Mongo';
+import ProductsDetail from './components/sub/ProductsDetail';
 
 function App() {
 	const dispatch = useDispatch();
@@ -103,6 +104,16 @@ function App() {
 					render={() => (
 						<>
 							<Gallery />
+							<FooterNone type={'sub'} imgBg={'footerW'} />
+						</>
+					)}
+				></Route>
+
+				<Route
+					path='/products/detail'
+					render={() => (
+						<>
+							<ProductsDetail />
 							<FooterNone type={'sub'} imgBg={'footerW'} />
 						</>
 					)}

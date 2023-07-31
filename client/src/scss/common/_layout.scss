@@ -61,6 +61,20 @@
 	}
 }
 
+.content.yellow {
+	background: rgb(252, 252, 243);
+
+	.background {
+		background: rgb(252, 252, 243);
+	}
+
+	.titContainer {
+		h1 {
+			color: $fontColorBl;
+		}
+	}
+}
+
 .content.member {
 	.subVisual {
 		width: 100%;

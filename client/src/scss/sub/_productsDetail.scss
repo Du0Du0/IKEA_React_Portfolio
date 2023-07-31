@@ -1,0 +1,199 @@
+.productsDetail {
+	background: rgb(252, 252, 243);
+
+	.topBanner {
+		width: 100%;
+		height: 500px;
+		padding: 0px 15vw 0px;
+		display: flex;
+		padding-bottom: 50px;
+		gap: 20px;
+
+		.topBannerLeft {
+			width: 70%;
+			height: 100%;
+
+			h2 {
+				font: 40px/1 $ikeaFontKo;
+				margin-left: 2vw;
+				color: $fontColorW;
+				margin-top: 300px;
+
+				span {
+					font: 16px/1 $ikeaFontKo;
+					margin-right: 2vw;
+					color: $fontColorW;
+				}
+			}
+		}
+
+		.topBannerRight {
+			width: 50%;
+			height: 100%;
+			display: flex;
+
+			.topBannerRightWrap {
+				width: 100%;
+				height: 100%;
+				border-top: 1px solid $border;
+				display: flex;
+				flex-direction: column;
+
+				.topDescWrap {
+					display: flex;
+					justify-content: space-between;
+					font: 14px/1 $ikeaFontKo;
+					color: $fontColorBl;
+					padding-top: 35px;
+
+					.categoryWrap {
+						display: flex;
+						gap: 10px;
+						margin-bottom: 13px;
+
+						p {
+							font: 14px/1 $ikeaFontKo;
+							color: $fontColorBl;
+
+							&:nth-of-type(1) {
+								color: $category;
+							}
+						}
+					}
+				}
+
+				h2 {
+					font: bold 20px/1 $ikeaFontKo;
+					color: $fontColorBl;
+				}
+
+				.imgBox1 {
+					width: 100%;
+					height: 350px;
+					background: orange;
+					margin-top: 30px;
+				}
+			}
+		}
+	}
+
+	.horzienLine {
+		height: 1.5px;
+		width: 70%;
+		margin: 0px auto;
+		margin-bottom: 35px;
+		background: $border;
+	}
+
+	.frame {
+		opacity: 0;
+		transform: translateY(200px);
+		transition: 0.5s;
+		padding: 0px 15vw 0px;
+
+		&::after {
+			content: '';
+			display: block;
+			clear: both;
+		}
+
+		article {
+			width: calc(100% / 3);
+			padding: 30px;
+			float: left;
+
+			.inner {
+				width: 100%;
+				height: 25%;
+				border-top: 1px solid $border;
+				padding-top: 50px;
+
+				.topDescWrap {
+					display: flex;
+					justify-content: space-between;
+					font: 14px/1 $ikeaFontKo;
+					color: $fontColorBl;
+
+					.categoryWrap {
+						display: flex;
+						gap: 10px;
+						margin-bottom: 13px;
+
+						p {
+							font: 14px/1 $ikeaFontKo;
+							color: $fontColorBl;
+
+							&:nth-of-type(1) {
+								color: $category;
+							}
+						}
+					}
+				}
+
+				h2 {
+					font: bold 20px/1 $ikeaFontKo;
+					color: $fontColorBl;
+					margin-bottom: 15px;
+					cursor: pointer;
+				}
+
+				.profile {
+					display: flex;
+					align-items: center;
+					gap: 15px;
+
+					img {
+						width: 30px;
+					}
+					span {
+						cursor: pointer;
+						font: 12px/40px $ikeaFontKo;
+						color: $fontColorBl;
+						margin-bottom: 30px;
+						transform: translateY(15px);
+					}
+				}
+
+				.pic {
+					width: 100%;
+
+					img {
+						width: 100%;
+						cursor: pointer;
+					}
+				}
+			}
+		}
+	}
+	.frame.on {
+		opacity: 1;
+		transform: translateY(0px);
+	}
+
+	.loader {
+		position: absolute;
+		top: 35%;
+		left: 50%;
+		transform: translateX(-50%);
+	}
+}
+
+@media screen and (max-width: $tablet) {
+	.productsDetail {
+		.frame {
+			article {
+				width: 50%;
+			}
+		}
+	}
+}
+
+@media screen and (max-width: $mobile) {
+	.productsDetail {
+		.frame {
+			article {
+				width: 100%;
+			}
+		}
+	}
+}

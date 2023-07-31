@@ -1,5 +1,6 @@
 @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
 @import 'https://use.fontawesome.com/releases/v5.8.2/css/all.css';
+
 $ikeaBlue: #0058ab;
 $ikeaYellow: #fec202;
 $ikeaBl: #171717;
@@ -48,6 +49,9 @@ $localBus: #3d8825;
 $trunkBus: #2c5fca;
 $expressBus: #c44b3d;
 $seaterBus: #2c5fca;
+
+//products
+$category: rgb(224, 110, 3);
 
 $swiper-navigation-size: 30px;
 body {
@@ -108,3 +112,4 @@ a:visited {
 @import 'sub/subwayInfo';
 @import 'sub/busInfo';
 @import 'sub/paging';
+@import 'sub/productsDetail';
