@@ -8,6 +8,7 @@ import { useEffect } from 'react';
 import axios from 'axios';
 import { setLoginUser, setLogoutUser } from './redux/action';
 import firebase from './firebase';
+import { useCallback } from 'react';
 
 //common
 import Footer from './components/common/Footer';
@@ -15,6 +16,7 @@ import FooterNone from './components/common/FooterNone';
 import Header from './components/common/Header';
 import TopButton from './components/common/TopButton';
 import Scroll_navi from './components/common/Scroll_navi';
+import GlobalStyle from './GlobalStyle';
 
 //main
 import Main from './components/main/Main';
@@ -32,7 +34,6 @@ import Update from './components/sub/Update';
 import MuseumDetail from './components/sub/MuseumDetail';
 import PromotionDetail from './components/sub/PromotionDetail';
 import Login from './components/sub/Login';
-import GlobalStyle from './GlobalStyle';
 import FindPassword from './components/sub/FindPassword';
 import Mongo from './components/sub/Mongo';
 import ProductsDetail from './components/sub/ProductsDetail';
@@ -42,7 +43,7 @@ function App() {
 	const youtubeIndicatorLists = ['Title', 'About', 'Photo', 'Video', 'List'];
 
 	//서브페이지 유투브 데이터
-	const fetchSubYoutube = async () => {
+	const fetchSubYoutube = useCallback(async () => {
 		const key1 = 'AIzaSyCKs11Yu98hp6fq7N54tY2iWSY9qvTh4cM';
 		const list1 = 'PLWgHnOZUp_4FJWdMzYeEAM4Waf8IhnZCB';
 		const num1 = 8;
@@ -51,14 +52,14 @@ function App() {
 		const result1 = await axios.get(url1);
 		dispatch(setSubYoutube(result1.data.items));
 		console.log('result1.data.items', result1.data.items);
-	};
+	}, [dispatch]);
 
 	useEffect(() => {
 		fetchSubYoutube();
-	}, []);
+	}, [fetchSubYoutube]);
 
 	//메인페이지 유투브 데이터
-	const fetchMainYoutube = async () => {
+	const fetchMainYoutube = useCallback(async () => {
 		const key2 = 'AIzaSyCKs11Yu98hp6fq7N54tY2iWSY9qvTh4cM';
 		const list2 = 'PLWgHnOZUp_4H3oyXBnWAhhQhWulLsuoPO';
 		const num2 = 5;
@@ -67,11 +68,11 @@ function App() {
 		const result2 = await axios.get(url2);
 		dispatch(setMainYoutube(result2.data.items));
 		console.log('result2.data.items', result2.data.items);
-	};
+	}, [dispatch]);
 
 	useEffect(() => {
 		fetchMainYoutube();
-	}, []);
+	}, [fetchMainYoutube]);
 
 	useEffect(() => {
 		firebase.auth().onAuthStateChanged((userInfo) => {
