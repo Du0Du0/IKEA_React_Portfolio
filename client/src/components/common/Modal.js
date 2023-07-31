@@ -1,4 +1,4 @@
-import { useState, forwardRef, useImperativeHandle, useEffect } from 'react';
+import { useState, forwardRef, useImperativeHandle, useEffect, useRef } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 
@@ -9,9 +9,9 @@ const Modal = forwardRef((props, ref) => {
 		return { open: () => setOpen(true) };
 	});
 
-	useEffect(() => {
-		Open ? (document.body.style.overflow = 'hidden') : (document.body.style.overflow = 'auto');
-	}, [Open]);
+	// useEffect(() => {
+	// 	Open ? (document.body.style.overflow = 'hidden') : (document.body.style.overflow = 'auto');
+	// }, [Open]);
 
 	return (
 		<>

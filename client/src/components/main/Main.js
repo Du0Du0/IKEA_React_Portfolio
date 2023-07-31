@@ -16,47 +16,62 @@ import moment from 'moment';
 
 function Main({ menuRef }) {
 	const mainIndicatorLists = ['Menu', 'video', 'Living', 'Event', 'Exhibit', 'Notice'];
-	const [IsOpen, setIsOpen] = useState(true);
+	const [IsOpen, setIsOpen] = useState(false);
 	const container = useRef(null);
 	const [Cookies, setCookies] = useCookies(['ONE_WEEK_COOKIE']);
+	const getCookiesValue = localStorage.getItem('cookiesValue') === true ? true : false;
+	const [CookiesValue, setCookiesValue] = useState(JSON.parse(getCookiesValue));
 	const path = process.env.PUBLIC_URL;
-	const [IsHideChecked, setIsHideChecked] = useState();
+	const [IsHideChecked, setIsHideChecked] = useState(false);
 	const cookiePop = useRef(null);
 
-	const hideModal = () => {
-		const oneWeek = moment();
-		oneWeek.add(7, 'd');
+	console.log('CookiesValue', CookiesValue);
+	const oneWeek = moment();
+	oneWeek.add(7, 'd');
 
+	const hideModal = () => {
 		if (IsHideChecked) {
-			setCookies('ONE_WEEK_COOKIE', 'true', {
-				path: '/',
-				expires: oneWeek.toDate(),
-			});
+			setCookies('ONE_WEEK_COOKIE', 'true', oneWeek.toDate());
+			localStorage.setItem('cookiesValue', JSON.stringify(true));
+		} else {
+			localStorage.setItem('cookiesValue', JSON.stringify(false));
 		}
 
-		localStorage.setItem('IsOpen', 'false');
-		setIsOpen(false);
+		setIsOpen(true);
 	};
 
 	useEffect(() => {
-		localStorage.getItem('IsOpen', true);
-		setIsOpen(true);
+		const getCookies = localStorage.getItem('cookiesValue');
+		const result = JSON.parse(getCookies);
+		setCookiesValue(result);
 	}, []);
+
+	console.log('IsOpen', IsOpen);
+	// 쿠키팝업창 뜰 시 뒷 배경 스크롤 기능 방지(스크롤 보이는 채)
+	const containerBlockScroll = {
+		overflowY: 'hidden',
+	};
+
+	// 쿠키팝업창 닫을 시 뒷 배경 스크롤 가능하도록(스크롤 보이는 채)
+	const cookiePopEnable = {
+		overflowY: 'auto',
+		width: '100vw',
+	};
 
 	return (
 		<>
 			<main>
 				{/* 메인전용 라우터에는 main문자값을 전달 */}
-				{IsOpen && !Cookies['ONE_WEEK_COOKIE'] ? (
+				{!IsOpen && !CookiesValue ? (
 					<aside id='pop'>
 						<div className='content'>
 							{/* cookie pop title top  */}
 							<div className='top'>
 								<p className='wrap'>
-									<input type='checkbox' id='ck' ref={cookiePop} checked={IsHideChecked} onChange={() => setIsHideChecked(!IsHideChecked)} />
+									<input type='checkbox' id='ck' ref={cookiePop} checked={IsHideChecked} onChange={() => setIsHideChecked((prevIsHideChecked) => !prevIsHideChecked)} />
 									<label htmlFor='ck'>7일간 보지 않기</label>
 									<FontAwesomeIcon icon={faXmark} className='close' onClick={hideModal} />
-									팝업닫기
+									<p onClick={hideModal}>팝업닫기</p>
 								</p>
 							</div>
 
@@ -88,7 +103,7 @@ function Main({ menuRef }) {
 					</aside>
 				) : null}
 
-				<aside className='bodyContainer' ref={container}>
+				<aside className='bodyContainer' ref={container} style={IsOpen ? containerBlockScroll : cookiePopEnable}>
 					<Header type={'sub'} menuRef={menuRef} />
 					<Visual />
 					<Products />

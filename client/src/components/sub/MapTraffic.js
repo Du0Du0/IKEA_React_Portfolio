@@ -158,12 +158,14 @@ function MapTraffic({ Index }) {
 	const subwayStationName = useMemo(() => info[Index].subwayStationName, [info, Index]);
 	const subwayStationDec = useMemo(() => info[Index].subwayStationDec, [info, Index]);
 
-	const marker = useMemo(() => {
-		new kakao.maps.Marker({
-			position: option.center,
-			image: new kakao.maps.MarkerImage(info[Index].imgSrc, info[Index].imgSize, info[Index].imgPos),
-		});
-	}, [Index, kakao]);
+	const marker = useMemo(
+		() =>
+			new kakao.maps.Marker({
+				position: option.center,
+				image: new kakao.maps.MarkerImage(info[Index].imgSrc, info[Index].imgSize, info[Index].imgPos),
+			}),
+		[Index, kakao]
+	);
 
 	useEffect(() => {
 		const mapInstance = new kakao.maps.Map(map.current, option);
