@@ -16,7 +16,7 @@ const Modal = forwardRef((props, ref) => {
 	return (
 		<>
 			{Open && (
-				<aside className='modal' ref={ref}>
+				<aside className='modal' ref={ref} initial={{ opacity: 0 }} animate={{ opacity: 1, transition: { duration: 0.5 } }} exit={{ opacity: 0, transition: { duration: 0.5 } }}>
 					<div className='close' onClick={() => setOpen(false)} data-name='close'>
 						<FontAwesomeIcon icon={faXmark} />
 					</div>

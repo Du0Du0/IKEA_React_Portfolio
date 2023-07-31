@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef, useCallback } from 'react';
 import { useLocation } from 'react-router-dom';
 import Layout from '../common/Layout';
 import axios from 'axios';
@@ -16,7 +16,7 @@ function ProductsDetail() {
 	const loader = useRef(null);
 	const openModal = useRef(null);
 
-	const getFlickr = async (opt) => {
+	const getFlickr = useCallback(async (opt) => {
 		let counter = 0;
 		const baseURL = 'https://www.flickr.com/services/rest/?format=json&nojsoncallback=1';
 		const key = '08e2b5a2a14d18ff9a849c7109134194';
@@ -53,7 +53,7 @@ function ProductsDetail() {
 				}
 			};
 		});
-	};
+	}, []);
 
 	const location = useLocation();
 	const Topic = location.state && location.state.Topic;
@@ -64,7 +64,7 @@ function ProductsDetail() {
 	const SubPic = location.state && location.state.SubPic;
 	const SubDesc = location.state && location.state.SubDesc;
 
-	useEffect(() => getFlickr({ type: 'search', tags: `${Search}` }), []);
+	useEffect(() => getFlickr({ type: 'search', tags: `${Search}` }), [getFlickr]);
 
 	const topBannerLeftStyle = {
 		backgroundImage: `url(${path + `/img/${MainPic}`})`,
