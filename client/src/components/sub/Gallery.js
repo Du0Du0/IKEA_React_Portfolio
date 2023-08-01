@@ -17,7 +17,7 @@ function Gallery() {
 	const loader = useRef(null);
 	const openModal = useRef(null);
 	const [ActiveMyGalleryBtn, setActiveMyGalleryBtn] = useState(true);
-
+	const btnSet = useRef(null);
 	const activeGalleryBtnStyle = {
 		border: '1px solid rgb(224, 110, 3)',
 		color: 'rgb(224, 110, 3)',
@@ -69,8 +69,15 @@ function Gallery() {
 		});
 	};
 
-	//아래 호출문으로 풍경이미지 검색되도록 함수 코드 수정
-	//getFlickr({type: 'search', tags: 'landscape'})
+	//기존 갤러리 초기화 함수
+	const resetGallery = (e) => {
+		const btns = btnSet.current.querySelectorAll('button');
+		btns.forEach((el) => el.classList.remove('on'));
+		e.target.classList.add('on');
+		enableEvent.current = false;
+		setLoader(true);
+		frame.current.classList.remove('on');
+	};
 
 	useEffect(() => getFlickr({ type: 'user', user: '168950802@N02' }), []);
 
@@ -88,15 +95,17 @@ function Gallery() {
 						</button>
 					</div>
 
-					<div class='btnSet'>
+					<div class='btnSet' ref={btnSet}>
 						<button
 							className='btnInterest'
-							onClick={() => {
+							onClick={(e) => {
 								setActiveMyGalleryBtn(false);
+								//재이벤트, 모션중 재이벤트 방지
 								if (!enableEvent.current) return;
-								enableEvent.current = false;
-								setLoader(true);
-								frame.current.classList.remove('on');
+								if (e.target.classList.contains('on')) return;
+
+								//기존 갤러리 초기화 함수 호출
+								resetGallery(e);
 								getFlickr({ type: 'interest' });
 							}}
 							style={ActiveMyGalleryBtn === false ? activeGalleryBtnStyle : null}
@@ -110,12 +119,14 @@ function Gallery() {
 						</button>
 						<button
 							className='btnMine'
-							onClick={() => {
+							onClick={(e) => {
 								setActiveMyGalleryBtn(true);
+								//재이벤트, 모션중 재이벤트 방지
 								if (!enableEvent.current) return;
-								enableEvent.current = false;
-								setLoader(true);
-								frame.current.classList.remove('on');
+								if (e.target.classList.contains('on')) return;
+
+								//기존 갤러리 초기화 함수 호출
+								resetGallery(e);
 								getFlickr({ type: 'user', user: '164021883@N04' });
 							}}
 							style={ActiveMyGalleryBtn === true ? activeGalleryBtnStyle : null}
