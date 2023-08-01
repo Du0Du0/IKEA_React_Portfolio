@@ -85,7 +85,7 @@ function Detail() {
 			// 로컬 스토리지에서도 데이터 삭제
 			localStorage.setItem('post', JSON.stringify(copy));
 			console.log('데이터 지움', copy);
-			history.push('/community');
+			history.push('/community/articles');
 		} else {
 			return;
 		}

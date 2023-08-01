@@ -618,7 +618,7 @@
 					}
 
 					p {
-						font: 12.8px/1 $ikeaFontKo;
+						font: 12.8px/1.3 $ikeaFontKo;
 
 						&::before {
 							margin-right: 5px;
@@ -1042,6 +1042,7 @@
 						width: 30%;
 						height: 32.8px;
 						font: 12.6px/1 $ikeaFont;
+						margin-bottom: 15px;
 					}
 
 					.addressBtn {

@@ -46,7 +46,7 @@ function Update() {
 	}, []);
 
 	//게시물 수정
-	const UpdatePost = async () => {
+	const UpdatePost = async (idx) => {
 		const changePosts = {
 			userId: userId.current.value,
 			topic: topic.current.value,
@@ -77,7 +77,7 @@ function Update() {
 		localStorage.setItem('post', JSON.stringify(updatedPosts)); //객체이기 때문에 문자열로 바꾸고 추가
 
 		history.push({
-			pathname: '/detail',
+			pathname: `/community/articles/${idx}`,
 			state: {
 				Posts: updatedPosts,
 			},

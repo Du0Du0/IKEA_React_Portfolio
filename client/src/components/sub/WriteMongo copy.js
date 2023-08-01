@@ -31,6 +31,20 @@ function Write() {
 		content.current.value = '';
 	};
 
+	const handleCreate = () => {
+		const item = { title: Tit, content: Con };
+		axios
+			.post('/api/community/create', item)
+			.then((res) => {
+				console.log(res);
+				alert('글 저장에 성공했습니다.');
+			})
+			.catch((err) => {
+				console.log(err);
+				alert('글 저장에 실패했습니다.');
+			});
+	};
+
 	useEffect(() => {}, []);
 
 	//게시물 생성
@@ -50,7 +64,7 @@ function Write() {
 		localStorage.setItem('post', JSON.stringify(updatedData));
 
 		history.push({
-			pathname: '/community/articles',
+			pathname: '/community',
 			state: {
 				Posts: updatedData,
 			},
@@ -136,7 +150,7 @@ function Write() {
 					<button type='submit' onClick={() => history.goBack()}>
 						취소
 					</button>
-					<button type='submit' onClick={creatPost}>
+					<button type='submit' onClick={handleCreate}>
 						등록
 					</button>
 				</div>

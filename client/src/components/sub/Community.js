@@ -2,30 +2,45 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import { useEffect, useState, useRef } from 'react';
 import LayoutNone from '../common/LayoutNone';
-import { useHistory, useLocation } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import Pagination from 'react-js-pagination';
 import moment from 'moment';
 import { Helmet } from 'react-helmet-async';
-import { Link } from 'react-router-dom';
 
 function Community() {
 	const history = useHistory();
+	const today = moment();
+
+	// pagination
 	const [Currentpage, setCurrentpage] = useState(1);
 	const [postPerPage] = useState(8);
 	const indexOfLastPost = Currentpage * postPerPage;
 	const indexOfFirstPost = indexOfLastPost - postPerPage;
+
+	//article date fillter
 	const startDateRef = useRef(null);
 	const endDateRef = useRef(null);
 	const ignoreDateRef = useRef(null);
 	const [IgnoreCheck, setIgnoreCheck] = useState(false);
-	const searchTopic = useRef(null);
-	const searchWhat = useRef(null);
-	const searchInput = useRef(null);
-	const [IsListType, setIsListType] = useState(false);
-	const today = moment();
+	const [ActiveDateBtn, setActiveDateBtn] = useState(null);
+	const activeDateBtnStyle = {
+		background: '#606060',
+		color: '#fff',
+	};
 	const oneWeekAgo = moment().subtract(1, 'weeks');
 	const oneMonthAgo = moment().subtract(1, 'months');
 	const threeMonthsAgo = moment().subtract(3, 'months');
+	const oneWeekBtn = useRef(null);
+	const oneMonthBtn = useRef(null);
+	const threeMonthBtn = useRef(null);
+
+	// article naming fillter
+	const searchTopic = useRef(null);
+	const searchWhat = useRef(null);
+	const searchInput = useRef(null);
+
+	// article lists type
+	const [IsListType, setIsListType] = useState(false);
 
 	const dummy = [
 		{
@@ -270,6 +285,7 @@ function Community() {
 		if (data) return JSON.parse(data);
 		else return dummy;
 	};
+
 	const [Posts, setPosts] = useState(getLocalData());
 	const currentPosts = Posts.slice(indexOfFirstPost, indexOfLastPost);
 
@@ -311,11 +327,6 @@ function Community() {
 		}
 	};
 
-	const changeListType = () => {
-		setIsListType((IsListType) => !IsListType);
-		console.log('IsListType', IsListType);
-	};
-
 	return (
 		<>
 			<Helmet>
@@ -341,26 +352,35 @@ function Community() {
 						<input type='date' className='dateInput' ref={endDateRef} disabled={IgnoreCheck ? true : false} />
 						<div className='dateBtnWrap'>
 							<button
+								ref={oneWeekBtn}
 								onClick={() => {
+									setActiveDateBtn(0);
 									startDateRef.current.value = oneWeekAgo.format('YYYY-MM-DD');
 									endDateRef.current.value = today.format('YYYY-MM-DD');
 								}}
+								style={ActiveDateBtn === 0 ? activeDateBtnStyle : null}
 							>
 								1주일
 							</button>
 							<button
+								ref={oneMonthBtn}
 								onClick={() => {
+									setActiveDateBtn(1);
 									startDateRef.current.value = oneMonthAgo.format('YYYY-MM-DD');
 									endDateRef.current.value = today.format('YYYY-MM-DD');
 								}}
+								style={ActiveDateBtn === 1 ? activeDateBtnStyle : null}
 							>
 								1개월
 							</button>
 							<button
+								ref={threeMonthBtn}
 								onClick={() => {
+									setActiveDateBtn(2);
 									startDateRef.current.value = threeMonthsAgo.format('YYYY-MM-DD');
 									endDateRef.current.value = today.format('YYYY-MM-DD');
 								}}
+								style={ActiveDateBtn === 2 ? activeDateBtnStyle : null}
 							>
 								3개월
 							</button>
@@ -443,14 +463,32 @@ function Community() {
 							<option value='최신순'>최신순</option>
 						</select>{' '}
 						&nbsp;
-						<svg xmlns='http://www.w3.org/2000/svg' width='20' height='18' viewBox='0 0 20 18' onClick={changeListType}>
+						<svg
+							xmlns='http://www.w3.org/2000/svg'
+							width='20'
+							height='18'
+							viewBox='0 0 20 18'
+							onClick={() => {
+								setIsListType(false);
+							}}
+							style={{ fill: IsListType === false ? '#17809b' : '#171717' }}
+						>
 							<path
 								id='align_card'
 								d='M22-11v7a.966.966,0,0,1-.29.71A.966.966,0,0,1,21-3H13v-8ZM11-11v8H3a.966.966,0,0,1-.71-.29A.966.966,0,0,1,2-4v-7Zm0-10v8H2v-7a.966.966,0,0,1,.29-.71A.966.966,0,0,1,3-21Zm10,0a.966.966,0,0,1,.71.29A.966.966,0,0,1,22-20v7H13v-8Z'
 								transform='translate(-2 21)'
 							></path>
 						</svg>
-						<svg xmlns='http://www.w3.org/2000/svg' width='20' height='18' viewBox='0 0 20 18' onClick={changeListType}>
+						<svg
+							xmlns='http://www.w3.org/2000/svg'
+							width='20'
+							height='18'
+							viewBox='0 0 20 18'
+							onClick={() => {
+								setIsListType(true);
+							}}
+							style={{ fill: IsListType === true ? '#17809b' : '#171717' }}
+						>
 							<path
 								id='align_row'
 								d='M22-11v7a.966.966,0,0,1-.29.71A.966.966,0,0,1,21-3H13v-8Zm-9,0v8H3a.966.966,0,0,1-.71-.29A.966.966,0,0,1,2-4v-7Zm0-10v8H2v-7a.966.966,0,0,1,.29-.71A.966.966,0,0,1,3-21Zm8,0a.966.966,0,0,1,.71.29A.966.966,0,0,1,22-20v7H13v-8Z'
@@ -460,7 +498,7 @@ function Community() {
 					</div>
 				</div>
 				<div className='horzienLine' />
-				<div className={!IsListType ? 'listWrap roomy' : 'listWrap'}>
+				<div className={IsListType === false ? 'listWrap roomy' : 'listWrap'}>
 					{Posts &&
 						currentPosts.map((post, idx) => {
 							return (
