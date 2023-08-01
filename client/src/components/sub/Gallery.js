@@ -172,6 +172,7 @@ function Gallery() {
 								//기존 갤러리 초기화 함수 호출
 								resetGallery(e);
 								getFlickr({ type: 'user', user: '168950802@N02' });
+								isUser.current = false;
 							}}
 							style={ActiveMyGalleryBtn === true ? activeGalleryBtnStyle : null}
 						>
@@ -216,6 +217,7 @@ function Gallery() {
 													setLoader(true);
 													frame.current.classList.remove('on');
 													getFlickr({ type: 'user', user: e.target.innerText });
+													setActiveMyGalleryBtn(null);
 												}}
 											>
 												{/* 프로필 유저명 */}
