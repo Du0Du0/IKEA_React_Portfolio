@@ -307,7 +307,7 @@ function Department() {
 											<FontAwesomeIcon icon={faEye} onClick={passwordToggle} style={InputType1 ? { color: '#969696' } : { color: '#1b2539' }} />
 											<br />
 
-											<PasswordStrengthBar className='pwdStrength' password={Val.password} shortScoreWord={false} />
+											<PasswordStrengthBar className='pwdStrength' password={Val.password} shortScoreWord={false} scoreWords={false} />
 											<p className='emailErr' style={{ color: Err.password ? '#d80000' : 'initial' }}>
 												{Err.password ? <span>{Err.password}</span> : '영문(대문자필수),숫자,특수문자(~!@#$%^&*)를 포함한 10~20자 조합으로 입력해 주세요.'}
 											</p>

@@ -1,27 +1,10 @@
-.productsDetail {
-	width: 100%;
-	min-height: calc(100vh - 400px);
-	overflow: hidden;
-	position: relative;
-
-	.titContainer {
-		width: 100%;
-		height: 300px;
-		padding: 150px 15vw 246px;
-
-		h1 {
-			text-align: left;
-			font: bold 70px/1 $ikeaFontKo;
-			color: $fontColorBl;
-			margin-top: 20px;
-			margin-bottom: 96px;
-		}
-	}
+.gallery {
+	background: rgb(252, 252, 243);
 
 	.searchBarWrap {
-		padding: 30px 0px 30px;
+		padding: 0px 0px 30px;
 		margin-bottom: 96px;
-		background: #eff3ff;
+
 		.searchBox {
 			width: 100%;
 			padding: 50px 10px 10px;
@@ -31,42 +14,42 @@
 
 			input {
 				width: 600px;
-				height: 70px;
+				height: 60px;
 				background: transparent;
-				border: 4px solid #1877f2;
+				border: 1px solid $border;
 				padding: 10px 30px;
 				position: relative;
-				background-repeat: no-repeat;
-				background-size: 40px;
-				background-position: 98% 50%;
-				font: bold 18px/70px $ikeaFontKo;
-				color: #1877f2;
+				font: 16px/70px $ikeaFontKo;
+				color: $fontColorBl;
 
 				&:focus {
 					outline: none;
 				}
 
 				&::placeholder {
-					font: bold 18px/70px $ikeaFontKo;
-					color: #1877f2;
+					font: 16px/70px $ikeaFontKo;
+					color: $fontColorBl;
 				}
 			}
 
 			.fa-magnifying-glass {
-				font: bold 18px/70px $ikeaFontKo;
+				font: bold 16px/70px $ikeaFontKo;
 				color: #1877f2;
 			}
 
 			.btnSearch {
 				width: 150px;
-				height: 70px;
-				border: 4px solid #1877f2;
-				background-color: #eff3ff;
+				height: 60px;
+				border: 1px solid rgb(224, 110, 3);
 				cursor: pointer;
+				transition: 0.5s;
+				background: none;
+				font: 16px/50px $ikeaFontKo;
+				color: rgb(224, 110, 3);
 
-				p {
-					font: bold 18px/50px $ikeaFontKo;
-					color: #1877f2;
+				&:hover {
+					background: rgb(224, 110, 3);
+					color: $fontColorW;
 				}
 			}
 		}
@@ -74,317 +57,139 @@
 		.btnSet {
 			width: 760px;
 			display: flex;
-			margin: 0px auto;
+			margin: 10px auto;
 			justify-content: left;
-			gap: 5px;
-			margin-bottom: 50px;
+			gap: 10px;
+			margin-bottom: 0px;
 
 			.btnInterest {
-				width: 150px;
-				height: 30px;
-				background: transparent;
-				font: 18px/30px $ikeaFontKo;
+				width: 170px;
+				height: 50px;
+				background: none;
+				border: 1px solid $border;
+				border-radius: 50px;
+				font: 14px/50px $ikeaFontKo;
 				color: $fontColorBl;
-				border: none;
 				cursor: pointer;
+
+				.interestPlus {
+					font: 14px/50px $ikeaFontKo;
+					color: $fontColorBl;
+					display: inline;
+				}
 			}
+
 			.btnMine {
 				width: 150px;
-				height: 30px;
-				background: transparent;
-				font: 18px/30px $ikeaFontKo;
-				color: #474747;
-				border: none;
+				height: 50px;
+				background: none;
+				border: 1px solid $border;
+				border-radius: 50px;
+				font: 14px/50px $ikeaFontKo;
+				color: $fontColorBl;
 				cursor: pointer;
 			}
 		}
 	}
-	.loading {
-		position: fixed;
-		top: 50%;
-		left: 50%;
-		transform: translate(-50%, -50%);
-		opacity: 1;
-		transition: opacity 1s;
-		z-index: 6;
 
-		&.off {
-			opacity: 0;
-			z-index: 6;
-		}
-	}
-
-	.wrap {
+	.frame {
 		opacity: 0;
-		transform: translateY(100px);
-		transition: 1s;
-		margin-bottom: 150px;
-
-		&.on {
-			opacity: 1;
-			transform: translateY(0px);
-		}
+		transform: translateY(200px);
+		transition: 0.5s;
+		padding: 0px 15vw 0px;
 
 		&::after {
 			content: '';
 			display: block;
 			clear: both;
 		}
-		li {
-			width: calc(100% / 4);
+
+		article {
+			width: calc(100% / 3);
+			padding: 30px;
 			float: left;
-			padding: 10px;
 
-			> div {
+			.inner {
 				width: 100%;
-				background: #fff;
-				padding: 10px;
-				box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.05);
+				height: 25%;
+				border-top: 1px solid $border;
+				padding-top: 50px;
 
-				.thumb {
-					width: 100%;
-					cursor: pointer;
-				}
-
-				p {
-					font: bold 22px/1.2 $ikeaFontKo;
-					color: $fontColorBl;
-					margin-top: 10px;
-					margin-bottom: 20px;
-				}
-				.profile {
-					width: 100%;
+				.topDescWrap {
 					display: flex;
-					flex-direction: column;
-					justify-content: center;
-					align-items: center;
-					margin-top: -2.5vw;
-					margin-bottom: 30px;
+					justify-content: space-between;
+					font: 14px/1 $ikeaFontKo;
+					color: $fontColorBl;
+
+					.categoryWrap {
+						display: flex;
+						gap: 10px;
+						margin-bottom: 13px;
+
+						p {
+							font: 14px/1 $ikeaFontKo;
+							color: $fontColorBl;
+
+							&:nth-of-type(1) {
+								color: $category;
+							}
+						}
+					}
+				}
+
+				h2 {
+					font: bold 20px/1 $ikeaFontKo;
+					color: $fontColorBl;
+					margin-bottom: 15px;
 					cursor: pointer;
+				}
+
+				.profile {
+					display: flex;
+					align-items: center;
+					gap: 15px;
 
 					img {
-						width: 80px;
-						border-radius: 50%;
-						cursor: pointer;
-						z-index: 5;
+						width: 30px;
 					}
 					span {
-						display: inline-block;
-						font: 12px/1 $ikeaFontKo;
-						color: #1198bb;
-						margin-left: 5px;
-						margin-top: 20px;
-						transform: translateY(-10px);
+						cursor: pointer;
+						font: 12px/40px $ikeaFontKo;
+						color: $fontColorBl;
+						margin-bottom: 30px;
+						transform: translateY(15px);
+					}
+				}
+
+				.pic {
+					width: 100%;
+
+					img {
+						width: 100%;
 						cursor: pointer;
 					}
 				}
 			}
 		}
 	}
+	.frame.on {
+		opacity: 1;
+		transform: translateY(0px);
+	}
+
+	.loader {
+		position: absolute;
+		top: 55%;
+		left: 50%;
+		transform: translateX(-50%);
+	}
 }
 
 @media screen and (max-width: $tablet) {
 	.gallery {
-		width: 100%;
-		min-height: calc(100vh - 400px);
-		overflow: hidden;
-		position: relative;
-
-		.subVisual {
-			width: 100%;
-			height: 380px;
-			position: relative;
-			overflow: hidden;
-
-			video {
-				object-fit: contain;
-				object-position: -80vw -40vw;
-			}
-
-			.background {
+		.frame {
+			article {
 				width: 50%;
-				height: 80px;
-				background: white;
-				position: absolute;
-				bottom: 0;
-				left: 0;
-			}
-		}
-
-		.titContainer {
-			width: 100%;
-			height: 300px;
-			padding: 150px 10vw 246px;
-
-			h1 {
-				text-align: left;
-				font: bold 70px/1 $ikeaFontKo;
-				color: $fontColorBl;
-				margin-top: 20px;
-				margin-bottom: 96px;
-			}
-		}
-
-		.searchBarWrap {
-			padding: 20px 0px 20px;
-			margin-bottom: 96px;
-			background: #eff3ff;
-			.searchBox {
-				width: 100%;
-				padding: 50px 10vw 10px;
-				display: flex;
-				justify-content: center;
-				gap: 10px;
-
-				input {
-					width: 560px;
-					height: 56px;
-					background: transparent;
-					border: 3px solid #1877f2;
-					padding: 10px 30px;
-					position: relative;
-					background-repeat: no-repeat;
-					background-size: 30px;
-					background-position: 98% 50%;
-					font: bold 14.4px/56px $ikeaFontKo;
-					color: #1877f2;
-
-					&:focus {
-						outline: none;
-					}
-
-					&::placeholder {
-						font: bold 14.4px/56px $ikeaFontKo;
-						color: #1877f2;
-					}
-				}
-
-				.fa-magnifying-glass {
-					font: bold 12px/63px $ikeaFontKo;
-					color: #1877f2;
-				}
-
-				.btnSearch {
-					width: 150px;
-					height: 56px;
-					border: 3px solid #1877f2;
-					background-color: #eff3ff;
-					cursor: pointer;
-
-					p {
-						font: bold 14.4px/50px $ikeaFontKo;
-						color: #1877f2;
-					}
-				}
-			}
-
-			.btnSet {
-				width: 80%;
-				display: flex;
-				margin: 0px auto;
-				justify-content: left;
-				gap: 5px;
-				margin-bottom: 50px;
-
-				.btnInterest {
-					width: 150px;
-					height: 30px;
-					background: transparent;
-					font: 14.4px/30px $ikeaFontKo;
-					color: $fontColorBl;
-					border: none;
-					cursor: pointer;
-				}
-				.btnMine {
-					width: 150px;
-					height: 30px;
-					background: transparent;
-					font: 14.4px/30px $ikeaFontKo;
-					color: #474747;
-					border: none;
-					cursor: pointer;
-					margin-left: -3vw;
-				}
-			}
-		}
-		.loading {
-			position: fixed;
-			top: 50%;
-			left: 50%;
-			transform: translate(-50%, -50%);
-			opacity: 1;
-			transition: opacity 1s;
-			z-index: 6;
-
-			&.off {
-				opacity: 0;
-				z-index: 6;
-			}
-		}
-
-		.wrap {
-			opacity: 0;
-			transform: translateY(100px);
-			transition: 1s;
-
-			&.on {
-				opacity: 1;
-				transform: translateY(0px);
-			}
-
-			&::after {
-				content: '';
-				display: block;
-				clear: both;
-			}
-			li {
-				width: calc(100% / 3);
-				float: left;
-				padding: 10px;
-
-				> div {
-					width: 100%;
-					background: #fff;
-					padding: 10px;
-					box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.05);
-
-					.thumb {
-						width: 100%;
-						cursor: pointer;
-					}
-
-					p {
-						font: bold 14.4px/1.2 $ikeaFontKo;
-						color: $fontColorBl;
-						margin-top: 10px;
-						margin-bottom: 20px;
-					}
-					.profile {
-						width: 100%;
-						display: flex;
-						flex-direction: column;
-						justify-content: center;
-						align-items: center;
-						margin-top: -3vw;
-						margin-bottom: 30px;
-						cursor: pointer;
-
-						img {
-							width: 50px;
-							border-radius: 50%;
-							cursor: pointer;
-						}
-						span {
-							display: inline-block;
-							font: 12px/1 $ikeaFontKo;
-							color: #1198bb;
-							margin-left: 5px;
-							margin-top: 20px;
-							transform: translateY(-10px);
-							cursor: pointer;
-						}
-					}
-				}
 			}
 		}
 	}
@@ -392,206 +197,9 @@
 
 @media screen and (max-width: $mobile) {
 	.gallery {
-		width: 100%;
-		min-height: calc(100vh - 400px);
-		overflow: hidden;
-		position: relative;
-
-		.subVisual {
-			width: 100%;
-			height: 300px;
-			position: relative;
-			overflow: hidden;
-
-			video {
-				object-fit: contain;
-				object-position: -150vw -80vw;
-			}
-
-			.background {
-				width: 50%;
-				height: 80px;
-				background: white;
-				position: absolute;
-				bottom: 0;
-				left: 0;
-			}
-		}
-
-		.titContainer {
-			width: 100%;
-			height: 300px;
-			padding: 150px 10vw 50px;
-
-			h1 {
-				text-align: left;
-				font: bold 36px/1 $ikeaFontKo;
-				color: $fontColorBl;
-				margin-top: 20px;
-				margin-bottom: 96px;
-			}
-		}
-
-		.searchBarWrap {
-			padding: 15px 0px 15px;
-			margin-bottom: 50px;
-			background: #eff3ff;
-			.searchBox {
+		.frame {
+			article {
 				width: 100%;
-				padding: 50px 5vw 10px;
-				display: flex;
-				justify-content: center;
-				gap: 10px;
-
-				input {
-					width: 246px;
-					height: 49px;
-					background: transparent;
-					border: 2px solid #1877f2;
-					padding: 10px 30px;
-					position: relative;
-					background-repeat: no-repeat;
-					background-size: 25px;
-					background-position: 96% 50%;
-					font: bold 12px/49px $ikeaFontKo;
-					color: #1877f2;
-
-					&:focus {
-						outline: none;
-					}
-
-					&::placeholder {
-						font: bold 12px/49px $ikeaFontKo;
-						color: #1877f2;
-					}
-				}
-
-				.fa-magnifying-glass {
-					font: bold 12px/63px $ikeaFontKo;
-					color: #1877f2;
-				}
-
-				.btnSearch {
-					width: 128px;
-					height: 49px;
-					border: 2px solid #1877f2;
-					background-color: #eff3ff;
-					cursor: pointer;
-
-					p {
-						font: bold 12px/40px $ikeaFontKo;
-						color: #1877f2;
-					}
-				}
-			}
-
-			.btnSet {
-				width: 410px;
-				display: flex;
-				margin: 0px auto;
-				justify-content: left;
-				gap: 5px;
-				margin-bottom: 50px;
-
-				.btnInterest {
-					width: 150px;
-					height: 30px;
-					background: transparent;
-					font: 14.4px/30px $ikeaFontKo;
-					color: $fontColorBl;
-					border: none;
-					cursor: pointer;
-				}
-				.btnMine {
-					width: 150px;
-					height: 30px;
-					background: transparent;
-					font: 14.4px/30px $ikeaFontKo;
-					color: #474747;
-					border: none;
-					cursor: pointer;
-					margin-left: -8vw;
-				}
-			}
-		}
-		.loading {
-			position: fixed;
-			top: 50%;
-			left: 50%;
-			transform: translate(-50%, -50%);
-			opacity: 1;
-			transition: opacity 1s;
-			z-index: 6;
-
-			&.off {
-				opacity: 0;
-				z-index: 6;
-			}
-		}
-
-		.wrap {
-			opacity: 0;
-			transform: translateY(100px);
-			transition: 1s;
-
-			&.on {
-				opacity: 1;
-				transform: translateY(0px);
-			}
-
-			&::after {
-				content: '';
-				display: block;
-				clear: both;
-			}
-			li {
-				width: calc(100% / 1);
-				float: left;
-				padding: 10px;
-
-				> div {
-					width: 100%;
-					background: #fff;
-					padding: 10px;
-					box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.05);
-
-					.thumb {
-						width: 100%;
-						cursor: pointer;
-					}
-
-					p {
-						font: bold 14.4px/1.2 $ikeaFontKo;
-						color: $fontColorBl;
-						margin-top: 10px;
-						margin-bottom: 20px;
-					}
-					.profile {
-						width: 100%;
-						display: flex;
-						flex-direction: column;
-						justify-content: center;
-						align-items: center;
-						margin-top: -6vw;
-						margin-bottom: 30px;
-						cursor: pointer;
-
-						img {
-							width: 50px;
-							border-radius: 50%;
-							cursor: pointer;
-						}
-						span {
-							display: inline-block;
-							font: 12px/1 $ikeaFontKo;
-							color: #1198bb;
-							margin-left: 5px;
-							margin-top: 20px;
-							transform: translateY(-10px);
-							cursor: pointer;
-						}
-					}
-				}
 			}
 		}
 	}

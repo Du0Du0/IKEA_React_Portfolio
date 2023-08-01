@@ -417,7 +417,7 @@
 				}
 
 				.addressErr {
-					font: 11.2px/1 $ikeaFontKo;
+					font: 16px/1 $ikeaFontKo;
 					color: $fontColorBl;
 				}
 
@@ -771,6 +771,11 @@
 							font: bold 14.4px/1 $ikeaFontKo;
 						}
 					}
+
+					.addressErr {
+						font: 12.8px/1 $ikeaFontKo;
+						color: $fontColorBl;
+					}
 				}
 			}
 		}
@@ -1077,6 +1082,11 @@
 						&::after {
 							font: bold 12.6px/1 $ikeaFontKo;
 						}
+					}
+
+					.addressErr {
+						font: 11.2px/1 $ikeaFontKo;
+						color: $fontColorBl;
 					}
 				}
 			}

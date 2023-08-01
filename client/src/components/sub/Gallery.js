@@ -3,12 +3,26 @@ import Layout from '../common/Layout';
 import axios from 'axios';
 import Masonry from 'react-masonry-component';
 import { Helmet } from 'react-helmet-async';
+import Modal from '../common/Modal';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlus, faCheck } from '@fortawesome/free-solid-svg-icons';
 
 function Gallery() {
-	const enableEvent = useRef(true);
+	const path = process.env.PUBLIC_URL;
 	const [Items, setItems] = useState([]);
-	const frame = useRef(null);
 	const [Loader, setLoader] = useState(true);
+	const [Index, setIndex] = useState(0);
+	const enableEvent = useRef(true);
+	const frame = useRef(null);
+	const loader = useRef(null);
+	const openModal = useRef(null);
+	const [ActiveMyGalleryBtn, setActiveMyGalleryBtn] = useState(true);
+
+	const activeGalleryBtnStyle = {
+		border: '1px solid rgb(224, 110, 3)',
+		color: 'rgb(224, 110, 3)',
+		transition: '0.5s',
+	};
 
 	const getFlickr = async (opt) => {
 		//getFlickr함수가 재실행될떄마다 어차피 counter값을 초기화되어야 하므로 useRef가 아닌 일반 지역변수로 설정
@@ -63,47 +77,83 @@ function Gallery() {
 	return (
 		<>
 			<Helmet>
-				<title>갤러리</title>
+				<title>gallery</title>
 			</Helmet>
-			<Layout name1={'gallery'} name2={'갤러리'} video={'pexels.mp4'}>
-				<button
-					onClick={() => {
-						if (!enableEvent.current) return;
-						enableEvent.current = false;
-						setLoader(true);
-						frame.current.classList.remove('on');
-						getFlickr({ type: 'interest' });
-					}}
-				>
-					Interest Gallery
-				</button>
-				<button
-					onClick={() => {
-						if (!enableEvent.current) return;
-						enableEvent.current = false;
-						setLoader(true);
-						frame.current.classList.remove('on');
-						getFlickr({ type: 'user', user: '164021883@N04' });
-					}}
-				>
-					My Gallery
-				</button>
+			<Layout type={'yellow'} name1={'gallery'} name2={`갤러리`} video={'productsFigure.mp4'}>
+				<div className='searchBarWrap'>
+					<div className='searchBox'>
+						<input type='text' id='search' placeholder='찾으시는 검색어를 입력해 주세요' autoFocus={true} />
+						<button className='btnSearch'>
+							<p>검색</p>
+						</button>
+					</div>
+
+					<div class='btnSet'>
+						<button
+							className='btnInterest'
+							onClick={() => {
+								setActiveMyGalleryBtn(false);
+								if (!enableEvent.current) return;
+								enableEvent.current = false;
+								setLoader(true);
+								frame.current.classList.remove('on');
+								getFlickr({ type: 'interest' });
+							}}
+							style={ActiveMyGalleryBtn === false ? activeGalleryBtnStyle : null}
+						>
+							<span style={{ display: ActiveMyGalleryBtn === false ? 'none' : 'block' }}>
+								<FontAwesomeIcon icon={faPlus} /> Interest Gallery
+							</span>
+							<span style={{ display: ActiveMyGalleryBtn === false ? 'block' : 'none' }}>
+								<FontAwesomeIcon icon={faCheck} /> Interest Gallery
+							</span>
+						</button>
+						<button
+							className='btnMine'
+							onClick={() => {
+								setActiveMyGalleryBtn(true);
+								if (!enableEvent.current) return;
+								enableEvent.current = false;
+								setLoader(true);
+								frame.current.classList.remove('on');
+								getFlickr({ type: 'user', user: '164021883@N04' });
+							}}
+							style={ActiveMyGalleryBtn === true ? activeGalleryBtnStyle : null}
+						>
+							<span style={{ display: ActiveMyGalleryBtn === true ? 'none' : 'block' }}>
+								<FontAwesomeIcon icon={faPlus} /> &nbsp; My Gallery
+							</span>
+							<span style={{ display: ActiveMyGalleryBtn === true ? 'block' : 'none' }}>
+								<FontAwesomeIcon icon={faCheck} /> &nbsp; My Gallery
+							</span>
+						</button>
+					</div>
+				</div>
 				<div className='frame' ref={frame}>
 					<Masonry elementType={'div'} options={{ transitionDuration: '0.5s' }}>
 						{Items.map((item, idx) => {
 							return (
 								<article key={idx}>
 									<div className='inner'>
-										<div className='pic'>
-											<img src={`https://live.staticflickr.com/${item.server}/${item.id}_${item.secret}_m.jpg`} alt={item.title} />
+										<div className='topDescWrap'>
+											<div className='categoryWrap'>
+												{/*  전체 카테고리 */}
+												<p>Gallery</p>/<p>{ActiveMyGalleryBtn === true ? 'My Gallery' : 'Interest Gallery'}</p>
+											</div>
+											{/* 현재 카테고리 */}
+											<p> {ActiveMyGalleryBtn === true ? 'interior' : 'landscape'}</p>
 										</div>
-										<h2>{item.title}</h2>
+										{/*  제목 */}
+										<h2>{item.title ? item.title.toUpperCase() : null}</h2>
+
 										<div className='profile'>
+											{/* 프로필 사진*/}
 											<img
 												src={`http://farm${item.farm}.staticflickr.com/${item.server}/buddyicons/${item.owner}.jpg`}
 												alt={item.owner}
 												onError={(e) => e.target.setAttribute('src', 'https://www.flickr.com/images/buddyicon.gif')}
 											/>
+											{/* 프로필 사진 클릭 시  해당 유저 페이지로 이동 */}
 											<span
 												onClick={(e) => {
 													setLoader(true);
@@ -111,8 +161,19 @@ function Gallery() {
 													getFlickr({ type: 'user', user: e.target.innerText });
 												}}
 											>
+												{/* 프로필 유저명 */}
 												{item.owner}
 											</span>
+										</div>
+
+										<div
+											className='pic'
+											onClick={() => {
+												openModal.current.open();
+												setIndex(idx);
+											}}
+										>
+											<img src={`https://live.staticflickr.com/${item.server}/${item.id}_${item.secret}_m.jpg`} alt={item.title} />
 										</div>
 									</div>
 								</article>
@@ -120,8 +181,12 @@ function Gallery() {
 						})}
 					</Masonry>
 				</div>
-				{Loader && <img className='loader' src={`${process.env.PUBLIC_URL}/img/loading.gif`} alt='loader' />}
+				{Loader && <img className='loader' src={`${process.env.PUBLIC_URL}/img/loadingBar350.gif`} alt='loader' ref={loader} />}
 			</Layout>
+
+			<Modal ref={openModal}>
+				<img src={`https://live.staticflickr.com/${Items[Index]?.server}/${Items[Index]?.id}_${Items[Index]?.secret}_b.jpg`} alt={Items[Index]?.title} />
+			</Modal>
 		</>
 	);
 }
