@@ -156,6 +156,24 @@
 			}
 		}
 
+		.goCommunityBtn {
+			width: 108px;
+			height: 41.61px;
+			background: $tableBtn;
+			border-radius: 5px;
+			padding: 9px 13.5px;
+			font: 15px/1 $ikeaFontKo;
+			color: $fontColorW;
+			transition: 0.5s;
+			border: none;
+			cursor: pointer;
+
+			&:hover {
+				background: $hoverBtn;
+				color: $fontColorW;
+			}
+		}
+
 		.rightBtnWrap {
 			display: flex;
 			gap: 20px;
@@ -272,6 +290,12 @@
 				}
 			}
 		}
+	}
+
+	.notFoundErr {
+		font: 15px/1 $ikeaFontKo;
+		color: $fontColorBl;
+		margin: 0px auto;
 	}
 }
 
@@ -417,6 +441,24 @@
 			padding: 36px 15vw 30px;
 
 			.writeBtn {
+				width: 108px;
+				height: 41.61px;
+				background: $tableBtn;
+				border-radius: 5px;
+				padding: 9px 13.5px;
+				font: 15px/1 $ikeaFontKo;
+				color: $fontColorW;
+				transition: 0.5s;
+				border: none;
+				cursor: pointer;
+
+				&:hover {
+					background: $hoverBtn;
+					color: $fontColorW;
+				}
+			}
+
+			.goCommunityBtn {
 				width: 108px;
 				height: 41.61px;
 				background: $tableBtn;
@@ -682,6 +724,24 @@
 			padding: 36px 15vw 30px;
 
 			.writeBtn {
+				width: 108px;
+				height: 41.61px;
+				background: $tableBtn;
+				border-radius: 5px;
+				padding: 9px 13.5px;
+				font: 15px/1 $ikeaFontKo;
+				color: $fontColorW;
+				transition: 0.5s;
+				border: none;
+				cursor: pointer;
+
+				&:hover {
+					background: $hoverBtn;
+					color: $fontColorW;
+				}
+			}
+
+			.goCommunityBtn {
 				width: 108px;
 				height: 41.61px;
 				background: $tableBtn;

@@ -39,6 +39,10 @@ function Community() {
 	const searchWhat = useRef(null);
 	const searchInput = useRef(null);
 
+	// fillter display screen
+	const [NotFoundErr, setNotFoundErr] = useState('');
+	const [ShowArticleLists, setShowArticleLists] = useState(true);
+
 	// article lists type
 	const [IsListType, setIsListType] = useState(false);
 
@@ -310,6 +314,16 @@ function Community() {
 	};
 
 	//검색1. 시작날짜, 마지막날짜 설정 후 맞는 조건 게시물 필터링
+	const handleSubmitKeyDown = (e) => {
+		searchDateInput();
+		searchArticleKeyDown(e);
+	};
+
+	const handleSubmitClick = () => {
+		searchDateInput();
+		searchArticleClick();
+	};
+
 	const searchDateInput = () => {
 		const startDate = startDateRef.current.value;
 		const endDate = endDateRef.current.value;
@@ -323,7 +337,76 @@ function Community() {
 				return postDate >= start && postDate <= end;
 			});
 
-			setPosts(matchDatePosts);
+			if (matchDatePosts === null) setNotFoundErr('해당 결과를 찾을 수 없습니다.');
+			else setPosts(matchDatePosts);
+		}
+	};
+
+	const searchArticleKeyDown = (e) => {
+		let copy = [...Posts];
+		const selectedTopic = copy.filter((el) => el.topic.includes(searchTopic.current.value));
+		setPosts(selectedTopic);
+
+		if ((e.key === 'Enter' && searchWhat.current.value === '') || (e.key === 'Enter' && searchWhat.current.value === '제목')) {
+			let copy = [...Posts];
+			const newFilter = copy.filter((el) => el.title.includes(searchInput.current.value));
+			if (newFilter.length === 0) {
+				setShowArticleLists(false);
+				return setNotFoundErr('해당 결과를 찾을 수 없습니다.');
+			}
+			setPosts(newFilter);
+		}
+		if (e.key === 'Enter' && searchWhat.current.value === '내용') {
+			let copy = [...Posts];
+			const newFilter = copy.filter((el) => el.content.includes(searchInput.current.value));
+			if (newFilter.length === 0) {
+				setShowArticleLists(false);
+				return setNotFoundErr('해당 결과를 찾을 수 없습니다.');
+			}
+			setPosts(newFilter);
+		}
+		if (e.key === 'Enter' && searchWhat.current.value === '작성자') {
+			let copy = [...Posts];
+			const newFilter = copy.filter((el) => el.userId.includes(searchInput.current.value));
+			if (newFilter.length === 0) {
+				setShowArticleLists(false);
+				return setNotFoundErr('해당 결과를 찾을 수 없습니다.');
+			}
+			setPosts(newFilter);
+		}
+	};
+
+	const searchArticleClick = () => {
+		let copy = [...Posts];
+		const selectedTopic = copy.filter((el) => el.topic.includes(searchTopic.current.value));
+		setPosts(selectedTopic);
+
+		if (searchWhat.current.value === '' || searchWhat.current.value === '제목') {
+			let copy = [...Posts];
+			const newFilter = copy.filter((el) => el.title.includes(searchInput.current.value));
+			if (newFilter.length === 0) {
+				setShowArticleLists(false);
+				return setNotFoundErr('해당 결과를 찾을 수 없습니다.');
+			}
+			setPosts(newFilter);
+		}
+		if (searchWhat.current.value === '내용') {
+			let copy = [...Posts];
+			const newFilter = copy.filter((el) => el.content.includes(searchInput.current.value));
+			if (newFilter.length === 0) {
+				setShowArticleLists(false);
+				return setNotFoundErr('해당 결과를 찾을 수 없습니다.');
+			}
+			setPosts(newFilter);
+		}
+		if (searchWhat.current.value === '작성자') {
+			let copy = [...Posts];
+			const newFilter = copy.filter((el) => el.userId.includes(searchInput.current.value));
+			if (newFilter.length === 0) {
+				setShowArticleLists(false);
+				return setNotFoundErr('해당 결과를 찾을 수 없습니다.');
+			}
+			setPosts(newFilter);
 		}
 	};
 
@@ -400,39 +483,16 @@ function Community() {
 							<option value='내용'>내용</option>
 							<option value='작성자'>작성자</option>
 						</select>
-						<input
-							type='text'
-							ref={searchInput}
-							placeholder='검색어를 입력하세요'
-							className='searchBar'
-							onKeyDown={(e) => {
-								let copy = [...Posts];
-								const selectedTopic = copy.filter((el) => el.topic.includes(searchTopic.current.value));
-								setPosts(selectedTopic);
-
-								if ((e.key === 'Enter' && searchWhat.current.value === '') || (e.key === 'Enter' && searchWhat.current.value === '제목')) {
-									let copy = [...Posts];
-									const newFilter = copy.filter((el) => el.title.includes(searchInput.current.value));
-									setPosts(newFilter);
-								}
-								if (e.key === 'Enter' && searchWhat.current.value === '내용') {
-									let copy = [...Posts];
-									const newFilter = copy.filter((el) => el.content.includes(searchInput.current.value));
-									setPosts(newFilter);
-								}
-								if (e.key === 'Enter' && searchWhat.current.value === '작성자') {
-									let copy = [...Posts];
-									const newFilter = copy.filter((el) => el.userId.includes(searchInput.current.value));
-									setPosts(newFilter);
-								}
-							}}
-						/>
-						<FontAwesomeIcon icon={faMagnifyingGlass} onClick={searchDateInput} />
+						<input type='text' ref={searchInput} placeholder='검색어를 입력하세요' className='searchBar' onKeyDown={(e) => handleSubmitKeyDown(e)} />
+						<FontAwesomeIcon icon={faMagnifyingGlass} onClick={handleSubmitClick} />
 					</div>
 				</div>
 				<div className='btnContainer'>
-					<button className='writeBtn' onClick={() => history.push('/Write')}>
+					<button className='writeBtn' onClick={() => history.push('/Write')} style={{ display: NotFoundErr ? 'none' : 'block' }}>
 						글쓰기
+					</button>
+					<button className='goCommunityBtn' onClick={() => window.location.replace('/community/articles')} style={{ display: NotFoundErr ? 'block' : 'none' }}>
+						목록
 					</button>
 
 					<div className='rightBtnWrap'>
@@ -499,7 +559,8 @@ function Community() {
 				</div>
 				<div className='horzienLine' />
 				<div className={IsListType === false ? 'listWrap roomy' : 'listWrap'}>
-					{Posts &&
+					{ShowArticleLists ? (
+						Posts &&
 						currentPosts.map((post, idx) => {
 							return (
 								<div
@@ -517,7 +578,10 @@ function Community() {
 									</div>
 								</div>
 							);
-						})}
+						})
+					) : (
+						<p className='notFoundErr'>{NotFoundErr && NotFoundErr}</p>
+					)}
 				</div>
 				<div className='horzienLine2' />
 				<Pagination activePage={Currentpage} itemsCountPerPage={8} totalItemsCount={30} pageRangeDisplayed={3} prevPageText={'‹'} nextPageText={'›'} onChange={pageChange} />;
