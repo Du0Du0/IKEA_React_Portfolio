@@ -64,7 +64,7 @@
 				top: 30%;
 				left: -70%;
 				transform: translate(50%, 50%);
-				font: 30px/1 $ikeaFontKo;
+				font: 25px/1 $ikeaFontKo;
 				color: $inputBorder;
 				display: inline-block;
 				font-family: 'Font Awesome 5 Free';
@@ -196,6 +196,7 @@
 						}
 					}
 				}
+
 				.fa-eye {
 					position: relative;
 					right: 30px;
@@ -240,6 +241,7 @@
 					color: $fontColorBl;
 					transform: translate(0, -1%);
 					margin-bottom: 15px;
+					margin-left: 7px;
 
 					&:focus {
 						outline: 1px solid #12a8ce;
@@ -299,7 +301,9 @@
 					border: none;
 					transform: translate(0, -5%);
 					font: 15px/1 $ikeaFontKo;
+					margin-left: 7px;
 				}
+
 				input[type='text'] {
 					padding: 10px;
 					width: 40%;
@@ -357,6 +361,10 @@
 					}
 				}
 
+				label {
+					margin-left: 7px;
+				}
+
 				select {
 					padding: 8px;
 					width: 15%;
@@ -406,6 +414,11 @@
 						font: bold 18px/1 $ikeaFontKo;
 						color: red;
 					}
+				}
+
+				.addressErr {
+					font: 11.2px/1 $ikeaFontKo;
+					color: $fontColorBl;
 				}
 
 				p {
@@ -472,6 +485,10 @@
 						accent-color: $tableCheckBox;
 					}
 				}
+
+				label {
+					margin-left: 7px;
+				}
 			}
 		}
 	}
@@ -509,15 +526,23 @@
 
 @media screen and (max-width: $tablet) {
 	.department {
+		.titTop {
+			h1 {
+				padding: 250px 15vw 96px;
+				text-align: center;
+				font: bold 48px/1 $ikeaFontKo;
+				color: $fontColorBl;
+			}
+		}
+
 		.titContainer {
 			height: 300px;
-			padding: 150px 10vw 150px;
-			margin-bottom: 150px;
+			padding: 30px 10vw 150px;
+			margin-bottom: 15px;
 
 			///Sign Up pagee title
 			h1 {
 				font: bold 38.4px/1 $ikeaFontKo;
-
 				margin-top: 20px;
 				margin-bottom: 96px;
 			}
@@ -530,7 +555,6 @@
 
 		.timeLine {
 			height: 300px;
-
 			padding-bottom: 60px;
 
 			.timeLineNum {
@@ -539,8 +563,15 @@
 
 				&::after {
 					content: '\f061';
-
-					font-family: 'Font Awesome';
+					position: relative;
+					align-items: center;
+					top: 30%;
+					left: -70%;
+					transform: translate(50%, 50%);
+					font: 25px/1 $ikeaFontKo;
+					color: $inputBorder;
+					display: inline-block;
+					font-family: 'Font Awesome 5 Free';
 					font-weight: 900;
 				}
 			}
@@ -550,7 +581,7 @@
 			width: 100%;
 			height: 517px;
 			margin-bottom: 200px;
-			padding: 150px 10vw 150px;
+			padding: 0px 10vw 150px;
 
 			h2 {
 				font: bold 22.4px/1 $ikeaFontKo;
@@ -616,6 +647,16 @@
 						margin-bottom: 15px;
 					}
 
+					.pwdStrength {
+						width: 50%;
+						margin-bottom: 15px;
+						p {
+							&::before {
+								content: none;
+							}
+						}
+					}
+
 					input[placeholder] {
 						padding: 5px;
 						width: 50%;
@@ -643,7 +684,7 @@
 		}
 
 		.info2 {
-			padding: 150px 10vw 150px;
+			padding: 55px 10vw 150px;
 
 			h2 {
 				font: bold 22.4px/1 $ikeaFontKo;
@@ -701,6 +742,12 @@
 						font: 14.4px/1 $ikeaFont;
 					}
 
+					.addressBtn {
+						transform: translateY(-2px);
+						height: 37px;
+						font: 11.2px/1 $ikeaFontKo;
+					}
+
 					input[class='address'] {
 						&:nth-of-type(2) {
 							width: 92%;
@@ -729,7 +776,7 @@
 		}
 
 		.info3 {
-			margin-top: 530px;
+			margin-top: 460px;
 			padding: 0px 10vw 0px;
 
 			h2 {
@@ -761,10 +808,18 @@
 
 @media screen and (max-width: $mobile) {
 	.department {
+		.titTop {
+			h1 {
+				padding: 250px 15vw 0px;
+				text-align: center;
+				font: bold 48px/1 $ikeaFontKo;
+				color: $fontColorBl;
+			}
+		}
 		.titContainer {
 			height: 300px;
-			padding: 150px 5vw 150px;
-			margin-bottom: 150px;
+			padding: 100px 5vw 150px;
+			margin-bottom: 50px;
 
 			///Sign Up pagee title
 			h1 {
@@ -807,7 +862,7 @@
 		.info1 {
 			width: 100%;
 			height: 517px;
-			padding: 96px 5vw 96px;
+			padding: 0px 5vw 96px;
 			margin-bottom: 96px;
 
 			h2 {
@@ -865,6 +920,16 @@
 						height: 32.8px;
 						margin-bottom: 10px;
 						font: 12.6px/1 $ikeaFontKo;
+					}
+
+					.pwdStrength {
+						width: 65%;
+						margin-bottom: 15px;
+						p {
+							&::before {
+								content: none;
+							}
+						}
 					}
 
 					.fa-eye {
@@ -936,6 +1001,7 @@
 						width: 100%;
 						font: 12.6px/1 $ikeaFontKo;
 					}
+
 					th {
 						font: bold 14.4px/1 $ikeaFontKo;
 						padding: 0px 1vw 0px;
@@ -949,6 +1015,7 @@
 						height: 32.8px;
 						font: 11.2px/1 $ikeaFontKo;
 					}
+
 					input[type='text'] {
 						padding: 5px;
 						width: 100%;
@@ -961,16 +1028,6 @@
 						width: 100%;
 						font: 12.6px/1 $ikeaFontKo;
 						margin-bottom: 5px;
-					}
-
-					input[type='checkbox'] {
-						margin-left: 10px;
-						margin-bottom: 10px;
-						margin-right: 7px;
-
-						&:nth-of-type(1) {
-							margin-left: 0;
-						}
 					}
 
 					input[placeholder] {
@@ -989,7 +1046,7 @@
 
 					.addressBtn {
 						transform: translateY(0px);
-						height: 32.8px;
+						height: 39px;
 						font: 11.2px/1 $ikeaFontKo;
 					}
 
@@ -1026,7 +1083,7 @@
 
 		.info3 {
 			margin-top: 150px;
-			padding: 206px 5vw 150px;
+			padding: 286px 5vw 150px;
 
 			h2 {
 				font: bold 19.6px/1 $ikeaFontKo;
@@ -1057,7 +1114,7 @@
 						margin-left: 5vw;
 
 						input[type='radio'] {
-							margin-right: 7px;
+							margin-right: 3px;
 						}
 					}
 				}

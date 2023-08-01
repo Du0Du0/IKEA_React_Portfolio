@@ -525,7 +525,7 @@ function Department() {
 											{/* extra address */}
 											<input type='text' name='extraAddress' id='sample6_extraAddress' placeholder='참고항목' className='address' readOnly={true} value={Val.extraAddress} onChange={handleChange} />
 											<br />
-											<p className='pwdErr2' style={{ color: Err.address ? '#d80000' : 'initial' }}>
+											<p className='addressErr' style={{ color: Err.address ? '#d80000' : 'initial' }}>
 												{Err.address ? <span>{Err.address}</span> : '우편번호와 주소를 입력해주세요.'}
 											</p>
 										</td>
