@@ -67,7 +67,7 @@ function Gallery() {
 				++counter;
 
 				//로딩완료된 이미지수와 전체이미지수가 같아지면
-				if (counter === imgs.length - 1) {
+				if (counter === imgs.length - 2) {
 					//로더 제거하고 이미지 갤러리 보임처리
 					setLoader(false);
 					frame.current.classList.add('on');
