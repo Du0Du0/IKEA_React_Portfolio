@@ -95,6 +95,22 @@ function Vids() {
 		backgroundSize: 'cover',
 	};
 
+	const [NumVideosToShow, SetNumVideosToShow] = useState(0);
+
+	useEffect(() => {
+		function handleWindowResize() {
+			if (window.innerWidth >= 1200 && window.innerWidth <= 1920) SetNumVideosToShow(5);
+			else if (window.innerWidth >= 760 && window.innerWidth <= 1199) SetNumVideosToShow(3);
+			else SetNumVideosToShow(2);
+		}
+
+		handleWindowResize(); // 초기 로드 시 한 번 호출하여 초기값 설정
+		window.addEventListener('resize', handleWindowResize);
+
+		return () => {
+			window.removeEventListener('resize', handleWindowResize);
+		};
+	}, []);
 	return (
 		<>
 			<section id='vids' className='myScroll' ref={ref} style={backgroundStyle}>
@@ -125,7 +141,7 @@ function Vids() {
 					{/* video list start  */}
 					<div className='vidsVideoWrap'>
 						{MainVids.map((mainVid, idx) => {
-							// if (idx >= 4) return null;
+							if (idx >= `${NumVideosToShow}`) return null;
 
 							return (
 								<div

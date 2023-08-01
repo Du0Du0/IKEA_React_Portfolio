@@ -8,7 +8,7 @@ import { useEffect } from 'react';
 import axios from 'axios';
 import { setLoginUser, setLogoutUser } from './redux/action';
 import firebase from './firebase';
-import { useCallback } from 'react';
+import { useCallback, useRef } from 'react';
 
 //common
 import Footer from './components/common/Footer';
@@ -37,10 +37,12 @@ import Login from './components/sub/Login';
 import FindPassword from './components/sub/FindPassword';
 import Mongo from './components/sub/Mongo';
 import ProductsDetail from './components/sub/ProductsDetail';
+import Menu from './components/common/Menu';
 
 function App() {
 	const dispatch = useDispatch();
 	const youtubeIndicatorLists = ['Title', 'About', 'Photo', 'Video', 'List'];
+	const menuRef = useRef(null);
 
 	//서브페이지 유투브 데이터
 	const fetchSubYoutube = useCallback(async () => {
@@ -92,11 +94,12 @@ function App() {
 				<title>이케아 코리아(대표)</title>
 			</Helmet>
 			<GlobalStyle />
+
 			{/* Switch는 내부에 중복되는 라우트 경로가 있을때 더 먼저 나오는 라우터를 채택하고 나머지는 무시 */}
 			<Switch>
 				<Route exact path='/ikea-react' component={Main}></Route>
 
-				<Route path='/' render={() => <Header type={'sub'} />}></Route>
+				<Route path='/' render={() => <Header type={'sub'} menu={menuRef} />}></Route>
 			</Switch>
 
 			<Switch>
@@ -255,6 +258,7 @@ function App() {
 					)}
 				></Route>
 			</Switch>
+			<Menu ref={menuRef} />
 		</>
 	);
 }

@@ -67,7 +67,8 @@
     ]
   },
   "devDependencies": {
-    "gh-pages": "^5.0.0"
+    "gh-pages": "^5.0.0",
+    "react-router-dom": "^5.3.4"
   },
   "main": "index.js",
   "keywords": [],

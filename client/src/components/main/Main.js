@@ -14,7 +14,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import moment from 'moment';
 
-function Main({ menuRef }) {
+function Main({ menu }) {
 	const mainIndicatorLists = ['Menu', 'video', 'Living', 'Event', 'Exhibit', 'Notice'];
 	const [IsOpen, setIsOpen] = useState(false);
 	const container = useRef(null);
@@ -104,7 +104,7 @@ function Main({ menuRef }) {
 				) : null}
 
 				<aside className='bodyContainer' ref={container} style={IsOpen ? containerBlockScroll : cookiePopEnable}>
-					<Header type={'sub'} menuRef={menuRef} />
+					<Header type={'sub'} menuRef={menu} />
 					<Visual />
 					<Products />
 					<Vids />

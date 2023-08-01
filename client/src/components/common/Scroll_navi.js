@@ -9,7 +9,7 @@ function Scroll_navi({ type, pageLists }) {
 
 	const getPosition = () => {
 		position.current = [];
-		const sections = btnRef.current.parentElement.querySelectorAll('.myScroll');
+		const sections = btnRef.current?.parentElement.querySelectorAll('.myScroll');
 		position.current = Array.from(sections).map((sec) => sec.offsetTop);
 		setNum(position.current.length);
 	};
@@ -17,15 +17,17 @@ function Scroll_navi({ type, pageLists }) {
 	const activeIndicator = () => {
 		const base = -window.innerHeight / 2;
 		const scroll = window.scrollY;
-		const btns = btnRef.current.children;
-		const sections = btnRef.current.parentElement.querySelectorAll('.myScroll');
+		const btns = btnRef.current?.children;
+		const sections = btnRef.current?.parentElement.querySelectorAll('.myScroll');
 
 		position.current?.forEach((pos, idx) => {
 			if (scroll >= pos + base) {
-				for (const btn of btns) btn.classList.remove('on');
-				for (const sec of sections) sec.classList.remove('on');
-				btns[idx].classList.add('on');
-				sections[idx].classList.add('on');
+				if (btns && sections) {
+					for (const btn of btns) btn.classList.remove('on');
+					for (const sec of sections) sec.classList.remove('on');
+					btns[idx].classList.add('on');
+					sections[idx].classList.add('on');
+				}
 			}
 		});
 	};
