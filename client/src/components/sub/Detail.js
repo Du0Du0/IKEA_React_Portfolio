@@ -1,6 +1,6 @@
 import React from 'react';
 import { useHistory, useLocation, useParams } from 'react-router-dom';
-import { faHeart, faClock } from '@fortawesome/free-regular-svg-icons';
+import { faHeart, faClock, faCommentDots } from '@fortawesome/free-regular-svg-icons';
 import { faAngleDown, faCircleExclamation } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import LayoutNone from '../common/LayoutNone';
@@ -166,7 +166,12 @@ function Detail() {
 						</div>
 						<div className='titBottom'>
 							<p>{Posts && Posts.userId}</p>
-							<p>{Posts && Posts.topic}</p>
+							<p>
+								<FontAwesomeIcon icon={faCommentDots} />
+								&nbsp;&nbsp;
+								{Posts.comments === undefined ? 0 : Posts.comments.length}
+							</p>
+
 							<p>
 								<FontAwesomeIcon icon={faClock} />
 								&nbsp;&nbsp;

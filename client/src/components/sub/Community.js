@@ -1,5 +1,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+import { faCommentDots } from '@fortawesome/free-regular-svg-icons';
 import { useEffect, useState, useRef } from 'react';
 import LayoutNone from '../common/LayoutNone';
 import { useHistory } from 'react-router-dom';
@@ -571,10 +572,14 @@ function Community() {
 									}}
 								>
 									<h3>{post.topic}</h3>
-									<h2>{!IsListType && `${post.title}`.length > 18 ? `${post.title}`.substr(0, 18) + '...' : `${post.title}`}</h2>
+									<h2>{!IsListType && `${post.title}`.length > 18 ? `${post.title}`.substr(0, 15) + '...' : `${post.title}`}</h2>
 									<div className='bottomWrap'>
 										<p>{`${post.date}`.substr(0, 10)}</p>
 										<p>{`${post.userId}`.substr(0, 3).replace(/^(.)(.*)$/, '$1**')}</p>
+										<p>
+											<FontAwesomeIcon icon={faCommentDots} />
+											{post.comments ? post.comments.length : 0}
+										</p>
 									</div>
 								</div>
 							);
