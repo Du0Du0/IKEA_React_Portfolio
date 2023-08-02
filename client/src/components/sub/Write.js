@@ -18,6 +18,7 @@ function Write() {
 	const title = useRef(null);
 	const keyword = useRef(null);
 	const content = useRef(null);
+	const comments = useRef(null);
 
 	const [Tit, setTit] = useState('');
 	const [Con, setCon] = useState('');
@@ -29,6 +30,7 @@ function Write() {
 		title.current.value = '';
 		keyword.current.value = '';
 		content.current.value = '';
+		comments.current.value = '';
 	};
 
 	useEffect(() => {}, []);
@@ -42,6 +44,7 @@ function Write() {
 			keyword: [keyword.current.value],
 			content: content.current.value,
 			date: new Date(),
+			comments: [],
 		};
 
 		const updatedData = [newPosts, ...Posts];

@@ -11,27 +11,23 @@ import { Helmet } from 'react-helmet-async';
 function Detail() {
 	const history = useHistory();
 	const location = useLocation();
-	const [Posts, setPosts] = useState([]);
 	const [LikeBtn, setLikeBtn] = useState([0, 0, 0, 0, 0, 0, 0]);
 	const [InputCount, setInputCount] = useState(0);
 	const noticeModal = useRef(null);
 	const { idx } = useParams();
 	const comment = useRef(null);
 
-	const dummyComments = [
-		{ comment: '안녕하세요', date: '2023-07-08' },
-		{ comment: '안녕하세요', date: '2023-07-08' },
-		{ comment: '안녕하세요', date: '2023-07-08' },
-		{ comment: '안녕하세요', date: '2023-07-08' },
-		{ comment: '안녕하세요', date: '2023-07-08' },
-	];
-
 	const getLocalComment = () => {
-		const dataComment = localStorage.getItem('comment');
-		if (dataComment) return JSON.parse(dataComment);
-		else return dummyComments;
+		const dataComment = localStorage.getItem('post');
+		if (dataComment) {
+			const postData = JSON.parse(dataComment);
+			return postData.comments || [];
+		} else {
+			return [];
+		}
 	};
-	const [Comments, setComments] = useState(getLocalComment());
+
+	const [Posts, setPosts] = useState(getLocalComment());
 
 	useEffect(() => {
 		const data = localStorage.getItem('post');
@@ -68,8 +64,8 @@ function Detail() {
 	}, [history, location.state, idx]);
 
 	useEffect(() => {
-		localStorage.getItem('comment');
-	}, [Comments]);
+		getLocalComment();
+	}, []);
 
 	//게시물 삭제하는 기능
 	const deletePost = () => {
@@ -112,34 +108,47 @@ function Detail() {
 		comment.current.value = '';
 	};
 
-	// 댓글 삭제하기
-	const deleteComment = (delIndex) => {
-		const result = window.confirm('정말로 삭제하시겠습니까?');
-		const data = localStorage.getItem('comment');
-		const comments = JSON.parse(data);
+	// // 댓글 삭제하기
+	// const deleteComment = (delIndex) => {
+	// 	const result = window.confirm('정말로 삭제하시겠습니까?');
+	// 	const data = localStorage.getItem('comment');
+	// 	const comments = JSON.parse(data);
 
-		if (result) {
-			console.log('index는', idx);
-			const copy = comments.filter((el, i) => i !== delIndex);
-			setComments(copy);
-			// 로컬 스토리지에서도 데이터 삭제
-			localStorage.setItem('comment', JSON.stringify(copy));
-			console.log('데이터 지움', copy);
-		} else {
-			return;
-		}
-	};
+	// 	if (result) {
+	// 		console.log('index는', idx);
+	// 		const copy = comments.filter((el, i) => i !== delIndex);
+	// 		setComments(copy);
+	// 		// 로컬 스토리지에서도 데이터 삭제
+	// 		localStorage.setItem('comment', JSON.stringify(copy));
+	// 		console.log('데이터 지움', copy);
+	// 	} else {
+	// 		return;
+	// 	}
+	// };
 
-	//댓글 생성하는 기능
 	const creatComment = () => {
 		const newComment = {
 			comment: comment.current.value,
-			date: new Date(),
+			date: new Date().toISOString(), // 날짜를 ISO 형식으로 저장 (현재 시간을 문자열로 변환)
 		};
 
-		const updatedComment = [newComment, ...Comments];
-		setComments(updatedComment);
-		localStorage.setItem('comment', JSON.stringify(updatedComment));
+		const updatedComments = [...Posts.comments, newComment];
+
+		const updatedPost = {
+			...Posts,
+			comments: updatedComments,
+		};
+
+		setPosts(updatedPost);
+
+		// 로컬 스토리지에 댓글 업데이트
+		const data = localStorage.getItem('post');
+		const posts = JSON.parse(data);
+		posts[idx] = updatedPost;
+
+		// 변경된 Posts 배열을 로컬 스토리지에 저장
+		localStorage.setItem('post', JSON.stringify(posts));
+
 		resetComment();
 		setInputCount(0);
 	};
@@ -222,24 +231,24 @@ function Detail() {
 						></textarea>
 						<div className='textareaBottom'>
 							<p>{InputCount}/1500</p>
-							<button onClick={creatComment}>남기기</button>
+							<button onClick={() => creatComment()}>남기기</button>
 						</div>
 					</div>
 					<div className='commentShowWrap'>
 						<div className='commentShowTop'>
 							<h3>
-								댓글 <span>{Comments.length}</span>건
+								댓글 <span>{Posts.comments ? Posts.comments.length : 0}</span>건
 							</h3>
 
 							<div className='commentSortBtn'>
 								<button
 									className='active'
-									onClick={() => {
-										const copyPosts = [...Comments];
-										const ascDate = copyPosts.sort((a, b) => a - b);
-										console.log('댓글최신순정렬');
-										setComments(ascDate);
-									}}
+									// onClick={() => {
+									// 	const copyPosts = [...Comments];
+									// 	const ascDate = copyPosts.sort((a, b) => a - b);
+									// 	console.log('댓글최신순정렬');
+									// 	setComments(ascDate);
+									// }}
 								>
 									최신순
 								</button>
@@ -247,20 +256,20 @@ function Detail() {
 							</div>
 						</div>
 
-						{Comments.map((comment, i) => {
-							return (
-								<>
-									<div className='commentList' key={i}>
+						{Posts &&
+							Posts.comments &&
+							Posts.comments.map((comment, i) => (
+								<React.Fragment key={i}>
+									<div className='commentList'>
 										<div className='commentListTop'>
 											<p>{comment.comment}</p>
 										</div>
 										<div className='commentListBottom'>
 											<div className='leftWrap'>
-												<p>{`${Posts && Posts.date}`.substr(0, 10)}</p>
+												<p>{`${comment.date}`.substr(0, 10)}</p>
 												<p>수정</p>
-												<p onClick={(e) => deleteComment(i)}>삭제</p>
+												<p>삭제</p>
 											</div>
-
 											<div className='rightWrap'>
 												<FontAwesomeIcon
 													icon={faHeart}
@@ -275,9 +284,8 @@ function Detail() {
 											</div>
 										</div>
 									</div>
-								</>
-							);
-						})}
+								</React.Fragment>
+							))}
 					</div>
 				</div>
 			</LayoutNone>
