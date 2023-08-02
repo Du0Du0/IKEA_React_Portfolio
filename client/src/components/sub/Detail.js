@@ -11,11 +11,11 @@ import { Helmet } from 'react-helmet-async';
 function Detail() {
 	const history = useHistory();
 	const location = useLocation();
-	const [LikeBtn, setLikeBtn] = useState([0, 0, 0, 0, 0, 0, 0]);
 	const [InputCount, setInputCount] = useState(0);
 	const noticeModal = useRef(null);
 	const { idx } = useParams();
 	const comment = useRef(null);
+	const likeBtn = useRef(null);
 
 	const getLocalComment = () => {
 		const dataComment = localStorage.getItem('post');
@@ -28,6 +28,17 @@ function Detail() {
 	};
 
 	const [Posts, setPosts] = useState(getLocalComment());
+
+	const getLocalLikeBtn = () => {
+		const dataComment = localStorage.getItem('post');
+		if (dataComment) {
+			const postData = JSON.parse(dataComment);
+			return postData.likeBtn || 0;
+		} else {
+			return 0;
+		}
+	};
+	const [LikeBtnNum, setLikeBtnNum] = useState(getLocalLikeBtn());
 
 	useEffect(() => {
 		const data = localStorage.getItem('post');
@@ -65,6 +76,7 @@ function Detail() {
 
 	useEffect(() => {
 		getLocalComment();
+		getLocalLikeBtn();
 	}, []);
 
 	//게시물 삭제하는 기능
@@ -130,6 +142,7 @@ function Detail() {
 		const newComment = {
 			comment: comment.current.value,
 			date: new Date().toISOString(), // 날짜를 ISO 형식으로 저장 (현재 시간을 문자열로 변환)
+			likeBtn: 0,
 		};
 
 		const updatedComments = [...Posts.comments, newComment];
@@ -151,6 +164,33 @@ function Detail() {
 
 		resetComment();
 		setInputCount(0);
+	};
+
+	const likeBtnClickCount = (commentIndex) => {
+		const updatedComments = Posts.comments.map((comment, i) => {
+			if (i === commentIndex) {
+				return {
+					...comment,
+					likeBtn: comment.likeBtn + 1,
+				};
+			}
+			return comment;
+		});
+
+		const updatedPost = {
+			...Posts,
+			comments: updatedComments,
+		};
+
+		setPosts(updatedPost);
+
+		// 로컬 스토리지에 댓글 업데이트
+		const data = localStorage.getItem('post');
+		const posts = JSON.parse(data);
+		posts[idx] = updatedPost;
+
+		// 변경된 Posts 배열을 로컬 스토리지에 저장
+		localStorage.setItem('post', JSON.stringify(posts));
 	};
 
 	return (
@@ -278,14 +318,13 @@ function Detail() {
 											<div className='rightWrap'>
 												<FontAwesomeIcon
 													icon={faHeart}
+													ref={likeBtn}
 													onClick={(e) => {
 														e.stopPropagation();
-														let copy = [...LikeBtn];
-														copy[i] = copy[i] + 1;
-														setLikeBtn(copy);
+														likeBtnClickCount(i);
 													}}
 												/>
-												<span>{LikeBtn[i]}</span>
+												<span>{comment.likeBtn}</span>
 											</div>
 										</div>
 									</div>
