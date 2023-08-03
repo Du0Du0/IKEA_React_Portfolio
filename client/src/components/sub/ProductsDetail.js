@@ -15,6 +15,8 @@ function ProductsDetail() {
 	const frame = useRef(null);
 	const loader = useRef(null);
 	const openModal = useRef(null);
+	const isUser = useRef(true);
+	const searchInput = useRef(null);
 
 	const getFlickr = useCallback(async (opt) => {
 		let counter = 0;
@@ -130,7 +132,14 @@ function ProductsDetail() {
 											<p> {Topic}</p>
 										</div>
 										{/*  제목 */}
-										<h2>{item.title ? item.title.toUpperCase() : null}</h2>
+										<h2
+											onClick={() => {
+												openModal.current.open();
+												setIndex(idx);
+											}}
+										>
+											{item.title ? item.title.toUpperCase() : null}
+										</h2>
 
 										<div className='profile'>
 											{/* 프로필 사진*/}
@@ -140,13 +149,7 @@ function ProductsDetail() {
 												onError={(e) => e.target.setAttribute('src', 'https://www.flickr.com/images/buddyicon.gif')}
 											/>
 											{/* 프로필 사진 클릭 시  해당 유저 페이지로 이동 */}
-											<span
-												onClick={(e) => {
-													setLoader(true);
-													frame.current.classList.remove('on');
-													getFlickr({ type: 'user', user: e.target.innerText });
-												}}
-											>
+											<span>
 												{/* 프로필 유저명 */}
 												{item.owner}
 											</span>

@@ -17,7 +17,7 @@
 				font: 40px/1 $ikeaFontKo;
 				margin-left: 2vw;
 				color: $fontColorW;
-				margin-top: 300px;
+				margin-top: 330px;
 
 				span {
 					font: 16px/1 $ikeaFontKo;
@@ -146,7 +146,6 @@
 						width: 30px;
 					}
 					span {
-						cursor: pointer;
 						font: 12px/40px $ikeaFontKo;
 						color: $fontColorBl;
 						margin-bottom: 30px;
@@ -172,7 +171,7 @@
 
 	.loader {
 		position: absolute;
-		top: 35%;
+		top: 60%;
 		left: 50%;
 		transform: translateX(-50%);
 	}
@@ -180,20 +179,156 @@
 
 @media screen and (max-width: $tablet) {
 	.productsDetail {
-		.frame {
-			article {
-				width: 50%;
+		.topBanner {
+			padding: 0px 10vw 0px;
+			padding-bottom: 50px;
+
+			.topBannerLeft {
+				h2 {
+					font: 40px/1 $ikeaFontKo;
+
+					span {
+						font: 16px/1 $ikeaFontKo;
+					}
+				}
 			}
+
+			.topBannerRight {
+				.topBannerRightWrap {
+					.topDescWrap {
+						font: 14px/1 $ikeaFontKo;
+
+						.categoryWrap {
+							p {
+								font: 14px/1 $ikeaFontKo;
+							}
+						}
+					}
+
+					h2 {
+						font: bold 20px/1 $ikeaFontKo;
+					}
+
+					.imgBox1 {
+					}
+				}
+			}
+		}
+
+		.frame {
+			padding: 0px 10vw 0px;
+
+			article {
+				width: calc(100% / 2);
+				padding: 15px;
+
+				.inner {
+					width: 100%;
+					height: 25%;
+					border-top: 1px solid $border;
+					padding-top: 50px;
+
+					.topDescWrap {
+						font: 14px/1 $ikeaFontKo;
+
+						.categoryWrap {
+							p {
+								font: 14px/1 $ikeaFontKo;
+							}
+						}
+					}
+
+					h2 {
+						font: bold 20px/1 $ikeaFontKo;
+					}
+
+					.profile {
+						img {
+							width: 30px;
+						}
+						span {
+							font: 12px/40px $ikeaFontKo;
+						}
+					}
+				}
+			}
+		}
+
+		.loader {
+			top: 60%;
 		}
 	}
 }
 
 @media screen and (max-width: $mobile) {
 	.productsDetail {
+		.topBanner {
+			padding: 0px 5vw 0px;
+			padding-bottom: 30px;
+
+			.topBannerLeft {
+				width: 100%;
+
+				h2 {
+					margin-left: 5vw;
+					margin-top: 370px;
+					font: 30px/1 $ikeaFontKo;
+
+					span {
+						font: 16.8px/1 $ikeaFontKo;
+					}
+				}
+			}
+
+			.topBannerRight {
+				display: none;
+			}
+		}
+
 		.frame {
+			padding: 0px 5vw 0px;
+
 			article {
 				width: 100%;
+				padding: 0;
+
+				.inner {
+					width: 100%;
+
+					.topDescWrap {
+						font: 12.6px/1 $ikeaFontKo;
+
+						.categoryWrap {
+							p {
+								font: 12.6px/1 $ikeaFontKo;
+							}
+						}
+					}
+
+					h2 {
+						font: bold 16.8px/1 $ikeaFontKo;
+					}
+
+					.profile {
+						span {
+							font: 12px/40px $ikeaFontKo;
+						}
+					}
+					.pic {
+						width: 100%;
+
+						img {
+							width: 100%;
+							margin-bottom: 50px;
+							cursor: pointer;
+						}
+					}
+				}
 			}
+		}
+
+		.loader {
+			top: 40%;
 		}
 	}
 }
