@@ -9,6 +9,7 @@ import firebase from './firebase';
 import { useCallback, useRef } from 'react';
 
 import { fetchMainYoutube } from './redux-toolkit/mainYoutubeSlice';
+import { fetchFlickr } from './redux-toolkit/flickerSlice';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 
@@ -65,6 +66,7 @@ function App() {
 	//redux-toolkit
 	useEffect(() => {
 		dispatch(fetchMainYoutube());
+		dispatch(fetchFlickr({ type: 'user', user: '168950802@N02' }));
 	}, [dispatch]);
 
 	/*

@@ -7,7 +7,7 @@ import { BrowserRouter } from 'react-router-dom/cjs/react-router-dom';
 import { Provider } from 'react-redux';
 import { configureStore } from '@reduxjs/toolkit';
 import mainYoutubeReducer from './redux-toolkit/mainYoutubeSlice';
-import flickrReducer from './redux/flickrSlice';
+import flickrReducer from './redux-toolkit/flickerSlice';
 
 const store = configureStore({
 	reducer: {
