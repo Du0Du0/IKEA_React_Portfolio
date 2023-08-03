@@ -1,14 +1,17 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
-import { useSelector } from 'react-redux';
 import { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom/cjs/react-router-dom';
 import Modal from '../common/Modal';
 import SnsShareModal from './SnsShareModal';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useSelector } from 'react-redux';
 
 function Vids() {
+	//redux-toolkit test
+	useSelector((store) => console.log(store));
+
 	const MainVids = useSelector((store) => store.mainYoutubeReducer.mainYoutube);
 
 	const [Index, setIndex] = useState(0);
