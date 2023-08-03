@@ -12,8 +12,8 @@ import firebase from '../../firebase';
 // props와 ref를 인자로 받음
 function Menu(props, ref) {
 	const [IsOpen, setIsOpen] = useState(false);
-	const user = useSelector((store) => store.user);
-	console.log(user);
+	// const user = useSelector((store) => store.user);
+	// console.log(user);
 
 	// 1번인자 : ref
 	// 2번인자 : toggle 함수를 useImperativeHandle을 사용하여 ref로 전달
@@ -28,7 +28,7 @@ function Menu(props, ref) {
 	const active = { color: '#17809b' };
 
 	// useSelector를 사용하여 Redux 상태에서 displayName 가져오기
-	const displayName = useSelector((state) => state.userReducer.displayName);
+	// const displayName = useSelector((state) => state.userReducer.displayName);
 
 	return (
 		<React.Fragment>
@@ -44,7 +44,7 @@ function Menu(props, ref) {
 										<h2>IKEA Category</h2>
 									</Link>
 									<br />
-									<div className='loginStatus'>
+									{/* <div className='loginStatus'>
 										<FontAwesomeIcon icon={faUser} />
 										<span>
 											{displayName ? (
@@ -56,7 +56,7 @@ function Menu(props, ref) {
 											)}
 										</span>
 										<span>{displayName ? <button onClick={() => firebase.auth().signOut()}>로그아웃</button> : ''}</span>
-									</div>
+									</div> */}
 								</div>
 							</div>
 

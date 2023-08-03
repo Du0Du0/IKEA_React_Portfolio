@@ -8,7 +8,7 @@ import { setLoginUser, setLogoutUser } from './redux/action';
 import firebase from './firebase';
 import { useCallback, useRef } from 'react';
 
-import { fetchMainYoutube } from './redux-toolkit/youtubeSlice';
+import { fetchMainYoutube } from './redux-toolkit/mainYoutubeSlice';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 

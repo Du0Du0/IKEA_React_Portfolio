@@ -57,7 +57,7 @@ function Museum() {
 	// 	});
 	// }, []);
 
-	const Museum = useSelector((store) => store.museumReducer.museum);
+	// const Museum = useSelector((store) => store.museumReducer.museum);
 
 	const dispatch = useDispatch();
 	const history = useHistory();
@@ -293,7 +293,7 @@ function Museum() {
 								},
 							}}
 						>
-							{Museum.map((museum, i) => {
+							{/* {Museum.map((museum, i) => {
 								return (
 									<>
 										<SwiperSlide className='swiper-slide second' key={i} onClick={() => goToDetail(i)}>
@@ -304,7 +304,7 @@ function Museum() {
 										</SwiperSlide>
 									</>
 								);
-							})}
+							})} */}
 						</Swiper>
 					</div>
 

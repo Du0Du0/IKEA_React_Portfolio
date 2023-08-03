@@ -11,8 +11,11 @@ import { useSelector } from 'react-redux';
 function Vids() {
 	//redux-toolkit test
 	useSelector((store) => console.log(store));
+	const MainToolkitVids = useSelector((store) => store.mainYoutube.data);
+	console.log(Vids);
 
-	const MainVids = useSelector((store) => store.mainYoutubeReducer.mainYoutube);
+	//redux
+	// const MainVids = useSelector((store) => store.mainYoutubeReducer.mainYoutube);
 
 	const [Index, setIndex] = useState(0);
 	const [SelectedIdx, setSelectedIdx] = useState(0);
@@ -143,7 +146,7 @@ function Vids() {
 					</div>
 					{/* video list start  */}
 					<div className='vidsVideoWrap'>
-						{MainVids.map((mainVid, idx) => {
+						{MainToolkitVids.map((mainVid, idx) => {
 							if (idx >= `${NumVideosToShow}`) return null;
 
 							return (
@@ -191,7 +194,7 @@ function Vids() {
 			</section>
 			<SnsShareModal ref={snsShareModal} />
 			<Modal ref={videoModal}>
-				<iframe title={MainVids[Index]?.id} src={`https://www.youtube.com/embed/${MainVids[Index]?.snippet.resourceId.videoId}`} frameBorder='0'></iframe>
+				<iframe title={MainToolkitVids[Index]?.id} src={`https://www.youtube.com/embed/${MainToolkitVids[Index]?.snippet.resourceId.videoId}`} frameBorder='0'></iframe>
 			</Modal>
 		</>
 	);

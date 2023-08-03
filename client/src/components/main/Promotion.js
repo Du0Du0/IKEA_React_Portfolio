@@ -10,7 +10,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 function Promotion() {
 	const history = useHistory();
 	const path = process.env.PUBLIC_URL;
-	const Promotion = useSelector((store) => store.promotionReducer.promotion);
+	// const Promotion = useSelector((store) => store.promotionReducer.promotion);
 	const dispatch = useDispatch();
 
 	const goToDetail = (idx) => {
@@ -210,7 +210,7 @@ function Promotion() {
 				{/* promotion 오른쪽 sns 영역  */}
 				<div className='promotionWrap'>
 					<div className='sns'>
-						{Promotion.map((promotion, idx) => {
+						{/* {Promotion.map((promotion, idx) => {
 							return (
 								<React.Fragment key={idx}>
 									<h3 onClick={() => goToDetail(idx)}>{promotion.title}</h3>
@@ -222,7 +222,7 @@ function Promotion() {
 									<br />
 								</React.Fragment>
 							);
-						})}
+						})} */}
 					</div>
 					<div className='snsGoBtn'>
 						<a href='#'>
