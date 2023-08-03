@@ -200,22 +200,30 @@ function Detail() {
 
 	const enableUpdate = (editIndex) => {
 		//수정모드 진입함수 호출시 Allowd가 true일때에만 로직이 실행되도록 처리
-		if (!Allowed) return;
+
 		//일직 로직이 실행되면 allowed값을 false로 바꿔서 이후부터는 다시 수정모드로 진입되는 것을 방지
-		setAllowed(false);
-		setPosts(
-			Posts.comments.map((comment, postIndex) => {
-				if (editIndex === postIndex) comment.enableUpdate = true;
-				return comment;
-			})
-		);
+
+		comment.enableUpdate = true;
 	};
+
+	// const enableUpdate = (editIndex) => {
+	// 	//수정모드 진입함수 호출시 Allowd가 true일때에만 로직이 실행되도록 처리
+	// 	if (!Allowed) return;
+	// 	//일직 로직이 실행되면 allowed값을 false로 바꿔서 이후부터는 다시 수정모드로 진입되는 것을 방지
+	// 	setAllowed(false);
+	// 	setPosts(
+	// 		Posts.comments.map((comment, postIndex) => {
+	// 			if (editIndex === postIndex) comment.enableUpdate = true;
+	// 			return comment;
+	// 		})
+	// 	);
+	// };
 
 	const disableUpdate = (editIndex) => {
 		setPosts(
-			Posts.map((post, postIndex) => {
-				if (editIndex === postIndex) post.enableUpdate = false;
-				return post;
+			comment.map((comment, postIndex) => {
+				if (editIndex === postIndex) comment.enableUpdate = false;
+				return comment;
 			})
 		);
 		//글 수정 취소버튼을 눌러서 disableUpdate함수가 호출이 되야지만 Allowed값을 다시 true로 바꿔서 글 수정 가능하게 처리
@@ -350,7 +358,7 @@ function Detail() {
 							Posts.comments &&
 							Posts.comments.map((comment, i) => (
 								<React.Fragment key={i}>
-									{comment.enableUpdate ? (
+									{Allowed[i] ? (
 										<div className='commentList'>
 											<div className='commentListTop'>
 												<p>{comment.comment}</p>
@@ -358,7 +366,7 @@ function Detail() {
 											<div className='commentListBottom'>
 												<div className='leftWrap'>
 													<p>{`${comment.date}`.substr(0, 10)}</p>
-													<p>수정</p>
+													<p onClick={() => setAllowed({ ...Allowed, [i]: false })}>수정</p>
 													<p>삭제</p>
 												</div>
 												<div className='rightWrap'>
@@ -383,7 +391,7 @@ function Detail() {
 														textarea
 														cols='30'
 														rows='6'
-														placeholder='로그인 후 남길 수 있어요. 문의사항을 댓글로 알려주세요! 욕설 및 인신공격성 글은 삭제될 수 있습니다.'
+														defaultValue={comment.comment}
 														maxLength={1500}
 														ref={updateComment}
 														onChange={(e) => {
@@ -398,12 +406,12 @@ function Detail() {
 													></textarea>
 												</div>
 												<div className='commentListBottom'>
-													<div className='leftWrap'>
-														<p>{InputCount}/1500</p>
+													<div className='updateLeftWrap'>
+														<p>{UpdatenputCount}/1500</p>
 													</div>
 													<div className='rightWrap'>
 														<button>저장</button>
-														<button>취소</button>
+														<button onClick={() => setAllowed({ ...Allowed, [i]: true })}>취소</button>
 													</div>
 												</div>
 											</div>

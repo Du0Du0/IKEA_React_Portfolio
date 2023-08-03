@@ -48,9 +48,9 @@
 		}
 
 		input[type='text'] {
-			padding: 2px 25px;
+			padding: 6px 12px;
 			width: 30%;
-			height: 50px;
+			height: 46px;
 			border-radius: 5px;
 			border: 1px solid #cfcfcf;
 			background: #fff;
@@ -62,41 +62,23 @@
 			}
 		}
 
-		.contentWrap {
-			display: flex;
-			flex-direction: column;
-			width: 100%;
-			height: 100%;
-			margin-top: 30px;
+		textarea {
+			width: 95%;
+			height: 300px;
+			padding: 15px 18px;
+			font: 18px/1 $ikeaFontKo;
+			color: $fontColorBl;
+			border: 1px solid $border;
+			border-radius: 5px;
 
-			th {
-				border-bottom: none;
-				margin-bottom: 15px;
-			}
-
-			td {
-				border: none;
-
-				textarea {
-					width: 700%;
-					height: 300px;
-					padding: 15px 18px;
-					font: 18px/1 $ikeaFontKo;
-					color: $fontColorBl;
-					border: 1px solid $border;
-					border-radius: 5px;
-					margin-left: 15px;
-
-					&:focus {
-						outline: 1px solid #12a8ce;
-					}
-				}
+			&:focus {
+				outline: 1px solid #12a8ce;
 			}
 		}
 
 		input[placeholder] {
-			padding: 2px 20px;
-			width: 96%;
+			padding: 6px 12px;
+			width: 95%;
 			height: 50px;
 			border-radius: 5px;
 			border: 1px solid #cfcfcf;
@@ -108,7 +90,7 @@
 		select {
 			padding: 2px 15px;
 			width: 13%;
-			height: 50px;
+			height: 46px;
 			border-radius: 5px;
 			border: 1px solid #cfcfcf;
 			background: transparent;
@@ -121,13 +103,6 @@
 		}
 	}
 
-	.horzienLine {
-		height: 1px;
-		width: 70%;
-		margin: 0px auto;
-		margin-bottom: 5px;
-		background: $border;
-	}
 	.submitBtnWrap {
 		display: flex;
 		justify-content: center;
@@ -164,6 +139,309 @@
 				&:hover {
 					background: $hoverBtn;
 					color: $fontColorW;
+				}
+			}
+		}
+	}
+}
+
+@media screen and (max-width: $tablet) {
+	.write {
+		width: 100vw;
+		min-height: calc(100vh - 300px);
+
+		.titTop {
+			h1 {
+				padding: 250px 10vw 120px;
+				text-align: center;
+				font: bold 48px/1 $ikeaFontKo;
+				color: $fontColorBl;
+			}
+		}
+		fieldset {
+			border: none;
+			padding: 0px 10vw 0px;
+		}
+
+		table {
+			width: 100%;
+			height: 700px;
+			border: none;
+			padding: 0px 10vw 0px;
+			position: relative;
+
+			&::before {
+				content: '';
+				position: absolute;
+				top: 0;
+				border-top: 2px solid $ikeaBl;
+				width: calc(100% - 20vw);
+			}
+
+			th,
+			td {
+				padding: 5px 18px;
+				border-bottom: 1px solid $border;
+			}
+
+			th {
+				font: bold 16.2px/1 $ikeaFontKo;
+				color: $fontColorBl;
+				text-align: left;
+				padding: 0px 2vw 0px;
+			}
+
+			td {
+				width: 80%;
+			}
+
+			input[type='text'] {
+				padding: 6px 12px;
+				width: 30%;
+				height: 41.39px;
+				border-radius: 5px;
+				border: 1px solid #cfcfcf;
+				background: #fff;
+				font: 16.2px/1 $ikeaFontKo;
+				color: $fontColorBl;
+
+				&:focus {
+					outline: 1px solid #12a8ce;
+				}
+			}
+
+			textarea {
+				width: 95%;
+				height: 300px;
+				padding: 15px 18px;
+				font: 16.2px/1 $ikeaFontKo;
+				color: $fontColorBl;
+				border: 1px solid $border;
+				border-radius: 5px;
+				margin-left: 0px;
+
+				&:focus {
+					outline: 1px solid #12a8ce;
+				}
+			}
+
+			input[placeholder] {
+				padding: 6px 12px;
+				width: 95%;
+				height: 41.39px;
+				border-radius: 5px;
+				border: 1px solid #cfcfcf;
+				background: #fff;
+				font: 16.2px/1 $ikeaFontKo;
+				color: $fontColorBl;
+			}
+
+			select {
+				padding: 2px 15px;
+				width: 20%;
+				height: 41.39px;
+				border-radius: 5px;
+				border: 1px solid #cfcfcf;
+				background: transparent;
+				font: 16.2px/1 $ikeaFontKo;
+				color: $fontColorBl;
+
+				&:focus {
+					outline: 1px solid #12a8ce;
+				}
+			}
+		}
+
+		.submitBtnWrap {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			width: 100%;
+			height: 200px;
+			margin-bottom: 56px;
+			gap: 15px;
+
+			button {
+				width: 108px;
+				height: 41px;
+				background: $tableBtn;
+				border-radius: 5px;
+				color: $fontColorW;
+				border: none;
+				transform: translate(0, -5%);
+				font: 14.4px/1 $ikeaFontKo;
+				cursor: pointer;
+				transition: 0.5s;
+				margin-top: -20px;
+
+				&:nth-of-type(1) {
+					background: #fff;
+					border: 1px solid $tableBtn;
+					color: $fontColorBl;
+
+					&:hover {
+						background: $tableBtn;
+						color: $fontColorW;
+					}
+				}
+
+				&:nth-of-type(2) {
+					&:hover {
+						background: $hoverBtn;
+						color: $fontColorW;
+					}
+				}
+			}
+		}
+	}
+}
+
+@media screen and (max-width: $mobile) {
+	.write {
+		width: 100vw;
+		min-height: calc(100vh - 300px);
+
+		.titTop {
+			h1 {
+				padding: 250px 5vw 120px;
+				text-align: center;
+				font: bold 48px/1 $ikeaFontKo;
+				color: $fontColorBl;
+			}
+		}
+		fieldset {
+			border: none;
+			padding: 0px 5vw 0px;
+		}
+
+		table {
+			width: 100%;
+			height: 700px;
+			border: none;
+			padding: 0px 5vw 0px;
+			position: relative;
+
+			&::before {
+				content: '';
+				position: absolute;
+				top: 0;
+				border-top: 2px solid $ikeaBl;
+				width: calc(100% - 10vw);
+			}
+
+			th,
+			td {
+				padding: 5px 18px;
+				border-bottom: 1px solid $border;
+			}
+
+			th {
+				font: bold 12.6px/1 $ikeaFontKo;
+				color: $fontColorBl;
+				text-align: left;
+				padding: 0px 2vw 0px;
+			}
+
+			td {
+				width: 80%;
+			}
+
+			input[type='text'] {
+				padding: 6px 12px;
+				width: 50%;
+				height: 41.39px;
+				border-radius: 5px;
+				border: 1px solid #cfcfcf;
+				background: #fff;
+				font: 12.6px/1 $ikeaFontKo;
+				color: $fontColorBl;
+
+				&:focus {
+					outline: 1px solid #12a8ce;
+				}
+			}
+
+			textarea {
+				width: 100%;
+				height: 300px;
+				margin-top: -40px;
+				padding: 15px 18px;
+				font: 12.6px/1 $ikeaFontKo;
+				color: $fontColorBl;
+				border: 1px solid $border;
+				border-radius: 5px;
+				margin-left: 0px;
+
+				&:focus {
+					outline: 1px solid #12a8ce;
+				}
+			}
+
+			input[placeholder] {
+				padding: 6px 12px;
+				width: 100%;
+				height: 41.39px;
+				border-radius: 5px;
+				border: 1px solid #cfcfcf;
+				background: #fff;
+				font: 12.6px/1 $ikeaFontKo;
+				color: $fontColorBl;
+			}
+
+			select {
+				padding: 2px 15px;
+				width: 40%;
+				height: 41.39px;
+				border-radius: 5px;
+				border: 1px solid #cfcfcf;
+				background: transparent;
+				font: 12.6px/1 $ikeaFontKo;
+				color: $fontColorBl;
+
+				&:focus {
+					outline: 1px solid #12a8ce;
+				}
+			}
+		}
+
+		.submitBtnWrap {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			width: 100%;
+			height: 200px;
+			margin-bottom: 56px;
+			gap: 15px;
+
+			button {
+				width: 84px;
+				height: 32px;
+				background: $tableBtn;
+				border-radius: 5px;
+				color: $fontColorW;
+				border: none;
+				transform: translate(0, -5%);
+				font: 11.2px/1 $ikeaFontKo;
+				cursor: pointer;
+				transition: 0.5s;
+				margin-top: -40px;
+
+				&:nth-of-type(1) {
+					background: #fff;
+					border: 1px solid $tableBtn;
+					color: $fontColorBl;
+
+					&:hover {
+						background: $tableBtn;
+						color: $fontColorW;
+					}
+				}
+
+				&:nth-of-type(2) {
+					&:hover {
+						background: $hoverBtn;
+						color: $fontColorW;
+					}
 				}
 			}
 		}

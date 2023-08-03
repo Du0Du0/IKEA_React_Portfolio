@@ -122,7 +122,7 @@ function Write() {
 							</td>
 						</tr>
 
-						<tr className='contentWrap'>
+						<tr>
 							{/* 내용 */}
 							<th>
 								<label htmlFor='content'>내용</label>
@@ -134,7 +134,6 @@ function Write() {
 					</tbody>
 				</table>
 
-				<div className='horzienLine' />
 				<div className='submitBtnWrap'>
 					<button type='submit' onClick={() => history.goBack()}>
 						취소

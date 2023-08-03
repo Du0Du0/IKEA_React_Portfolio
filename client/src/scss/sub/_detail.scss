@@ -294,11 +294,28 @@
 						}
 					}
 				}
+
+				.updateLeftWrap {
+					p {
+						font: 16px/1 $ikeaFontKo;
+						color: $fontColorBl;
+					}
+				}
+
 				.rightWrap {
 					display: flex;
 					gap: 5px;
 					font: 16px/1 $ikeaFontKo;
 					color: $fontColorGrC;
+
+					button {
+						width: 120px;
+						height: 46px;
+						border-radius: 5px;
+						background: $tableBtn;
+						font: 16px/1 $ikeaFontKo;
+						color: $fontColorW;
+					}
 
 					.fa-heart {
 						transform: translateY(3px);
