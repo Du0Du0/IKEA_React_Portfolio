@@ -8,7 +8,7 @@
     <title>React App</title>
     <script type="text/javascript"
       src="//dapi.kakao.com/v2/maps/sdk.js?appkey=be0e6a448d5b266e02a1457647324d73"></script>
-    <!-- <style>
+    <style>
       .default {
         position: absolute;
         top: -99999px;
@@ -30,32 +30,36 @@
         font: 20px/1 'arial';
         color: #fff;
       }
-    </style> -->
+
+      .mask.off {
+        opacity: 0;
+      }
+    </style>
   </head>
 
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
-    <!-- <div class="defaults"></div>
-    <div class="mask"></div>
+    <div class="defaults"></div>
+    <div class="mask">Loading...</div>
 
     <script>
       const defaults = document.querySelector('.defaults');
       const mask = document.querySelector('.mask');
       let tags = '';
-      const baseURL = 'https://Du0Du0.github.io/ikea-react';
+      const baseURL = 'http://localhost:3000/ikea-react#/';
       const imgs = [
-        baseURL + '/img/Community.jpg',
+        baseURL + '/img/Vids.jpg',
         baseURL + '/img/Visual.jpg',
-        // baseURL + '/img/Gallery.jpg',
-        // baseURL + '/img/Location.jpg',
-        // baseURL + '/img/Youtube.jpg',
-        // baseURL + '/img/Members.jpg',
+        baseURL + '/img/Gallery.jpg',
+        baseURL + '/img/Location.jpg',
+        baseURL + '/img/Youtube.jpg',
+        baseURL + '/img/Members.jpg',
       ];
-      // const vids = [baseURL + '/img/vid.mp4'];
+      const vids = [baseURL + '/img/vid.mp4'];
 
       const lenImg = imgs.length;
-      // const lenVid = vids.length;
+      const lenVid = vids.length;
 
       createDOM();
 
@@ -63,12 +67,74 @@
         imgs.forEach(src => {
           tags += `<img src = ${src} />`
         })
-        // vids.forEach(src => {
-        //   tags += `<video src=${src}></video>`
-        // })
+        vids.forEach(src => {
+          tags += `<video src=${src}></video>`
+        })
         defaults.innerHTML = tags;
       }
-    </script> -->
+
+      //이미지소스 로딩완료 검사함수
+      function loadImg() {
+        return new Promise((res, rej) => {
+          let countImg = 0;
+          const imgDOM = defaults.querySelectorAll('img');
+          imgDOM.forEach(img => {
+            img.onload = () => {
+              countImg++;
+              console.log('img loaded..', countImg);
+              if (countImg === lenImg) {
+                res(true);
+              }
+            }
+          })
+        })
+      }
+      //영상소스 로딩완료 검사함수
+      function loadVid() {
+        return new Promise((res, rej) => {
+          let countVid = 0;
+          const vidDOM = defaults.querySelectorAll('video');
+          vidDOM.forEach(vid => {
+            vid.onloadeddata = () => {
+              countVid++;
+              console.log('vid loaded..', countVid);
+              if (countVid === lenVid) {
+                res(true);
+              }
+            }
+          })
+        })
+      }
+
+      //promise.all vs promise.race
+      //promise.all : 인수로 전달받은 모든 promise가 완료되야지 동기화처리
+      //promise.race : 인수로 전달받은 promise중 하나라도 완료되는것이 바로 동기화처리
+
+      //promise.all()로 loadImg, loadVid함수가 모두 프로미스 객체를 반환할때까지 기다린후 동기화 처리
+
+      setTimeout(() => {
+        mask.classList.add('off');
+      }, 1000)
+
+
+      setTimeout(() => {
+        mask.classList.add('off');
+        mask.remove();
+        defaults.remove();
+      }, 2000)
+
+
+      // Promise.all([loadImg(), loadVid()]).then(result => {
+      //   console.log(result);
+      //   mask.classList.add('off');
+
+      //   setTimeout(() => {
+      //     mask.remove();
+      //     defaults.remove();
+      //   }, 500)
+      // })
+
+    </script>
   </body>
 
 </html>
