@@ -125,13 +125,13 @@ function Youtube() {
 						<figure className='subRight'>
 							<div className='videoBtnContainer'>
 								<span>
-									<button className='pauseBtn' onClick={videoPlayToggle1} style={{ display: IsPlay1 ? 'none' : 'block' }} data-name='Pause'>
-										<img src={path + '/img/pauseWhite.png'} alt='video pause button' />
+									<button className='pauseBtn' onClick={videoPlayToggle1} style={{ display: IsPlay1 ? 'none' : 'block' }}>
+										<img src={path + '/img/pauseWhite.png'} alt='video pause button' data-name='Pause' />
 									</button>
 								</span>
 								<span>
-									<button className='playBtn' onClick={videoPlayToggle1} style={{ display: IsPlay1 ? 'block' : 'none' }} data-name='Play'>
-										<img src={path + '/img/playWhite.png'} alt='video play button' />
+									<button className='playBtn' onClick={videoPlayToggle1} style={{ display: IsPlay1 ? 'block' : 'none' }}>
+										<img src={path + '/img/playWhite.png'} alt='video play button' data-name='Play' />
 									</button>
 								</span>
 							</div>
@@ -154,8 +154,8 @@ function Youtube() {
 						<figure className='imgBoxLeft'>
 							<div className='videoBtnContainer2'>
 								<span>
-									<button className='pauseBtn2' onClick={videoPlayToggle2} style={{ display: IsPlay2 ? 'none' : 'block' }} data-name='Pause'>
-										<img src={path + '/img/pauseWhite.png'} alt='video pause button' />
+									<button className='pauseBtn2' onClick={videoPlayToggle2} style={{ display: IsPlay2 ? 'none' : 'block' }}>
+										<img src={path + '/img/pauseWhite.png'} alt='video pause button' data-name='Pause' />
 									</button>
 								</span>
 								<span>
@@ -246,7 +246,7 @@ function Youtube() {
 				</section>
 			</Layout>
 			<Modal ref={modal}>
-				<iframe title={SubVids[Index]?.id} src={`https://www.youtube.com/embed/${SubVids[Index]?.snippet.resourceId.videoId}`}></iframe>
+				<iframe title={SubVids[Index]?.id} src={`https://www.youtube.com/embed/${SubVids[Index]?.snippet.resourceId.videoId}`} frameBorder='0'></iframe>
 			</Modal>
 		</>
 	);

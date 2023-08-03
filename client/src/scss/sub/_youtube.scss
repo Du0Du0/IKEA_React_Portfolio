@@ -43,7 +43,7 @@
 			}
 
 			p {
-				font: 16px/1.6 $ikeaFontKo;
+				font: 16px/1.5 $ikeaFontKo;
 				color: $fontColorW;
 				text-align: justify;
 				word-break: break-all;
@@ -72,8 +72,8 @@
 			}
 
 			.pauseBtn {
-				width: 30px;
-				height: 30px;
+				width: 40px;
+				height: 40px;
 				background: transparent;
 				position: absolute;
 				z-index: 44;
@@ -91,8 +91,8 @@
 			}
 
 			.playBtn {
-				width: 30px;
-				height: 30px;
+				width: 40px;
+				height: 40px;
 				background: transparent;
 				position: absolute;
 				z-index: 44;
@@ -121,12 +121,13 @@
 		z-index: 2;
 
 		p {
-			font: 36px/1.3 $ikeaFontKo;
+			font: 36px/1.2 $ikeaFontKo;
 			color: $fontColorW;
 			margin-bottom: 96px;
 			text-align: justify;
 			word-wrap: break-word;
 			padding-top: 36px;
+			letter-spacing: -1px;
 		}
 
 		button {
@@ -177,8 +178,8 @@
 			}
 
 			.pauseBtn2 {
-				width: 30px;
-				height: 30px;
+				width: 40px;
+				height: 40px;
 				background: transparent;
 				position: absolute;
 				z-index: 44;
@@ -196,8 +197,8 @@
 			}
 
 			.playBtn2 {
-				width: 30px;
-				height: 30px;
+				width: 40px;
+				height: 40px;
 				background: transparent;
 				position: absolute;
 				z-index: 44;
@@ -518,6 +519,47 @@
 					width: 100%;
 					height: 900px;
 				}
+				.pauseBtn {
+					width: 40px;
+					height: 40px;
+					background: transparent;
+					position: absolute;
+					z-index: 44;
+					bottom: 30px;
+					left: 30px;
+					border: none;
+					cursor: none;
+					transform: translateY(24vh);
+
+					img {
+						width: 100%;
+						height: 100%;
+						object-fit: cover;
+						cursor: none;
+						transform: translateY(24vh);
+					}
+				}
+
+				.playBtn {
+					width: 40px;
+					height: 40px;
+					background: transparent;
+					position: absolute;
+					z-index: 44;
+					bottom: 30px;
+					left: 30px;
+					border: none;
+					cursor: none;
+					transform: translateY(24vh);
+
+					img {
+						width: 100%;
+						height: 100%;
+						object-fit: cover;
+						cursor: none;
+						transform: translateY(24vh);
+					}
+				}
 			}
 		}
 
@@ -623,7 +665,7 @@
 				}
 
 				p {
-					font: 16px/1.6 $ikeaFontKo;
+					font: 16px/1.5 $ikeaFontKo;
 					width: 120%;
 				}
 
@@ -642,6 +684,48 @@
 					width: 100%;
 					height: 100%;
 				}
+
+				.pauseBtn {
+					width: 40px;
+					height: 40px;
+					background: transparent;
+					position: absolute;
+					z-index: 44;
+					bottom: 30px;
+					left: 30px;
+					border: none;
+					cursor: none;
+					transform: translateY(0vh);
+
+					img {
+						width: 100%;
+						height: 100%;
+						object-fit: cover;
+						cursor: none;
+						transform: translateY(0vh);
+					}
+				}
+
+				.playBtn {
+					width: 40px;
+					height: 40px;
+					background: transparent;
+					position: absolute;
+					z-index: 44;
+					bottom: 30px;
+					left: 30px;
+					border: none;
+					cursor: none;
+					transform: translateY(0vh);
+
+					img {
+						width: 100%;
+						height: 100%;
+						object-fit: cover;
+						cursor: none;
+						transform: translateY(0vh);
+					}
+				}
 			}
 		}
 
@@ -649,8 +733,9 @@
 			padding: 0px 5vw 26px;
 
 			p {
-				font: 16px/1.6 $ikeaFontKo;
+				font: 16px/1.5 $ikeaFontKo;
 				margin-bottom: 66px;
+				letter-spacing: 1px;
 			}
 
 			button {
@@ -740,12 +825,12 @@
 		}
 
 		.videoListContainer {
-			padding: 80px 5vw 150px;
+			padding: 80px 0vw 150px;
 
 			.container {
 				.videoBox1 {
 					.textBox {
-						padding: 30px;
+						padding: 20px;
 
 						h3 {
 							font: 25px/1.5 $ikeaFontKo;
