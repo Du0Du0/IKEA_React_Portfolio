@@ -1,3 +1,4 @@
+//roomy
 .community {
 	width: 100vw;
 	min-height: calc(100vh - 300px);
@@ -26,25 +27,31 @@
 			font: 16.2px/41.39px $ikeaFontKo;
 			color: $fontColorBl;
 
-			input[type='checkBox'] {
-				cursor: pointer;
-			}
-			label {
-				font: 16.2px/41.39px $ikeaFontKo;
-				color: $fontColorBl;
-				margin-left: -5px;
-				cursor: pointer;
+			.dateInputContainer {
+				display: flex;
+				gap: 5px;
+
+				input[type='checkBox'] {
+					cursor: pointer;
+				}
+				label {
+					font: 16.2px/41.39px $ikeaFontKo;
+					color: $fontColorBl;
+					margin-left: 5px;
+					cursor: pointer;
+				}
+
+				.dateInput {
+					width: 151px;
+					height: 41.39px;
+					padding: 6px 12px;
+					border: none;
+					border-bottom: 1px solid $border;
+					font: 16.2px/41.39px $ikeaFontKo;
+					color: $fontColorBl;
+				}
 			}
 
-			.dateInput {
-				width: 151px;
-				height: 41.39px;
-				padding: 5.4px 10.8px;
-				border: none;
-				border-bottom: 1px solid $border;
-				font: 16.2px/41.39px $ikeaFontKo;
-				color: $fontColorBl;
-			}
 			.dateBtnWrap {
 				display: flex;
 				gap: 10px;
@@ -64,37 +71,43 @@
 
 		.searchBarBottom {
 			display: flex;
-			gap: 30px;
+			gap: 15px;
 
-			.searchTopic {
-				width: 117px;
-				height: 41.39px;
-				border: none;
-				border-bottom: 1px solid $border;
-				font: 18px/1 $ikeaFontKo;
-				color: $fontColorBl;
-				padding: 5.4px;
-				cursor: pointer;
+			.selectContainer {
+				display: flex;
+				gap: 15px;
+				margin-left: 20px;
 
-				&:focus {
-					outline: none;
-					box-shadow: 0 1px 6px rgba(0, 0, 0, 0.1), 0 1px 6px rgba(0, 0, 0, 0.1);
+				.searchTopic {
+					width: 117px;
+					height: 41.39px;
+					border: none;
+					border-bottom: 1px solid $border;
+					font: 18px/1 $ikeaFontKo;
+					color: $fontColorBl;
+					padding: 5.4px;
+					cursor: pointer;
+
+					&:focus {
+						outline: none;
+						box-shadow: 0 1px 6px rgba(0, 0, 0, 0.1), 0 1px 6px rgba(0, 0, 0, 0.1);
+					}
 				}
-			}
 
-			.searchWhat {
-				width: 270px;
-				height: 41.39px;
-				font: 18px/1 $ikeaFontKo;
-				color: $fontColorBl;
-				padding: 5.4px 18px 4.5px 10.8px;
-				cursor: pointer;
-				border: none;
-				border-bottom: 1px solid $border;
+				.searchWhat {
+					width: 270px;
+					height: 41.39px;
+					font: 18px/1 $ikeaFontKo;
+					color: $fontColorBl;
+					padding: 5.4px 18px 4.5px 10.8px;
+					cursor: pointer;
+					border: none;
+					border-bottom: 1px solid $border;
 
-				&:focus {
-					outline: none;
-					box-shadow: 0 1px 6px rgba(0, 0, 0, 0.1), 0 1px 6px rgba(0, 0, 0, 0.1);
+					&:focus {
+						outline: none;
+						box-shadow: 0 1px 6px rgba(0, 0, 0, 0.1), 0 1px 6px rgba(0, 0, 0, 0.1);
+					}
 				}
 			}
 
@@ -139,24 +152,6 @@
 		padding: 36px 15vw 30px;
 
 		.writeBtn {
-			width: 108px;
-			height: 41.61px;
-			background: $tableBtn;
-			border-radius: 5px;
-			padding: 9px 13.5px;
-			font: 15px/1 $ikeaFontKo;
-			color: $fontColorW;
-			transition: 0.5s;
-			border: none;
-			cursor: pointer;
-
-			&:hover {
-				background: $hoverBtn;
-				color: $fontColorW;
-			}
-		}
-
-		.goCommunityBtn {
 			width: 108px;
 			height: 41.61px;
 			background: $tableBtn;
@@ -224,13 +219,14 @@
 		margin-bottom: 50px;
 		background: $border;
 	}
+
 	.listWrap {
 		width: 100%;
 		display: flex;
 		flex-wrap: wrap;
 		justify-content: left;
 		gap: 20px;
-		padding: 36px 15vw 50px;
+		padding: 15px 15vw 30px;
 
 		.list {
 			display: flex;
@@ -268,9 +264,11 @@
 				display: flex;
 				flex-wrap: wrap;
 				padding: 0px 0px 50px 50px;
+
 				p {
 					font: 14px/1 $ikeaFontKo;
 					color: $fontColorBl;
+
 					&::after {
 						content: '|';
 						margin-right: 10px;
@@ -278,806 +276,20 @@
 					}
 
 					&:nth-of-type(3) {
-						.fa-comment-dots {
-							margin-right: 5px;
-						}
-
 						&::after {
 							content: '';
 							margin-right: 10px;
 							margin-left: 10px;
 						}
 					}
-					.fa-eye {
-						margin-right: 8px;
+					.fa-comment-dots {
+						margin-right: 5px;
 					}
 				}
 			}
 		}
 	}
 
-	.notFoundErr {
-		font: 15px/1 $ikeaFontKo;
-		color: $fontColorBl;
-		margin: 0px auto;
-	}
-}
-
-@media screen and (max-width: $tablet) {
-	.community {
-		width: 100vw;
-		min-height: calc(100vh - 400px);
-
-		.titTop {
-			h1 {
-				padding: 250px 15vw 120px;
-				text-align: center;
-				font: bold 48px/1 $ikeaFontKo;
-				color: $fontColorBl;
-			}
-		}
-		.searchBarWrap {
-			width: 100%;
-			height: 109px;
-			display: flex;
-			justify-content: center;
-			gap: 30px;
-			align-items: center;
-			margin-bottom: 30px;
-			flex-direction: column;
-
-			.searchBarTop {
-				display: flex;
-				gap: 15px;
-				font: 16.2px/41.39px $ikeaFontKo;
-				color: $fontColorBl;
-
-				input[type='checkBox'] {
-					cursor: pointer;
-				}
-				label {
-					font: 16.2px/41.39px $ikeaFontKo;
-					color: $fontColorBl;
-					margin-left: -5px;
-					cursor: pointer;
-				}
-
-				.dateInput {
-					width: 151px;
-					height: 41.39px;
-					padding: 5.4px 10.8px;
-					border: none;
-					border-bottom: 1px solid $border;
-					font: 16.2px/41.39px $ikeaFontKo;
-					color: $fontColorBl;
-				}
-				.dateBtnWrap {
-					display: flex;
-					gap: 10px;
-
-					button {
-						width: 87px;
-						height: 41px;
-						background: none;
-						border: 1px solid $border;
-						border-radius: 5px;
-						font: 16.2px/41.39px $ikeaFontKo;
-						color: $fontColorBl;
-						cursor: pointer;
-					}
-				}
-			}
-
-			.searchBarBottom {
-				display: flex;
-				gap: 30px;
-
-				.searchTopic {
-					width: 117px;
-					height: 41.39px;
-					border: none;
-					border-bottom: 1px solid $border;
-					font: 18px/1 $ikeaFontKo;
-					color: $fontColorBl;
-					padding: 5.4px;
-					cursor: pointer;
-
-					&:focus {
-						outline: none;
-						box-shadow: 0 1px 6px rgba(0, 0, 0, 0.1), 0 1px 6px rgba(0, 0, 0, 0.1);
-					}
-				}
-
-				.searchWhat {
-					width: 270px;
-					height: 41.39px;
-					font: 18px/1 $ikeaFontKo;
-					color: $fontColorBl;
-					padding: 5.4px 18px 4.5px 10.8px;
-					cursor: pointer;
-					border: none;
-					border-bottom: 1px solid $border;
-
-					&:focus {
-						outline: none;
-						box-shadow: 0 1px 6px rgba(0, 0, 0, 0.1), 0 1px 6px rgba(0, 0, 0, 0.1);
-					}
-				}
-
-				input {
-					width: 333px;
-					height: 41.39px;
-					border: none;
-					border-bottom: 1px solid $border;
-					font: 18px/1 $ikeaFontKo;
-					color: $fontColorBl;
-					padding: 5.4px 45px 4.5px 10.8px;
-					position: relative;
-
-					&::placeholder {
-						color: $fontColorBl;
-					}
-
-					&:focus {
-						outline: none;
-						box-shadow: 0 1px 6px rgba(0, 0, 0, 0.1), 0 1px 6px rgba(0, 0, 0, 0.1);
-					}
-				}
-
-				.fa-magnifying-glass {
-					position: relative;
-					right: 0;
-					font: 18px/41.39px $ikeaFontKo;
-					color: $fontColorGrC;
-					cursor: pointer;
-
-					transform: translate(-350%, 60%);
-				}
-			}
-		}
-
-		.btnContainer {
-			width: 100%;
-			height: 67.38;
-			display: flex;
-			justify-content: space-between;
-			align-items: center;
-			padding: 36px 15vw 30px;
-
-			.writeBtn {
-				width: 108px;
-				height: 41.61px;
-				background: $tableBtn;
-				border-radius: 5px;
-				padding: 9px 13.5px;
-				font: 15px/1 $ikeaFontKo;
-				color: $fontColorW;
-				transition: 0.5s;
-				border: none;
-				cursor: pointer;
-
-				&:hover {
-					background: $hoverBtn;
-					color: $fontColorW;
-				}
-			}
-
-			.goCommunityBtn {
-				width: 108px;
-				height: 41.61px;
-				background: $tableBtn;
-				border-radius: 5px;
-				padding: 9px 13.5px;
-				font: 15px/1 $ikeaFontKo;
-				color: $fontColorW;
-				transition: 0.5s;
-				border: none;
-				cursor: pointer;
-
-				&:hover {
-					background: $hoverBtn;
-					color: $fontColorW;
-				}
-			}
-
-			.rightBtnWrap {
-				display: flex;
-				gap: 30px;
-				align-items: center;
-
-				p {
-					font: 15px/1 $ikeaFontKo;
-					color: $fontColorBl;
-
-					span {
-						font: bold 15px/1 $ikeaFontKo;
-						color: $fontColorBl;
-					}
-				}
-
-				.arrayBtn {
-					width: 108px;
-					height: 41.61px;
-					font: 15px/1 $ikeaFontKo;
-					color: $fontColorBl;
-					cursor: pointer;
-					border: none;
-					text-align: center;
-
-					&:hover,
-					&:focus {
-						outline: none;
-						box-shadow: 2px 1px 1rem rgba(137, 137, 143, 0.3);
-					}
-				}
-			}
-		}
-		.horzienLine {
-			height: 1px;
-			width: 70%;
-			margin: 0px auto;
-			margin-bottom: 35px;
-			background: $border;
-		}
-		.listWrap {
-			width: 100%;
-			display: flex;
-			flex-wrap: wrap;
-			justify-content: left;
-			gap: 25px;
-			padding: 36px 10vw 35px;
-
-			.list {
-				display: flex;
-				flex-wrap: wrap;
-				justify-content: space-between;
-				width: calc(100% / 2 - 25px);
-				height: 250px;
-				border: 1px solid $grey;
-				flex-direction: column;
-				border-radius: 5px;
-				cursor: pointer;
-
-				&:hover {
-					box-shadow: 2px 1px 1rem rgba(137, 137, 143, 0.3);
-				}
-
-				h3 {
-					font: bold 20px/1 $ikeaFontKo;
-					padding: 50px 50px 0px;
-					color: $fontColorBl;
-				}
-
-				h2 {
-					font: bold 20px/1.5 $ikeaFontKo;
-					padding: 20px 50px 14.4px;
-					color: $fontColorBl;
-					margin-bottom: 15px;
-				}
-
-				.bottomWrap {
-					width: 100%;
-					display: flex;
-					flex-wrap: wrap;
-					padding: 0px 0px 50px 50px;
-					p {
-						font: 14px/1 $ikeaFontKo;
-						color: $fontColorBl;
-						&::after {
-							content: '|';
-							margin-right: 10px;
-							margin-left: 10px;
-						}
-
-						&:nth-of-type(3) {
-							&::after {
-								content: '';
-								margin-right: 10px;
-								margin-left: 10px;
-							}
-						}
-						.fa-eye {
-							margin-right: 8px;
-						}
-					}
-				}
-			}
-		}
-	}
-}
-
-@media screen and (max-width: $mobile) {
-	.community {
-		width: 100vw;
-		min-height: calc(100vh - 400px);
-
-		.titTop {
-			h1 {
-				padding: 250px 15vw 120px;
-				text-align: center;
-				font: bold 48px/1 $ikeaFontKo;
-				color: $fontColorBl;
-			}
-		}
-		.searchBarWrap {
-			width: 100%;
-			height: 109px;
-			display: flex;
-			justify-content: center;
-			gap: 30px;
-			align-items: center;
-			margin-bottom: 30px;
-			flex-direction: column;
-
-			.searchBarTop {
-				display: flex;
-				gap: 15px;
-				font: 16.2px/41.39px $ikeaFontKo;
-				color: $fontColorBl;
-
-				input[type='checkBox'] {
-					cursor: pointer;
-				}
-				label {
-					font: 16.2px/41.39px $ikeaFontKo;
-					color: $fontColorBl;
-					margin-left: -5px;
-					cursor: pointer;
-				}
-
-				.dateInput {
-					width: 151px;
-					height: 41.39px;
-					padding: 5.4px 10.8px;
-					border: none;
-					border-bottom: 1px solid $border;
-					font: 16.2px/41.39px $ikeaFontKo;
-					color: $fontColorBl;
-				}
-				.dateBtnWrap {
-					display: flex;
-					gap: 10px;
-
-					button {
-						width: 87px;
-						height: 41px;
-						background: none;
-						border: 1px solid $border;
-						border-radius: 5px;
-						font: 16.2px/41.39px $ikeaFontKo;
-						color: $fontColorBl;
-						cursor: pointer;
-					}
-				}
-			}
-
-			.searchBarBottom {
-				display: flex;
-				gap: 30px;
-
-				.searchTopic {
-					width: 117px;
-					height: 41.39px;
-					border: none;
-					border-bottom: 1px solid $border;
-					font: 18px/1 $ikeaFontKo;
-					color: $fontColorBl;
-					padding: 5.4px;
-					cursor: pointer;
-
-					&:focus {
-						outline: none;
-						box-shadow: 0 1px 6px rgba(0, 0, 0, 0.1), 0 1px 6px rgba(0, 0, 0, 0.1);
-					}
-				}
-
-				.searchWhat {
-					width: 270px;
-					height: 41.39px;
-					font: 18px/1 $ikeaFontKo;
-					color: $fontColorBl;
-					padding: 5.4px 18px 4.5px 10.8px;
-					cursor: pointer;
-					border: none;
-					border-bottom: 1px solid $border;
-
-					&:focus {
-						outline: none;
-						box-shadow: 0 1px 6px rgba(0, 0, 0, 0.1), 0 1px 6px rgba(0, 0, 0, 0.1);
-					}
-				}
-
-				input {
-					width: 333px;
-					height: 41.39px;
-					border: none;
-					border-bottom: 1px solid $border;
-					font: 18px/1 $ikeaFontKo;
-					color: $fontColorBl;
-					padding: 5.4px 45px 4.5px 10.8px;
-					position: relative;
-
-					&::placeholder {
-						color: $fontColorBl;
-					}
-
-					&:focus {
-						outline: none;
-						box-shadow: 0 1px 6px rgba(0, 0, 0, 0.1), 0 1px 6px rgba(0, 0, 0, 0.1);
-					}
-				}
-
-				.fa-magnifying-glass {
-					position: relative;
-					right: 0;
-					font: 18px/41.39px $ikeaFontKo;
-					color: $fontColorGrC;
-					cursor: pointer;
-
-					transform: translate(-350%, 60%);
-				}
-			}
-		}
-
-		.btnContainer {
-			width: 100%;
-			height: 67.38;
-			display: flex;
-			justify-content: space-between;
-			align-items: center;
-			padding: 36px 15vw 30px;
-
-			.writeBtn {
-				width: 108px;
-				height: 41.61px;
-				background: $tableBtn;
-				border-radius: 5px;
-				padding: 9px 13.5px;
-				font: 15px/1 $ikeaFontKo;
-				color: $fontColorW;
-				transition: 0.5s;
-				border: none;
-				cursor: pointer;
-
-				&:hover {
-					background: $hoverBtn;
-					color: $fontColorW;
-				}
-			}
-
-			.goCommunityBtn {
-				width: 108px;
-				height: 41.61px;
-				background: $tableBtn;
-				border-radius: 5px;
-				padding: 9px 13.5px;
-				font: 15px/1 $ikeaFontKo;
-				color: $fontColorW;
-				transition: 0.5s;
-				border: none;
-				cursor: pointer;
-
-				&:hover {
-					background: $hoverBtn;
-					color: $fontColorW;
-				}
-			}
-
-			.rightBtnWrap {
-				display: flex;
-				gap: 30px;
-				align-items: center;
-
-				p {
-					font: 15px/1 $ikeaFontKo;
-					color: $fontColorBl;
-
-					span {
-						font: bold 15px/1 $ikeaFontKo;
-						color: $fontColorBl;
-					}
-				}
-
-				.arrayBtn {
-					width: 108px;
-					height: 41.61px;
-					font: 15px/1 $ikeaFontKo;
-					color: $fontColorBl;
-					cursor: pointer;
-					border: none;
-					text-align: center;
-
-					&:hover,
-					&:focus {
-						outline: none;
-						box-shadow: 2px 1px 1rem rgba(137, 137, 143, 0.3);
-					}
-				}
-			}
-		}
-		.horzienLine {
-			height: 1px;
-			width: 70%;
-			margin: 0px auto;
-			margin-bottom: 35px;
-			background: $border;
-		}
-		.listWrap {
-			width: 100%;
-			display: flex;
-			flex-wrap: wrap;
-			justify-content: left;
-			gap: 25px;
-			padding: 36px 5vw 35px;
-
-			.list {
-				display: flex;
-				flex-wrap: wrap;
-				justify-content: space-between;
-				width: calc(100% / 1 - 25px);
-				height: 250px;
-				border: 1px solid $grey;
-				flex-direction: column;
-				border-radius: 5px;
-				cursor: pointer;
-
-				&:hover {
-					box-shadow: 2px 1px 1rem rgba(137, 137, 143, 0.3);
-				}
-
-				h3 {
-					font: bold 20px/1 $ikeaFontKo;
-					padding: 50px 50px 0px;
-					color: $fontColorBl;
-				}
-
-				h2 {
-					font: bold 20px/1.5 $ikeaFontKo;
-					padding: 20px 50px 14.4px;
-					color: $fontColorBl;
-					margin-bottom: 15px;
-				}
-
-				.bottomWrap {
-					width: 100%;
-					display: flex;
-					flex-wrap: wrap;
-					padding: 0px 0px 50px 50px;
-					p {
-						font: 14px/1 $ikeaFontKo;
-						color: $fontColorBl;
-						&::after {
-							content: '|';
-							margin-right: 10px;
-							margin-left: 10px;
-						}
-
-						&:nth-of-type(3) {
-							&::after {
-								content: '';
-								margin-right: 10px;
-								margin-left: 10px;
-							}
-						}
-						.fa-eye {
-							margin-right: 8px;
-						}
-					}
-				}
-			}
-		}
-	}
-}
-
-//roomy
-.community {
-	width: 100vw;
-	min-height: calc(100vh - 300px);
-
-	.titTop {
-		h1 {
-			padding: 250px 15vw 120px;
-			text-align: center;
-			font: bold 48px/1 $ikeaFontKo;
-			color: $fontColorBl;
-		}
-	}
-	.searchBarWrap {
-		width: 100%;
-		height: 109px;
-		display: flex;
-		justify-content: center;
-		gap: 30px;
-		align-items: center;
-		margin-bottom: 30px;
-		flex-direction: column;
-
-		.searchBarTop {
-			display: flex;
-			gap: 15px;
-			font: 16.2px/41.39px $ikeaFontKo;
-			color: $fontColorBl;
-
-			input[type='checkBox'] {
-				cursor: pointer;
-			}
-			label {
-				font: 16.2px/41.39px $ikeaFontKo;
-				color: $fontColorBl;
-				margin-left: -5px;
-				cursor: pointer;
-			}
-
-			.dateInput {
-				width: 151px;
-				height: 41.39px;
-				padding: 5.4px 10.8px;
-				border: none;
-				border-bottom: 1px solid $border;
-				font: 16.2px/41.39px $ikeaFontKo;
-				color: $fontColorBl;
-			}
-			.dateBtnWrap {
-				display: flex;
-				gap: 10px;
-
-				button {
-					width: 87px;
-					height: 41px;
-					background: none;
-					border: 1px solid $border;
-					border-radius: 5px;
-					font: 16.2px/41.39px $ikeaFontKo;
-					color: $fontColorBl;
-					cursor: pointer;
-				}
-			}
-		}
-
-		.searchBarBottom {
-			display: flex;
-			gap: 30px;
-
-			.searchTopic {
-				width: 117px;
-				height: 41.39px;
-				border: none;
-				border-bottom: 1px solid $border;
-				font: 18px/1 $ikeaFontKo;
-				color: $fontColorBl;
-				padding: 5.4px;
-				cursor: pointer;
-
-				&:focus {
-					outline: none;
-					box-shadow: 0 1px 6px rgba(0, 0, 0, 0.1), 0 1px 6px rgba(0, 0, 0, 0.1);
-				}
-			}
-
-			.searchWhat {
-				width: 270px;
-				height: 41.39px;
-				font: 18px/1 $ikeaFontKo;
-				color: $fontColorBl;
-				padding: 5.4px 18px 4.5px 10.8px;
-				cursor: pointer;
-				border: none;
-				border-bottom: 1px solid $border;
-
-				&:focus {
-					outline: none;
-					box-shadow: 0 1px 6px rgba(0, 0, 0, 0.1), 0 1px 6px rgba(0, 0, 0, 0.1);
-				}
-			}
-
-			input {
-				width: 333px;
-				height: 41.39px;
-				border: none;
-				border-bottom: 1px solid $border;
-				font: 18px/1 $ikeaFontKo;
-				color: $fontColorBl;
-				padding: 5.4px 45px 4.5px 10.8px;
-				position: relative;
-
-				&::placeholder {
-					color: $fontColorBl;
-				}
-
-				&:focus {
-					outline: none;
-					box-shadow: 0 1px 6px rgba(0, 0, 0, 0.1), 0 1px 6px rgba(0, 0, 0, 0.1);
-				}
-			}
-
-			.fa-magnifying-glass {
-				position: relative;
-				right: 0;
-				font: 18px/41.39px $ikeaFontKo;
-				color: $fontColorGrC;
-				cursor: pointer;
-
-				transform: translate(-350%, 60%);
-			}
-		}
-	}
-
-	.btnContainer {
-		width: 100%;
-		height: 67.38;
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-		padding: 36px 15vw 30px;
-
-		.writeBtn {
-			width: 108px;
-			height: 41.61px;
-			background: $tableBtn;
-			border-radius: 5px;
-			padding: 9px 13.5px;
-			font: 15px/1 $ikeaFontKo;
-			color: $fontColorW;
-			transition: 0.5s;
-			border: none;
-			cursor: pointer;
-
-			&:hover {
-				background: $hoverBtn;
-				color: $fontColorW;
-			}
-		}
-
-		.rightBtnWrap {
-			display: flex;
-			gap: 20px;
-			align-items: center;
-
-			p {
-				font: 15px/1 $ikeaFontKo;
-				color: $fontColorBl;
-
-				span {
-					font: bold 15px/1 $ikeaFontKo;
-					color: $fontColorBl;
-				}
-			}
-
-			.arrayBtn {
-				width: 108px;
-				height: 41.61px;
-				font: 15px/1 $ikeaFontKo;
-				color: $fontColorBl;
-				cursor: pointer;
-				border: none;
-				text-align: center;
-
-				&:hover,
-				&:focus {
-					outline: none;
-					box-shadow: 2px 1px 1rem rgba(137, 137, 143, 0.3);
-				}
-			}
-
-			svg {
-				cursor: pointer;
-			}
-		}
-	}
-	.horzienLine {
-		height: 1px;
-		width: 70%;
-		margin: 0px auto;
-		margin-bottom: 15px;
-		background: $border;
-	}
-	.horzienLine2 {
-		height: 1px;
-		width: 70%;
-		margin: 0px auto;
-		margin-bottom: 50px;
-		background: $border;
-	}
 	.listWrap.roomy {
 		width: 100%;
 		display: flex;
@@ -1138,8 +350,8 @@
 							margin-left: 10px;
 						}
 					}
-					.fa-eye {
-						margin-right: 8px;
+					.fa-comment-dots {
+						margin-right: 5px;
 					}
 				}
 			}
@@ -1154,7 +366,7 @@
 
 		.titTop {
 			h1 {
-				padding: 250px 15vw 120px;
+				padding: 250px 10vw 120px;
 				text-align: center;
 				font: bold 48px/1 $ikeaFontKo;
 				color: $fontColorBl;
@@ -1173,28 +385,31 @@
 			.searchBarTop {
 				display: flex;
 				gap: 15px;
-				font: 16.2px/41.39px $ikeaFontKo;
+				font: 14.4px/41.39px $ikeaFontKo;
 				color: $fontColorBl;
 
-				input[type='checkBox'] {
-					cursor: pointer;
-				}
-				label {
-					font: 16.2px/41.39px $ikeaFontKo;
-					color: $fontColorBl;
-					margin-left: -5px;
-					cursor: pointer;
+				.dateInputContainer {
+					input[type='checkBox'] {
+						cursor: pointer;
+					}
+					label {
+						font: 14.4px/41.39px $ikeaFontKo;
+						color: $fontColorBl;
+						margin-left: 5px;
+						cursor: pointer;
+					}
+
+					.dateInput {
+						width: 130px;
+						height: 41.39px;
+						padding: 5.4px 10.8px;
+						border: none;
+						border-bottom: 1px solid $border;
+						font: 14.4px/41.39px $ikeaFontKo;
+						color: $fontColorBl;
+					}
 				}
 
-				.dateInput {
-					width: 151px;
-					height: 41.39px;
-					padding: 5.4px 10.8px;
-					border: none;
-					border-bottom: 1px solid $border;
-					font: 16.2px/41.39px $ikeaFontKo;
-					color: $fontColorBl;
-				}
 				.dateBtnWrap {
 					display: flex;
 					gap: 10px;
@@ -1205,7 +420,7 @@
 						background: none;
 						border: 1px solid $border;
 						border-radius: 5px;
-						font: 16.2px/41.39px $ikeaFontKo;
+						font: 14.4px/41.39px $ikeaFontKo;
 						color: $fontColorBl;
 						cursor: pointer;
 					}
@@ -1214,37 +429,45 @@
 
 			.searchBarBottom {
 				display: flex;
-				gap: 30px;
+				gap: 15px;
+				padding: 0px 10vw 0px;
+				margin-left: -5px;
 
-				.searchTopic {
-					width: 117px;
-					height: 41.39px;
-					border: none;
-					border-bottom: 1px solid $border;
-					font: 18px/1 $ikeaFontKo;
-					color: $fontColorBl;
-					padding: 5.4px;
-					cursor: pointer;
+				.selectContainer {
+					display: flex;
+					gap: 15px;
 
-					&:focus {
-						outline: none;
-						box-shadow: 0 1px 6px rgba(0, 0, 0, 0.1), 0 1px 6px rgba(0, 0, 0, 0.1);
+					.searchTopic {
+						width: 117px;
+						height: 41.39px;
+						border: none;
+						border-bottom: 1px solid $border;
+						font: 14.4px/1 $ikeaFontKo;
+						color: $fontColorBl;
+						padding: 5.4px;
+						cursor: pointer;
+						margin-left: 30px;
+
+						&:focus {
+							outline: none;
+							box-shadow: 0 1px 6px rgba(0, 0, 0, 0.1), 0 1px 6px rgba(0, 0, 0, 0.1);
+						}
 					}
-				}
 
-				.searchWhat {
-					width: 270px;
-					height: 41.39px;
-					font: 18px/1 $ikeaFontKo;
-					color: $fontColorBl;
-					padding: 5.4px 18px 4.5px 10.8px;
-					cursor: pointer;
-					border: none;
-					border-bottom: 1px solid $border;
+					.searchWhat {
+						width: 250px;
+						height: 41.39px;
+						font: 14.4px/1 $ikeaFontKo;
+						color: $fontColorBl;
+						padding: 5.4px 18px 4.5px 10.8px;
+						cursor: pointer;
+						border: none;
+						border-bottom: 1px solid $border;
 
-					&:focus {
-						outline: none;
-						box-shadow: 0 1px 6px rgba(0, 0, 0, 0.1), 0 1px 6px rgba(0, 0, 0, 0.1);
+						&:focus {
+							outline: none;
+							box-shadow: 0 1px 6px rgba(0, 0, 0, 0.1), 0 1px 6px rgba(0, 0, 0, 0.1);
+						}
 					}
 				}
 
@@ -1253,7 +476,7 @@
 					height: 41.39px;
 					border: none;
 					border-bottom: 1px solid $border;
-					font: 18px/1 $ikeaFontKo;
+					font: 14.4px/1 $ikeaFontKo;
 					color: $fontColorBl;
 					padding: 5.4px 45px 4.5px 10.8px;
 					position: relative;
@@ -1266,16 +489,15 @@
 						outline: none;
 						box-shadow: 0 1px 6px rgba(0, 0, 0, 0.1), 0 1px 6px rgba(0, 0, 0, 0.1);
 					}
-				}
 
-				.fa-magnifying-glass {
-					position: relative;
-					right: 0;
-					font: 18px/41.39px $ikeaFontKo;
-					color: $fontColorGrC;
-					cursor: pointer;
-
-					transform: translate(-350%, 60%);
+					.fa-magnifying-glass {
+						position: relative;
+						right: 0;
+						font: 18px/41.39px $ikeaFontKo;
+						color: $fontColorGrC;
+						cursor: pointer;
+						transform: translate(-250%, 60%);
+					}
 				}
 			}
 		}
@@ -1286,15 +508,15 @@
 			display: flex;
 			justify-content: space-between;
 			align-items: center;
-			padding: 36px 15vw 30px;
+			padding: 36px 10vw 30px;
 
 			.writeBtn {
 				width: 108px;
-				height: 41.61px;
+				height: 41px;
 				background: $tableBtn;
 				border-radius: 5px;
 				padding: 9px 13.5px;
-				font: 15px/1 $ikeaFontKo;
+				font: 13.5px/1 $ikeaFontKo;
 				color: $fontColorW;
 				transition: 0.5s;
 				border: none;
@@ -1308,11 +530,11 @@
 
 			.rightBtnWrap {
 				display: flex;
-				gap: 30px;
+				gap: 8px;
 				align-items: center;
 
 				p {
-					font: 15px/1 $ikeaFontKo;
+					font: 13.5px/1 $ikeaFontKo;
 					color: $fontColorBl;
 
 					span {
@@ -1324,7 +546,7 @@
 				.arrayBtn {
 					width: 108px;
 					height: 41.61px;
-					font: 15px/1 $ikeaFontKo;
+					font: 13.5px/1 $ikeaFontKo;
 					color: $fontColorBl;
 					cursor: pointer;
 					border: none;
@@ -1336,15 +558,86 @@
 						box-shadow: 2px 1px 1rem rgba(137, 137, 143, 0.3);
 					}
 				}
+
+				svg {
+					margin-right: 8px;
+				}
 			}
 		}
 		.horzienLine {
 			height: 1px;
-			width: 70%;
+			width: 80%;
 			margin: 0px auto;
 			margin-bottom: 35px;
 			background: $border;
 		}
+
+		.listWrap {
+			width: 100%;
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: left;
+			gap: 25px;
+			padding: 36px 10vw 35px;
+
+			.list {
+				display: flex;
+				flex-wrap: wrap;
+				justify-content: space-between;
+				width: 100%;
+				height: 250px;
+				border: 1px solid $grey;
+				flex-direction: column;
+				border-radius: 5px;
+				cursor: pointer;
+
+				&:hover {
+					box-shadow: 2px 1px 1rem rgba(137, 137, 143, 0.3);
+				}
+
+				h3 {
+					font: bold 19.6px/1 $ikeaFontKo;
+					padding: 50px 50px 0px;
+					color: $fontColorBl;
+				}
+
+				h2 {
+					font: bold 19.6px/1.5 $ikeaFontKo;
+					padding: 20px 50px 14.4px;
+					color: $fontColorBl;
+					margin-bottom: 15px;
+				}
+
+				.bottomWrap {
+					width: 100%;
+					display: flex;
+					flex-wrap: wrap;
+					padding: 0px 0px 50px 50px;
+
+					p {
+						font: 14.4px/1 $ikeaFontKo;
+						color: $fontColorBl;
+						&::after {
+							content: '|';
+							margin-right: 10px;
+							margin-left: 10px;
+						}
+
+						&:nth-of-type(3) {
+							&::after {
+								content: '';
+								margin-right: 10px;
+								margin-left: 10px;
+							}
+						}
+						.fa-comment-dots {
+							margin-right: 5px;
+						}
+					}
+				}
+			}
+		}
+
 		.listWrap.roomy {
 			width: 100%;
 			display: flex;
@@ -1357,7 +650,7 @@
 				display: flex;
 				flex-wrap: wrap;
 				justify-content: space-between;
-				width: calc(100% / 2 - 25px);
+				width: calc(100% / 2 - 13px);
 				height: 250px;
 				border: 1px solid $grey;
 				flex-direction: column;
@@ -1369,13 +662,13 @@
 				}
 
 				h3 {
-					font: bold 20px/1 $ikeaFontKo;
+					font: bold 19.6px/1 $ikeaFontKo;
 					padding: 50px 50px 0px;
 					color: $fontColorBl;
 				}
 
 				h2 {
-					font: bold 20px/1.5 $ikeaFontKo;
+					font: bold 19.6px/1.5 $ikeaFontKo;
 					padding: 20px 50px 14.4px;
 					color: $fontColorBl;
 					margin-bottom: 15px;
@@ -1386,8 +679,9 @@
 					display: flex;
 					flex-wrap: wrap;
 					padding: 0px 0px 50px 50px;
+
 					p {
-						font: 14px/1 $ikeaFontKo;
+						font: 14.4px/1 $ikeaFontKo;
 						color: $fontColorBl;
 						&::after {
 							content: '|';
@@ -1402,12 +696,20 @@
 								margin-left: 10px;
 							}
 						}
-						.fa-eye {
-							margin-right: 8px;
+						.fa-comment-dots {
+							margin-right: 5px;
 						}
 					}
 				}
 			}
+		}
+
+		.horzienLine2 {
+			height: 1px;
+			width: 80%;
+			margin: 0px auto;
+			margin-bottom: 35px;
+			background: $border;
 		}
 	}
 }
@@ -1419,7 +721,7 @@
 
 		.titTop {
 			h1 {
-				padding: 250px 15vw 120px;
+				padding: 250px 3vw 180px;
 				text-align: center;
 				font: bold 48px/1 $ikeaFontKo;
 				color: $fontColorBl;
@@ -1438,39 +740,45 @@
 			.searchBarTop {
 				display: flex;
 				gap: 15px;
-				font: 16.2px/41.39px $ikeaFontKo;
+				font: 12.6px/41.39px $ikeaFontKo;
 				color: $fontColorBl;
+				flex-direction: column;
+				justify-content: center;
 
 				input[type='checkBox'] {
 					cursor: pointer;
+					transform: translateY(2px);
 				}
+
 				label {
-					font: 16.2px/41.39px $ikeaFontKo;
+					font: 11.2px/41.39px $ikeaFontKo;
 					color: $fontColorBl;
-					margin-left: -5px;
+					margin-left: 5px;
 					cursor: pointer;
 				}
 
 				.dateInput {
-					width: 151px;
-					height: 41.39px;
-					padding: 5.4px 10.8px;
+					width: 130px;
+					height: 36.8px;
+					padding: 9.8px 10px;
 					border: none;
 					border-bottom: 1px solid $border;
-					font: 16.2px/41.39px $ikeaFontKo;
+					font: 11.2px/36.8px $ikeaFontKo;
 					color: $fontColorBl;
 				}
 				.dateBtnWrap {
+					width: 100%;
 					display: flex;
 					gap: 10px;
+					justify-content: center;
 
 					button {
-						width: 87px;
-						height: 41px;
+						width: 70px;
+						height: 32px;
 						background: none;
 						border: 1px solid $border;
 						border-radius: 5px;
-						font: 16.2px/41.39px $ikeaFontKo;
+						font: 11.2px/32px $ikeaFontKo;
 						color: $fontColorBl;
 						cursor: pointer;
 					}
@@ -1478,47 +786,60 @@
 			}
 
 			.searchBarBottom {
+				width: 100%;
 				display: flex;
 				gap: 30px;
+				flex-direction: column;
+				justify-content: center;
+				align-items: center;
 
-				.searchTopic {
-					width: 117px;
-					height: 41.39px;
-					border: none;
-					border-bottom: 1px solid $border;
-					font: 18px/1 $ikeaFontKo;
-					color: $fontColorBl;
-					padding: 5.4px;
-					cursor: pointer;
+				.selectContainer {
+					width: 100%;
+					display: flex;
+					gap: 15px;
+					justify-content: center;
+					align-items: center;
+					margin-left: -5vw;
 
-					&:focus {
-						outline: none;
-						box-shadow: 0 1px 6px rgba(0, 0, 0, 0.1), 0 1px 6px rgba(0, 0, 0, 0.1);
+					.searchTopic {
+						width: 50%;
+						height: 36.8px;
+						border: none;
+						border-bottom: 1px solid $border;
+						font: 12.6px/1 $ikeaFontKo;
+						color: $fontColorBl;
+						padding: 4.2px 14px 4.2px 8.4px;
+						cursor: pointer;
+
+						&:focus {
+							outline: none;
+							box-shadow: 0 1px 6px rgba(0, 0, 0, 0.1), 0 1px 6px rgba(0, 0, 0, 0.1);
+						}
 					}
-				}
 
-				.searchWhat {
-					width: 270px;
-					height: 41.39px;
-					font: 18px/1 $ikeaFontKo;
-					color: $fontColorBl;
-					padding: 5.4px 18px 4.5px 10.8px;
-					cursor: pointer;
-					border: none;
-					border-bottom: 1px solid $border;
+					.searchWhat {
+						width: 50%;
+						height: 36.8px;
+						font: 12.6px/1 $ikeaFontKo;
+						color: $fontColorBl;
+						padding: 4.2px 14px 4.2px 8.4px;
+						cursor: pointer;
+						border: none;
+						border-bottom: 1px solid $border;
 
-					&:focus {
-						outline: none;
-						box-shadow: 0 1px 6px rgba(0, 0, 0, 0.1), 0 1px 6px rgba(0, 0, 0, 0.1);
+						&:focus {
+							outline: none;
+							box-shadow: 0 1px 6px rgba(0, 0, 0, 0.1), 0 1px 6px rgba(0, 0, 0, 0.1);
+						}
 					}
 				}
 
 				input {
-					width: 333px;
-					height: 41.39px;
+					width: 100%;
+					height: 36.8px;
 					border: none;
 					border-bottom: 1px solid $border;
-					font: 18px/1 $ikeaFontKo;
+					font: 12.6px/1 $ikeaFontKo;
 					color: $fontColorBl;
 					padding: 5.4px 45px 4.5px 10.8px;
 					position: relative;
@@ -1536,11 +857,13 @@
 				.fa-magnifying-glass {
 					position: relative;
 					right: 0;
-					font: 18px/41.39px $ikeaFontKo;
+					font: 14.4px/41.39px $ikeaFontKo;
 					color: $fontColorGrC;
 					cursor: pointer;
-
-					transform: translate(-350%, 60%);
+					transform: translate(-250%, -50%);
+					float: right;
+					top: -50px;
+					left: 43vw;
 				}
 			}
 		}
@@ -1551,15 +874,15 @@
 			display: flex;
 			justify-content: space-between;
 			align-items: center;
-			padding: 36px 15vw 30px;
+			padding: 36px 3vw 30px;
 
 			.writeBtn {
-				width: 108px;
-				height: 41.61px;
+				width: 64px;
+				height: 29px;
 				background: $tableBtn;
 				border-radius: 5px;
 				padding: 9px 13.5px;
-				font: 15px/1 $ikeaFontKo;
+				font: 10.5px/1 $ikeaFontKo;
 				color: $fontColorW;
 				transition: 0.5s;
 				border: none;
@@ -1573,23 +896,24 @@
 
 			.rightBtnWrap {
 				display: flex;
-				gap: 30px;
+				gap: 8px;
 				align-items: center;
+				padding: 0px 3vw 0px;
 
 				p {
-					font: 15px/1 $ikeaFontKo;
+					font: 10.5px/1 $ikeaFontKo;
 					color: $fontColorBl;
 
 					span {
-						font: bold 15px/1 $ikeaFontKo;
+						font: bold 10.5px/1 $ikeaFontKo;
 						color: $fontColorBl;
 					}
 				}
 
 				.arrayBtn {
-					width: 108px;
-					height: 41.61px;
-					font: 15px/1 $ikeaFontKo;
+					width: 64px;
+					height: 29px;
+					font: 10.5px/1 $ikeaFontKo;
 					color: $fontColorBl;
 					cursor: pointer;
 					border: none;
@@ -1605,43 +929,45 @@
 		}
 		.horzienLine {
 			height: 1px;
-			width: 70%;
+			width: 95%;
 			margin: 0px auto;
 			margin-bottom: 35px;
 			background: $border;
 		}
-		.listWrap.roomy {
+
+		.listWrap {
 			width: 100%;
 			display: flex;
 			flex-wrap: wrap;
 			justify-content: left;
 			gap: 25px;
-			padding: 36px 5vw 35px;
+			padding: 0px 3vw 0px;
 
 			.list {
 				display: flex;
 				flex-wrap: wrap;
 				justify-content: space-between;
-				width: calc(100% / 1 - 25px);
-				height: 250px;
+				width: 100%;
+				height: 200px;
 				border: 1px solid $grey;
 				flex-direction: column;
 				border-radius: 5px;
 				cursor: pointer;
+				padding: 30px 20px;
 
 				&:hover {
 					box-shadow: 2px 1px 1rem rgba(137, 137, 143, 0.3);
 				}
 
 				h3 {
-					font: bold 20px/1 $ikeaFontKo;
-					padding: 50px 50px 0px;
+					font: bold 14.4px/1 $ikeaFontKo;
+					padding: 0px;
 					color: $fontColorBl;
 				}
 
 				h2 {
-					font: bold 20px/1.5 $ikeaFontKo;
-					padding: 20px 50px 14.4px;
+					font: bold 12.6px/1.5 $ikeaFontKo;
+					padding: 0px 0px 11.2px;
 					color: $fontColorBl;
 					margin-bottom: 15px;
 				}
@@ -1650,14 +976,15 @@
 					width: 100%;
 					display: flex;
 					flex-wrap: wrap;
-					padding: 0px 0px 50px 50px;
+					padding: 0px;
+
 					p {
-						font: 14px/1 $ikeaFontKo;
+						font: 10px/1 $ikeaFontKo;
 						color: $fontColorBl;
 						&::after {
 							content: '|';
-							margin-right: 10px;
-							margin-left: 10px;
+							margin-right: 5px;
+							margin-left: 5px;
 						}
 
 						&:nth-of-type(3) {
@@ -1667,12 +994,88 @@
 								margin-left: 10px;
 							}
 						}
-						.fa-eye {
-							margin-right: 8px;
+						.fa-comment-dots {
+							margin-right: 5px;
 						}
 					}
 				}
 			}
+		}
+
+		.listWrap.roomy {
+			width: 100%;
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: left;
+			gap: 25px;
+			padding: 0px 3vw 0px;
+
+			.list {
+				display: flex;
+				flex-wrap: wrap;
+				justify-content: space-between;
+				width: calc(100% / 2 - 13px);
+				height: 200px;
+				border: 1px solid $grey;
+				flex-direction: column;
+				border-radius: 5px;
+				cursor: pointer;
+				padding: 30px 20px;
+
+				&:hover {
+					box-shadow: 2px 1px 1rem rgba(137, 137, 143, 0.3);
+				}
+
+				h3 {
+					font: bold 14.4px/1 $ikeaFontKo;
+					padding: 0px;
+					color: $fontColorBl;
+				}
+
+				h2 {
+					font: bold 12.6px/1.5 $ikeaFontKo;
+					padding: 0px 0px 11.2px;
+					color: $fontColorBl;
+					margin-bottom: 15px;
+				}
+
+				.bottomWrap {
+					width: 100%;
+					display: flex;
+					flex-wrap: wrap;
+					padding: 0px;
+
+					p {
+						font: 10px/1 $ikeaFontKo;
+						color: $fontColorBl;
+						&::after {
+							content: '|';
+							margin-right: 5px;
+							margin-left: 5px;
+						}
+
+						&:nth-of-type(3) {
+							&::after {
+								content: '';
+								margin-right: 10px;
+								margin-left: 10px;
+							}
+						}
+						.fa-comment-dots {
+							margin-right: 3px;
+						}
+					}
+				}
+			}
+		}
+
+		.horzienLine2 {
+			height: 1px;
+			width: 95%;
+			margin: 0px auto;
+			margin-bottom: 35px;
+			background: $border;
+			margin-top: 30px;
 		}
 	}
 }

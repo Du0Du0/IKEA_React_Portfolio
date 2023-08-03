@@ -422,18 +422,21 @@ function Community() {
 				</div>
 				<div className='searchBarWrap'>
 					<div className='searchBarTop'>
-						<input
-							type='checkBox'
-							name='nonDate'
-							ref={ignoreDateRef}
-							onClick={() => {
-								setIgnoreCheck((IgnoreCheck) => !IgnoreCheck);
-							}}
-						/>
-						<label htmlFor='nonDate'>날짜 미지정</label>
-						<input type='date' className='dateInput' ref={startDateRef} disabled={IgnoreCheck ? true : false} />
-						<span>-</span>
-						<input type='date' className='dateInput' ref={endDateRef} disabled={IgnoreCheck ? true : false} />
+						<div className='dateInputContainer'>
+							<input
+								type='checkBox'
+								name='nonDate'
+								ref={ignoreDateRef}
+								onClick={() => {
+									setIgnoreCheck((IgnoreCheck) => !IgnoreCheck);
+								}}
+							/>
+							<label htmlFor='nonDate'>날짜 미지정</label>
+							<input type='date' className='dateInput' ref={startDateRef} disabled={IgnoreCheck ? true : false} />
+							<span>-</span>
+							<input type='date' className='dateInput' ref={endDateRef} disabled={IgnoreCheck ? true : false} />
+						</div>
+
 						<div className='dateBtnWrap'>
 							<button
 								ref={oneWeekBtn}
@@ -471,19 +474,22 @@ function Community() {
 						</div>
 					</div>
 					<div className='searchBarBottom'>
-						<select className='searchTopic' ref={searchTopic}>
-							<option value=''>분류 전체</option>
-							<option value='문의'>문의</option>
-							<option value='요청'>요청</option>
-							<option value='전시'>전시</option>
-							<option value='이벤트'>이벤트</option>
-						</select>
-						<select className='searchWhat' ref={searchWhat}>
-							<option value=''>전체</option>
-							<option value='제목'>제목</option>
-							<option value='내용'>내용</option>
-							<option value='작성자'>작성자</option>
-						</select>
+						<div className='selectContainer'>
+							<select className='searchTopic' ref={searchTopic}>
+								<option value=''>분류 전체</option>
+								<option value='문의'>문의</option>
+								<option value='요청'>요청</option>
+								<option value='전시'>전시</option>
+								<option value='이벤트'>이벤트</option>
+							</select>
+							<select className='searchWhat' ref={searchWhat}>
+								<option value=''>전체</option>
+								<option value='제목'>제목</option>
+								<option value='내용'>내용</option>
+								<option value='작성자'>작성자</option>
+							</select>
+						</div>
+
 						<input type='text' ref={searchInput} placeholder='검색어를 입력하세요' className='searchBar' onKeyDown={(e) => handleSubmitKeyDown(e)} />
 						<FontAwesomeIcon icon={faMagnifyingGlass} onClick={handleSubmitClick} />
 					</div>
