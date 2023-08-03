@@ -16,7 +16,7 @@ export const fetchMainYoutube = createAsyncThunk('youtube/requestYoutube', async
 
 // Redux Toolkit에서 제공하는 유틸리티 함수로서, 리덕스 상태와 액션을 간편하게 관리하기 위해 사용, 이 함수를 사용하면 리듀서와 액션 타입을 자동으로 생성
 const youtubeSlice = createSlice({
-	name: 'youtube',
+	name: 'mainYoutube',
 	initialState: {
 		data: [],
 		isLoading: false,

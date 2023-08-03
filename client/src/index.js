@@ -1,20 +1,26 @@
-import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
-import { BrowserRouter } from 'react-router-dom';
-import ScrollToTop from './components/common/ScrollTop';
+import { HashRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import store from './redux/store';
+import { configureStore } from '@reduxjs/toolkit';
+import mainYoutube from './redux/youtubeSlice';
+import ScrollToTop from './components/common/ScrollTop';
 import { HelmetProvider } from 'react-helmet-async';
 
+const store = configureStore({
+	reducer: {
+		youtube: mainYoutube,
+	},
+});
+
 ReactDOM.render(
-	<BrowserRouter>
+	<HashRouter>
 		<Provider store={store}>
 			<HelmetProvider>
 				<ScrollToTop />
 				<App />
 			</HelmetProvider>
 		</Provider>
-	</BrowserRouter>,
+	</HashRouter>,
 	document.getElementById('root')
 );
