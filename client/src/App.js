@@ -1,14 +1,16 @@
 import { Route, Switch } from 'react-router-dom';
 import './scss/style.scss';
 import { Helmet } from 'react-helmet-async';
-import { useDispatch } from 'react-redux';
 import { setSubYoutube } from './redux/action';
 import { setMainYoutube } from './redux/action';
-import { useEffect } from 'react';
 import axios from 'axios';
 import { setLoginUser, setLogoutUser } from './redux/action';
 import firebase from './firebase';
 import { useCallback, useRef } from 'react';
+
+import { fetchMainYoutube } from './redux-toolkit/youtubeSlice';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 
 //common
 import Footer from './components/common/Footer';
@@ -44,7 +46,7 @@ function App() {
 	const youtubeIndicatorLists = ['Title', 'About', 'Photo', 'Video', 'List'];
 	const menuRef = useRef(null);
 
-	//서브페이지 유투브 데이터
+	//sub youtube with redux
 	const fetchSubYoutube = useCallback(async () => {
 		const key1 = 'AIzaSyCKs11Yu98hp6fq7N54tY2iWSY9qvTh4cM';
 		const list1 = 'PLWgHnOZUp_4FJWdMzYeEAM4Waf8IhnZCB';
@@ -60,22 +62,12 @@ function App() {
 		fetchSubYoutube();
 	}, [fetchSubYoutube]);
 
-	//메인페이지 유투브 데이터
-	const fetchMainYoutube = useCallback(async () => {
-		const key2 = 'AIzaSyCKs11Yu98hp6fq7N54tY2iWSY9qvTh4cM';
-		const list2 = 'PLWgHnOZUp_4H3oyXBnWAhhQhWulLsuoPO';
-		const num2 = 5;
-		const url2 = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=${list2}&key=${key2}&maxResults=${num2}`;
-
-		const result2 = await axios.get(url2);
-		dispatch(setMainYoutube(result2.data.items));
-		console.log('result2.data.items', result2.data.items);
+	//redux-toolkit
+	useEffect(() => {
+		dispatch(fetchMainYoutube());
 	}, [dispatch]);
 
-	useEffect(() => {
-		fetchMainYoutube();
-	}, [fetchMainYoutube]);
-
+	//firebase login & logout
 	useEffect(() => {
 		firebase.auth().onAuthStateChanged((userInfo) => {
 			console.log('userInfo', userInfo);
