@@ -8,12 +8,77 @@
     <title>React App</title>
     <script type="text/javascript"
       src="//dapi.kakao.com/v2/maps/sdk.js?appkey=be0e6a448d5b266e02a1457647324d73"></script>
+    <!-- <style>
+      .default {
+        position: absolute;
+        top: -99999px;
+      }
+
+      .mask {
+        width: 100%;
+        height: 100vh;
+        background: #111;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 10;
+        opacity: 1;
+        transition: opacity 2s;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font: 20px/1 'arial';
+        color: #fff;
+      }
+    </style> -->
   </head>
 
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
+    <!-- <div class="defaults"></div>
+    <div class="mask"></div>
 
+    <script>
+      const defaults = document.querySelector('.defaults');
+      const mask = document.querySelector('.mask');
+      let tags = '';
+      const baseURL = 'https://Du0Du0.github.io/ikea-react';
+      const imgs = [
+        baseURL + '/img/Community.jpg',
+        baseURL + '/img/Visual.jpg',
+        // baseURL + '/img/Gallery.jpg',
+        // baseURL + '/img/Location.jpg',
+        // baseURL + '/img/Youtube.jpg',
+        // baseURL + '/img/Members.jpg',
+      ];
+      // const vids = [baseURL + '/img/vid.mp4'];
+
+      const lenImg = imgs.length;
+      // const lenVid = vids.length;
+
+      createDOM();
+
+      function createDOM() {
+        imgs.forEach(src => {
+          tags += `<img src = ${src} />`
+        })
+        // vids.forEach(src => {
+        //   tags += `<video src=${src}></video>`
+        // })
+        defaults.innerHTML = tags;
+      }
+    </script> -->
   </body>
 
 </html>
+
+<!-- 
+  이미지, 영상을 리액트 컴포넌트가 마운트되기 전 미리 캐싱처리하는 작업흐름
+  1. 배열에 캐싱할 이미지와 영상의 URL을 각각 담아줌
+  2. index.html이 서버쪽에서 호출되자마자 배열에 담긴 url을 반복돌면서 동적으로 DOM생성
+  3. DOM이 index.html에 생성되는 동안 마스크 화면을 대신 보여줌
+  4. 모든, 영상 이미지가 캐싱완료되면 마스크를 강제 제거하고 동적으로 생성된 요소도 제거
+  5. 그 사이 React컴포넌트들이 Real DOM으로 변환되면서 화면에 출력
+  6. github 사이트에서 redux-toolkit브랜치를 default로 지정한 뒤 npm run deploy로 빌드 및 배포
+-->
