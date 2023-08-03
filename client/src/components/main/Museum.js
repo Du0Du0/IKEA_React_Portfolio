@@ -3,6 +3,8 @@ import { useSelector, dispatch, useDispatch } from 'react-redux';
 import axios from 'axios';
 import { useHistory, useParams } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
+
+import { Autoplay } from 'swiper';
 import SwiperCore, { Navigation, Pagination, Scrollbar } from 'swiper';
 import 'swiper/swiper-bundle.min.css';
 import 'swiper/swiper.min.css';
@@ -196,6 +198,8 @@ function Museum() {
 					<div className='swiper-wrapper '>
 						<Swiper
 							className='second'
+							modules={[Autoplay, Pagination, Navigation]}
+							autoplay={{ delay: 2000, disableOnInteraction: true }}
 							loop={true}
 							navigation={{
 								nextEl: '.swiper-button-next',
@@ -203,6 +207,8 @@ function Museum() {
 							}}
 							slidesPerView={2}
 							clickable={true}
+							centeredSlides={true}
+							pagination={{ clickable: true }}
 							touchRatio={0}
 							breakpoints={{
 								1920: {
