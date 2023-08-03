@@ -1,31 +1,23 @@
 import React from 'react';
 import { Link, NavLink } from 'react-router-dom';
-import { useState, useEffect, forwardRef } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import { faUser } from '@fortawesome/free-regular-svg-icons';
 import { faTwitter, faFacebookF } from '@fortawesome/free-brands-svg-icons';
 import { useImperativeHandle } from 'react';
-import { useSelector } from 'react-redux';
 import firebase from '../../firebase';
+import { useSelector, useDispatch } from 'react-redux';
+//menuSlice로 부터 전역state값을 변경해주는 close함수를 import
+import { close } from '../../redux-toolkit/menuSlice';
 
 // props와 ref를 인자로 받음
-function Menu(props, ref) {
-	const [IsOpen, setIsOpen] = useState(false);
+function Menu() {
 	// const user = useSelector((store) => store.user);
 	// console.log(user);
 
-	// 1번인자 : ref
-	// 2번인자 : toggle 함수를 useImperativeHandle을 사용하여 ref로 전달
-	useImperativeHandle(ref, () => {
-		return { toggle: () => setIsOpen(!IsOpen) };
-	});
-
-	useEffect(() => {
-		setIsOpen(false);
-	}, []);
-
 	const active = { color: '#17809b' };
+	const dispatch = useDispatch();
+	const menu = useSelector((store) => store.menu.open);
 
 	// useSelector를 사용하여 Redux 상태에서 displayName 가져오기
 	// const displayName = useSelector((state) => state.userReducer.displayName);
@@ -33,10 +25,11 @@ function Menu(props, ref) {
 	return (
 		<React.Fragment>
 			{/* header left side bar  */}
-			{IsOpen && (
+			{menu && (
 				<>
-					<div className={IsOpen ? 'leftBar lft' : 'leftBar'}>
+					<div className={menu ? 'leftBar lft' : 'leftBar'}>
 						<div className='leftBarWrap'>
+							<button onClick={() => dispatch(close())}>close</button>
 							{/* header left side title */}
 							<div className='leftBarTit'>
 								<div className='titWrap'>
@@ -119,11 +112,11 @@ function Menu(props, ref) {
 						</div>
 					</div>
 
-					<div className={IsOpen ? 'rightBar rgt' : 'rightBar'}></div>
+					<div className={menu ? 'rightBar rgt' : 'rightBar'}></div>
 				</>
 			)}
 		</React.Fragment>
 	);
 }
 
-export default forwardRef(Menu);
+export default Menu;

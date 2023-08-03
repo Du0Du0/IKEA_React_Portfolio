@@ -101,7 +101,7 @@ function App() {
 			<Switch>
 				<Route exact path='/ikea-react' component={Main}></Route>
 
-				<Route path='/' render={() => <Header type={'sub'} menu={menuRef} />}></Route>
+				<Route path='/' render={() => <Header type={'sub'} />}></Route>
 			</Switch>
 
 			<Switch>
