@@ -162,11 +162,14 @@
 		.commentWriteBottom {
 			display: flex;
 			flex-direction: column;
-			border-bottom: 1px solid rgba($ikeaBl, 0.6);
 
 			textarea[placeholder] {
 				font: 16px/1.5 $ikeaFontKo;
 				color: $fontColorBl;
+			}
+
+			&.border {
+				border-bottom: 1px solid rgba($ikeaBl, 0.6);
 			}
 
 			textarea {

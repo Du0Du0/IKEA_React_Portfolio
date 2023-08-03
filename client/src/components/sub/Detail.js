@@ -12,10 +12,13 @@ function Detail() {
 	const history = useHistory();
 	const location = useLocation();
 	const [InputCount, setInputCount] = useState(0);
+	const [UpdatenputCount, setUpdatenputCount] = useState(0);
 	const noticeModal = useRef(null);
 	const { idx } = useParams();
 	const comment = useRef(null);
 	const likeBtn = useRef(null);
+	const [Allowed, setAllowed] = useState(true);
+	const updateComment = useRef(null);
 
 	const getLocalComment = () => {
 		const dataComment = localStorage.getItem('post');
@@ -193,6 +196,48 @@ function Detail() {
 		localStorage.setItem('post', JSON.stringify(posts));
 	};
 
+	const editTextarea = useRef(null);
+
+	const enableUpdate = (editIndex) => {
+		//수정모드 진입함수 호출시 Allowd가 true일때에만 로직이 실행되도록 처리
+		if (!Allowed) return;
+		//일직 로직이 실행되면 allowed값을 false로 바꿔서 이후부터는 다시 수정모드로 진입되는 것을 방지
+		setAllowed(false);
+		setPosts(
+			Posts.comments.map((comment, postIndex) => {
+				if (editIndex === postIndex) comment.enableUpdate = true;
+				return comment;
+			})
+		);
+	};
+
+	const disableUpdate = (editIndex) => {
+		setPosts(
+			Posts.map((post, postIndex) => {
+				if (editIndex === postIndex) post.enableUpdate = false;
+				return post;
+			})
+		);
+		//글 수정 취소버튼을 눌러서 disableUpdate함수가 호출이 되야지만 Allowed값을 다시 true로 바꿔서 글 수정 가능하게 처리
+		setAllowed(true);
+	};
+
+	const updatePost = (editIndex) => {
+		if (!editTextarea.current.value.trim()) {
+			return alert('수정할 제목과 본문을 모두 입력하세요.');
+		}
+
+		setPosts(
+			Posts.map((post, postIndex) => {
+				if (postIndex === editIndex) {
+					post.content = editTextarea.current.value;
+					post.enableUpdate = false;
+				}
+				return post;
+			})
+		);
+	};
+
 	return (
 		<>
 			<Helmet>
@@ -257,7 +302,7 @@ function Detail() {
 						</h3>
 						<CommentModal ref={noticeModal} />
 					</div>
-					<div className='commentWriteBottom'>
+					<div className='commentWriteBottom border'>
 						<textarea
 							cols='30'
 							rows='6'
@@ -305,29 +350,65 @@ function Detail() {
 							Posts.comments &&
 							Posts.comments.map((comment, i) => (
 								<React.Fragment key={i}>
-									<div className='commentList'>
-										<div className='commentListTop'>
-											<p>{comment.comment}</p>
-										</div>
-										<div className='commentListBottom'>
-											<div className='leftWrap'>
-												<p>{`${comment.date}`.substr(0, 10)}</p>
-												<p>수정</p>
-												<p>삭제</p>
+									{comment.enableUpdate ? (
+										<div className='commentList'>
+											<div className='commentListTop'>
+												<p>{comment.comment}</p>
 											</div>
-											<div className='rightWrap'>
-												<FontAwesomeIcon
-													icon={faHeart}
-													ref={likeBtn}
-													onClick={(e) => {
-														e.stopPropagation();
-														likeBtnClickCount(i);
-													}}
-												/>
-												<span>{comment.likeBtn}</span>
+											<div className='commentListBottom'>
+												<div className='leftWrap'>
+													<p>{`${comment.date}`.substr(0, 10)}</p>
+													<p>수정</p>
+													<p>삭제</p>
+												</div>
+												<div className='rightWrap'>
+													<FontAwesomeIcon
+														icon={faHeart}
+														ref={likeBtn}
+														onClick={(e) => {
+															e.stopPropagation();
+															likeBtnClickCount(i);
+														}}
+													/>
+													<span>{comment.likeBtn}</span>
+												</div>
 											</div>
 										</div>
-									</div>
+									) : (
+										//출력모드
+										<>
+											<div className='commentList'>
+												<div className='commentWriteBottom '>
+													<textarea
+														textarea
+														cols='30'
+														rows='6'
+														placeholder='로그인 후 남길 수 있어요. 문의사항을 댓글로 알려주세요! 욕설 및 인신공격성 글은 삭제될 수 있습니다.'
+														maxLength={1500}
+														ref={updateComment}
+														onChange={(e) => {
+															if (e.target.value.length > e.target.maxLength) {
+																e.target.value = e.target.value.slice(0, e.target.maxLength);
+															}
+															setUpdatenputCount(e.target.value.length);
+														}}
+														onInput={(e) => {
+															if (e.target.value.length > e.target.maxLength) e.target.value = e.target.value.slice(0, e.target.maxLength);
+														}}
+													></textarea>
+												</div>
+												<div className='commentListBottom'>
+													<div className='leftWrap'>
+														<p>{InputCount}/1500</p>
+													</div>
+													<div className='rightWrap'>
+														<button>저장</button>
+														<button>취소</button>
+													</div>
+												</div>
+											</div>
+										</>
+									)}
 								</React.Fragment>
 							))}
 					</div>

@@ -29,7 +29,7 @@
     "react-js-pagination": "^3.0.3",
     "react-masonry-component": "^6.3.0",
     "react-password-strength-bar": "^0.4.1",
-    "react-redux": "^8.1.1",
+    "react-redux": "^8.1.2",
     "react-rellax": "^1.0.3",
     "react-router-dom": "^5.3.4",
     "react-scripts": "5.0.1",
