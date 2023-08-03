@@ -36,51 +36,12 @@ function Member() {
 						</>
 					);
 				})}
-				<Parallax className='published' speed={5}>
-					<p>To create a better everyday life </p>
-				</Parallax>
-				<div className='rellaxContainer'>
-					<div className='rellaxWrap'>
-						<ul className='round'>
-							<Parallax className='rellax' speed={2}></Parallax>
-							<Parallax className='rellax'></Parallax>
-							<Parallax className='rellax'></Parallax>
-							<Parallax className='rellax'></Parallax>
-							<Parallax className='rellax' speed={2}></Parallax>
-							<Parallax className='rellax'></Parallax>
-							<Parallax className='rellax'></Parallax>
-							<Parallax className='rellax' speed={2}></Parallax>
-							<Parallax className='rellax'></Parallax>
-							<Parallax className='rellax' speed={10}></Parallax>
-						</ul>
-						<p>Let's go back in time to</p>
-						<h1>1975</h1>
-						<img src={path + '/img/arrowBl.png'} />
-					</div>
+
+				<div className='titContainer '>
+					<p>Let's go back in time to</p>
+					<h2>1975</h2>
+					<img src={path + '/img/arrowBl.png'} />
 				</div>
-
-				<Parallax className='published' speed={3.75}>
-					<h3>
-						California <br /> San Fransico
-					</h3>
-				</Parallax>
-
-				<Parallax className='published' speed={4.3}>
-					<h2>
-						Incorporated - <br /> 1983
-						<br />
-						<br />
-						IKEA Store
-					</h2>
-				</Parallax>
-
-				<Parallax className='middleText' speed={1.5}>
-					<p>
-						“I hope people put their own energy and history onto the products, so that
-						<br /> everyone can make them their own and tell their own stories through these
-						<br /> pieces." – Trini Guzmán, designer
-					</p>
-				</Parallax>
 
 				<div className='articleContainer'>
 					<div className='sticky-container'>
