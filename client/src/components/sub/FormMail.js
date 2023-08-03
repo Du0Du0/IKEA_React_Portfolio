@@ -53,7 +53,7 @@ function FormMail({ Success, setSuccess }) {
 
 						<div className='formMiddleWrap'>
 							{/* 내용 */}
-							<textarea name='message' id='' cols='100' rows='5' placeholder='내용을 입력해주세요.' ref={inputMsg} />
+							<textarea name='message' id='' cols='30' rows='5' placeholder='내용을 입력해주세요.' ref={inputMsg} />
 						</div>
 
 						<div className='formBottomWrap'>
