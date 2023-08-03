@@ -181,6 +181,7 @@
 					color: red;
 					margin-bottom: 15px;
 					position: relative;
+					padding-right: 40px;
 
 					&:focus {
 						outline: 1px solid #12a8ce;
@@ -213,6 +214,7 @@
 					background: #fff;
 					font: 16px/1 $ikeaFontKo;
 					color: $fontColorBl;
+					padding-right: 40px;
 				}
 
 				input[type='email'] {
@@ -299,7 +301,7 @@
 					border-radius: 5px;
 					color: $fontColorW;
 					border: none;
-					transform: translate(0, -5%);
+					transform: translate(0, -2%);
 					font: 15px/1 $ikeaFontKo;
 					margin-left: 7px;
 				}
@@ -633,7 +635,7 @@
 					}
 					input[type='text'] {
 						padding: 5px;
-						width: 50%;
+						width: 30%;
 						height: 37px;
 						margin-bottom: 15px;
 						font: 14.4px/1 $ikeaFontKo;
@@ -645,10 +647,11 @@
 						height: 37px;
 						border-radius: 5px;
 						margin-bottom: 15px;
+						padding-right: 40px;
 					}
 
 					.pwdStrength {
-						width: 50%;
+						width: 30%;
 						margin-bottom: 15px;
 						p {
 							&::before {
@@ -659,9 +662,10 @@
 
 					input[placeholder] {
 						padding: 5px;
-						width: 50%;
+						width: 30%;
 						height: 37px;
 						font: 14.4px/1 $ikeaFontKo;
+						padding-right: 40px;
 					}
 
 					input[type='email'] {
@@ -742,6 +746,16 @@
 						font: 14.4px/1 $ikeaFont;
 					}
 
+					.textareaCount {
+						font: 14.4px/1 $ikeaFontKo;
+						color: $fontColorGr;
+
+						span {
+							font: 14.4px/1 $ikeaFontKo;
+							color: $fontColorGr;
+						}
+					}
+
 					.addressBtn {
 						transform: translateY(-2px);
 						height: 37px;
@@ -802,7 +816,7 @@
 
 		.btnSet {
 			width: 80%;
-			padding: 0px 10vw 0px;
+			padding: -30px 10vw 0px;
 
 			input {
 				font: 12.8px/1 $ikeaFontKo;
@@ -905,7 +919,7 @@
 
 					p {
 						width: 100%;
-						font: 11.2px/1 $ikeaFontKo;
+						font: 11.2px/1.2 $ikeaFontKo;
 
 						&::before {
 							margin-right: 5px;
@@ -919,17 +933,19 @@
 						margin-left: 5px;
 						font: 11.2px/1 $ikeaFontKo;
 					}
+
 					input[type='text'] {
 						padding: 5px;
-						width: 65%;
+						width: 55%;
 						height: 32.8px;
 						margin-bottom: 10px;
 						font: 12.6px/1 $ikeaFontKo;
 					}
 
 					.pwdStrength {
-						width: 65%;
+						width: 55%;
 						margin-bottom: 15px;
+
 						p {
 							&::before {
 								content: none;
@@ -946,14 +962,14 @@
 					}
 
 					input[type='password'] {
-						width: 65%;
+						width: 55%;
 						height: 32.8px;
 						margin-bottom: 10px;
 					}
 
 					input[placeholder] {
 						padding: 5px;
-						width: 65%;
+						width: 55%;
 						height: 32.8px;
 						font: 12.6px/1 $ikeaFontKo;
 					}
@@ -1050,16 +1066,30 @@
 						margin-bottom: 15px;
 					}
 
+					.textareaCount {
+						font: 12.6px/1 $ikeaFontKo;
+						color: $fontColorGr;
+
+						span {
+							font: 12.6px/1 $ikeaFontKo;
+							color: $fontColorGr;
+							span {
+								font: 14px/1 $ikeaFontKo;
+								color: $fontColorGr;
+							}
+						}
+					}
+
 					.addressBtn {
-						transform: translateY(0px);
-						height: 39px;
+						transform: translateX(-2px);
+						height: 32.8px;
 						font: 11.2px/1 $ikeaFontKo;
 					}
 
 					input[class='address'] {
 						&:nth-of-type(1) {
 							width: 40%;
-							margin-right: 5px;
+							margin-right: 2px;
 						}
 
 						&:nth-of-type(2) {
@@ -1134,7 +1164,7 @@
 
 		.btnSet {
 			width: 85%;
-			padding: 0px 10vw 0px;
+			padding: -30px 10vw 0px;
 
 			input {
 				font: 12.8px/1 $ikeaFontKo;
