@@ -34,29 +34,18 @@ app.get('*', (req, res) => {
 });
 
 //create
-//글저장 작업 흐름
-//Counter모델에서부터 글번호 가져옴 -> body-parser로 제목, 본문 가져와서 글 번호를 추가한 후 모델 인스턴스 저장
-//저장이 완료되면 카운터 모델에 있는 글번호 증가
 app.post('/api/create', (req, res) => {
 	//PostSchema가 적용된 Post모델 생성자를 통해 저장 모델 인스턴스 생성
-	Counter.findOne({ name: 'counter' })
-		.exec()
-		.then((doc) => {
-			const PostModel = new Post({
-				title: req.body.title,
-				content: req.body.content,
-				communityNum: doc.communityNum,
-			});
+	const PostModel = new Post({
+		topic: req.body.topic,
+		title: req.body.title,
+		content: req.body.content,
+	});
 
-			PostModel.save().then(() => {
-				//update : $inc(증가), $dec(감소), $set(새로운값으로 변경)
-				Counter.updateOne({ name: 'counter' }, { $inc: { communityNum: 1 } })
-					.then(() => {
-						res.json({ success: true });
-					})
-					.catch(() => res.json({ success: false }));
-			});
-		});
+	//생성된 모델 인스턴스로부터 save명령어로 DB저장 (Promise반환)
+	PostModel.save()
+		.then(() => res.json({ success: true }))
+		.catch(() => res.json({ success: false }));
 });
 
 //read

@@ -94,6 +94,11 @@ function Menu(props, ref) {
 											Join
 										</NavLink>
 									</li>
+									<li>
+										<NavLink to='/faq' activeStyle={active}>
+											FAQ
+										</NavLink>
+									</li>
 								</ul>
 								<ul>
 									{/* ikea twitter icon */}

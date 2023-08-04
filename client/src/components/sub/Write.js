@@ -135,7 +135,7 @@ function Write() {
 				</table>
 
 				<div className='submitBtnWrap'>
-					<button type='submit' onClick={() => history.goBack()}>
+					<button type='cancel' onClick={() => history.goBack()}>
 						취소
 					</button>
 					<button type='submit' onClick={creatPost}>

@@ -35,9 +35,10 @@ import MuseumDetail from './components/sub/MuseumDetail';
 import PromotionDetail from './components/sub/PromotionDetail';
 import Login from './components/sub/Login';
 import FindPassword from './components/sub/FindPassword';
-import Mongo from './components/sub/Mongo';
 import ProductsDetail from './components/sub/ProductsDetail';
 import Menu from './components/common/Menu';
+import FaqRead from './components/sub/FaqRead';
+import FaqWrite from './components/sub/FaqWrite';
 
 function App() {
 	const dispatch = useDispatch();
@@ -166,10 +167,21 @@ function App() {
 
 				<Route
 					exact
-					path='/mongos'
+					path='/faq'
 					render={() => (
 						<>
-							<Mongo />
+							<FaqRead />
+							<FooterNone type={'sub'} imgBg={'footerW'} />
+						</>
+					)}
+				></Route>
+
+				<Route
+					exact
+					path='/faq/write'
+					render={() => (
+						<>
+							<FaqWrite />
 							<FooterNone type={'sub'} imgBg={'footerW'} />
 						</>
 					)}
