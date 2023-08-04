@@ -17,6 +17,7 @@ import Header from './components/common/Header';
 import TopButton from './components/common/TopButton';
 import Scroll_navi from './components/common/Scroll_navi';
 import GlobalStyle from './GlobalStyle';
+import Menu from './components/common/Menu';
 
 //main
 import Main from './components/main/Main';
@@ -36,9 +37,9 @@ import PromotionDetail from './components/sub/PromotionDetail';
 import Login from './components/sub/Login';
 import FindPassword from './components/sub/FindPassword';
 import ProductsDetail from './components/sub/ProductsDetail';
-import Menu from './components/common/Menu';
 import FaqRead from './components/sub/FaqRead';
 import FaqWrite from './components/sub/FaqWrite';
+import FaqDetail from './components/sub/FaqDetail';
 
 function App() {
 	const dispatch = useDispatch();
@@ -182,6 +183,17 @@ function App() {
 					render={() => (
 						<>
 							<FaqWrite />
+							<FooterNone type={'sub'} imgBg={'footerW'} />
+						</>
+					)}
+				></Route>
+
+				<Route
+					exact
+					path='/faq/detail'
+					render={() => (
+						<>
+							<FaqDetail />
 							<FooterNone type={'sub'} imgBg={'footerW'} />
 						</>
 					)}

@@ -8,6 +8,7 @@ import Pagination from 'react-js-pagination';
 import moment from 'moment';
 import { Helmet } from 'react-helmet-async';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 function FaqRead() {
 	const history = useHistory();
@@ -342,6 +343,7 @@ function FaqRead() {
 										goToDetail(idx);
 									}}
 								>
+									<Link to={`/detail/${post.communityNum}`}>{post.title}</Link>
 									<h3>{post.topic}</h3>
 									<h2>{!IsListType && `${post.title}`.length > 18 ? `${post.title}`.substr(0, 15) + '...' : `${post.title}`}</h2>
 									<p>{post.content}</p>
