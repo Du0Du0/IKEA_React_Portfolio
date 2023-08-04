@@ -148,7 +148,7 @@ function Detail() {
 			likeBtn: 0,
 		};
 
-		const updatedComments = [...Posts.comments, newComment];
+		const updatedComments = [newComment, ...Posts.comments];
 
 		const updatedPost = {
 			...Posts,
@@ -291,16 +291,29 @@ function Detail() {
 							<div className='commentSortBtn'>
 								<button
 									className='active'
-									// onClick={() => {
-									// 	const copyPosts = [...Comments];
-									// 	const ascDate = copyPosts.sort((a, b) => a - b);
-									// 	console.log('댓글최신순정렬');
-									// 	setComments(ascDate);
-									// }}
+									onClick={() => {
+										const sortedComments = [...Posts.comments].sort((a, b) => new Date(a.date) - new Date(b.date)).reverse();
+
+										// 정렬된 결과를 Posts에 다시 저장
+										const sortedPosts = { ...Posts, comments: sortedComments };
+
+										setPosts(sortedPosts);
+									}}
 								>
 									최신순
 								</button>
-								<button>공감순</button>
+								<button
+									onClick={() => {
+										const sortedComments = [...Posts.comments].sort((a, b) => a.likeBtn - b.likeBtn).reverse();
+
+										// 정렬된 결과를 Posts에 다시 저장
+										const sortedPosts = { ...Posts, comments: sortedComments };
+
+										setPosts(sortedPosts);
+									}}
+								>
+									공감순
+								</button>
 							</div>
 						</div>
 
