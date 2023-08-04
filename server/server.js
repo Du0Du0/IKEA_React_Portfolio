@@ -35,17 +35,25 @@ app.get('*', (req, res) => {
 
 //create
 app.post('/api/create', (req, res) => {
-	//PostSchema가 적용된 Post모델 생성자를 통해 저장 모델 인스턴스 생성
-	const PostModel = new Post({
-		topic: req.body.topic,
-		title: req.body.title,
-		content: req.body.content,
-	});
+	Counter.findOne({ name: 'counter' })
+		.exec()
+		.then((doc) => {
+			const PostModel = new Post({
+				topic: req.body.topic,
+				title: req.body.title,
+				content: req.body.content,
+				communityNum: doc.communityNum,
+			});
 
-	//생성된 모델 인스턴스로부터 save명령어로 DB저장 (Promise반환)
-	PostModel.save()
-		.then(() => res.json({ success: true }))
-		.catch(() => res.json({ success: false }));
+			PostModel.save().then(() => {
+				//update : $inc(증가), $dec(감소), $set(새로운값으로 변경)
+				Counter.updateOne({ name: 'counter' }, { $inc: { communityNum: 1 } })
+					.then(() => {
+						res.json({ success: true });
+					})
+					.catch(() => res.json({ success: false }));
+			});
+		});
 });
 
 //read
