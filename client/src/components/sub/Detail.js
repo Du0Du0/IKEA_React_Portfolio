@@ -180,6 +180,20 @@ function Detail() {
 		localStorage.setItem('post', JSON.stringify(posts));
 	};
 
+	const [TotalLikes, setTotalLikes] = useState(0); // 좋아요 총 갯수 상태
+
+	const viewLikeNumber = () => {
+		const idx = localStorage.getItem('idx');
+		console.log(idx);
+
+		return Posts.comments?.reduce((total, comments) => total + (comments.likeBtn || 0), 0);
+	};
+
+	useEffect(() => {
+		setTotalLikes(viewLikeNumber());
+		console.log('TotalLikes', TotalLikes);
+	}, [likeBtnClickCount]);
+
 	return (
 		<>
 			<Helmet>
@@ -199,6 +213,11 @@ function Detail() {
 								{Posts.comments === undefined ? 0 : Posts.comments.length}
 							</p>
 
+							<p>
+								<FontAwesomeIcon icon={faHeart} />
+								&nbsp;&nbsp;
+								{TotalLikes}
+							</p>
 							<p>
 								<FontAwesomeIcon icon={faClock} />
 								&nbsp;&nbsp;
