@@ -196,56 +196,6 @@ function Detail() {
 		localStorage.setItem('post', JSON.stringify(posts));
 	};
 
-	const editTextarea = useRef(null);
-
-	const enableUpdate = (editIndex) => {
-		//수정모드 진입함수 호출시 Allowd가 true일때에만 로직이 실행되도록 처리
-
-		//일직 로직이 실행되면 allowed값을 false로 바꿔서 이후부터는 다시 수정모드로 진입되는 것을 방지
-
-		comment.enableUpdate = true;
-	};
-
-	// const enableUpdate = (editIndex) => {
-	// 	//수정모드 진입함수 호출시 Allowd가 true일때에만 로직이 실행되도록 처리
-	// 	if (!Allowed) return;
-	// 	//일직 로직이 실행되면 allowed값을 false로 바꿔서 이후부터는 다시 수정모드로 진입되는 것을 방지
-	// 	setAllowed(false);
-	// 	setPosts(
-	// 		Posts.comments.map((comment, postIndex) => {
-	// 			if (editIndex === postIndex) comment.enableUpdate = true;
-	// 			return comment;
-	// 		})
-	// 	);
-	// };
-
-	const disableUpdate = (editIndex) => {
-		setPosts(
-			comment.map((comment, postIndex) => {
-				if (editIndex === postIndex) comment.enableUpdate = false;
-				return comment;
-			})
-		);
-		//글 수정 취소버튼을 눌러서 disableUpdate함수가 호출이 되야지만 Allowed값을 다시 true로 바꿔서 글 수정 가능하게 처리
-		setAllowed(true);
-	};
-
-	const updatePost = (editIndex) => {
-		if (!editTextarea.current.value.trim()) {
-			return alert('수정할 제목과 본문을 모두 입력하세요.');
-		}
-
-		setPosts(
-			Posts.map((post, postIndex) => {
-				if (postIndex === editIndex) {
-					post.content = editTextarea.current.value;
-					post.enableUpdate = false;
-				}
-				return post;
-			})
-		);
-	};
-
 	return (
 		<>
 			<Helmet>
@@ -358,7 +308,7 @@ function Detail() {
 							Posts.comments &&
 							Posts.comments.map((comment, i) => (
 								<React.Fragment key={i}>
-									{Allowed[i] ? (
+									{!Allowed[i] ? (
 										<div className='commentList'>
 											<div className='commentListTop'>
 												<p>{comment.comment}</p>
@@ -366,7 +316,7 @@ function Detail() {
 											<div className='commentListBottom'>
 												<div className='leftWrap'>
 													<p>{`${comment.date}`.substr(0, 10)}</p>
-													<p onClick={() => setAllowed({ ...Allowed, [i]: false })}>수정</p>
+													<p onClick={() => setAllowed({ ...Allowed, [i]: true })}>수정</p>
 													<p>삭제</p>
 												</div>
 												<div className='rightWrap'>
@@ -410,8 +360,38 @@ function Detail() {
 														<p>{UpdatenputCount}/1500</p>
 													</div>
 													<div className='rightWrap'>
-														<button>저장</button>
-														<button onClick={() => setAllowed({ ...Allowed, [i]: true })}>취소</button>
+														<button
+															onClick={() => {
+																const updatedComment = {
+																	comment: updateComment.current.value,
+																	likeBtn: comment.likeBtn,
+																	date: comment.date,
+																};
+
+																const updatedComments = [...Posts.comments];
+																updatedComments[i] = updatedComment;
+
+																const updatedPost = {
+																	...Posts,
+																	comments: updatedComments,
+																};
+
+																setPosts(updatedPost);
+
+																const data = localStorage.getItem('post');
+																const posts = JSON.parse(data);
+																posts[idx] = updatedPost;
+
+																localStorage.setItem('post', JSON.stringify(posts));
+
+																resetComment();
+																setUpdatenputCount(0);
+																setAllowed({ ...Allowed, [i]: false });
+															}}
+														>
+															저장
+														</button>
+														<button onClick={() => setAllowed({ ...Allowed, [i]: false })}>취소</button>
 													</div>
 												</div>
 											</div>
