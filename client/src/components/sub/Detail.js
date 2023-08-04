@@ -196,6 +196,7 @@ function Detail() {
 		localStorage.setItem('post', JSON.stringify(posts));
 	};
 
+	const currentComments = useRef(null);
 	return (
 		<>
 			<Helmet>
@@ -330,7 +331,31 @@ function Detail() {
 												<div className='leftWrap'>
 													<p>{`${comment.date}`.substr(0, 10)}</p>
 													<p onClick={() => setAllowed({ ...Allowed, [i]: true })}>수정</p>
-													<p>삭제</p>
+													<p
+														onClick={() => {
+															const result = window.confirm('정말로 삭제하시겠습니까?');
+															if (result) {
+																const updatedComments = Posts.comments.filter((_, idx) => idx !== i);
+
+																console.log('updatedComments', updatedComments);
+																const updatedPost = {
+																	...Posts,
+																	comments: updatedComments,
+																};
+
+																setPosts(updatedPost);
+
+																const data = localStorage.getItem('post');
+																const posts = JSON.parse(data);
+																posts[i].comments = updatedComments;
+																localStorage.setItem('post', JSON.stringify(posts));
+															} else {
+																return;
+															}
+														}}
+													>
+														삭제
+													</p>
 												</div>
 												<div className='rightWrap'>
 													<FontAwesomeIcon
