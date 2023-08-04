@@ -502,6 +502,24 @@
 			}
 		}
 
+		.goCommunityBtn {
+			width: 108px;
+			height: 41px;
+			background: $tableBtn;
+			border-radius: 5px;
+			padding: 9px 13.5px;
+			font: 13.5px/1 $ikeaFontKo;
+			color: $fontColorW;
+			transition: 0.5s;
+			border: none;
+			cursor: pointer;
+
+			&:hover {
+				background: $hoverBtn;
+				color: $fontColorW;
+			}
+		}
+
 		.btnContainer {
 			width: 100%;
 			height: 67.38;
@@ -511,6 +529,24 @@
 			padding: 36px 10vw 30px;
 
 			.writeBtn {
+				width: 108px;
+				height: 41px;
+				background: $tableBtn;
+				border-radius: 5px;
+				padding: 9px 13.5px;
+				font: 13.5px/1 $ikeaFontKo;
+				color: $fontColorW;
+				transition: 0.5s;
+				border: none;
+				cursor: pointer;
+
+				&:hover {
+					background: $hoverBtn;
+					color: $fontColorW;
+				}
+			}
+
+			.seeCommunityList {
 				width: 108px;
 				height: 41px;
 				background: $tableBtn;
@@ -564,6 +600,7 @@
 				}
 			}
 		}
+
 		.horzienLine {
 			height: 1px;
 			width: 80%;

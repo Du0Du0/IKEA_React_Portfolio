@@ -314,15 +314,22 @@ function Community() {
 		setCurrentpage(page);
 	};
 
+	const [Search, setSearch] = useState(false);
+
 	//검색1. 시작날짜, 마지막날짜 설정 후 맞는 조건 게시물 필터링
 	const handleSubmitKeyDown = (e) => {
 		searchDateInput();
 		searchArticleKeyDown(e);
+		setSearch(true);
+		console.log('Search', Search);
 	};
+
+	console.log('Search', Search);
 
 	const handleSubmitClick = () => {
 		searchDateInput();
 		searchArticleClick();
+		setSearch(true);
 	};
 
 	const searchDateInput = () => {
@@ -495,10 +502,10 @@ function Community() {
 					</div>
 				</div>
 				<div className='btnContainer'>
-					<button className='writeBtn' onClick={() => history.push('/Write')} style={{ display: NotFoundErr ? 'none' : 'block' }}>
+					<button className='writeBtn' onClick={() => history.push('/Write')} style={{ display: NotFoundErr || Search ? 'none' : 'block' }}>
 						글쓰기
 					</button>
-					<button className='goCommunityBtn' onClick={() => window.location.replace('/community/articles')} style={{ display: NotFoundErr ? 'block' : 'none' }}>
+					<button className='seeCommunityList' onClick={() => window.location.replace('/community/articles')} style={{ display: NotFoundErr || Search ? 'block' : 'none' }}>
 						목록
 					</button>
 

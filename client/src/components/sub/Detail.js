@@ -19,6 +19,7 @@ function Detail() {
 	const likeBtn = useRef(null);
 	const [Allowed, setAllowed] = useState(true);
 	const updateComment = useRef(null);
+	const [ActiveArrLatestBtn, setActiveArrLatestBtn] = useState(true);
 
 	const getLocalComment = () => {
 		const dataComment = localStorage.getItem('post');
@@ -41,7 +42,6 @@ function Detail() {
 			return 0;
 		}
 	};
-	const [LikeBtnNum, setLikeBtnNum] = useState(getLocalLikeBtn());
 
 	useEffect(() => {
 		const data = localStorage.getItem('post');
@@ -82,7 +82,7 @@ function Detail() {
 		getLocalLikeBtn();
 	}, []);
 
-	//게시물 삭제하는 기능
+	//게시물 삭제
 	const deletePost = () => {
 		const result = window.confirm('정말로 삭제하시겠습니까?');
 		const data = localStorage.getItem('post');
@@ -102,7 +102,7 @@ function Detail() {
 		}
 	};
 
-	//게시물 수정하기 버튼 클릭 시
+	//게시물 수정
 	const goToUpdate = (idx) => {
 		try {
 			history.push({
@@ -123,24 +123,7 @@ function Detail() {
 		comment.current.value = '';
 	};
 
-	// // 댓글 삭제하기
-	// const deleteComment = (delIndex) => {
-	// 	const result = window.confirm('정말로 삭제하시겠습니까?');
-	// 	const data = localStorage.getItem('comment');
-	// 	const comments = JSON.parse(data);
-
-	// 	if (result) {
-	// 		console.log('index는', idx);
-	// 		const copy = comments.filter((el, i) => i !== delIndex);
-	// 		setComments(copy);
-	// 		// 로컬 스토리지에서도 데이터 삭제
-	// 		localStorage.setItem('comment', JSON.stringify(copy));
-	// 		console.log('데이터 지움', copy);
-	// 	} else {
-	// 		return;
-	// 	}
-	// };
-
+	//댓글 생성
 	const creatComment = () => {
 		const newComment = {
 			comment: comment.current.value,
@@ -169,6 +152,7 @@ function Detail() {
 		setInputCount(0);
 	};
 
+	//좋아요 버튼 카운트
 	const likeBtnClickCount = (commentIndex) => {
 		const updatedComments = Posts.comments.map((comment, i) => {
 			if (i === commentIndex) {
@@ -196,7 +180,6 @@ function Detail() {
 		localStorage.setItem('post', JSON.stringify(posts));
 	};
 
-	const currentComments = useRef(null);
 	return (
 		<>
 			<Helmet>
@@ -291,8 +274,9 @@ function Detail() {
 
 							<div className='commentSortBtn'>
 								<button
-									className='active'
+									className={ActiveArrLatestBtn ? 'active' : ''}
 									onClick={() => {
+										setActiveArrLatestBtn(true);
 										const sortedComments = [...Posts.comments].sort((a, b) => new Date(a.date) - new Date(b.date)).reverse();
 
 										// 정렬된 결과를 Posts에 다시 저장
@@ -304,12 +288,13 @@ function Detail() {
 									최신순
 								</button>
 								<button
+									className={!ActiveArrLatestBtn ? 'active' : ''}
 									onClick={() => {
+										setActiveArrLatestBtn(false);
 										const sortedComments = [...Posts.comments].sort((a, b) => a.likeBtn - b.likeBtn).reverse();
 
 										// 정렬된 결과를 Posts에 다시 저장
 										const sortedPosts = { ...Posts, comments: sortedComments };
-
 										setPosts(sortedPosts);
 									}}
 								>
