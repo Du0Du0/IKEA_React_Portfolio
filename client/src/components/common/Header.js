@@ -22,7 +22,7 @@ function Header({ type }) {
 			</div>
 			<div className='logo'>
 				<h1>
-					<Link to='/ikea-react'>IKEA</Link>
+					<Link to='/'>IKEA</Link>
 				</h1>
 			</div>
 			<Menu ref={menuRef} />

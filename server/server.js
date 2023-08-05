@@ -5,6 +5,9 @@ const mongoose = require('mongoose');
 const port = 5000;
 const { Post } = require('./model/postSchema.js');
 const { Counter } = require('./model/counterSchema.js');
+const cors = require('cors');
+
+app.use(cors()); // cors 미들웨어 추가
 
 //클라이언트로 부터 보내진 데이터를 전달받도록 설정 (body-parser)
 app.use(express.json());

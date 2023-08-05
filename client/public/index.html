@@ -8,12 +8,145 @@
     <title>React App</title>
     <script type="text/javascript"
       src="//dapi.kakao.com/v2/maps/sdk.js?appkey=be0e6a448d5b266e02a1457647324d73"></script>
+    <style>
+      .default {
+        position: absolute;
+        top: -99999px;
+      }
+
+      .mask {
+        width: 100%;
+        height: 100vh;
+        background: #111;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 10;
+        opacity: 1;
+        transition: opacity 2s;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font: 20px/1 'arial';
+        color: #fff;
+      }
+
+      .mask.off {
+        opacity: 0;
+      }
+    </style>
   </head>
 
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
+    <div class="defaults"></div>
+    <div class="mask">Loading...</div>
 
+    <script>
+      const defaults = document.querySelector('.defaults');
+      const mask = document.querySelector('.mask');
+      let tags = '';
+      const baseURL = 'http://localhost:3000/ikea-react#/';
+      const imgs = [
+        baseURL + '/img/Vids.jpg',
+        baseURL + '/img/Visual.jpg',
+        baseURL + '/img/Gallery.jpg',
+        baseURL + '/img/Location.jpg',
+        baseURL + '/img/Youtube.jpg',
+        baseURL + '/img/Members.jpg',
+      ];
+      const vids = [baseURL + '/img/vid.mp4'];
+
+      const lenImg = imgs.length;
+      const lenVid = vids.length;
+
+      createDOM();
+
+      function createDOM() {
+        imgs.forEach(src => {
+          tags += `<img src = ${src} />`
+        })
+        vids.forEach(src => {
+          tags += `<video src=${src}></video>`
+        })
+        defaults.innerHTML = tags;
+      }
+
+      //이미지소스 로딩완료 검사함수
+      function loadImg() {
+        return new Promise((res, rej) => {
+          let countImg = 0;
+          const imgDOM = defaults.querySelectorAll('img');
+          imgDOM.forEach(img => {
+            img.onload = () => {
+              countImg++;
+              console.log('img loaded..', countImg);
+              if (countImg === lenImg) {
+                res(true);
+              }
+            }
+          })
+        })
+      }
+      //영상소스 로딩완료 검사함수
+      function loadVid() {
+        return new Promise((res, rej) => {
+          let countVid = 0;
+          const vidDOM = defaults.querySelectorAll('video');
+          vidDOM.forEach(vid => {
+            vid.onloadeddata = () => {
+              countVid++;
+              console.log('vid loaded..', countVid);
+              if (countVid === lenVid) {
+                res(true);
+              }
+            }
+          })
+        })
+      }
+
+      //promise.all vs promise.race
+      //promise.all : 인수로 전달받은 모든 promise가 완료되야지 동기화처리
+      //promise.race : 인수로 전달받은 promise중 하나라도 완료되는것이 바로 동기화처리
+
+      //promise.all()로 loadImg, loadVid함수가 모두 프로미스 객체를 반환할때까지 기다린후 동기화 처리
+
+      setTimeout(() => {
+        mask.classList.add('off');
+      }, 1000)
+
+
+      setTimeout(() => {
+        mask.classList.add('off');
+        mask.remove();
+        defaults.remove();
+      }, 2000)
+
+
+      // Promise.all([loadImg(), loadVid()]).then(result => {
+      //   console.log(result);
+      //   mask.classList.add('off');
+
+      //   setTimeout(() => {
+      //     mask.remove();
+      //     defaults.remove();
+      //   }, 500)
+      // })
+
+    </script>
   </body>
+
+</html>
+
+<!-- 
+  이미지, 영상을 리액트 컴포넌트가 마운트되기 전 미리 캐싱처리하는 작업흐름
+  1. 배열에 캐싱할 이미지와 영상의 URL을 각각 담아줌
+  2. index.html이 서버쪽에서 호출되자마자 배열에 담긴 url을 반복돌면서 동적으로 DOM생성
+  3. DOM이 index.html에 생성되는 동안 마스크 화면을 대신 보여줌
+  4. 모든, 영상 이미지가 캐싱완료되면 마스크를 강제 제거하고 동적으로 생성된 요소도 제거
+  5. 그 사이 React컴포넌트들이 Real DOM으로 변환되면서 화면에 출력
+  6. github 사이트에서 redux-toolkit브랜치를 default로 지정한 뒤 npm run deploy로 빌드 및 배포
+-->
 
 </html>
