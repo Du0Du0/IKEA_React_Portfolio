@@ -3,9 +3,9 @@ const path = require('path');
 const app = express();
 const mongoose = require('mongoose');
 const port = 5000;
+const cors = require('cors');
 const { Post } = require('./model/postSchema.js');
 const { Counter } = require('./model/counterSchema.js');
-const cors = require('cors');
 
 app.use(cors()); // cors 미들웨어 추가
 
@@ -79,6 +79,24 @@ app.post('/api/detail', (req, res) => {
 		.exec()
 		.then((doc) => res.json({ success: true, detail: doc }))
 		.catch((err) => res.json({ success: false, err: err }));
+});
+
+//회원정보 라우터
+router.post('/join', (req, res) => {
+	const temp = req.body;
+
+	Counter.findOne({ name: 'counter' }).then((doc) => {
+		temp.userNum = doc.userNum;
+
+		const userData = new User(temp);
+		userData.save().then(() => {
+			Counter.updateOne({ name: 'counter' }, { $inc: { userNum: 1 } })
+				.then(() => {
+					res.json({ success: true });
+				})
+				.catch((err) => res.json({ success: false, err: err }));
+		});
+	});
 });
 
 // 서버 시작 시 게시물 번호 초기값 생성

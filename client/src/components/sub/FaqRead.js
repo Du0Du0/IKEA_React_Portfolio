@@ -270,9 +270,7 @@ function FaqRead() {
 					</button>
 
 					<div className='rightBtnWrap'>
-						<p>
-							전체 <span>{Posts.length}</span>건
-						</p>
+						<p>{/* 전체 <span>{Posts.length}</span>건 */}</p>
 						<select
 							className='arrayBtn'
 							onClick={(e) => {
@@ -334,21 +332,22 @@ function FaqRead() {
 				<div className='horzienLine' />
 				<div className={IsListType === false ? 'listWrap roomy' : 'listWrap'}>
 					{ShowArticleLists ? (
+						Posts &&
 						currentPosts.map((post, idx) => {
 							return (
 								<div className='list' key={post._id}>
-									<Link to={`/faq/detail/${post.communityNum}`}>{post.title}</Link>
 									<h3>{post.topic}</h3>
-									<h2>{!IsListType && `${post.title}`.length > 18 ? `${post.title}`.substr(0, 15) + '...' : `${post.title}`}</h2>
-									<p>{post.content}</p>
-									{/* <div className='bottomWrap'>
-										<p>{`${post.date}`.substr(0, 10)}</p>
+									<h2>
+										<Link to={`/faq/detail/${post.communityNum}`}>{!IsListType && `${post.title}`.length > 18 ? `${post.title}`.substr(0, 15) + '...' : `${post.title}`} </Link>
+									</h2>
+									<div className='bottomWrap'>
+										<p>{`${post.publishedDate}`.substr(0, 10)}</p>
 										<p>{`${post.userId}`.substr(0, 3).replace(/^(.)(.*)$/, '$1**')}</p>
 										<p>
 											<FontAwesomeIcon icon={faCommentDots} />
 											{post.comments ? post.comments.length : 0}
 										</p>
-									</div> */}
+									</div>
 								</div>
 							);
 						})
