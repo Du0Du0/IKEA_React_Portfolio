@@ -36,7 +36,7 @@ app.get('*', (req, res) => {
 	res.sendFile(path.join(__dirname, '../client/build/index.html'));
 });
 
-//create
+//게시물 작성 라우터
 app.post('/api/create', (req, res) => {
 	Counter.findOne({ name: 'counter' })
 		.exec()
@@ -47,7 +47,7 @@ app.post('/api/create', (req, res) => {
 				content: req.body.content,
 				communityNum: doc.communityNum,
 			});
-
+			console.log('doc', doc);
 			PostModel.save().then(() => {
 				//update : $inc(증가), $dec(감소), $set(새로운값으로 변경)
 				Counter.updateOne({ name: 'counter' }, { $inc: { communityNum: 1 } })
@@ -59,7 +59,7 @@ app.post('/api/create', (req, res) => {
 		});
 });
 
-//read
+//게시물 리스트 출력 라우터
 app.post('/api/read', (req, res) => {
 	Post.find()
 		.exec()
@@ -72,3 +72,37 @@ app.post('/api/read', (req, res) => {
 			res.json({ success: false });
 		});
 });
+
+//상세페이지 출력 라우터
+app.post('/api/detail', (req, res) => {
+	Post.findOne({ communityNum: req.body.id })
+		.exec()
+		.then((doc) => res.json({ success: true, detail: doc }))
+		.catch((err) => res.json({ success: false, err: err }));
+});
+
+// 서버 시작 시 게시물 번호 초기값 생성
+const initializeCounter = async () => {
+	try {
+		const doc = await Counter.findOne({ name: 'counter' });
+
+		// 'counter' 문서가 존재하지 않으면 초기값 생성
+		if (!doc) {
+			await Counter.create({
+				name: 'counter',
+				communityNum: 0,
+			});
+			console.log('초기값이 성공적으로 생성되었습니다.');
+		} else {
+			console.log('초기값이 이미 존재합니다:', doc);
+		}
+	} catch (error) {
+		console.error('초기값 생성 중 에러 발생:', error);
+	}
+};
+
+// 서버가 시작될 때 초기값 생성
+if (require.main === module) {
+	// 서버가 직접 실행될 때에만 initializeCounter() 함수를 호출
+	initializeCounter();
+}

@@ -181,7 +181,7 @@ function FaqRead() {
 	return (
 		<>
 			<Helmet>
-				<title>커뮤니티</title>
+				<title>1:1문의</title>
 			</Helmet>
 			<LayoutNone type={''} name1={'community'}>
 				<div className='titTop'>
@@ -336,13 +336,7 @@ function FaqRead() {
 					{ShowArticleLists ? (
 						currentPosts.map((post, idx) => {
 							return (
-								<div
-									className='list'
-									key={post._id}
-									onClick={() => {
-										goToDetail(idx);
-									}}
-								>
+								<div className='list' key={post._id}>
 									<Link to={`/detail/${post.communityNum}`}>{post.title}</Link>
 									<h3>{post.topic}</h3>
 									<h2>{!IsListType && `${post.title}`.length > 18 ? `${post.title}`.substr(0, 15) + '...' : `${post.title}`}</h2>

@@ -6,13 +6,8 @@ const postShema = new mongoose.Schema(
 		title: String,
 		content: String,
 		communityNum: Number,
-
-		writer: {
-			ref: 'User',
-			type: mongoose.Schema.Types.ObjectId,
-		},
 	},
-	{ collection: 'Posts', timestamps: true }
+	{ collection: 'Posts' }
 );
 
 const Post = mongoose.model('Posts', postShema);

@@ -19,9 +19,6 @@ function FaqWrite() {
 			.then((res) => {
 				console.log(res);
 				alert('글 저장에 성공했습니다.');
-				setTit('');
-				setCon('');
-				setTopic('');
 				history.push('/faq');
 			})
 			.catch((err) => {
