@@ -337,7 +337,7 @@ function FaqRead() {
 						currentPosts.map((post, idx) => {
 							return (
 								<div className='list' key={post._id}>
-									<Link to={`/detail/${post.communityNum}`}>{post.title}</Link>
+									<Link to={`/faq/detail/${post.communityNum}`}>{post.title}</Link>
 									<h3>{post.topic}</h3>
 									<h2>{!IsListType && `${post.title}`.length > 18 ? `${post.title}`.substr(0, 15) + '...' : `${post.title}`}</h2>
 									<p>{post.content}</p>

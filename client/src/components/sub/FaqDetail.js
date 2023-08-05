@@ -54,7 +54,7 @@ function FaqDetail() {
 							<p>
 								<FontAwesomeIcon icon={faCommentDots} />
 								&nbsp;&nbsp;
-								{Detail.comments === undefined ? 0 : Detail.comments.length}
+								{/* {Detail.comments === undefined ? 0 : Detail.comments.length} */}
 							</p>
 
 							<p>
@@ -65,7 +65,7 @@ function FaqDetail() {
 							<p>
 								<FontAwesomeIcon icon={faClock} />
 								&nbsp;&nbsp;
-								{`${Detail.date}`.substr(0, 10)}
+								{/* {`${Detail.date}`.substr(0, 10)} */}
 							</p>
 						</div>
 					</div>
@@ -88,11 +88,11 @@ function FaqDetail() {
 					<div className='buttonWrap'>
 						<button>삭제</button>
 						<button>수정</button>
-						<button onClick={() => history.push('/community/articles')}>목록</button>
+						<button onClick={() => history.push('/faq')}>목록</button>
 					</div>
 				</div>
 
-				<div className='commentWriteWrap'>
+				{/* <div className='commentWriteWrap'>
 					<div className='commentWriteTop'>
 						<h2>댓글 남기기</h2>
 						<h3
@@ -198,7 +198,7 @@ function FaqDetail() {
 							</React.Fragment>
 						))}
 					</div>
-				</div>
+				</div> */}
 			</LayoutNone>
 		</>
 	);

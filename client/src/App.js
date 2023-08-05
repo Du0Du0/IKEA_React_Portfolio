@@ -190,7 +190,7 @@ function App() {
 
 				<Route
 					exact
-					path='/faq/detail'
+					path='/faq/detail/:id'
 					render={() => (
 						<>
 							<FaqDetail />
