@@ -6,6 +6,7 @@ const port = 5000;
 const cors = require('cors');
 const { Post } = require('./model/postSchema.js');
 const { Counter } = require('./model/counterSchema.js');
+const { User } = require('./model/userSchema.js');
 
 app.use(cors()); // cors 미들웨어 추가
 
@@ -122,6 +123,7 @@ app.post('/api/join', (req, res) => {
 			const userData = new User(temp);
 			userData.save().then(() => {
 				Counter.updateOne({ name: 'counter' }, { $inc: { userNum: 1 } })
+					.exec()
 					.then(() => {
 						res.json({ success: true });
 					})
