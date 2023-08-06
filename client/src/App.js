@@ -202,7 +202,7 @@ function App() {
 
 				<Route
 					exact
-					path='/faq/updte/:id'
+					path='/faq/update/:id'
 					render={() => (
 						<>
 							<FaqUpdate />

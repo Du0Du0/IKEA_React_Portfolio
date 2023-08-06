@@ -20,15 +20,16 @@ function FaqUpdate() {
 		if (Title.trim() === '' || Content.trim() === '') return alert('모든 항목을 입력하세요.');
 
 		const item = {
-			topic: Topic,
+			// topic: Topic,
 			title: Title,
 			content: Content,
-			keyword: Keyword,
+			// keyword: Keyword,
 			id: params.id,
 		};
-		axios.post('/api/faq/update', item).then((res) => {
+		axios.post('/api/update', item).then((res) => {
 			if (res.data.success) {
 				alert('글 수정이 완료되었습니다.');
+				history.push('/faq');
 			} else {
 				alert('글 수정에 실패했습니다.');
 			}
@@ -36,7 +37,7 @@ function FaqUpdate() {
 	};
 
 	useEffect(() => {
-		axios.post('/api/faq/detail', params).then((res) => {
+		axios.post('/api/detail', params).then((res) => {
 			if (res.data.success) {
 				console.log(res.data.detail);
 				setDetail(res.data.detail);

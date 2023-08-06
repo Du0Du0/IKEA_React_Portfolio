@@ -100,6 +100,16 @@ app.post('/api/update', (req, res) => {
 		.catch((err) => res.json({ success: false }));
 });
 
+//게시물 삭제 라우터
+app.post('/api/delete', (req, res) => {
+	Post.deleteOne({ communityNum: req.body.id })
+		.exec()
+		.then(() => {
+			res.json({ success: true });
+		})
+		.catch(() => res.json({ success: false }));
+});
+
 //회원정보 라우터
 app.post('/api/join', (req, res) => {
 	const temp = req.body;

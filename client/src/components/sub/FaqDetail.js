@@ -30,6 +30,20 @@ function FaqDetail() {
 			.catch((err) => console.log(err));
 	}, []);
 
+	//게시물 삭제
+	const handleDelete = () => {
+		if (!window.confirm('정말 삭제하겠습니까')) return;
+
+		axios.post('/api/faq/delete', params).then((res) => {
+			if (res.data.success) {
+				alert('게시글이 삭제되었습니다.');
+				history.push('/faq');
+			} else {
+				alert('게시글 삭제에 실패했습니다.');
+			}
+		});
+	};
+
 	const history = useHistory();
 	const location = useLocation();
 	const [InputCount, setInputCount] = useState(0);
@@ -82,7 +96,7 @@ function FaqDetail() {
 					<div className='buttonWrap'>
 						{user.uid !== '' && (
 							<>
-								<button>삭제</button>
+								<button onClick={handleDelete}>삭제</button>
 								<Link to={`/faq/update/${params.id}`}>
 									<button>수정</button>
 								</Link>
