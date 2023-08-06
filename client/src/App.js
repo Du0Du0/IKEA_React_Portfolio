@@ -40,6 +40,7 @@ import ProductsDetail from './components/sub/ProductsDetail';
 import FaqRead from './components/sub/FaqRead';
 import FaqWrite from './components/sub/FaqWrite';
 import FaqDetail from './components/sub/FaqDetail';
+import FaqUpdate from './components/sub/FaqUpdate';
 
 function App() {
 	const dispatch = useDispatch();
@@ -194,6 +195,17 @@ function App() {
 					render={() => (
 						<>
 							<FaqDetail />
+							<FooterNone type={'sub'} imgBg={'footerW'} />
+						</>
+					)}
+				></Route>
+
+				<Route
+					exact
+					path='/faq/updte/:id'
+					render={() => (
+						<>
+							<FaqUpdate />
 							<FooterNone type={'sub'} imgBg={'footerW'} />
 						</>
 					)}

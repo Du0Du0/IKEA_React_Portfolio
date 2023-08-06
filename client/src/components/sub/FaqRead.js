@@ -9,12 +9,15 @@ import moment from 'moment';
 import { Helmet } from 'react-helmet-async';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 function FaqRead() {
 	const history = useHistory();
 	const today = moment();
 	const [Posts, setPosts] = useState([]);
 	const [Search, setSearch] = useState(false);
+
+	const user = useSelector((state) => state.userReducer);
 
 	useEffect(() => {
 		axios.post('/api/read').then((res) => {
@@ -262,12 +265,17 @@ function FaqRead() {
 					</div>
 				</div>
 				<div className='btnContainer'>
-					<button className='writeBtn' onClick={() => history.push('/faq/write')} style={{ display: NotFoundErr || Search ? 'none' : 'block' }}>
-						글쓰기
-					</button>
-					<button className='seeCommunityList' onClick={() => window.location.replace('/community/articles')} style={{ display: NotFoundErr || Search ? 'block' : 'none' }}>
-						목록
-					</button>
+					{user.uid !== '' && (
+						<button className='writeBtn' onClick={() => history.push('/faq/write')}>
+							글쓰기
+						</button>
+					)}
+
+					{user.uid === '' && (
+						<button className='seeCommunityList' onClick={() => window.location.replace('/community/articles')}>
+							로그인
+						</button>
+					)}
 
 					<div className='rightBtnWrap'>
 						<p>{/* 전체 <span>{Posts.length}</span>건 */}</p>

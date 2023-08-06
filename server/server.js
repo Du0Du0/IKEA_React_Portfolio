@@ -83,6 +83,23 @@ app.post('/api/detail', (req, res) => {
 		.catch((err) => res.json({ success: false, err: err }));
 });
 
+//게시물 수정 라우터
+app.post('/api/update', (req, res) => {
+	const temp = {
+		topic: req.body.topic,
+		title: req.body.title,
+		content: req.body.content,
+		keyword: req.body.keyword,
+	};
+	Post.updateOne({ communityNum: req.body.id }, { $set: temp })
+		.exec()
+		.then((doc) => {
+			console.log(doc);
+			res.json({ success: true });
+		})
+		.catch((err) => res.json({ success: false }));
+});
+
 //회원정보 라우터
 app.post('/api/join', (req, res) => {
 	const temp = req.body;

@@ -9,6 +9,7 @@ import CommentModal from './CommentModal';
 import { Helmet } from 'react-helmet-async';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 function FaqDetail() {
 	const params = useParams();
@@ -82,7 +83,9 @@ function FaqDetail() {
 						{user.uid !== '' && (
 							<>
 								<button>삭제</button>
-								<button>수정</button>
+								<Link to={`/faq/update/${params.id}`}>
+									<button>수정</button>
+								</Link>
 							</>
 						)}
 
