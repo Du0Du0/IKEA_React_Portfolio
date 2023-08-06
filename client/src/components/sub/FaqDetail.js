@@ -8,10 +8,13 @@ import { useEffect, useState, useRef } from 'react';
 import CommentModal from './CommentModal';
 import { Helmet } from 'react-helmet-async';
 import axios from 'axios';
+import { useSelector } from 'react-redux';
 
 function FaqDetail() {
 	const params = useParams();
 	const [Detail, setDetail] = useState(null);
+
+	const user = useSelector((state) => state.userReducer);
 
 	useEffect(() => {
 		axios
@@ -50,7 +53,8 @@ function FaqDetail() {
 							<h1>{Detail?.title}</h1>
 						</div>
 						<div className='titBottom'>
-							<p>{Detail?.userId}</p>
+							<p>{user.displayName}</p>
+							<p>{user.uid}</p>
 							<p>
 								<FontAwesomeIcon icon={faCommentDots} />
 								&nbsp;&nbsp;
@@ -75,8 +79,13 @@ function FaqDetail() {
 						{Detail?.keyword && <p>{Detail.keyword}</p>}
 					</div>
 					<div className='buttonWrap'>
-						<button>삭제</button>
-						<button>수정</button>
+						{user.uid !== '' && (
+							<>
+								<button>삭제</button>
+								<button>수정</button>
+							</>
+						)}
+
 						<button onClick={() => history.push('/faq')}>목록</button>
 					</div>
 				</div>

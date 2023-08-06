@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 import { useEffect, useState, useRef } from 'react';
 import { Helmet } from 'react-helmet-async';
 import axios from 'axios';
+import { useSelector } from 'react-redux';
 
 function FaqWrite() {
 	const history = useHistory();
@@ -12,9 +13,11 @@ function FaqWrite() {
 	const [UserId, setUserId] = useState('');
 	const [Keyword, setKeyword] = useState([]);
 
+	const user = useSelector((store) => store.user);
+
 	//게시물 작성 (mongoDB)
 	const handleCreate = () => {
-		const item = { topic: Topic, title: Tit, content: Con, keyword: Keyword };
+		const item = { topic: Topic, title: Tit, content: Con, keyword: Keyword, uid: user.uid };
 		axios
 			.post('/api/create', item)
 			.then((res) => {
