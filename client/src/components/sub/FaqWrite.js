@@ -13,7 +13,7 @@ function FaqWrite() {
 	const [UserId, setUserId] = useState('');
 	const [Keyword, setKeyword] = useState([]);
 
-	const user = useSelector((store) => store.user);
+	const user = useSelector((state) => state.userReducer);
 
 	//게시물 작성 (mongoDB)
 	const handleCreate = () => {
@@ -31,6 +31,11 @@ function FaqWrite() {
 			})
 			.catch((err) => console.log(err));
 	};
+
+	//비정상적 접근 차단
+	useEffect(() => {
+		if (user.uid === '') history.push('/faq');
+	}, [history, user]);
 
 	return (
 		<>
