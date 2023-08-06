@@ -5,6 +5,7 @@ const postShema = new mongoose.Schema(
 		topic: String,
 		title: String,
 		content: String,
+		keyword: String,
 		communityNum: Number,
 		publishedDate: {
 			type: Date,

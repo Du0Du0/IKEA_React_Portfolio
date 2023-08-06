@@ -45,12 +45,14 @@ app.post('/api/create', (req, res) => {
 				topic: req.body.topic,
 				title: req.body.title,
 				content: req.body.content,
+				keyword: req.body.keyword,
 				communityNum: doc.communityNum,
 			});
 			console.log('doc', doc);
 			PostModel.save().then(() => {
 				//update : $inc(증가), $dec(감소), $set(새로운값으로 변경)
 				Counter.updateOne({ name: 'counter' }, { $inc: { communityNum: 1 } })
+					.exec()
 					.then(() => {
 						res.json({ success: true });
 					})
@@ -82,21 +84,23 @@ app.post('/api/detail', (req, res) => {
 });
 
 //회원정보 라우터
-router.post('/join', (req, res) => {
+app.post('/api/join', (req, res) => {
 	const temp = req.body;
 
-	Counter.findOne({ name: 'counter' }).then((doc) => {
-		temp.userNum = doc.userNum;
+	Counter.findOne({ name: 'counter' })
+		.exec()
+		.then((doc) => {
+			temp.userNum = doc.userNum;
 
-		const userData = new User(temp);
-		userData.save().then(() => {
-			Counter.updateOne({ name: 'counter' }, { $inc: { userNum: 1 } })
-				.then(() => {
-					res.json({ success: true });
-				})
-				.catch((err) => res.json({ success: false, err: err }));
+			const userData = new User(temp);
+			userData.save().then(() => {
+				Counter.updateOne({ name: 'counter' }, { $inc: { userNum: 1 } })
+					.then(() => {
+						res.json({ success: true });
+					})
+					.catch((err) => res.json({ success: false, err: err }));
+			});
 		});
-	});
 });
 
 // 서버 시작 시 게시물 번호 초기값 생성
@@ -109,6 +113,7 @@ const initializeCounter = async () => {
 			await Counter.create({
 				name: 'counter',
 				communityNum: 0,
+				userNum: 0,
 			});
 			console.log('초기값이 성공적으로 생성되었습니다.');
 		} else {

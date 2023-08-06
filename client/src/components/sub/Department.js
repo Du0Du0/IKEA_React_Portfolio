@@ -10,6 +10,7 @@ import { Helmet } from 'react-helmet-async';
 import firebase from '../../firebase';
 import { setLoginUser, setLogoutUser } from '../../redux/action';
 import { useDispatch } from 'react-redux';
+import axios from 'axios';
 
 function Department() {
 	const [IsOpen, setIsOpen] = useState(false);
@@ -97,24 +98,33 @@ function Department() {
 				const email = Val.emailId + '@' + (Val.emailAddress === '' ? Val.emailAddressSelect : Val.emailAddress);
 				const password = Val.password;
 
-				const userCredential = await firebase.auth().createUserWithEmailAndPassword(email, password);
+				const createdUser = await firebase.auth().createUserWithEmailAndPassword(email, password);
 
 				// displayName 추가가 완료된 후에 리덕스 스테이트를 업데이트합니다.
-				await userCredential.user.updateProfile({
+				await createdUser.user.updateProfile({
 					displayName: Val.userid,
 				});
+
+				const item = {
+					displayName: createdUser.user.multiFactor.user.displayName,
+					uid: createdUser.user.multiFactor.user.uid,
+				};
 
 				// 리덕스 스테이트를 업데이트합니다.
 				dispatch(
 					setLoginUser({
 						displayName: Val.userid,
-						uid: userCredential.user.uid,
+						uid: createdUser.user.uid,
 					})
 				);
 
-				alert('회원가입이 성공적으로 이루어졌습니다.');
-				history.push('/login');
-				resetForm();
+				axios.post('/api/join', item).then((res) => {
+					if (res.data.success) {
+						firebase.auth().signOut();
+						alert('성공적으로 회원가입 되었습니다.');
+						history.push('/login');
+					} else return alert('회원가입에 실패했습니다.');
+				});
 			} catch (error) {
 				console.error('회원가입 오류:', error.message);
 			}

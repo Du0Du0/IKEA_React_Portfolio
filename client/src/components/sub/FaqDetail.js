@@ -65,25 +65,14 @@ function FaqDetail() {
 							<p>
 								<FontAwesomeIcon icon={faClock} />
 								&nbsp;&nbsp;
-								{/* {`${Detail.date}`.substr(0, 10)} */}
+								{`${Detail?.publishedDate}`.substr(0, 10)}
 							</p>
 						</div>
 					</div>
 
 					<div className='contentWrap'>
 						<p>{Detail?.content}</p>
-						{/* <p>
-							{Posts &&
-								Posts.keyword &&
-								Object.values(Posts.keyword)
-									.join(',')
-									.split(',')
-									.map((word, index) => (
-										<span key={index} className='keywordMap'>
-											{'#' + word}{' '}
-										</span>
-									))}
-						</p> */}
+						{Detail?.keyword && <p>{Detail.keyword}</p>}
 					</div>
 					<div className='buttonWrap'>
 						<button>삭제</button>

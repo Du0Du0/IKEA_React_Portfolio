@@ -10,10 +10,11 @@ function FaqWrite() {
 	const [Con, setCon] = useState('');
 	const [Topic, setTopic] = useState('');
 	const [UserId, setUserId] = useState('');
+	const [Keyword, setKeyword] = useState([]);
 
 	//게시물 작성 (mongoDB)
 	const handleCreate = () => {
-		const item = { topic: Topic, title: Tit, content: Con };
+		const item = { topic: Topic, title: Tit, content: Con, keyword: Keyword };
 		axios
 			.post('/api/create', item)
 			.then((res) => {
@@ -92,7 +93,7 @@ function FaqWrite() {
 								<label htmlFor='keyword'>키워드</label>
 							</th>
 							<td>
-								<input type='text' placeholder='키워드를 ,로 구분해서 작성해 주세요.' />
+								<input type='text' placeholder='키워드를 ,로 구분해서 작성해 주세요.' value={Keyword} onChange={(e) => setKeyword(e.target.value)} />
 							</td>
 						</tr>
 
