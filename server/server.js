@@ -89,6 +89,7 @@ app.post('/api/read', (req, res) => {
 //상세페이지 출력 라우터
 app.post('/api/detail', (req, res) => {
 	Post.findOne({ communityNum: req.body.id })
+		.populate('writer') // 작성자 정보 populate 추가
 		.exec()
 		.then((doc) => res.json({ success: true, detail: doc }))
 		.catch((err) => res.json({ success: false, err: err }));
@@ -162,6 +163,24 @@ const initializeCounter = async () => {
 		console.error('초기값 생성 중 에러 발생:', error);
 	}
 };
+
+//작성자 정보 조회
+app.post('/api/user', (req, res) => {
+	const { uid } = req.body;
+	User.findOne({ uid })
+		.exec()
+		.then((user) => {
+			if (user) {
+				res.json({ success: true, user });
+			} else {
+				res.json({ success: false, message: 'User not found' });
+			}
+		})
+		.catch((err) => {
+			console.log(err);
+			res.json({ success: false, message: 'Error finding user' });
+		});
+});
 
 // 서버가 시작될 때 초기값 생성
 if (require.main === module) {

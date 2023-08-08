@@ -14,7 +14,6 @@ import { Link } from 'react-router-dom';
 function FaqDetail() {
 	const params = useParams();
 	const [Detail, setDetail] = useState(null);
-
 	const user = useSelector((state) => state.userReducer);
 
 	useEffect(() => {
@@ -23,12 +22,23 @@ function FaqDetail() {
 			.then((res) => {
 				if (res.data.success) {
 					setDetail(res.data.detail);
+
+					// 작성자 정보 조회
+					axios
+						.post('/api/user', { uid: res.data.detail.writer })
+						.then((response) => {
+							if (response.data.success) {
+							} else {
+								console.log(response.data.message);
+							}
+						})
+						.catch((err) => console.log(err));
 				} else {
 					alert('상세글 호출에 실패했습니다.');
 				}
 			})
 			.catch((err) => console.log(err));
-	}, []);
+	}, [params]);
 
 	//게시물 삭제
 	const handleDelete = () => {
@@ -68,8 +78,8 @@ function FaqDetail() {
 							<h1>{Detail?.title}</h1>
 						</div>
 						<div className='titBottom'>
-							<p>{user.displayName}</p>
-							<p>{user.uid}</p>
+							<p>{Detail?.writer?.displayName}</p>
+
 							<p>
 								<FontAwesomeIcon icon={faCommentDots} />
 								&nbsp;&nbsp;

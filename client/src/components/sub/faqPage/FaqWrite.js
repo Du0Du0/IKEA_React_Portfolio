@@ -17,7 +17,7 @@ function FaqWrite() {
 
 	//게시물 작성 (mongoDB)
 	const handleCreate = () => {
-		const item = { topic: Topic, title: Tit, content: Con, keyword: Keyword, uid: user.uid };
+		const item = { topic: Topic, title: Tit, content: Con, keyword: Keyword, displayName: user.displayName, uid: user.uid };
 		axios
 			.post('/api/create', item)
 			.then((res) => {

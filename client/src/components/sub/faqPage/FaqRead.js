@@ -272,7 +272,7 @@ function FaqRead() {
 					)}
 
 					{user.uid === '' && (
-						<button className='seeCommunityList' onClick={() => window.location.replace('/community/articles')}>
+						<button className='seeCommunityList' onClick={() => history.push('/Login')}>
 							로그인
 						</button>
 					)}
@@ -350,7 +350,7 @@ function FaqRead() {
 									</h2>
 									<div className='bottomWrap'>
 										<p>{`${post.publishedDate}`.substr(0, 10)}</p>
-										<p>{`${user.displayName}`.substr(0, 3).replace(/^(.)(.*)$/, '$1**')}</p>
+										<p>{`${post.writer.displayName}`.substr(0, 3).replace(/^(.)(.*)$/, '$1**')}</p>
 										<p>
 											<FontAwesomeIcon icon={faCommentDots} />
 											{post.comments ? post.comments.length : 0}

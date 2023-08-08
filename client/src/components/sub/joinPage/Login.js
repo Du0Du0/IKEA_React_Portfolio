@@ -20,7 +20,7 @@ function Login() {
 		try {
 			await firebase.auth().signInWithEmailAndPassword(Email, Pwd);
 			alert('로그인 되었습니다.');
-			history.push('/');
+			history.push('/ikea-react');
 		} catch (err) {
 			console.log(err.code);
 			if (err.code === 'auth/user-not-found') setErr('존재하지 않는 이메일입니다.');
