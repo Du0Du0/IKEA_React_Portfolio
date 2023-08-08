@@ -65,7 +65,7 @@ function PwdCheckModal(props, ref) {
 	}, [history, location.state]);
 
 	const allowUpdate = (idx) => {
-		if (Number(InputPassword) === Posts.password) {
+		if (Number(InputPassword) === Number(Posts.password)) {
 			alert('비밀번호 인증이 완료되었습니다.');
 			setInputPassword('');
 			try {

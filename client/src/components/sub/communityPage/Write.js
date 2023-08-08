@@ -19,6 +19,7 @@ function Write() {
 	const keyword = useRef(null);
 	const content = useRef(null);
 	const comments = useRef(null);
+	const password = useRef(null);
 
 	const [Tit, setTit] = useState('');
 	const [Con, setCon] = useState('');
@@ -31,6 +32,7 @@ function Write() {
 		keyword.current.value = '';
 		content.current.value = '';
 		comments.current.value = '';
+		password.current.value = '';
 	};
 
 	useEffect(() => {}, []);
@@ -39,6 +41,7 @@ function Write() {
 	const creatPost = async () => {
 		const newPosts = {
 			userId: userId.current.value,
+			password: password.current.value,
 			topic: topic.current.value,
 			title: title.current.value,
 			keyword: [keyword.current.value],
@@ -83,6 +86,20 @@ function Write() {
 							</th>
 							<td>
 								<input type='text' ref={userId} />
+							</td>
+						</tr>
+
+						<tr>
+							{/* 비밀번호 */}
+							<th scope='row'>
+								<label htmlFor='userId'>
+									글 비밀번호
+									<br />
+									(숫자)
+								</label>
+							</th>
+							<td>
+								<input type='password' ref={password} className='pwdInput' />
 							</td>
 						</tr>
 
