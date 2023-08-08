@@ -103,7 +103,7 @@ function Main({ menu }) {
 					</aside>
 				) : null}
 
-				<aside className='bodyContainer' ref={container} style={IsOpen ? containerBlockScroll : cookiePopEnable}>
+				<aside className='bodyContainer' ref={container}>
 					<Header type={'sub'} menuRef={menu} />
 					<Visual />
 					<Products />

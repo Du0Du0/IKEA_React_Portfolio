@@ -4,14 +4,9 @@ import { faXmark } from '@fortawesome/free-solid-svg-icons';
 
 const Modal = forwardRef((props, ref) => {
 	const [Open, setOpen] = useState(false);
-	const [Index, setIndex] = useState(0);
 	useImperativeHandle(ref, () => {
 		return { open: () => setOpen(true) };
 	});
-
-	// useEffect(() => {
-	// 	Open ? (document.body.style.overflow = 'hidden') : (document.body.style.overflow = 'auto');
-	// }, [Open]);
 
 	return (
 		<>

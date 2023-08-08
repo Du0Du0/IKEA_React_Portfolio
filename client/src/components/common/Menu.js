@@ -40,8 +40,8 @@ function Menu(props, ref) {
 							{/* header left side title */}
 							<div className='leftBarTit'>
 								<div className='titWrap'>
-									<Link to='/'>
-										<h2>IKEA Category</h2>
+									<Link to='/ikea-react'>
+										<h2>IKEA CATEGORY</h2>
 									</Link>
 									<br />
 									<div className='loginStatus'>
@@ -76,7 +76,7 @@ function Menu(props, ref) {
 									</li>
 									<li>
 										<NavLink to='/member' activeStyle={active}>
-											Members
+											Member
 										</NavLink>
 									</li>
 									<li>
@@ -96,7 +96,7 @@ function Menu(props, ref) {
 									</li>
 									<li>
 										<NavLink to='/faq' activeStyle={active}>
-											FAQ
+											Faq
 										</NavLink>
 									</li>
 								</ul>

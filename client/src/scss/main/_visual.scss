@@ -42,7 +42,7 @@
 			// Main pointBox1 (none color box)
 			&:nth-of-type(8) {
 				padding: 15px 1vw 0px;
-				font: 19px/1 $ikeaFontKo;
+				font: 17px/1 $ikeaFontKo;
 				color: $grey;
 				border: 1px solid $fontColorW;
 				cursor: pointer;
@@ -56,8 +56,8 @@
 			}
 
 			&:nth-of-type(9) {
-				padding: 170px 1vw 15px;
-				font: 19px/1 $ikeaFontKo;
+				padding: 180px 1vw 15px;
+				font: 17px/1 $ikeaFontKo;
 				color: $fontColorGr;
 				text-align: start;
 			}
@@ -74,7 +74,7 @@
 
 				h1 {
 					width: 60%;
-					font: 27px/1 $ikeaFontKo;
+					font: 23px/1 $ikeaFontKo;
 					color: $fontColorGrT;
 					text-align: justify;
 					word-break: break-all;
@@ -87,7 +87,7 @@
 				}
 
 				p {
-					font: 19px/1 $ikeaFontKo;
+					font: 17px/1 $ikeaFontKo;
 					color: $fontColorGr;
 					text-align: justify;
 					word-break: break-all;
@@ -105,7 +105,7 @@
 			&:nth-of-type(13) {
 				text-align: end;
 				padding: 170px 1vw 15px;
-				font: 19px/1 $ikeaFontKo;
+				font: 17px/1 $ikeaFontKo;
 				color: $grey;
 				border: 1px solid $fontColorW;
 				cursor: pointer;
@@ -137,22 +137,29 @@
 				// Main pointBox1 (none color box)
 				&:nth-of-type(8) {
 					padding: 20px 2vw 0px;
+					font: 15.3px/1 $ikeaFontKo;
 				}
 
 				&:nth-of-type(9) {
 					padding: 170px 2vw 15px;
+					font: 15.3px/1 $ikeaFontKo;
 				}
 
 				&:nth-of-type(12) {
 					h1 {
 						width: 90%;
-						font: 28px/1 $ikeaFontKo;
+						font: 20px/1 $ikeaFontKo;
+					}
+
+					p {
+						font: 15.3px/1 $ikeaFontKo;
 					}
 				}
 
 				// Main pointBox2 (yellow box)
 				&:nth-of-type(13) {
 					padding: 170px 2vw 15px;
+					font: 15.3px/1 $ikeaFontKo;
 				}
 			}
 		}
@@ -171,10 +178,12 @@
 				// Main pointBox1 (none color box)
 				&:nth-of-type(8) {
 					padding: 15px 3vw 170px;
+					font: 12.6px/1 $ikeaFontKo;
 				}
 
 				&:nth-of-type(9) {
 					padding: 170px 3vw 10px;
+					font: 12.6px/1 $ikeaFontKo;
 				}
 
 				&:nth-of-type(12) {
@@ -194,6 +203,7 @@
 				// Main pointBox2 (yellow box)
 				&:nth-of-type(13) {
 					padding: 170px 3vw 15px;
+					font: 12.6px/1 $ikeaFontKo;
 				}
 			}
 		}

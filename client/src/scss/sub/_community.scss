@@ -169,6 +169,24 @@
 			}
 		}
 
+		.seeCommunityList {
+			width: 108px;
+			height: 41.61px;
+			background: $tableBtn;
+			border-radius: 5px;
+			padding: 9px 13.5px;
+			font: 15px/1 $ikeaFontKo;
+			color: $fontColorW;
+			transition: 0.5s;
+			border: none;
+			cursor: pointer;
+
+			&:hover {
+				background: $hoverBtn;
+				color: $fontColorW;
+			}
+		}
+
 		.rightBtnWrap {
 			display: flex;
 			gap: 20px;
@@ -227,6 +245,13 @@
 		justify-content: left;
 		gap: 20px;
 		padding: 15px 15vw 30px;
+
+		.notFoundErr {
+			width: 100%;
+			font: 15px/1 $ikeaFontKo;
+			color: $fontColorBl;
+			text-align: center;
+		}
 
 		.list {
 			display: flex;
@@ -914,6 +939,24 @@
 			padding: 36px 3vw 30px;
 
 			.writeBtn {
+				width: 64px;
+				height: 29px;
+				background: $tableBtn;
+				border-radius: 5px;
+				padding: 9px 13.5px;
+				font: 10.5px/1 $ikeaFontKo;
+				color: $fontColorW;
+				transition: 0.5s;
+				border: none;
+				cursor: pointer;
+
+				&:hover {
+					background: $hoverBtn;
+					color: $fontColorW;
+				}
+			}
+
+			.seeCommunityList {
 				width: 64px;
 				height: 29px;
 				background: $tableBtn;

@@ -78,13 +78,13 @@
 						cursor: pointer;
 
 						h3 {
-							font: 24px/1 $ikeaFontKo;
+							font: 21px/1 $ikeaFontKo;
 							color: rgb(196, 196, 255);
 							margin-bottom: 10px;
 						}
 
 						h2 {
-							font: bold 24px/1 $ikeaFontKo;
+							font: bold 21px/1 $ikeaFontKo;
 							color: $fontColorW;
 						}
 					}
@@ -96,7 +96,7 @@
 						text-align: end;
 
 						.fa-arrow-right {
-							font: 22px/1 $ikeaFontKo;
+							font: 21px/1 $ikeaFontKo;
 							color: $fontColorW;
 							transition: 0.5s;
 							margin-right: 5px;
@@ -115,13 +115,13 @@
 				padding: 0;
 
 				h4 {
-					margin: 0px auto;
+					margin: 50px auto;
 					text-orientation: upright;
 					writing-mode: vertical-rl;
 					white-space: wrap;
 					word-spacing: -55px;
 					letter-spacing: -5px;
-					font: bold 70px/1 $ikeaFontKo;
+					font: bold 60px/1 $ikeaFontKo;
 					color: transparent;
 					-webkit-text-stroke: 1px $fontColorW;
 				}
@@ -143,14 +143,14 @@
 					word-break: break-all;
 
 					h3 {
-						font: bold 24px/1 $ikeaFontKo;
+						font: bold 21px/1 $ikeaFontKo;
 						color: $fontColorW;
 						margin-bottom: 10px;
 						cursor: pointer;
 					}
 
 					h4 {
-						font: 18px/1.5 $ikeaFontKo;
+						font: 17px/1.5 $ikeaFontKo;
 						color: #ffc6ec;
 						margin-bottom: 10px;
 						cursor: pointer;
@@ -372,6 +372,7 @@
 					flex: 0.35;
 
 					h4 {
+						margin-top: 10px;
 						font: bold 49px/1 $ikeaFontKo;
 					}
 				}

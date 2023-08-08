@@ -187,7 +187,98 @@
 
 @media screen and (max-width: $tablet) {
 	.gallery {
+		.searchBarWrap {
+			padding: 0px 0px 30px;
+			margin-bottom: 96px;
+
+			.searchBox {
+				width: 100%;
+				padding: 50px 10px 10px;
+				display: flex;
+				justify-content: center;
+				gap: 10px;
+
+				input {
+					width: 600px;
+					height: 60px;
+					background: transparent;
+					border: 1px solid $border;
+					padding: 10px 30px;
+					position: relative;
+					font: 16px/70px $ikeaFontKo;
+					color: $fontColorBl;
+
+					&:focus {
+						outline: none;
+					}
+
+					&::placeholder {
+						font: 16px/70px $ikeaFontKo;
+						color: $fontColorBl;
+					}
+				}
+
+				.fa-magnifying-glass {
+					font: bold 16px/70px $ikeaFontKo;
+					color: #1877f2;
+				}
+
+				.btnSearch {
+					width: 150px;
+					height: 60px;
+					border: 1px solid rgb(224, 110, 3);
+					cursor: pointer;
+					transition: 0.5s;
+					background: none;
+					font: 16px/50px $ikeaFontKo;
+					color: rgb(224, 110, 3);
+
+					&:hover {
+						background: rgb(224, 110, 3);
+						color: $fontColorW;
+					}
+				}
+			}
+
+			.btnSet {
+				width: 760px;
+				display: flex;
+				margin: 10px auto;
+				justify-content: left;
+				gap: 10px;
+				margin-bottom: 0px;
+
+				.btnInterest {
+					width: 170px;
+					height: 50px;
+					background: none;
+					border: 1px solid $border;
+					border-radius: 50px;
+					font: 14px/50px $ikeaFontKo;
+					color: $fontColorBl;
+					cursor: pointer;
+
+					.interestPlus {
+						font: 14px/50px $ikeaFontKo;
+						color: $fontColorBl;
+						display: inline;
+					}
+				}
+
+				.btnMine {
+					width: 150px;
+					height: 50px;
+					background: none;
+					border: 1px solid $border;
+					border-radius: 50px;
+					font: 14px/50px $ikeaFontKo;
+					color: $fontColorBl;
+					cursor: pointer;
+				}
+			}
+		}
 		.frame {
+			padding: 0px 10vw 0px;
 			article {
 				width: 50%;
 			}
@@ -197,7 +288,98 @@
 
 @media screen and (max-width: $mobile) {
 	.gallery {
+		.searchBarWrap {
+			padding: 0px 0px 30px;
+			margin-bottom: 96px;
+
+			.searchBox {
+				width: 100%;
+				padding: 50px 10px 10px;
+				display: flex;
+				justify-content: center;
+				gap: 10px;
+
+				input {
+					width: 600px;
+					height: 60px;
+					background: transparent;
+					border: 1px solid $border;
+					padding: 10px 30px;
+					position: relative;
+					font: 16px/70px $ikeaFontKo;
+					color: $fontColorBl;
+
+					&:focus {
+						outline: none;
+					}
+
+					&::placeholder {
+						font: 16px/70px $ikeaFontKo;
+						color: $fontColorBl;
+					}
+				}
+
+				.fa-magnifying-glass {
+					font: bold 16px/70px $ikeaFontKo;
+					color: #1877f2;
+				}
+
+				.btnSearch {
+					width: 150px;
+					height: 60px;
+					border: 1px solid rgb(224, 110, 3);
+					cursor: pointer;
+					transition: 0.5s;
+					background: none;
+					font: 16px/50px $ikeaFontKo;
+					color: rgb(224, 110, 3);
+
+					&:hover {
+						background: rgb(224, 110, 3);
+						color: $fontColorW;
+					}
+				}
+			}
+
+			.btnSet {
+				width: 760px;
+				display: flex;
+				margin: 10px auto;
+				justify-content: left;
+				gap: 10px;
+				margin-bottom: 0px;
+
+				.btnInterest {
+					width: 170px;
+					height: 50px;
+					background: none;
+					border: 1px solid $border;
+					border-radius: 50px;
+					font: 14px/50px $ikeaFontKo;
+					color: $fontColorBl;
+					cursor: pointer;
+
+					.interestPlus {
+						font: 14px/50px $ikeaFontKo;
+						color: $fontColorBl;
+						display: inline;
+					}
+				}
+
+				.btnMine {
+					width: 150px;
+					height: 50px;
+					background: none;
+					border: 1px solid $border;
+					border-radius: 50px;
+					font: 14px/50px $ikeaFontKo;
+					color: $fontColorBl;
+					cursor: pointer;
+				}
+			}
+		}
 		.frame {
+			padding: 0px 5vw 0px;
 			article {
 				width: 100%;
 			}

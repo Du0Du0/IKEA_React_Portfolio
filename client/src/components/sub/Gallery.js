@@ -131,7 +131,7 @@ function Gallery() {
 			<Helmet>
 				<title>gallery</title>
 			</Helmet>
-			<Layout type={'yellow'} name1={'gallery'} name2={`갤러리`} video={'productsFigure.mp4'}>
+			<Layout type={'yellow'} name1={'gallery'} name2={`갤러리`} video={'galleryFigure.mp4'}>
 				<div className='searchBarWrap'>
 					<div className='searchBox'>
 						<input type='text' id='search' placeholder='찾으시는 검색어를 입력해 주세요' autoFocus={true} ref={searchInput} onKeyPress={(e) => e.key === 'Enter' && showSearch(e)} />

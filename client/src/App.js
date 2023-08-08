@@ -23,24 +23,31 @@ import Menu from './components/common/Menu';
 import Main from './components/main/Main';
 
 //sub
-import Community from './components/sub/Community';
-import Contact from './components/sub/Contact';
-import Department from './components/sub/Department';
+
+import Contact from './components/sub/contactPage/Contact';
+
 import Gallery from './components/sub/Gallery';
 import Member from './components/sub/Member';
 import Youtube from './components/sub/Youtube';
-import Write from './components/sub/Write';
-import Detail from './components/sub/Detail';
-import Update from './components/sub/Update';
+
 import MuseumDetail from './components/sub/MuseumDetail';
 import PromotionDetail from './components/sub/PromotionDetail';
-import Login from './components/sub/Login';
-import FindPassword from './components/sub/FindPassword';
+
 import ProductsDetail from './components/sub/ProductsDetail';
-import FaqRead from './components/sub/FaqRead';
-import FaqWrite from './components/sub/FaqWrite';
-import FaqDetail from './components/sub/FaqDetail';
-import FaqUpdate from './components/sub/FaqUpdate';
+
+import Community from './components/sub/communityPage/Community';
+import Update from './components/sub/communityPage/Update';
+import Write from './components/sub/communityPage/Write';
+import Detail from './components/sub/communityPage/Detail';
+
+import Department from './components/sub/joinPage/Department';
+import FindPassword from './components/sub/joinPage/FindPassword';
+import Login from './components/sub/joinPage/Login';
+
+import FaqRead from './components/sub/faqPage/FaqRead';
+import FaqWrite from './components/sub/faqPage/FaqWrite';
+import FaqDetail from './components/sub/faqPage/FaqDetail';
+import FaqUpdate from './components/sub/faqPage/FaqUpdate';
 
 function App() {
 	const dispatch = useDispatch();

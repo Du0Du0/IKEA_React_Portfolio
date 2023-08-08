@@ -126,7 +126,7 @@
 
 				.date {
 					position: relative;
-					font: 18px/1.5 $ikeaFontKo;
+					font: 17px/1.5 $ikeaFontKo;
 					color: $fontColorW;
 					z-index: 1;
 				}
@@ -466,7 +466,7 @@
 					font-size: 18px;
 					backdrop-filter: brightness(0.4);
 					border-radius: 50%;
-					background: transparent;
+					background: rgba(0, 0, 0, 0.5);
 					border: none;
 					background-position: center;
 					background-repeat: no-repeat;

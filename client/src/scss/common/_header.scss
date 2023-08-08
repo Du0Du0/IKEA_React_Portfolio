@@ -1,6 +1,6 @@
 header {
 	width: 24.2%;
-	height: 108px;
+	height: 110px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -17,7 +17,7 @@ header {
 
 	.rightBar {
 		width: 24.4%;
-		margin-top: 108px;
+		margin-top: 110px;
 		height: 100vh;
 		background: $black;
 		position: fixed;
@@ -91,7 +91,7 @@ header {
 
 				.titWrap {
 					h2 {
-						font: 70px/1 $ikeaFontKo;
+						font: 50px/1 $ikeaFontKo;
 						color: $grey;
 					}
 
@@ -102,14 +102,14 @@ header {
 						align-items: center;
 
 						.fa-user {
-							font: 18px/1 $ikeaFontKo;
+							font: 17px/1 $ikeaFontKo;
 							color: $fontColorGr;
 							margin-top: 20px;
 							transform: translateY(-10px);
 						}
 
 						span {
-							font: 18px/1 $ikeaFontKo;
+							font: 17px/1 $ikeaFontKo;
 							color: $fontColorGr;
 							margin-left: 10px;
 						}
@@ -180,29 +180,38 @@ header {
 						float: left;
 						margin-top: 35px;
 						gap: 30px;
-						font: 24px/35px $ikeaFontKo;
+						font: 17px/35px $ikeaFontKo;
 						color: $fontColorGr;
 						cursor: pointer;
 					}
 
 					li {
-						font: 24px/35px $ikeaFontKo;
+						font: 21px/30px $ikeaFontKo;
 						color: $fontColorGr;
 						animation: appear 0.5s linear;
 						animation-fill-mode: backwards;
 						animation-delay: 0.5s;
 						opacity: 1;
 
-						.fa-twitter:hover {
-							color: #0398e9;
+						.fa-twitter {
+							font: 24px/30px $ikeaFontKo;
+							&:hover {
+								color: #0398e9;
+							}
 						}
 
-						.fa-facebook-f:hover {
-							color: #3053b6;
+						.fa-facebook-f {
+							font: 24px/30px $ikeaFontKo;
+							&:hover {
+								color: #3053b6;
+							}
 						}
 
-						.fa-envelope:hover {
-							color: #e9e9e9;
+						.fa-envelope {
+							font: 24px/30px $ikeaFontKo;
+							&:hover {
+								color: #e9e9e9;
+							}
 						}
 
 						a {
@@ -263,7 +272,7 @@ header {
 	// header Box
 	.menu {
 		flex: 1.5;
-		font: 35px/110px $ikeaFontKo;
+		font: 30px/110px $ikeaFontKo;
 		color: $grey;
 		cursor: pointer;
 
@@ -298,7 +307,7 @@ header {
 		cursor: pointer;
 
 		h1 {
-			font: bold 36px/108px $ikeaFontKo;
+			font: bold 30px/110px $ikeaFontKo;
 			color: $grey;
 			margin-right: 50px;
 
@@ -353,7 +362,7 @@ header {
 					padding: 0px 10vw 0px;
 
 					h2 {
-						font: 70px/1 $ikeaFontKo;
+						font: 17px/1 $ikeaFontKo;
 						color: $grey;
 						animation: appear 0.5s linear;
 						animation-fill-mode: backwards;
@@ -411,7 +420,7 @@ header {
 					}
 
 					li {
-						font: 24px/35px $ikeaFontKo;
+						font: 16px/35px $ikeaFontKo;
 						color: $fontColorGr;
 						animation: appear 0.5s linear;
 						animation-fill-mode: backwards;
@@ -473,19 +482,19 @@ header {
 @media screen and (max-width: $mobile) {
 	header {
 		width: 50%;
-		height: 95px;
+		height: 80px;
 		.rightBar {
 			width: 50%;
 
 			&.rgt {
-				width: 49.6%;
-				margin-top: 95px;
+				width: 50%;
+				margin-top: 80px;
 			}
 		}
 
 		.leftBar {
 			height: 100%;
-			width: 50.4%;
+			width: 50%;
 			background: $black;
 			position: fixed;
 			display: flex;
@@ -511,7 +520,7 @@ header {
 					padding: 0px 5vw 0px;
 
 					h2 {
-						font: 44px/1 $ikeaFontKo;
+						font: 21px/1 $ikeaFontKo;
 						color: $grey;
 						animation: appear 0.5s linear;
 						animation-fill-mode: backwards;
@@ -615,73 +624,14 @@ header {
 
 			.fa-bars-staggered {
 				margin-left: 50px;
+				font: bold 21px/95px $ikeaFontKo;
 			}
 		}
 
 		.logo {
 			h1 {
-				font: bold 30px/95px $ikeaFontKo;
+				font: bold 21px/95px $ikeaFontKo;
 				margin-left: 20px;
-			}
-		}
-	}
-}
-
-header.main {
-	background: #82807d;
-	border: 1px solid rgba(#9f9f9f, 0.5);
-	position: absolute;
-	top: 0;
-	right: 0;
-
-	// header Box
-	.menu {
-		flex: 1.5;
-		font: 35px/108px $ikeaFontKo;
-		color: $grey;
-		cursor: pointer;
-
-		//header open button
-		.fa-bars-staggered {
-			margin-left: 50px;
-			rotate: 90deg;
-		}
-
-		//header close button
-		.fa-xmark {
-			margin-left: 50px;
-			animation: roateCloseBtn 0.5s ease-in;
-			animation-fill-mode: backwards;
-			animation-duration: 0.5s;
-			display: none;
-
-			@keyframes roateCloseBtn {
-				from {
-					transform: rotate(0deg);
-				}
-				to {
-					transform: rotate(720deg);
-				}
-			}
-		}
-	}
-
-	//header title
-	.logo {
-		flex: 4;
-		cursor: pointer;
-
-		h1 {
-			font: bold 35px/108px $ikeaFontKo;
-			color: $grey;
-			margin-right: 50px;
-
-			a {
-				cursor: pointer;
-
-				&.on {
-					color: aqua;
-				}
 			}
 		}
 	}

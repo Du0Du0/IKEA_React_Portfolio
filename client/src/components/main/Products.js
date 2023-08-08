@@ -95,11 +95,9 @@ function Products() {
 			element.querySelector('.productsTit'),
 			{
 				opacity: 0.1,
-				x: -450,
 			},
 			{
 				opacity: 1,
-				x: 0,
 				ease: 'power2.out',
 				scrollTrigger: {
 					start: '260',

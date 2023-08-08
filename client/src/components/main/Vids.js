@@ -28,11 +28,9 @@ function Vids() {
 			element.querySelector('.title'),
 			{
 				opacity: 0.1,
-				x: -450,
 			},
 			{
 				opacity: 1,
-				x: 0,
 				ease: 'power2.out',
 				scrollTrigger: {
 					trigger: element.querySelector('.first'),

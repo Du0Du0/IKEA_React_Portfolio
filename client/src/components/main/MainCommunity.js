@@ -45,15 +45,13 @@ function MainCommunity() {
 			element.querySelector('.goBtn'),
 			{
 				opacity: 0,
-				x: -450,
 			},
 			{
 				opacity: 1,
-				x: 0,
 				ease: 'power2.out',
 				scrollTrigger: {
-					start: '3500',
-					end: '3800',
+					start: '3000',
+					end: '3200',
 					scrub: true,
 				},
 			}
@@ -66,15 +64,13 @@ function MainCommunity() {
 			element.querySelector('.pageTit'),
 			{
 				opacity: 0,
-				x: -450,
 			},
 			{
 				opacity: 1,
-				x: 0,
 				ease: 'power2.out',
 				scrollTrigger: {
-					start: '3500',
-					end: '3800',
+					start: '3000',
+					end: '3200',
 					scrub: true,
 				},
 			}
@@ -87,11 +83,9 @@ function MainCommunity() {
 			element.querySelector('.iconWrap'),
 			{
 				opacity: 0,
-				x: -450,
 			},
 			{
 				opacity: 1,
-				x: 0,
 				ease: 'power2.out',
 				duration: 1,
 				scrollTrigger: {
@@ -117,7 +111,7 @@ function MainCommunity() {
 				ease: 'power2.out',
 				scrollTrigger: {
 					start: '3400',
-					end: '3700',
+					end: '3600',
 					scrub: true,
 				},
 			}

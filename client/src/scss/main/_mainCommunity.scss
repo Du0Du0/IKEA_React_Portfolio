@@ -3,7 +3,7 @@
 	height: 750px;
 	background: white;
 	padding: 0px 10vw 0px;
-	margin-bottom: 150px;
+	margin-bottom: 90px;
 
 	.mainCommContainer {
 		width: 100%;
@@ -21,7 +21,7 @@
 
 			// section notice title
 			h4 {
-				font: bold 70px/1 $ikeaFontKo;
+				font: bold 60px/1 $ikeaFontKo;
 				color: $ikeaBl;
 				margin-bottom: 70px;
 				animation-duration: 0.5s;
@@ -169,7 +169,7 @@
 					word-break: break-all;
 
 					p {
-						font: 18px/1.6 $ikeaFontKo;
+						font: 17px/1.6 $ikeaFontKo;
 						color: $ikeaBl;
 						cursor: pointer;
 					}
@@ -264,8 +264,8 @@
 @media screen and (max-width: $mobile) {
 	#mainCommunity {
 		height: 744px;
-		padding: 0px 5vw 0px;
-		margin-bottom: 200px;
+		padding: 25px 5vw 0px;
+		margin-bottom: 130px;
 
 		.mainCommContainer {
 			padding: 35px 0px 35px;

@@ -82,11 +82,9 @@ function Museum() {
 			element.querySelector('.swiper-wrapper'),
 			{
 				opacity: 0,
-				y: 200,
 			},
 			{
 				opacity: 1,
-				y: 0,
 				ease: 'power2.out',
 				scrollTrigger: {
 					start: '2700',

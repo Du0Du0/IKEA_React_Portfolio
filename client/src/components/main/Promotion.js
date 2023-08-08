@@ -43,7 +43,7 @@ function Promotion() {
 				ease: 'power2.out',
 				scrollTrigger: {
 					start: '1900',
-					end: '2400',
+					end: '2300',
 					scrub: true,
 				},
 			}
@@ -61,8 +61,8 @@ function Promotion() {
 				opacity: 1,
 				ease: 'power2.out',
 				scrollTrigger: {
-					start: '2200',
-					end: '2400',
+					start: '1700',
+					end: '2000',
 					scrub: true,
 				},
 			}
@@ -80,8 +80,8 @@ function Promotion() {
 				opacity: 1,
 				ease: 'power2.out',
 				scrollTrigger: {
-					start: '2200',
-					end: '2400',
+					start: '2100',
+					end: '2200',
 					scrub: true,
 				},
 			}
@@ -99,8 +99,8 @@ function Promotion() {
 				opacity: 1,
 				ease: 'power2.out',
 				scrollTrigger: {
-					start: '2200',
-					end: '2400',
+					start: '2300',
+					end: '2500',
 					scrub: true,
 				},
 			}
@@ -118,8 +118,8 @@ function Promotion() {
 				opacity: 1,
 				ease: 'power2.out',
 				scrollTrigger: {
-					start: '2300',
-					end: '2500',
+					start: '2200',
+					end: '2400',
 					scrub: true,
 				},
 			}
