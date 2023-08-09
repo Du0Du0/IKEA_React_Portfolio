@@ -1,8 +1,8 @@
 const express = require('express');
-const path = require('path');
 const app = express();
 const mongoose = require('mongoose');
-const port = process.env.PORT;
+const port = process.env.PORT || 5000;
+const path = require('path');
 const cors = require('cors');
 const { Post } = require('./model/postSchema.js');
 const { Counter } = require('./model/counterSchema.js');
