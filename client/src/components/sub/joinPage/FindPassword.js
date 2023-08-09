@@ -1,6 +1,6 @@
 import LayoutNone from '../../common/LayoutNone';
 import styled from 'styled-components';
-import { NavLink, useHistory } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { useState } from 'react';
 import { getAuth, sendPasswordResetEmail } from 'firebase/auth';
 
