@@ -4,32 +4,24 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import { faUser } from '@fortawesome/free-regular-svg-icons';
 import { faTwitter, faFacebookF } from '@fortawesome/free-brands-svg-icons';
-import { useImperativeHandle } from 'react';
 import firebase from '../../firebase';
-import { useSelector, useDispatch } from 'react-redux';
 //menuSlice로 부터 전역state값을 변경해주는 close함수를 import
 import { close } from '../../redux-toolkit/menuSlice';
+import { useGlobalData } from '../../hooks/useGlobalContext';
 
 // props와 ref를 인자로 받음
 function Menu() {
-	// const user = useSelector((store) => store.user);
-	// console.log(user);
-
+	const { MenuOpen, setMenuOpen } = useGlobalData();
 	const active = { color: '#17809b' };
-	const dispatch = useDispatch();
-	const menu = useSelector((store) => store.menu.open);
-
-	// useSelector를 사용하여 Redux 상태에서 displayName 가져오기
-	// const displayName = useSelector((state) => state.userReducer.displayName);
 
 	return (
 		<React.Fragment>
 			{/* header left side bar  */}
-			{menu && (
+			{MenuOpen && (
 				<>
-					<div className={menu ? 'leftBar lft' : 'leftBar'}>
+					<div className={MenuOpen ? 'leftBar lft' : 'leftBar'}>
 						<div className='leftBarWrap'>
-							<button onClick={() => dispatch(close())}>close</button>
+							<button onClick={() => setMenuOpen(false)}>close</button>
 							{/* header left side title */}
 							<div className='leftBarTit'>
 								<div className='titWrap'>
@@ -112,7 +104,7 @@ function Menu() {
 						</div>
 					</div>
 
-					<div className={menu ? 'rightBar rgt' : 'rightBar'}></div>
+					<div className={MenuOpen ? 'rightBar rgt' : 'rightBar'}></div>
 				</>
 			)}
 		</React.Fragment>
