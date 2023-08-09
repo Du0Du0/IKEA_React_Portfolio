@@ -10,6 +10,7 @@ import firebase from '../../../firebase';
 import { setLoginUser, setLogoutUser } from '../../../redux/action';
 import { useDispatch } from 'react-redux';
 import axios from 'axios';
+import { useDebounce } from '../../../hooks/useDebounce';
 
 function Department() {
 	const [IsOpen, setIsOpen] = useState(false);
@@ -53,11 +54,10 @@ function Department() {
 	const [Submit, setSubmit] = useState(false);
 	const [Err, setErr] = useState({});
 	const dispatch = useDispatch();
+	const DebouncedVal = useDebounce(Val);
 
 	const handleChange = (e) => {
-		//현재 입력하고 있는 input요소의 name,value값을 비구조화할당으로 뽑아서 출력
 		const { name, value } = e.target;
-		//기존 초기 Val State값을 deep copy해서 현재 입력하고 있는 항목의 name값과 value값으로 기존 State를 덮어쓰기 해서 변경 (불변성 유지)
 		setVal({ ...Val, [name]: value });
 	};
 
@@ -65,6 +65,11 @@ function Department() {
 		const { name, value } = e.target;
 		setVal({ ...Val, [name]: value });
 	};
+
+	const showErr = useCallback(() => {
+		console.log('showErr');
+		setErr(check(DebouncedVal));
+	}, [DebouncedVal]);
 
 	const handleCheck = (e) => {
 		const { name } = e.target;
@@ -173,6 +178,10 @@ function Department() {
 			alert('모든 인증을 통과했습니다.');
 		}
 	}, [Err, Submit, resetForm]);
+
+	useEffect(() => {
+		showErr();
+	}, [DebouncedVal, showErr]);
 
 	//"비밀번호" 문자 보이기/숨기기 토글 기능
 	const passwordToggle = () => {
