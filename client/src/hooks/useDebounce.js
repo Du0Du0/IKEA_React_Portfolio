@@ -8,7 +8,7 @@ export const useDebounce = (value) => {
 
 	eventBlocker.current = setTimeout(() => {
 		setDebouncedVal(value);
-	}, 400);
+	}, 300);
 
 	return DebouncedVal;
 };

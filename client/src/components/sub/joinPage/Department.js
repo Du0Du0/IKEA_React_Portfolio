@@ -55,6 +55,7 @@ function Department() {
 	const [Err, setErr] = useState({});
 	const dispatch = useDispatch();
 	const DebouncedVal = useDebounce(Val);
+	const [Mounted, setMounted] = useState(true);
 
 	const handleChange = (e) => {
 		const { name, value } = e.target;
@@ -68,8 +69,9 @@ function Department() {
 
 	const showErr = useCallback(() => {
 		console.log('showErr');
-		setErr(check(DebouncedVal));
-	}, [DebouncedVal]);
+		setSubmit(false);
+		Mounted && setErr(check(DebouncedVal));
+	}, [DebouncedVal, Mounted]);
 
 	const handleCheck = (e) => {
 		const { name } = e.target;
@@ -94,7 +96,7 @@ function Department() {
 		console.log('현재 스테이트값', Val);
 
 		const errors = check(Val);
-		setErr(errors);
+		Mounted && setErr(errors);
 
 		const isValid = Object.keys(errors).length === 0;
 		if (isValid) {
@@ -168,16 +170,13 @@ function Department() {
 		return errs;
 	};
 
-	const resetForm = useCallback(() => {
-		setVal(initVal);
-	}, []);
-
 	useEffect(() => {
 		const len = Object.keys(Err).length;
 		if (len === 0 && Submit) {
 			alert('모든 인증을 통과했습니다.');
 		}
-	}, [Err, Submit, resetForm]);
+		return () => setMounted(false);
+	}, [Err, Submit]);
 
 	useEffect(() => {
 		showErr();
