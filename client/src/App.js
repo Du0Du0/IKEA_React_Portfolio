@@ -9,7 +9,6 @@ import firebase from './firebase';
 import { useCallback, useRef } from 'react';
 
 import { fetchSubYoutube } from './redux-toolkit/subYoutubeSlice';
-import { fetchFlickr } from './redux-toolkit/flickerSlice';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
@@ -49,10 +48,6 @@ function App() {
 	const dispatch = useDispatch();
 	const youtubeIndicatorLists = ['Title', 'About', 'Photo', 'Video', 'List'];
 	const menuRef = useRef(null);
-
-	useEffect(() => {
-		dispatch(fetchFlickr({ type: 'user', user: '168950802@N02' }));
-	}, [dispatch]);
 
 	//firebase login & logout
 	useEffect(() => {
