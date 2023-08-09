@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+import { faMagnifyingGlass, faLock } from '@fortawesome/free-solid-svg-icons';
 import { faCommentDots } from '@fortawesome/free-regular-svg-icons';
 import { useEffect, useState, useRef } from 'react';
 import LayoutNone from '../../common/LayoutNone';
@@ -20,7 +20,7 @@ function FaqRead() {
 	const user = useSelector((state) => state.userReducer);
 
 	useEffect(() => {
-		axios.post('/api/faq/read').then((res) => {
+		axios.get('/api/faq/read').then((res) => {
 			console.log(res);
 			setPosts(res.data.communityList);
 		});
@@ -346,6 +346,7 @@ function FaqRead() {
 								<div className='list' key={post._id}>
 									<h3>{post.topic}</h3>
 									<h2>
+										{post.isSecret === false ? <FontAwesomeIcon icon={faLock} /> : ''}{' '}
 										<Link to={`/faq/detail/${post.communityNum}`}>{!IsListType && `${post.title}`.length > 18 ? `${post.title}`.substr(0, 15) + '...' : `${post.title}`} </Link>
 									</h2>
 									<div className='bottomWrap'>

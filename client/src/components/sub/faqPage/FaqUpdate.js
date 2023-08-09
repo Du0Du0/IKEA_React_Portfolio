@@ -26,7 +26,7 @@ function FaqUpdate() {
 			// keyword: Keyword,
 			id: params.id,
 		};
-		axios.post('/api/update', item).then((res) => {
+		axios.post('/api/faq/update', item).then((res) => {
 			if (res.data.success) {
 				alert('글 수정이 완료되었습니다.');
 				history.push('/faq');
@@ -37,7 +37,7 @@ function FaqUpdate() {
 	};
 
 	useEffect(() => {
-		axios.post('/api/detail', params).then((res) => {
+		axios.post('/api/faq/detail', params).then((res) => {
 			if (res.data.success) {
 				console.log(res.data.detail);
 				setDetail(res.data.detail);

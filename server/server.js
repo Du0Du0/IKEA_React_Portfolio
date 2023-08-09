@@ -7,6 +7,9 @@ const cors = require('cors');
 require('dotenv').config();
 const MONGODB_ID = process.env.SERVER_MONGODB_ID;
 const MONGODB_PASSWORD = process.env.SERVER_MONGODB_PASSWORD;
+const { Post } = require('./model/postSchema.js');
+const { Counter } = require('./model/counterSchema.js');
+const { User } = require('./model/userSchema');
 
 app.use(cors());
 

@@ -2,9 +2,10 @@ const express = require('express');
 const router = express.Router();
 const { User } = require('../model/userSchema');
 const { Counter } = require('../model/counterSchema');
+const { Post } = require('../model/postSchema.js');
 
 //회원정보 라우터
-router.post('/api/join', (req, res) => {
+router.post('/join', (req, res) => {
 	const temp = req.body;
 
 	Counter.findOne({ name: 'counter' })
@@ -25,7 +26,7 @@ router.post('/api/join', (req, res) => {
 });
 
 //작성자 정보 조회
-router.post('/api/user', (req, res) => {
+router.post('/user', (req, res) => {
 	const { uid } = req.body;
 	User.findOne({ uid })
 		.exec()

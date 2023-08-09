@@ -2,9 +2,10 @@ const express = require('express');
 const router = express.Router();
 const { Post } = require('../model/postSchema.js');
 const { Counter } = require('../model/counterSchema.js');
+const { User } = require('../model/userSchema');
 
 //게시물 작성 라우터
-router.post('/api/faq/create', (req, res) => {
+router.post('/create', (req, res) => {
 	const temp = req.body;
 
 	//1-카운터 모델에서 communityNum을 찾은 다음에 프론트에서 받은 객체에 추가
@@ -38,7 +39,7 @@ router.post('/api/faq/create', (req, res) => {
 });
 
 //게시물 리스트 출력 라우터
-router.post('/api/read', (req, res) => {
+router.get('/read', (req, res) => {
 	Post.find()
 		.populate('writer')
 		.sort({ createdAt: -1 })
@@ -54,7 +55,7 @@ router.post('/api/read', (req, res) => {
 });
 
 //상세페이지 출력 라우터
-router.post('/api/detail', (req, res) => {
+router.post('/detail', (req, res) => {
 	Post.findOne({ communityNum: req.body.id })
 		.populate('writer') // 작성자 정보 populate 추가
 		.exec()
@@ -63,7 +64,7 @@ router.post('/api/detail', (req, res) => {
 });
 
 //게시물 수정 라우터
-router.post('/api/update', (req, res) => {
+router.post('/update', (req, res) => {
 	const temp = {
 		topic: req.body.topic,
 		title: req.body.title,
@@ -80,7 +81,7 @@ router.post('/api/update', (req, res) => {
 });
 
 //게시물 삭제 라우터
-router.post('/api/delete', (req, res) => {
+router.post('/delete', (req, res) => {
 	Post.deleteOne({ communityNum: req.body.id })
 		.exec()
 		.then(() => {

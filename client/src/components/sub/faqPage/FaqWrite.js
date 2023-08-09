@@ -12,14 +12,15 @@ function FaqWrite() {
 	const [Topic, setTopic] = useState('');
 	const [UserId, setUserId] = useState('');
 	const [Keyword, setKeyword] = useState([]);
+	const [IsSecret, setIsSecret] = useState(false);
 
 	const user = useSelector((state) => state.userReducer);
 
 	//게시물 작성 (mongoDB)
 	const handleCreate = () => {
-		const item = { topic: Topic, title: Tit, content: Con, keyword: Keyword, displayName: user.displayName, uid: user.uid };
+		const item = { topic: Topic, title: Tit, content: Con, keyword: Keyword, displayName: user.displayName, uid: user.uid, isSecret: IsSecret };
 		axios
-			.post('/api/create', item)
+			.post('/api/faq/create', item)
 			.then((res) => {
 				console.log(res);
 				alert('글 저장에 성공했습니다.');
@@ -42,28 +43,12 @@ function FaqWrite() {
 			<Helmet>
 				<title>글쓰기</title>
 			</Helmet>
-			<LayoutNone type={''} name1={'write'}>
+			<LayoutNone type={''} name1={'faqWrite'}>
 				<div className='titTop'>
 					<h1>1:1문의</h1>
 				</div>
 				<table>
 					<tbody>
-						<tr>
-							{/* 작성자 */}
-							<th scope='row'>
-								<label htmlFor='userId'>작성자</label>
-							</th>
-							<td>
-								<input
-									type='text'
-									value={UserId}
-									onChange={(e) => {
-										setUserId(e.target.value);
-									}}
-								/>
-							</td>
-						</tr>
-
 						<tr>
 							{/* 분류 */}
 							<th>
@@ -102,6 +87,36 @@ function FaqWrite() {
 							</th>
 							<td>
 								<input type='text' placeholder='키워드를 ,로 구분해서 작성해 주세요.' value={Keyword} onChange={(e) => setKeyword(e.target.value)} />
+							</td>
+						</tr>
+
+						<tr className='setSecret'>
+							{/* 비밀글 */}
+							<th scope='row'>
+								<label htmlFor='secret'>공개설정</label>
+							</th>
+							<td>
+								<input
+									type='radio'
+									id='agreeY'
+									name='secret'
+									value={IsSecret}
+									onChange={(e) => {
+										setIsSecret(true);
+									}}
+								/>
+								<label htmlFor='agree1Y'>공개</label>
+
+								<input
+									type='radio'
+									id='agreeN'
+									name='secret'
+									value={IsSecret}
+									onChange={(e) => {
+										setIsSecret(false);
+									}}
+								/>
+								<label htmlFor='agree1N'>비공개</label>
 							</td>
 						</tr>
 
