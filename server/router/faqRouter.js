@@ -1,10 +1,10 @@
 const express = require('express');
 const router = express.Router();
-const { Post } = require('./model/postSchema.js');
-const { Counter } = require('./model/counterSchema.js');
+const { Post } = require('../model/postSchema.js');
+const { Counter } = require('../model/counterSchema.js');
 
 //게시물 작성 라우터
-app.post('/api/create', (req, res) => {
+router.post('/api/faq/create', (req, res) => {
 	const temp = req.body;
 
 	//1-카운터 모델에서 communityNum을 찾은 다음에 프론트에서 받은 객체에 추가
@@ -38,7 +38,7 @@ app.post('/api/create', (req, res) => {
 });
 
 //게시물 리스트 출력 라우터
-app.post('/api/read', (req, res) => {
+router.post('/api/read', (req, res) => {
 	Post.find()
 		.populate('writer')
 		.sort({ createdAt: -1 })
@@ -54,7 +54,7 @@ app.post('/api/read', (req, res) => {
 });
 
 //상세페이지 출력 라우터
-app.post('/api/detail', (req, res) => {
+router.post('/api/detail', (req, res) => {
 	Post.findOne({ communityNum: req.body.id })
 		.populate('writer') // 작성자 정보 populate 추가
 		.exec()
@@ -63,7 +63,7 @@ app.post('/api/detail', (req, res) => {
 });
 
 //게시물 수정 라우터
-app.post('/api/update', (req, res) => {
+router.post('/api/update', (req, res) => {
 	const temp = {
 		topic: req.body.topic,
 		title: req.body.title,
@@ -80,52 +80,13 @@ app.post('/api/update', (req, res) => {
 });
 
 //게시물 삭제 라우터
-app.post('/api/delete', (req, res) => {
+router.post('/api/delete', (req, res) => {
 	Post.deleteOne({ communityNum: req.body.id })
 		.exec()
 		.then(() => {
 			res.json({ success: true });
 		})
 		.catch(() => res.json({ success: false }));
-});
-
-//회원정보 라우터
-app.post('/api/join', (req, res) => {
-	const temp = req.body;
-
-	Counter.findOne({ name: 'counter' })
-		.exec()
-		.then((doc) => {
-			temp.userNum = doc.userNum;
-
-			const userData = new User(temp);
-			userData.save().then(() => {
-				Counter.updateOne({ name: 'counter' }, { $inc: { userNum: 1 } })
-					.exec()
-					.then(() => {
-						res.json({ success: true });
-					})
-					.catch((err) => res.json({ success: false, err: err }));
-			});
-		});
-});
-
-//작성자 정보 조회
-app.post('/api/user', (req, res) => {
-	const { uid } = req.body;
-	User.findOne({ uid })
-		.exec()
-		.then((user) => {
-			if (user) {
-				res.json({ success: true, user });
-			} else {
-				res.json({ success: false, message: 'User not found' });
-			}
-		})
-		.catch((err) => {
-			console.log(err);
-			res.json({ success: false, message: 'Error finding user' });
-		});
 });
 
 module.exports = router;

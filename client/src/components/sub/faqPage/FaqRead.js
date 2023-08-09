@@ -20,7 +20,7 @@ function FaqRead() {
 	const user = useSelector((state) => state.userReducer);
 
 	useEffect(() => {
-		axios.post('/api/read').then((res) => {
+		axios.post('/api/faq/read').then((res) => {
 			console.log(res);
 			setPosts(res.data.communityList);
 		});

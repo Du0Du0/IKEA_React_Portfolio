@@ -4,9 +4,6 @@ const app = express();
 const port = process.env.PORT || 5000;
 const path = require('path');
 const cors = require('cors');
-const { Post } = require('./model/postSchema.js');
-const { Counter } = require('./model/counterSchema.js');
-const { User } = require('./model/userSchema.js');
 require('dotenv').config();
 const MONGODB_ID = process.env.SERVER_MONGODB_ID;
 const MONGODB_PASSWORD = process.env.SERVER_MONGODB_PASSWORD;
@@ -19,6 +16,12 @@ app.use(express.urlencoded({ extended: true }));
 
 //express에서 react안쪽 build폴더까지의 경로를 static하게 지정
 app.use(express.static(path.join(__dirname, './client/build')));
+
+//faq 전용 라우터 추가
+app.use('/api/faq', require('./router/faqRouter.js'));
+
+//유저 전용 라우터 추가
+app.use('/api/user', require('./router/userRouter.js'));
 
 app.listen(port, () => {
 	mongoose

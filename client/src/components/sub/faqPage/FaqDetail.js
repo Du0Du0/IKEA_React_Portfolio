@@ -18,7 +18,7 @@ function FaqDetail() {
 
 	useEffect(() => {
 		axios
-			.post('/api/detail', params)
+			.post('/api/faq/detail', params)
 			.then((res) => {
 				if (res.data.success) {
 					setDetail(res.data.detail);
