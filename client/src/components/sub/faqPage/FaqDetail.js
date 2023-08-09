@@ -79,13 +79,11 @@ function FaqDetail() {
 						</div>
 						<div className='titBottom'>
 							<p>{Detail?.writer?.displayName}</p>
-
 							<p>
 								<FontAwesomeIcon icon={faCommentDots} />
 								&nbsp;&nbsp;
 								{/* {Detail.comments === undefined ? 0 : Detail.comments.length} */}
 							</p>
-
 							<p>
 								<FontAwesomeIcon icon={faHeart} />
 								&nbsp;&nbsp;

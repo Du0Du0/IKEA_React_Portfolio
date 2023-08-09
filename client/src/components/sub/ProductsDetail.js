@@ -15,13 +15,12 @@ function ProductsDetail() {
 	const frame = useRef(null);
 	const loader = useRef(null);
 	const openModal = useRef(null);
-	const isUser = useRef(true);
-	const searchInput = useRef(null);
+	const FLIKER_API_KEY = process.env.REACT_APP_CLIENT_FLIKER_API_KEY;
 
 	const getFlickr = useCallback(async (opt) => {
 		let counter = 0;
 		const baseURL = 'https://www.flickr.com/services/rest/?format=json&nojsoncallback=1';
-		const key = '08e2b5a2a14d18ff9a849c7109134194';
+		const key = FLIKER_API_KEY;
 		const method_interest = 'flickr.interestingness.getList';
 		const method_user = 'flickr.people.getPhotos';
 		const method_search = 'flickr.photos.search';

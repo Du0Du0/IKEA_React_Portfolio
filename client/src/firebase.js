@@ -1,15 +1,20 @@
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
-import { initializeApp } from 'firebase/app';
-import { getAuth } from 'firebase/auth';
+
+const FIREBASE_API_KEY = process.env.REACT_APP_CLIENT_FIREBASE_API_KEY;
+const FIREBASE_AUTH_DOMAIN = process.env.REACT_APP_CLIENT_FIREBASE_AUTH_DOMAIN;
+const FIREBASE_PROJECT_ID = process.env.REACT_APP_CLIENT_FIREBASE_PROJECT_ID;
+const FIREBASE_STORAGE_BUCKET = process.env.REACT_APP_CLIENT_FIREBASE_STORAGE_BUCKET;
+const FIREBASE_SENDER_ID = process.env.REACT_APP_CLIENT_FIREBASE_SENDER_ID;
+const FIREBASE_APP_ID = process.env.REACT_APP_CLIENT_FIREBASE_APP_ID;
 
 const firebaseConfig = {
-	apiKey: 'AIzaSyCkHiLcZc9G1Be0xmrpuViCTRqeeO2-O5A',
-	authDomain: 'ikea-react-main.firebaseapp.com',
-	projectId: 'ikea-react-main',
-	storageBucket: 'ikea-react-main.appspot.com',
-	messagingSenderId: '853858853088',
-	appId: '1:853858853088:web:449e3e876fc62f74d4f085',
+	apiKey: FIREBASE_API_KEY,
+	authDomain: FIREBASE_AUTH_DOMAIN,
+	projectId: FIREBASE_PROJECT_ID,
+	storageBucket: FIREBASE_STORAGE_BUCKET,
+	messagingSenderId: FIREBASE_SENDER_ID,
+	appId: FIREBASE_APP_ID,
 };
 
 firebase.initializeApp(firebaseConfig);

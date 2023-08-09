@@ -25,17 +25,18 @@ function Gallery() {
 		color: 'rgb(224, 110, 3)',
 		transition: '0.5s',
 	};
+	const FLIKER_API_KEY = process.env.REACT_APP_CLIENT_FLIKER_API_KEY;
+	const FLIKER_MY_ID = process.env.REACT_APP_CLIENT_FLIKER_MY_ID;
 
 	const getFlickr = async (opt) => {
 		//getFlickr함수가 재실행될떄마다 어차피 counter값을 초기화되어야 하므로 useRef가 아닌 일반 지역변수로 설정
 		let counter = 0;
 		const baseURL = 'https://www.flickr.com/services/rest/?format=json&nojsoncallback=1';
-		const key = '08e2b5a2a14d18ff9a849c7109134194';
+		const key = FLIKER_API_KEY;
 		const method_interest = 'flickr.interestingness.getList';
 		const method_user = 'flickr.people.getPhotos';
 		const method_search = 'flickr.photos.search';
 		const num = 50;
-		//const myId = '168950802@N02';
 		let url = '';
 		if (opt.type === 'interest') url = `${baseURL}&api_key=${key}&method=${method_interest}&per_page=${num}`;
 		if (opt.type === 'search') url = `${baseURL}&api_key=${key}&method=${method_search}&per_page=${num}&tags=${opt.tags}`;
@@ -47,7 +48,7 @@ function Gallery() {
 
 			frame.current.classList.add('on');
 			setActiveMyGalleryBtn(true);
-			getFlickr({ type: 'user', user: '168950802@N02' });
+			getFlickr({ type: 'user', user: FLIKER_MY_ID });
 			enableEvent.current = true;
 			return alert('이미지 결과값이 없습니다.');
 		}
@@ -87,7 +88,7 @@ function Gallery() {
 		frame.current.classList.remove('on');
 	};
 
-	useEffect(() => getFlickr({ type: 'user', user: '168950802@N02' }), []);
+	useEffect(() => getFlickr({ type: 'user', user: FLIKER_MY_ID }), []);
 
 	const showSearch = (e) => {
 		const tag = searchInput.current.value.trim();
@@ -123,7 +124,7 @@ function Gallery() {
 		resetGallery(e);
 
 		//새로운 데이터로 갤러리 생성 함수 호출
-		getFlickr({ type: 'user', user: '168950802@N02' });
+		getFlickr({ type: 'user', user: FLIKER_MY_ID });
 	};
 
 	return (
@@ -171,7 +172,7 @@ function Gallery() {
 
 								//기존 갤러리 초기화 함수 호출
 								resetGallery(e);
-								getFlickr({ type: 'user', user: '168950802@N02' });
+								getFlickr({ type: 'user', user: FLIKER_MY_ID });
 								isUser.current = false;
 							}}
 							style={ActiveMyGalleryBtn === true ? activeGalleryBtnStyle : null}

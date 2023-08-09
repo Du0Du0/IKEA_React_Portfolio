@@ -9,6 +9,7 @@ const SnsShareModal = forwardRef((props, ref) => {
 	const currentUrl = 'http://naver.com';
 	const path = process.env.PUBLIC_URL;
 	const { Kakao } = window;
+	const JAVASCRIPT_API_KEY = process.env.REACT_APP_CLIENT_KAKAO_JAVASCRIPT_API_KEY;
 
 	useImperativeHandle(ref, () => {
 		return { open: () => setOpen(true) };
@@ -25,7 +26,7 @@ const SnsShareModal = forwardRef((props, ref) => {
 				if (window.Kakao) {
 					if (!window.Kakao.isInitialized()) {
 						try {
-							await window.Kakao.init('be0e6a448d5b266e02a1457647324d73');
+							await window.Kakao.init(JAVASCRIPT_API_KEY);
 							console.log('Kakao initialized');
 						} catch (error) {
 							console.error('Error initializing Kakao:', error);

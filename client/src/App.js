@@ -53,38 +53,39 @@ function App() {
 	const dispatch = useDispatch();
 	const youtubeIndicatorLists = ['Title', 'About', 'Photo', 'Video', 'List'];
 	const menuRef = useRef(null);
-
-	//서브페이지 유투브 데이터
-	const fetchSubYoutube = useCallback(async () => {
-		const key1 = 'AIzaSyCKs11Yu98hp6fq7N54tY2iWSY9qvTh4cM';
-		const list1 = 'PLWgHnOZUp_4FJWdMzYeEAM4Waf8IhnZCB';
-		const num1 = 8;
-		const url1 = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=${list1}&key=${key1}&maxResults=${num1}`;
-
-		const result1 = await axios.get(url1);
-		dispatch(setSubYoutube(result1.data.items));
-		console.log('result1.data.items', result1.data.items);
-	}, [dispatch]);
-
-	useEffect(() => {
-		fetchSubYoutube();
-	}, [fetchSubYoutube]);
+	const YOUTUBE_API_KEY = process.env.REACT_APP_CLIENT_YOUTUBE_API_KEY;
+	const MAIN_YOUTUBE_LIST = process.env.REACT_APP_CLIENT_MAIN_YOUTUBE_LIST;
+	const SUB_YOUTUBE_LIST = process.env.REACT_APP_CLIENT_SUB_YOUTUBE_LIST;
 
 	//메인페이지 유투브 데이터
 	const fetchMainYoutube = useCallback(async () => {
-		const key2 = 'AIzaSyCKs11Yu98hp6fq7N54tY2iWSY9qvTh4cM';
-		const list2 = 'PLWgHnOZUp_4H3oyXBnWAhhQhWulLsuoPO';
-		const num2 = 5;
-		const url2 = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=${list2}&key=${key2}&maxResults=${num2}`;
+		const key = YOUTUBE_API_KEY;
+		const listMain = MAIN_YOUTUBE_LIST;
+		const numMain = 5;
+		const urlMain = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=${listMain}&key=${key}&maxResults=${numMain}`;
 
-		const result2 = await axios.get(url2);
-		dispatch(setMainYoutube(result2.data.items));
-		console.log('result2.data.items', result2.data.items);
+		const resultMain = await axios.get(urlMain);
+		dispatch(setMainYoutube(resultMain.data.items));
 	}, [dispatch]);
 
 	useEffect(() => {
 		fetchMainYoutube();
 	}, [fetchMainYoutube]);
+
+	//서브페이지 유투브 데이터
+	const fetchSubYoutube = useCallback(async () => {
+		const key = YOUTUBE_API_KEY;
+		const listSub = SUB_YOUTUBE_LIST;
+		const numSub = 8;
+		const urlSub = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=${listSub}&key=${key}&maxResults=${numSub}`;
+
+		const resultSub = await axios.get(urlSub);
+		dispatch(setSubYoutube(resultSub.data.items));
+	}, [dispatch]);
+
+	useEffect(() => {
+		fetchSubYoutube();
+	}, [fetchSubYoutube]);
 
 	useEffect(() => {
 		firebase.auth().onAuthStateChanged((userInfo) => {

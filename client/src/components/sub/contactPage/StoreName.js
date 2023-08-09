@@ -1,7 +1,7 @@
-import { useState, useEffect, useRef, useCallback } from 'react';
 import React from 'react';
-import { Link, NavLink } from 'react-router-dom';
 import axios from 'axios';
+import { useState, useEffect, useRef, useCallback } from 'react';
+import { Link, NavLink } from 'react-router-dom';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import moment from 'moment';
@@ -12,16 +12,18 @@ import { useSelector } from 'react-redux';
 import firebase from '../../../firebase';
 
 function StoreName({ City, setCity, Index, setIndex }) {
+	const path = process.env.PUBLIC_URL;
 	const [Weather, setWeather] = useState('');
 	const [Icon, setIcon] = useState('');
 	const [Temp, setTemp] = useState(0);
 	const [value, onChange] = useState(new Date());
-	const path = process.env.PUBLIC_URL;
 	const pageBg = useRef(null);
 	const banner = useRef(null);
 	const storeList = useRef(null);
+	const displayName = useSelector((state) => state.userReducer.displayName);
+	const WEATHER_API_KEY = process.env.REACT_APP_CLIENT_WEATHER_API_KEY;
 
-	//지점명: 영어 도시 이름 => 한글로 변경
+	//지점 선택시, 영어 도시 이름 => 한글로 변경
 	const getCityNameKo = useCallback((City) => {
 		switch (City) {
 			case 'Goyang-si':
@@ -37,7 +39,7 @@ function StoreName({ City, setCity, Index, setIndex }) {
 		}
 	}, []);
 
-	//지점명 :순서로 설정
+	//지점 선택시, 지도 설정(kakaoMap API)
 	const getCityIndex = useCallback(
 		(City) => {
 			switch (City) {
@@ -56,10 +58,10 @@ function StoreName({ City, setCity, Index, setIndex }) {
 		[setIndex]
 	);
 
-	//openWeather api 데이터 가져오기
+	//openWeather API 데이터 가져오기
 	const fetchWeather = useCallback(async () => {
 		let cityName = City;
-		const apiKey = '3bc1f51ea0960a95958152e47fb71800';
+		const apiKey = WEATHER_API_KEY;
 		const url = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}&units=metric`;
 
 		try {
@@ -78,6 +80,7 @@ function StoreName({ City, setCity, Index, setIndex }) {
 		getCityIndex(City);
 	}, [City, setCity, Index, setIndex, fetchWeather, getCityIndex]);
 
+	// 페이지 모션 적용
 	useEffect(() => {
 		pageBg.current.classList.add('on');
 		banner.current.classList.add('on');
@@ -89,8 +92,6 @@ function StoreName({ City, setCity, Index, setIndex }) {
 
 	//연장영업
 	const openLongMarks = ['04-08-2023', '05-08-2023', '06-08-2023', '12-08-2023', '13-08-2023', '18-08-2023', '19-08-2023', '20-08-2023', '26-08-2023', '27-08-2023'];
-
-	const displayName = useSelector((state) => state.userReducer.displayName);
 
 	return (
 		<>

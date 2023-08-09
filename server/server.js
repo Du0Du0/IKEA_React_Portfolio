@@ -2,15 +2,18 @@ const express = require('express');
 const path = require('path');
 const app = express();
 const mongoose = require('mongoose');
-const port = 5000;
+const port = process.env.PORT;
 const cors = require('cors');
 const { Post } = require('./model/postSchema.js');
 const { Counter } = require('./model/counterSchema.js');
 const { User } = require('./model/userSchema.js');
+require('dotenv').config();
+const MONGODB_ID = process.env.SERVER_MONGODB_ID;
+const MONGODB_PASSWORD = process.env.SERVER_MONGODB_PASSWORD;
 
-app.use(cors()); // cors 미들웨어 추가
+app.use(cors());
 
-//클라이언트로 부터 보내진 데이터를 전달받도록 설정 (body-parser)
+//클라이언트로부터 보내진 데이터를 전달받도록 설정 (body-parser)
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -19,11 +22,9 @@ app.use(express.static(path.join(__dirname, './client/build')));
 
 app.listen(port, () => {
 	mongoose
-		.connect('mongodb+srv://du0du0:!abcd1234@cluster0.5goswz5.mongodb.net/?retryWrites=true&w=majority', { useUnifiedTopology: true })
+		.connect(`mongodb+srv://${MONGODB_ID}:${MONGODB_PASSWORD}@cluster0.5goswz5.mongodb.net/?retryWrites=true&w=majority`, { useUnifiedTopology: true })
 
-		//접속 성공시
 		.then(() => console.log(`Server app listening on port ${port} with MongoDB`))
-		//접속 실패시
 		.catch((err) => console.log(err));
 });
 
@@ -75,6 +76,7 @@ app.post('/api/create', (req, res) => {
 app.post('/api/read', (req, res) => {
 	Post.find()
 		.populate('writer')
+		.sort({ createdAt: -1 })
 		.exec()
 		.then((doc) => {
 			console.log(doc);
