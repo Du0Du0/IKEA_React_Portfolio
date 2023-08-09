@@ -70,7 +70,7 @@ function Department() {
 	const showErr = useCallback(() => {
 		console.log('showErr');
 		setSubmit(false);
-		Mounted && setErr(check(DebouncedVal));
+		setErr(check(DebouncedVal));
 	}, [DebouncedVal, Mounted]);
 
 	const handleCheck = (e) => {
@@ -96,7 +96,7 @@ function Department() {
 		console.log('현재 스테이트값', Val);
 
 		const errors = check(Val);
-		Mounted && setErr(errors);
+		setErr(errors);
 
 		const isValid = Object.keys(errors).length === 0;
 		if (isValid) {

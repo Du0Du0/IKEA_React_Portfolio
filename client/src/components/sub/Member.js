@@ -8,8 +8,12 @@ import { Helmet } from 'react-helmet-async';
 
 function Member() {
 	const Members = useSelector((store) => store.memberReducer.members);
-
+	const [Mounted, setMounted] = useState(true);
 	const dispatch = useDispatch();
+
+	useEffect(() => {
+		return () => setMounted(false);
+	}, []);
 
 	const path = process.env.PUBLIC_URL;
 	return (
@@ -18,24 +22,25 @@ function Member() {
 				<title>멤버</title>
 			</Helmet>
 			<Layout type={''} name1={'member'} name2={'멤버'} video={'memberFigure.mp4'}>
-				{Members.map((member, idx) => {
-					return (
-						<>
-							<div className='membersBox' key={idx}>
-								<div className='membersName'>
-									<h1>{member.name}</h1>
-									<h3>{member.sub}</h3>
+				{Mounted &&
+					Members.map((member, idx) => {
+						return (
+							<>
+								<div className='membersBox' key={idx}>
+									<div className='membersName'>
+										<h1>{member.name}</h1>
+										<h3>{member.sub}</h3>
+									</div>
+									<div className='membersImg'>
+										<img src={`${process.env.PUBLIC_URL}/img/${member.pic}`} alt={member.name} />
+									</div>
+									<div className='membersDesc'>
+										<p>{member.description}</p>
+									</div>
 								</div>
-								<div className='membersImg'>
-									<img src={`${process.env.PUBLIC_URL}/img/${member.pic}`} alt={member.name} />
-								</div>
-								<div className='membersDesc'>
-									<p>{member.description}</p>
-								</div>
-							</div>
-						</>
-					);
-				})}
+							</>
+						);
+					})}
 
 				<div className='titContainer '>
 					<p>Let's go back in time to</p>

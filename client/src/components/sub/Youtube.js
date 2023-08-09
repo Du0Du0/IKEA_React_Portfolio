@@ -21,6 +21,11 @@ function Youtube() {
 	const imgBox = useRef(null);
 	const subTitVid = useRef(null);
 	const vidImgBox = useRef(null);
+	const [Mounted, setMounted] = useState(true);
+
+	useEffect(() => {
+		return () => setMounted(false);
+	}, []);
 
 	const openNewTab = (url) => {
 		window.open(url, '_blank', 'noopener, noreferrer');
@@ -219,25 +224,26 @@ function Youtube() {
 
 					<div className='videoListContainer myScroll'>
 						<div className='container'>
-							{SubVids.map((subVid, idx) => {
-								return (
-									<div className='videoBox1' key={idx}>
-										<div
-											className='videoCircle'
-											onClick={() => {
-												modal.current.open();
-												setIndex(idx);
-											}}
-										>
-											<img src={subVid.snippet.thumbnails.maxres.url} alt={subVid.snippet.title} data-video-id={subVid.snippet.resourceId.videoId} data-name='Watch' />
+							{Mounted &&
+								SubVids.map((subVid, idx) => {
+									return (
+										<div className='videoBox1' key={idx}>
+											<div
+												className='videoCircle'
+												onClick={() => {
+													modal.current.open();
+													setIndex(idx);
+												}}
+											>
+												<img src={subVid.snippet.thumbnails.maxres.url} alt={subVid.snippet.title} data-video-id={subVid.snippet.resourceId.videoId} data-name='Watch' />
+											</div>
+											<div className='textBox'>
+												<span className='listTitle'>{subVid.snippet.title.length > 4 ? subVid.snippet.title.split(' ').splice(0, 4).join(' ') : subVid.snippet.title}</span>
+												<p>{subVid.snippet.publishedAt.substr(0, 10)}</p>
+											</div>
 										</div>
-										<div className='textBox'>
-											<span className='listTitle'>{subVid.snippet.title.length > 4 ? subVid.snippet.title.split(' ').splice(0, 4).join(' ') : subVid.snippet.title}</span>
-											<p>{subVid.snippet.publishedAt.substr(0, 10)}</p>
-										</div>
-									</div>
-								);
-							})}
+									);
+								})}
 						</div>
 					</div>
 

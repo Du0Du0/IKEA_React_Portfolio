@@ -18,6 +18,7 @@ function Gallery() {
 	const frame = useRef(null);
 	const loader = useRef(null);
 	const openModal = useRef(null);
+	const [Mounted, setMounted] = useState(true);
 	const [ActiveMyGalleryBtn, setActiveMyGalleryBtn] = useState(true);
 	const btnSet = useRef(null);
 	const activeGalleryBtnStyle = {
@@ -188,57 +189,58 @@ function Gallery() {
 				</div>
 				<div className='frame' ref={frame}>
 					<Masonry elementType={'div'} options={{ transitionDuration: '0.5s' }}>
-						{Items.map((item, idx) => {
-							return (
-								<article key={idx}>
-									<div className='inner'>
-										<div className='topDescWrap'>
-											<div className='categoryWrap'>
-												{/*  전체 카테고리 */}
-												<p>Gallery</p>/<p>{ActiveMyGalleryBtn === true ? 'My Gallery' : 'Interest Gallery'}</p>
+						{Mounted &&
+							Items.map((item, idx) => {
+								return (
+									<article key={idx}>
+										<div className='inner'>
+											<div className='topDescWrap'>
+												<div className='categoryWrap'>
+													{/*  전체 카테고리 */}
+													<p>Gallery</p>/<p>{ActiveMyGalleryBtn === true ? 'My Gallery' : 'Interest Gallery'}</p>
+												</div>
+												{/* 현재 카테고리 */}
+												<p> {ActiveMyGalleryBtn === true ? 'interior' : 'landscape'}</p>
 											</div>
-											{/* 현재 카테고리 */}
-											<p> {ActiveMyGalleryBtn === true ? 'interior' : 'landscape'}</p>
-										</div>
-										{/*  제목 */}
-										<h2>{item.title ? item.title.toUpperCase() : null}</h2>
+											{/*  제목 */}
+											<h2>{item.title ? item.title.toUpperCase() : null}</h2>
 
-										<div className='profile'>
-											{/* 프로필 사진*/}
-											<img
-												src={`http://farm${item.farm}.staticflickr.com/${item.server}/buddyicons/${item.owner}.jpg`}
-												alt={item.owner}
-												onError={(e) => e.target.setAttribute('src', 'https://www.flickr.com/images/buddyicon.gif')}
-											/>
-											{/* 프로필 사진 클릭 시  해당 유저 페이지로 이동 */}
-											<span
-												onClick={(e) => {
-													if (isUser.current) return;
-													isUser.current = true;
-													setLoader(true);
-													frame.current.classList.remove('on');
-													getFlickr({ type: 'user', user: e.target.innerText });
-													setActiveMyGalleryBtn(null);
+											<div className='profile'>
+												{/* 프로필 사진*/}
+												<img
+													src={`http://farm${item.farm}.staticflickr.com/${item.server}/buddyicons/${item.owner}.jpg`}
+													alt={item.owner}
+													onError={(e) => e.target.setAttribute('src', 'https://www.flickr.com/images/buddyicon.gif')}
+												/>
+												{/* 프로필 사진 클릭 시  해당 유저 페이지로 이동 */}
+												<span
+													onClick={(e) => {
+														if (isUser.current) return;
+														isUser.current = true;
+														setLoader(true);
+														frame.current.classList.remove('on');
+														getFlickr({ type: 'user', user: e.target.innerText });
+														setActiveMyGalleryBtn(null);
+													}}
+												>
+													{/* 프로필 유저명 */}
+													{item.owner}
+												</span>
+											</div>
+
+											<div
+												className='pic'
+												onClick={() => {
+													openModal.current.open();
+													setIndex(idx);
 												}}
 											>
-												{/* 프로필 유저명 */}
-												{item.owner}
-											</span>
+												<img src={`https://live.staticflickr.com/${item.server}/${item.id}_${item.secret}_m.jpg`} alt={item.title} />
+											</div>
 										</div>
-
-										<div
-											className='pic'
-											onClick={() => {
-												openModal.current.open();
-												setIndex(idx);
-											}}
-										>
-											<img src={`https://live.staticflickr.com/${item.server}/${item.id}_${item.secret}_m.jpg`} alt={item.title} />
-										</div>
-									</div>
-								</article>
-							);
-						})}
+									</article>
+								);
+							})}
 					</Masonry>
 				</div>
 				{Loader && <img className='loader' src={`${process.env.PUBLIC_URL}/img/loadingBar350.gif`} alt='loader' ref={loader} />}
