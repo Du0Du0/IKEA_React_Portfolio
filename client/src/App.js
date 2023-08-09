@@ -8,7 +8,6 @@ import { setLoginUser, setLogoutUser } from './redux/action';
 import firebase from './firebase';
 import { useCallback, useRef } from 'react';
 
-import { fetchMainYoutube } from './redux-toolkit/mainYoutubeSlice';
 import { fetchSubYoutube } from './redux-toolkit/subYoutubeSlice';
 import { fetchFlickr } from './redux-toolkit/flickerSlice';
 import { useEffect } from 'react';
@@ -52,8 +51,6 @@ function App() {
 	const menuRef = useRef(null);
 
 	useEffect(() => {
-		dispatch(fetchSubYoutube());
-		dispatch(fetchMainYoutube());
 		dispatch(fetchFlickr({ type: 'user', user: '168950802@N02' }));
 	}, [dispatch]);
 

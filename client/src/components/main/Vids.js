@@ -6,13 +6,10 @@ import Modal from '../common/Modal';
 import SnsShareModal from './SnsShareModal';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { useSelector } from 'react-redux';
+import { useMainYoutubeQuery } from '../../hooks/useMainYoutubeQuery';
 
 function Vids() {
-	//redux-toolkit test
-	useSelector((store) => console.log(store));
-	const MainToolkitVids = useSelector((store) => store.mainYoutube.data);
-	console.log(Vids);
+	const { data: Videos = [], isSuccess } = useMainYoutubeQuery();
 
 	//redux
 	// const MainVids = useSelector((store) => store.mainYoutubeReducer.mainYoutube);
@@ -146,43 +143,44 @@ function Vids() {
 					</div>
 					{/* video list start  */}
 					<div className='vidsVideoWrap'>
-						{MainToolkitVids.map((mainVid, idx) => {
-							if (idx >= `${NumVideosToShow}`) return null;
+						{isSuccess &&
+							Videos.map((mainVid, idx) => {
+								if (idx >= NumVideosToShow || undefined) return null;
 
-							return (
-								<div
-									className={`video ${SelectedIdx === idx ? 'on' : ''}`}
-									data-video-id={mainVid.snippet.resourceId.videoId}
-									style={{ backgroundImage: `url(${mainVid.snippet.thumbnails.maxres.url})` }}
-									onClick={() => setSelectedIdx(idx)}
-									ref={videoRefs}
-									key={idx}
-								>
-									<div className='vidsNum' style={{ display: SelectedIdx === idx ? 'none' : 'block' }}>
-										{mainVid.snippet.position + 1}
-									</div>
-									<div className='vidsBarTit' style={{ display: SelectedIdx === idx ? 'none' : 'block' }}>
-										{(mainVid.snippet.title.length > 15 ? mainVid.snippet.title.substr(0, 20) : mainVid.snippet.title) + '...'}
-									</div>
-
-									<span className='vidsOnSpan' style={{ display: SelectedIdx === idx ? 'block' : 'none' }}>
-										<h4>{(mainVid.snippet.position + 1).toString().padStart(2, 0)}.</h4>
-										<h2>{mainVid.snippet.title}</h2>
-										<p>{(mainVid.snippet.description.length > 50 ? mainVid.snippet.description.substr(0, 180) : mainVid.snippet.description) + '...'}</p>
-									</span>
-									<button
-										className='discoverBtn'
-										style={{ display: SelectedIdx === idx ? 'block' : 'none' }}
-										onClick={() => {
-											videoModal.current.open();
-											setIndex(idx);
-										}}
+								return (
+									<div
+										className={`video ${SelectedIdx === idx ? 'on' : ''}`}
+										data-video-id={mainVid.snippet.resourceId.videoId}
+										style={{ backgroundImage: `url(${mainVid.snippet.thumbnails.maxres.url})` }}
+										onClick={() => setSelectedIdx(idx)}
+										ref={videoRefs}
+										key={idx}
 									>
-										Discover Now
-									</button>
-								</div>
-							);
-						})}
+										<div className='vidsNum' style={{ display: SelectedIdx === idx ? 'none' : 'block' }}>
+											{mainVid.snippet.position + 1}
+										</div>
+										<div className='vidsBarTit' style={{ display: SelectedIdx === idx ? 'none' : 'block' }}>
+											{(mainVid.snippet.title.length > 15 ? mainVid.snippet.title.substr(0, 20) : mainVid.snippet.title) + '...'}
+										</div>
+
+										<span className='vidsOnSpan' style={{ display: SelectedIdx === idx ? 'block' : 'none' }}>
+											<h4>{(mainVid.snippet.position + 1).toString().padStart(2, 0)}.</h4>
+											<h2>{mainVid.snippet.title}</h2>
+											<p>{(mainVid.snippet.description.length > 50 ? mainVid.snippet.description.substr(0, 180) : mainVid.snippet.description) + '...'}</p>
+										</span>
+										<button
+											className='discoverBtn'
+											style={{ display: SelectedIdx === idx ? 'block' : 'none' }}
+											onClick={() => {
+												videoModal.current.open();
+												setIndex(idx);
+											}}
+										>
+											Discover Now
+										</button>
+									</div>
+								);
+							})}
 					</div>
 					<p>
 						<Link to='/youtube'>
@@ -194,7 +192,7 @@ function Vids() {
 			</section>
 			<SnsShareModal ref={snsShareModal} />
 			<Modal ref={videoModal}>
-				<iframe title={MainToolkitVids[Index]?.id} src={`https://www.youtube.com/embed/${MainToolkitVids[Index]?.snippet.resourceId.videoId}`} frameBorder='0'></iframe>
+				<iframe title={Videos[Index]?.id} src={`https://www.youtube.com/embed/${Videos[Index]?.snippet.resourceId.videoId}`} frameBorder='0'></iframe>
 			</Modal>
 		</>
 	);
