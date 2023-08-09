@@ -1,5 +1,6 @@
-import { useRef, useState, useEffect } from 'react';
+import { useRef, useState, useEffect, useCallback } from 'react';
 import Anime from '../../asset/anime';
+import { useThrottle } from '../../hooks/useThrottle';
 
 function Scroll_navi({ type, pageLists }) {
 	const btnRef = useRef(null);
@@ -32,19 +33,22 @@ function Scroll_navi({ type, pageLists }) {
 		});
 	};
 
+	const getPos = useThrottle(getPosition);
+	const activation = useThrottle(activeIndicator);
+
 	useEffect(() => {
 		getPosition();
-		window.addEventListener('resize', getPosition);
-		window.addEventListener('scroll', activeIndicator);
+		window.addEventListener('resize', getPos);
+		window.addEventListener('scroll', activation);
 		//리액트는 SPA이기 때문에 페이지가 변경된다고 하더라도 스크롤 위치값이 초기화 되지 않으므로 마운트시마다 스크롤값을 초기화함
 		window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
 
 		return () => {
-			window.removeEventListener('resize', getPosition);
-			window.removeEventListener('scroll', activeIndicator);
+			window.removeEventListener('resize', getPos);
+			window.removeEventListener('scroll', activation);
 			window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
 		};
-	}, []);
+	}, [getPos, activation, getPosition]);
 
 	return (
 		<ul id='scroll_navi' className={type} ref={btnRef}>
