@@ -1,9 +1,10 @@
-import { useState, forwardRef, useImperativeHandle, useEffect, useRef } from 'react';
+import { useState, forwardRef, useImperativeHandle } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 
 const Modal = forwardRef((props, ref) => {
 	const [Open, setOpen] = useState(false);
+
 	useImperativeHandle(ref, () => {
 		return { open: () => setOpen(true) };
 	});

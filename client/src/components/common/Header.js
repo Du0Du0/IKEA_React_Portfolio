@@ -8,14 +8,12 @@ function Header({ type }) {
 	const menuRef = useRef(null);
 
 	return (
-		// props로 전달되는 type값을 header의 class명으로 지정해서 스타일 분기처리
 		<header className={type}>
 			<div className='menu'>
 				<FontAwesomeIcon
 					icon={faBarsStaggered}
 					onClick={() => {
 						menuRef.current.toggle();
-						console.log('menuRef.current', menuRef.current);
 					}}
 				/>
 				<FontAwesomeIcon icon={faXmark} />

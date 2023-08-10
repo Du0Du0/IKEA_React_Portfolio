@@ -19,6 +19,7 @@ function FaqRead() {
 
 	const user = useSelector((state) => state.userReducer);
 
+	console.log('user', user);
 	useEffect(() => {
 		axios.get('/api/faq/read').then((res) => {
 			console.log(res);
@@ -346,8 +347,20 @@ function FaqRead() {
 								<div className='list' key={post._id}>
 									<h3>{post.topic}</h3>
 									<h2>
-										{post.isSecret === false ? <FontAwesomeIcon icon={faLock} /> : ''}{' '}
-										<Link to={`/faq/detail/${post.communityNum}`}>{!IsListType && `${post.title}`.length > 18 ? `${post.title}`.substr(0, 15) + '...' : `${post.title}`} </Link>
+										{post.isSecret === true ? <FontAwesomeIcon icon={faLock} /> : ''}{' '}
+										{(user.displayName === 'administrator' || user.displayName === post.writer.displayName) && post.isSecret ? (
+											<Link to={`/faq/detail/${post.communityNum}`}>{!IsListType && post.title.length > 18 ? `${post.title.substr(0, 15)}...` : post.title}</Link>
+										) : (
+											<span
+												onClick={() => {
+													(user.displayName !== 'administrator' || user.displayName !== post.writer.displayName || user.displayName === '') &&
+														post.isSecret === true &&
+														alert('본인이 등록한 게시글만 조회하실 수 있습니다.');
+												}}
+											>
+												{!IsListType && post.title.length > 18 ? `${post.title.substr(0, 15)}...` : post.title}
+											</span>
+										)}
 									</h2>
 									<div className='bottomWrap'>
 										<p>{`${post.publishedDate}`.substr(0, 10)}</p>

@@ -1,5 +1,3 @@
-import { useSelector } from 'react-redux';
-
 function FooterNone({ type }) {
 	return (
 		<footer id='footerNone' className={type}>

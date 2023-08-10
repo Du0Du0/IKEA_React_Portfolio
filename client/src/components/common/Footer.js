@@ -1,9 +1,9 @@
 function Footer({ type, imgBg }) {
 	const path = process.env.PUBLIC_URL;
+
 	return (
 		<footer id='footer' className={type}>
 			<img src={path + `/img/${imgBg}.png`} alt='' />
-
 			<div className='footerContainer'>
 				<div className='footerCategory'>
 					<div className='footerTopWrap'>

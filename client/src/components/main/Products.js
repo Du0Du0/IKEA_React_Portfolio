@@ -33,8 +33,27 @@ function Products() {
 		});
 	}, []);
 
+	// 현재 화면 크기에 따라 최대 슬라이드 위치 계산
+	const getMaxSlidePosition = () => {
+		if (1199 < window.innerWidth <= 1920) {
+			return 4850; // 작은 화면에서 최대 슬라이드 위치
+		} else if (759 < window.innerWidth <= 1199) {
+			return 4500; // 중간 화면에서 최대 슬라이드 위치
+		} else {
+			return 4000; // 큰 화면에서 최대 슬라이드 위치
+		}
+	};
+
+	useEffect(() => {
+		window.addEventListener('resize', getMaxSlidePosition);
+
+		return () => {
+			window.removeEventListener('resize', getMaxSlidePosition);
+		};
+	}, []);
+
 	const nextBtnClick = () => {
-		if (Count * 400 >= 3203) {
+		if (Count * 600 >= getMaxSlidePosition()) {
 			setNextPreventClick(true);
 			return;
 		}

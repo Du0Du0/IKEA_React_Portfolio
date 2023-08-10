@@ -9,14 +9,13 @@ import { useImperativeHandle } from 'react';
 import { useSelector } from 'react-redux';
 import firebase from '../../firebase';
 
-// props와 ref를 인자로 받음
 function Menu(props, ref) {
 	const [IsOpen, setIsOpen] = useState(false);
-	const user = useSelector((store) => store.user);
-	console.log(user);
+	const active = { color: '#17809b' };
 
-	// 1번인자 : ref
-	// 2번인자 : toggle 함수를 useImperativeHandle을 사용하여 ref로 전달
+	// useSelector를 사용해 Redux 상태에서 displayName 가져옴
+	const displayName = useSelector((state) => state.userReducer.displayName);
+
 	useImperativeHandle(ref, () => {
 		return { toggle: () => setIsOpen(!IsOpen) };
 	});
@@ -25,10 +24,9 @@ function Menu(props, ref) {
 		setIsOpen(false);
 	}, []);
 
-	const active = { color: '#17809b' };
-
-	// useSelector를 사용하여 Redux 상태에서 displayName 가져오기
-	const displayName = useSelector((state) => state.userReducer.displayName);
+	const openNewTab = (url) => {
+		window.open(url, '_blank', 'noopener, noreferrer');
+	};
 
 	return (
 		<React.Fragment>
@@ -96,34 +94,42 @@ function Menu(props, ref) {
 									</li>
 									<li>
 										<NavLink to='/faq' activeStyle={active}>
-											Faq
+											FAQ
 										</NavLink>
 									</li>
 								</ul>
 								<ul>
 									{/* ikea twitter icon */}
 									<li>
-										<a href='https://twitter.com/IKEA' target='_blank' title='새창-이케아 미국 트위터' rel='noreferrer'>
-											<FontAwesomeIcon icon={faTwitter} />
-										</a>
+										<FontAwesomeIcon
+											icon={faTwitter}
+											onClick={() => {
+												openNewTab('https://twitter.com/IKEA');
+											}}
+										/>
 									</li>
 									{/* ikea facebook icon */}
 									<li>
-										<a href='https://www.facebook.com/IKEAUSA/' target='_blank' title='새창-이케아 미국 페이스북' rel='noreferrer'>
-											<FontAwesomeIcon icon={faFacebookF} />
-										</a>
+										<FontAwesomeIcon
+											icon={faFacebookF}
+											onClick={() => {
+												openNewTab('https://www.facebook.com/IKEAUSA');
+											}}
+										/>
 									</li>
 									{/* ikea kakao icon */}
 									<li>
-										<a href='https://pf.kakao.com/_jhmfxd' target='_blank' title='새창-이케아 코리아 카카오톡' rel='noreferrer'>
-											<FontAwesomeIcon icon={faEnvelope} />
-										</a>
+										<FontAwesomeIcon
+											icon={faEnvelope}
+											onClick={() => {
+												openNewTab('https://pf.kakao.com/_jhmfxd');
+											}}
+										/>
 									</li>
 								</ul>
 							</div>
 						</div>
 					</div>
-
 					<div className={IsOpen ? 'rightBar rgt' : 'rightBar'}></div>
 				</>
 			)}

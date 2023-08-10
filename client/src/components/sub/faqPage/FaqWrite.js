@@ -102,7 +102,7 @@ function FaqWrite() {
 									name='secret'
 									value={IsSecret}
 									onChange={(e) => {
-										setIsSecret(true);
+										setIsSecret(false);
 									}}
 								/>
 								<label htmlFor='agree1Y'>공개</label>
@@ -113,7 +113,7 @@ function FaqWrite() {
 									name='secret'
 									value={IsSecret}
 									onChange={(e) => {
-										setIsSecret(false);
+										setIsSecret(true);
 									}}
 								/>
 								<label htmlFor='agree1N'>비공개</label>

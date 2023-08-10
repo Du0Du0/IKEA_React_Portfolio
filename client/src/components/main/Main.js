@@ -15,13 +15,13 @@ import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import moment from 'moment';
 
 function Main({ menu }) {
+	const path = process.env.PUBLIC_URL;
 	const mainIndicatorLists = ['Menu', 'video', 'Living', 'Event', 'Exhibit', 'Notice'];
 	const [IsOpen, setIsOpen] = useState(false);
 	const container = useRef(null);
 	const [Cookies, setCookies] = useCookies(['ONE_WEEK_COOKIE']);
 	const getCookiesValue = localStorage.getItem('cookiesValue') === true ? true : false;
 	const [CookiesValue, setCookiesValue] = useState(JSON.parse(getCookiesValue));
-	const path = process.env.PUBLIC_URL;
 	const [IsHideChecked, setIsHideChecked] = useState(false);
 	const cookiePop = useRef(null);
 
@@ -36,7 +36,6 @@ function Main({ menu }) {
 		} else {
 			localStorage.setItem('cookiesValue', JSON.stringify(false));
 		}
-
 		setIsOpen(true);
 	};
 
@@ -46,7 +45,6 @@ function Main({ menu }) {
 		setCookiesValue(result);
 	}, []);
 
-	console.log('IsOpen', IsOpen);
 	// 쿠키팝업창 뜰 시 뒷 배경 스크롤 기능 방지(스크롤 보이는 채)
 	const containerBlockScroll = {
 		overflowY: 'hidden',

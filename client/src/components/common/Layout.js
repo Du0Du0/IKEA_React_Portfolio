@@ -2,7 +2,6 @@ import { useEffect, useRef } from 'react';
 
 function Layout({ name1, name2, video, type, children }) {
 	const path = process.env.PUBLIC_URL;
-
 	const title = useRef(null);
 
 	useEffect(() => {
@@ -17,11 +16,9 @@ function Layout({ name1, name2, video, type, children }) {
 				</video>
 				<div className='background'></div>
 			</figure>
-
 			<div className='titContainer'>
 				<h1 ref={title}>{name2}</h1>
 			</div>
-
 			<div className='inner'>{children}</div>
 		</section>
 	);
