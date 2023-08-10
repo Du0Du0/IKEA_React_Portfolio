@@ -353,9 +353,12 @@ function FaqRead() {
 										) : (
 											<span
 												onClick={() => {
-													(user.displayName !== 'administrator' || user.displayName !== post.writer.displayName || user.displayName === '') &&
-														post.isSecret === true &&
+													if ((user.displayName !== 'administrator' || user.displayName !== post.writer.displayName || user.displayName === '') && post.isSecret === true) {
 														alert('본인이 등록한 게시글만 조회하실 수 있습니다.');
+													} else if (post.isSecret === false) {
+														// 페이지 이동을 위해 useHistory 훅을 사용
+														history.push(`/faq/detail/${post.communityNum}`);
+													}
 												}}
 											>
 												{!IsListType && post.title.length > 18 ? `${post.title.substr(0, 15)}...` : post.title}
