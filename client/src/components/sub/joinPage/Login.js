@@ -4,15 +4,88 @@ import { NavLink, useHistory } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import firebase from '../../../firebase';
 import { getAuth } from 'firebase/auth';
+import { useDispatch } from 'react-redux';
+import { setLoginUser, setLogoutUser } from '../../../redux/action';
+import axios from 'axios';
 
 function Login() {
+	const { naver } = window;
 	const path = process.env.PUBLIC_URL;
 	const history = useHistory();
 	const auth = getAuth();
-
+	const dispatch = useDispatch();
 	const [Email, setEmail] = useState('');
 	const [Pwd, setPwd] = useState('');
 	const [Err, setErr] = useState('');
+
+	const NAVER_LOGIN_API_CLIENT_ID = process.env.REACT_APP_CLIENT_NAVER_LOGIN_API_CLIENT_ID;
+
+	const NAVER_LOGIN_API_CALLBACK_URL = process.env.REACT_APP_CLIENT_NAVER_LOGIN_API_CALLBACK_URL;
+
+	// 네이버 로그인 기능
+	const [User, setUser] = useState(null);
+
+	const handleNaverLogin = () => {
+		const naverLogin = new naver.LoginWithNaverId({
+			clientId: NAVER_LOGIN_API_CLIENT_ID,
+			callbackUrl: NAVER_LOGIN_API_CALLBACK_URL,
+			isPopup: true,
+			loginButton: { color: 'green', type: 1, height: 47 },
+		});
+
+		naverLogin.init();
+
+		naverLogin.getLoginStatus(async (status) => {
+			console.log(`로그인?: ${status}`);
+			if (status) {
+				try {
+					setUser({ ...naverLogin.user });
+
+					console.log('User', User);
+					console.log('naverLogin.user', naverLogin.user);
+					window.close();
+
+					const email = naverLogin.user.email;
+					const password = naverLogin.user.email;
+
+					const createdUser = await firebase.auth().createUserWithEmailAndPassword(email, password);
+
+					// displayName 추가가 완료된 후에 리덕스 스테이트를 업데이트합니다.
+					await createdUser.user.updateProfile({
+						displayName: naverLogin.user.name,
+					});
+
+					const item = {
+						displayName: createdUser.user.multiFactor.user.displayName,
+						uid: createdUser.user.multiFactor.user.uid,
+					};
+
+					// 리덕스 스테이트를 업데이트합니다.
+					dispatch(
+						setLoginUser({
+							displayName: naverLogin.user.name,
+							uid: createdUser.user.uid,
+						})
+					);
+
+					axios.post('/api/join', item).then((res) => {
+						if (res.data.success) {
+							firebase.auth().signOut();
+							alert('성공적으로 회원가입 되었습니다.');
+							history.push('/login');
+						} else return alert('회원가입에 실패했습니다.');
+					});
+				} catch (error) {
+					console.error('회원가입 오류:', error.message);
+				}
+			}
+		});
+	};
+
+	const naverLogout = () => {
+		window.location.reload();
+		setUser(null);
+	};
 
 	const handleLogin = async () => {
 		if (!(Email && Pwd)) return setErr('이메일과 비밀번호를 입력해주세요.');
@@ -28,10 +101,6 @@ function Login() {
 			else setErr('로그인에 실패했습니다.');
 		}
 	};
-
-	useEffect(() => {
-		console.log(Err);
-	}, [Err]);
 
 	return (
 		<>
@@ -67,7 +136,7 @@ function Login() {
 							<SnsLoginTitle>SNS 간편로그인</SnsLoginTitle>
 							<SocialLoginBtnWrap>
 								<NaverWrap>
-									<SocialLoginBtn>
+									<SocialLoginBtn id='naverIdLogin' onClick={handleNaverLogin}>
 										<img src={`${path + '/img/naverLogin.png'}`} alt='naver login button' />
 									</SocialLoginBtn>
 									<SocialLoginDesc>
@@ -75,6 +144,7 @@ function Login() {
 										로그인
 									</SocialLoginDesc>
 								</NaverWrap>
+
 								<KakaoWrap>
 									<SocialLoginBtn>
 										<img src={`${path + '/img/kakaoLogin.png'}`} alt='kakao login button' />
@@ -88,6 +158,31 @@ function Login() {
 						</SnsLoginContainer>
 					</LoginWrap>
 				</LoginContainer>
+				{/* <a href={naver_api_url}>
+					<img height='50' src='http://static.nid.naver.com/oauth/small_g_in.PNG' />
+				</a> */}
+				{/* <a href={kakao_api_url}>
+					<img src='img/kakao_login.png'></img>
+				</a> */}
+				<div>
+					{User ? (
+						<div>
+							<h2>네이버 로그인 성공!</h2>
+							<h3>사용자 이름</h3>
+							<div>{User.name}</div>
+							<h3>사용자 이메일</h3>
+							<div>{User.email}</div>
+							<h3>사용자 프로필사진</h3>
+							<img src={User.profile_image} alt='프로필 사진' />
+							<button onClick={naverLogout}>로그아웃</button>
+						</div>
+					) : (
+						// 네이버 로그인 버튼
+						<div>
+							<div id='naverIdLogin'></div>
+						</div>
+					)}
+				</div>
 			</LayoutNone>
 		</>
 	);

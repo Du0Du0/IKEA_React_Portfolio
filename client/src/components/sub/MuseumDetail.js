@@ -45,8 +45,8 @@ function MuseumDetail() {
 					<div className='contentWrap'>
 						<p>{museums[Index].content}</p>
 						{/* <p>
-							{museum?.keyword &&
-								Object.values(museum.keyword)
+							{museums?.keyword &&
+								Object.values(museums.keyword)
 									.join(',')
 									.split(',')
 									.map((word, index) => (

@@ -4,6 +4,8 @@ import { useEffect, useState, useRef } from 'react';
 import { Helmet } from 'react-helmet-async';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
+import { CKEditor } from '@ckeditor/ckeditor5-react';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 function FaqWrite() {
 	const history = useHistory();
