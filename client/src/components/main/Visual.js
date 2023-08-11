@@ -1,4 +1,4 @@
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -15,9 +15,17 @@ function Visual() {
 		visualDesc2.current.classList.add('on');
 	}, []);
 
+	const [IsColorYellow, setIsColorYellow] = useState(true);
+	const [BgImg, setBgImg] = useState('visual2');
+
+	useEffect(() => {
+		if (IsColorYellow) setBgImg('visual2');
+		else if (!IsColorYellow) setBgImg('visual1');
+	}, [IsColorYellow]);
+
 	return (
 		<section id='visual' ref={ref}>
-			<img src={path + '/img/visual2.png'} alt='Main Kitchen' />
+			<img src={path + `/img/${BgImg}.png`} alt='Main Kitchen' />
 			<div className='visualWrap'>
 				<div className='bg'></div>
 				<div className='bg'></div>
@@ -27,8 +35,8 @@ function Visual() {
 				<div className='bg'></div>
 				<div className='bg'></div>
 
-				{/* Main pointBox(text) */}
-				<div className='bg'>
+				{/* Main pointBox(text) (none color box) */}
+				<div className={!IsColorYellow ? 'bg on' : 'bg'} onClick={() => setIsColorYellow(false)}>
 					Like <br /> a new life
 				</div>
 				<div className='bg'>Ikea Home</div>
@@ -39,8 +47,8 @@ function Visual() {
 					<h1 ref={visualDesc2}>IKEA wants more people to experience IKEA home furnishing with products of good quality and practical designs.</h1>
 				</div>
 
-				{/* Main pointBox2 (text)  */}
-				<div className='bg on '>
+				{/* Main pointBox2 (text) (yellow box)*/}
+				<div className={IsColorYellow ? 'bg on' : 'bg'} onClick={() => setIsColorYellow(true)}>
 					Make
 					<br /> Home Happen.
 				</div>

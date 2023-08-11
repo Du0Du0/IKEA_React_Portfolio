@@ -23,27 +23,20 @@ import Menu from './components/common/Menu';
 import Main from './components/main/Main';
 
 //sub
-
 import Contact from './components/sub/contactPage/Contact';
-
 import Gallery from './components/sub/Gallery';
 import Member from './components/sub/Member';
 import Youtube from './components/sub/Youtube';
-
 import MuseumDetail from './components/sub/MuseumDetail';
 import PromotionDetail from './components/sub/PromotionDetail';
-
 import ProductsDetail from './components/sub/ProductsDetail';
-
 import Community from './components/sub/communityPage/Community';
 import Update from './components/sub/communityPage/Update';
 import Write from './components/sub/communityPage/Write';
 import Detail from './components/sub/communityPage/Detail';
-
 import Department from './components/sub/joinPage/Department';
 import FindPassword from './components/sub/joinPage/FindPassword';
 import Login from './components/sub/joinPage/Login';
-
 import FaqRead from './components/sub/faqPage/FaqRead';
 import FaqWrite from './components/sub/faqPage/FaqWrite';
 import FaqDetail from './components/sub/faqPage/FaqDetail';
