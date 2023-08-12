@@ -10,6 +10,7 @@ import axios from 'axios';
 
 function Login() {
 	const { naver } = window;
+	const { Kakao } = window;
 	const path = process.env.PUBLIC_URL;
 	const history = useHistory();
 	const auth = getAuth();
@@ -18,13 +19,11 @@ function Login() {
 	const [Pwd, setPwd] = useState('');
 	const [Err, setErr] = useState('');
 
+	//네이버 로그인
 	const NAVER_LOGIN_API_CLIENT_ID = process.env.REACT_APP_CLIENT_NAVER_LOGIN_API_CLIENT_ID;
-
 	const NAVER_LOGIN_API_CALLBACK_URL = process.env.REACT_APP_CLIENT_NAVER_LOGIN_API_CALLBACK_URL;
 
 	// 네이버 로그인 기능
-	const [User, setUser] = useState(null);
-
 	const handleNaverLogin = () => {
 		const naverLogin = new naver.LoginWithNaverId({
 			clientId: NAVER_LOGIN_API_CLIENT_ID,
@@ -39,9 +38,6 @@ function Login() {
 			console.log(`로그인?: ${status}`);
 			if (status) {
 				try {
-					setUser({ ...naverLogin.user });
-
-					console.log('User', User);
 					console.log('naverLogin.user', naverLogin.user);
 					window.close();
 
@@ -72,7 +68,7 @@ function Login() {
 						if (res.data.success) {
 							firebase.auth().signOut();
 							alert('성공적으로 회원가입 되었습니다.');
-							history.push('/login');
+							history.push('/ikea-react');
 						} else return alert('회원가입에 실패했습니다.');
 					});
 				} catch (error) {
@@ -82,11 +78,63 @@ function Login() {
 		});
 	};
 
-	const naverLogout = () => {
-		window.location.reload();
-		setUser(null);
+	//카카오 로그인 기능
+
+	const initKakao = () => {
+		if (Kakao && !Kakao.isInitialized()) {
+			Kakao.init('be0e6a448d5b266e02a1457647324d73');
+		}
 	};
 
+	useEffect(() => {
+		initKakao();
+	}, []);
+
+	const kakaoLoginHandler = () => {
+		Kakao.Auth.authorize({
+			redirectUri: 'http://localhost:3000/login',
+		});
+	};
+
+	const params = new URL(document.location.toString()).searchParams;
+	const code = params.get('code');
+	if (code) {
+		getToken(code);
+	}
+
+
+const getToken = async code => {
+    const grant_type = 'authorization_code'
+    const client_id = `${REST_API_KEY}`
+
+    const res = await axios.post(
+      `https://kauth.kakao.com/oauth/token?grant_type=${grant_type}&client_id=${client_id}&redirect_uri=${REDIRECT_URI}&code=${AUTHORIZE_CODE}`,
+      {
+        headers: {
+          'Content-type': 'application/x-www-form-urlencoded;charset=utf-8',
+        },
+      },
+    )
+
+    const token = res.data.access_token
+
+	
+	
+	const getKaKaoUserData = async token => {
+    const kakaoUser = await axios.get(`https://kapi.kakao.com/v2/user/me`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+    })
+    
+    return await kakaoUser.data
+}
+
+getKaKaoUserData(token)
+	
+	
+	
+	//일반 로그인 기능
 	const handleLogin = async () => {
 		if (!(Email && Pwd)) return setErr('이메일과 비밀번호를 입력해주세요.');
 
@@ -146,7 +194,7 @@ function Login() {
 								</NaverWrap>
 
 								<KakaoWrap>
-									<SocialLoginBtn>
+									<SocialLoginBtn onClick={kakaoLoginHandler}>
 										<img src={`${path + '/img/kakaoLogin.png'}`} alt='kakao login button' />
 									</SocialLoginBtn>
 									<SocialLoginDesc>
@@ -164,25 +212,6 @@ function Login() {
 				{/* <a href={kakao_api_url}>
 					<img src='img/kakao_login.png'></img>
 				</a> */}
-				<div>
-					{User ? (
-						<div>
-							<h2>네이버 로그인 성공!</h2>
-							<h3>사용자 이름</h3>
-							<div>{User.name}</div>
-							<h3>사용자 이메일</h3>
-							<div>{User.email}</div>
-							<h3>사용자 프로필사진</h3>
-							<img src={User.profile_image} alt='프로필 사진' />
-							<button onClick={naverLogout}>로그아웃</button>
-						</div>
-					) : (
-						// 네이버 로그인 버튼
-						<div>
-							<div id='naverIdLogin'></div>
-						</div>
-					)}
-				</div>
 			</LayoutNone>
 		</>
 	);
