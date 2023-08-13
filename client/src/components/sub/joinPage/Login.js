@@ -18,10 +18,14 @@ function Login() {
 	const [Email, setEmail] = useState('');
 	const [Pwd, setPwd] = useState('');
 	const [Err, setErr] = useState('');
+	const [user, setUser] = useState(null);
 
 	//네이버 로그인
 	const NAVER_LOGIN_API_CLIENT_ID = process.env.REACT_APP_CLIENT_NAVER_LOGIN_API_CLIENT_ID;
 	const NAVER_LOGIN_API_CALLBACK_URL = process.env.REACT_APP_CLIENT_NAVER_LOGIN_API_CALLBACK_URL;
+
+	//카카오 로그인
+	const KAKAO_JAVASCRIPT_API_KEY = process.env.REACT_APP_CLIENT_KAKAO_JAVASCRIPT_API_KEY;
 
 	// 네이버 로그인 기능
 	const handleNaverLogin = () => {
@@ -82,7 +86,7 @@ function Login() {
 
 	const initKakao = () => {
 		if (Kakao && !Kakao.isInitialized()) {
-			Kakao.init('be0e6a448d5b266e02a1457647324d73');
+			Kakao.init(KAKAO_JAVASCRIPT_API_KEY);
 		}
 	};
 
@@ -90,50 +94,54 @@ function Login() {
 		initKakao();
 	}, []);
 
-	const kakaoLoginHandler = () => {
-		Kakao.Auth.authorize({
-			redirectUri: 'http://localhost:3000/login',
+	const kakaoLogin = () => {
+		Kakao.Auth.login({
+			success() {
+				Kakao.API.request({
+					url: '/v2/user/me',
+					async success(res) {
+						console.log(res);
+						const kakaoAccount = res.kakao_account;
+
+						const email = kakaoAccount.email;
+						const password = kakaoAccount.email;
+
+						const createdUser = await firebase.auth().createUserWithEmailAndPassword(email, password);
+
+						// displayName 추가가 완료된 후에 리덕스 스테이트를 업데이트합니다.
+						await createdUser.user.updateProfile({
+							displayName: kakaoAccount.profile.nickname,
+						});
+
+						const item = {
+							displayName: createdUser.user.multiFactor.user.displayName,
+							uid: createdUser.user.multiFactor.user.uid,
+						};
+
+						// 리덕스 스테이트를 업데이트합니다.
+						dispatch(
+							setLoginUser({
+								displayName: kakaoAccount.profile.nickname,
+								uid: createdUser.user.uid,
+							})
+						);
+
+						axios.post('/api/join', item).then((res) => {
+							if (res.data.success) {
+								firebase.auth().signOut();
+								alert('성공적으로 회원가입 되었습니다.');
+								history.push('/ikea-react');
+							} else return alert('회원가입에 실패했습니다.');
+						});
+					},
+					fail(error) {
+						console.error('회원가입 오류:', error.message);
+					},
+				});
+			},
 		});
 	};
 
-	const params = new URL(document.location.toString()).searchParams;
-	const code = params.get('code');
-	if (code) {
-		getToken(code);
-	}
-
-
-const getToken = async code => {
-    const grant_type = 'authorization_code'
-    const client_id = `${REST_API_KEY}`
-
-    const res = await axios.post(
-      `https://kauth.kakao.com/oauth/token?grant_type=${grant_type}&client_id=${client_id}&redirect_uri=${REDIRECT_URI}&code=${AUTHORIZE_CODE}`,
-      {
-        headers: {
-          'Content-type': 'application/x-www-form-urlencoded;charset=utf-8',
-        },
-      },
-    )
-
-    const token = res.data.access_token
-
-	
-	
-	const getKaKaoUserData = async token => {
-    const kakaoUser = await axios.get(`https://kapi.kakao.com/v2/user/me`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-    })
-    
-    return await kakaoUser.data
-}
-
-getKaKaoUserData(token)
-	
-	
-	
 	//일반 로그인 기능
 	const handleLogin = async () => {
 		if (!(Email && Pwd)) return setErr('이메일과 비밀번호를 입력해주세요.');
@@ -194,7 +202,7 @@ getKaKaoUserData(token)
 								</NaverWrap>
 
 								<KakaoWrap>
-									<SocialLoginBtn onClick={kakaoLoginHandler}>
+									<SocialLoginBtn onClick={kakaoLogin}>
 										<img src={`${path + '/img/kakaoLogin.png'}`} alt='kakao login button' />
 									</SocialLoginBtn>
 									<SocialLoginDesc>
@@ -212,6 +220,18 @@ getKaKaoUserData(token)
 				{/* <a href={kakao_api_url}>
 					<img src='img/kakao_login.png'></img>
 				</a> */}
+
+				{user && (
+					<div>
+						<h2>카카오 로그인 성공!</h2>
+						<h3>카카오 프로필 사진</h3>
+						<img src={user.profileImg} alt='' />
+						<h3>카카오 닉네임</h3>
+						<h4>{user.nickname}</h4>
+						<h3>카카오 이메일</h3>
+						<h4>{user.email}</h4>
+					</div>
+				)}
 			</LayoutNone>
 		</>
 	);
