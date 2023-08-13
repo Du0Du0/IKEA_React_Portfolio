@@ -59,7 +59,7 @@ function Member() {
 						</div>
 						<div className='col-2 flex '>
 							<div className='tile'>
-								<img className='articleIcon' src='https://Du0Du0.github.io/IKEA-Redesign-Web/img/member_article_icon1.png' />
+								<img className='articleIcon' src={path + '/img/member_article_icon1.png'} alt='member_article_icon1' />
 								<h3>Sinta-se em casa! Be our guest!</h3>
 								<p>
 									Born in 1927 and raised in Östersund in central Sweden, Karin’s creative path began with ceramics. A few years into her studies at Stockholm’s University College of Arts, Crafts and
@@ -80,23 +80,23 @@ function Member() {
 								</p>
 							</div>
 							<div className='tile'>
-								<img src='https://Du0Du0.github.io/IKEA-Redesign-Web/img/member_article1.png' className='articleImg' />
+								<img src={path + '/img/member_article1.png'} alt='member_article1' className='articleImg' />
 								<p>Karin with colleagues Erik Wørts (left) and GilParallaxs Lundgren (centre)</p>
 							</div>
 							<div className='tile'>
-								<img src='https://Du0Du0.github.io/IKEA-Redesign-Web/img/member_article2.png' className='articleImg' />
+								<img src={path + '/img/member_article2.png'} alt='member_article2' className='articleImg' />
 								<p>Top left: PEGGY highchair, featured in the 1966 IKEA catalogue</p>
 							</div>
 							<div className='tile'>
-								<img src='https://Du0Du0.github.io/IKEA-Redesign-Web/img/member_article3.png' className='articleImg' />
+								<img src={path + '/img/member_article3.png'} alt='member_article3' className='articleImg' />
 								<p>Karin's INGRID chair also featured in the 1966 IKEA catalogue</p>
 							</div>
 							<div className='tile'>
-								<img src='https://Du0Du0.github.io/IKEA-Redesign-Web/img/member_article4.png' className='articleImg' />
+								<img src={path + '/img/member_article4.png'} alt='member_article4' className='articleImg' />
 								<p>Karin makes her debut the same year</p>
 							</div>
 							<div className='tile'>
-								<img src='https://Du0Du0.github.io/IKEA-Redesign-Web/img/member_article5.png' className='articleImg' />
+								<img src={path + '/img/member_article5.png'} alt='member_article5' className='articleImg' />
 								<p>LONDON Chair, launched in 1969</p>
 							</div>
 						</div>
@@ -112,7 +112,7 @@ function Member() {
 						</div>
 						<div className='col-2 flex '>
 							<div className='tile'>
-								<img className='articleIcon' src='https://Du0Du0.github.io/IKEA-Redesign-Web/img/member_article_icon2.PNG' />
+								<img className='articleIcon' src={path + '/img/member_article_icon2.PNG'} alt='member_article_icon2' />
 								<h3>Design Flashback</h3>
 								<p>
 									By the 1970s Karin had become regarded as one of IKEA’s most productive and trendsetting designers. Her furniture design became proParallaxfic, from the LONDON series of chairs and
@@ -132,7 +132,7 @@ function Member() {
 								</p>
 							</div>
 							<div className='tile'>
-								<img src='https://Du0Du0.github.io/IKEA-Redesign-Web/img/member_article6.png' className='articleImg' />
+								<img src={path + '/img/member_article6.png'} alt='member_article6' className='articleImg' />
 								<p>KARUSELL chairs and KATINKA table, 1969</p>
 							</div>
 							<div className='tile'>
@@ -144,15 +144,15 @@ function Member() {
 								</p>
 							</div>
 							<div className='tile'>
-								<img src='https://Du0Du0.github.io/IKEA-Redesign-Web/img/member_article7.png' className='articleImg' />
+								<img src={path + '/img/member_article7.png'} alt='member_article7' className='articleImg' />
 								<p>KRUMELUR chairs, shown on the cover of the 1972 IKEA catalogue</p>
 							</div>
 							<div className='tile'>
-								<img src='https://Du0Du0.github.io/IKEA-Redesign-Web/img/member_article8.png' className='articleImg' />
+								<img src={path + '/img/member_article8.png'} alt='member_article8' className='articleImg' />
 								<p>STABIL Table, 1970. A favourite of Ingvar Kamprad.</p>
 							</div>
 							<div className='tile'>
-								<img src='https://Du0Du0.github.io/IKEA-Redesign-Web/img/member_article9.png' className='articleImg' />
+								<img src={path + '/img/member_article9.png'} alt='member_article9' className='articleImg' />
 								<p>MÅLAND 3-seater sofa, 1970</p>
 							</div>
 						</div>
@@ -176,7 +176,7 @@ function Member() {
 						</div>
 						<div className='col-2 flex content title-before'>
 							<div className='tile'>
-								<img className='articleIcon' src='https://Du0Du0.github.io/IKEA-Redesign-Web/img/member_article_icon3.PNG' />
+								<img className='articleIcon' src={path + '/img/member_article_icon3.PNG'} alt='member_article_icon3' />
 								<h3>Teamwork is the key</h3>
 							</div>
 							<div className='tile'>
@@ -194,19 +194,19 @@ function Member() {
 								</p>
 							</div>
 							<div className='tile'>
-								<img src='https://Du0Du0.github.io/IKEA-Redesign-Web/img/member_article10.png' className='articleImg' />
+								<img src={path + '/img/member_article10.png'} alt='member_article10' className='articleImg' />
 								<p>The iconic IKEA FRAKTA bag (1989)</p>
 							</div>
 							<div className='tile'>
-								<img src='https://Du0Du0.github.io/IKEA-Redesign-Web/img/member_article11.png' className='articleImg' />
+								<img src={path + '/img/member_article11.png'} alt='member_article11' className='articleImg' />
 								<p>UPPTÄCKA Cabin bag and shoulder bag (2007)</p>
 							</div>
 							<div className='tile'>
-								<img src='https://Du0Du0.github.io/IKEA-Redesign-Web/img/member_article12.png' className='articleImg' />
+								<img src={path + '/img/member_article12.png'} alt='member_article12' className='articleImg' />
 								<p>A drawing of UPPTÄKA luggage</p>
 							</div>
 							<div className='tile'>
-								<img src='https://Du0Du0.github.io/IKEA-Redesign-Web/img/member_article13.png' className='articleImg' />
+								<img src={path + '/img/member_article13.png'} alt='member_article13' className='articleImg' />
 								<p>The front cover of the first STOCKHOLM collection catalogue, pubParallaxshed in 1986</p>
 							</div>
 						</div>
@@ -236,7 +236,7 @@ function Member() {
 								</p>
 							</div>
 							<div className='tile'>
-								<img src='https://Du0Du0.github.io/IKEA-Redesign-Web/img/member_article14.png' className='articleImg' />
+								<img src={path + '/img/member_article14.png'} alt='member_article14' className='articleImg' />
 								<p>The ParallaxSABO table series won the Red Dot Design Award in 2016.</p>
 							</div>
 							<div className='tile'>
@@ -253,17 +253,17 @@ function Member() {
 								</p>
 							</div>
 							<div className='tile'>
-								<img src='https://Du0Du0.github.io/IKEA-Redesign-Web/img/member_article15.png' className='articleImg' />
+								<img src={path + '/img/member_article15.png'} alt='member_article15' className='articleImg' />
 								<p>The Hagberg + Hagberg exhibition at the IKEA Museum</p>
 							</div>
 
 							<div className='tile'>
-								<img src='https://Du0Du0.github.io/IKEA-Redesign-Web/img/member_article16.png' className='articleImg' />
+								<img src={path + '/img/member_article16.png'} alt='member_article16' className='articleImg' />
 								<p>Back to the drawing board: Marianne and Knut at the Hagberg + Hagberg exhibition at the IKEA Museum in Älmhult.</p>
 							</div>
 
 							<div className='tile'>
-								<img src='https://Du0Du0.github.io/IKEA-Redesign-Web/img/member_article17.png' className='articleImg' />
+								<img src={path + '/img/member_article17.png'} alt='member_article17' className='articleImg' />
 								<p>KOBRA Children's sofa, table and armchair (1989)</p>
 							</div>
 						</div>
