@@ -241,7 +241,7 @@ function Department() {
 			<Helmet>
 				<title>회원가입</title>
 			</Helmet>
-			<LayoutNone type={''} name1={'department'}>
+			<LayoutNone type={''} name1={'join'}>
 				{/* 회원가입 페이지 제목 */}
 				<div className='titTop'>
 					<h1>회원가입</h1>

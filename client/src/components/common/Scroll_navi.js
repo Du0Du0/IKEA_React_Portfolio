@@ -8,12 +8,12 @@ function Scroll_navi({ type, pageLists }) {
 	const [ActiveIdx, setActiveIdx] = useState(0);
 	const [Num, setNum] = useState(0);
 
-	const getPosition = useCallback(() => {
+	const getPosition = () => {
 		position.current = [];
 		const sections = btnRef.current?.parentElement.querySelectorAll('.myScroll');
 		position.current = Array.from(sections).map((sec) => sec.offsetTop);
 		setNum(position.current.length);
-	}, []);
+	};
 
 	const activeIndicator = () => {
 		const base = -window.innerHeight / 2;
@@ -40,6 +40,7 @@ function Scroll_navi({ type, pageLists }) {
 		getPosition();
 		window.addEventListener('resize', getPos);
 		window.addEventListener('scroll', activation);
+		//리액트는 SPA이기 때문에 페이지가 변경된다고 하더라도 스크롤 위치값이 초기화 되지 않으므로 마운트시마다 스크롤값을 초기화함
 		window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
 
 		return () => {

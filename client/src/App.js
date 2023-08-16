@@ -34,7 +34,7 @@ import Community from './components/sub/communityPage/Community';
 import Update from './components/sub/communityPage/Update';
 import Write from './components/sub/communityPage/Write';
 import Detail from './components/sub/communityPage/Detail';
-import Department from './components/sub/joinPage/Department';
+import Join from './components/sub/joinPage/Join';
 import FindPassword from './components/sub/joinPage/FindPassword';
 import Login from './components/sub/joinPage/Login';
 import FaqRead from './components/sub/faqPage/FaqRead';
@@ -138,10 +138,10 @@ function App() {
 				></Route>
 
 				<Route
-					path='/department'
+					path='/join'
 					render={() => (
 						<>
-							<Department />
+							<Join />
 							<FooterNone type={'sub'} imgBg={'footerW'} />
 						</>
 					)}

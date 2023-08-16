@@ -88,7 +88,7 @@ function Menu(props, ref) {
 										</NavLink>
 									</li>
 									<li>
-										<NavLink to='/department' activeStyle={active}>
+										<NavLink to='/join' activeStyle={active}>
 											Join
 										</NavLink>
 									</li>
