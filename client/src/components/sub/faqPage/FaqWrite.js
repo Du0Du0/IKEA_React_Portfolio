@@ -22,7 +22,7 @@ function FaqWrite() {
 	const handleCreate = () => {
 		const item = { topic: Topic, title: Tit, content: Con, keyword: Keyword, displayName: user.displayName, uid: user.uid, isSecret: IsSecret };
 		axios
-			.post('/api/faq/create', item)
+			.post('/api/faq/write', item)
 			.then((res) => {
 				console.log(res);
 				alert('글 저장에 성공했습니다.');

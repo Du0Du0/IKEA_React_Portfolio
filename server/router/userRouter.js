@@ -26,7 +26,7 @@ router.post('/join', (req, res) => {
 });
 
 //작성자 정보 조회
-router.post('/user', (req, res) => {
+router.get('/user', (req, res) => {
 	const { uid } = req.body;
 	User.findOne({ uid })
 		.exec()

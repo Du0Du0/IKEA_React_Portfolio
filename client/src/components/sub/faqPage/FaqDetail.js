@@ -13,19 +13,20 @@ import { Link } from 'react-router-dom';
 
 function FaqDetail() {
 	const params = useParams();
+	console.log('params', params);
 	const [Detail, setDetail] = useState(null);
 	const user = useSelector((state) => state.userReducer);
 
 	useEffect(() => {
 		axios
-			.post('/api/faq/detail', params)
+			.get('/api/faq/detail', params)
 			.then((res) => {
 				if (res.data.success) {
 					setDetail(res.data.detail);
 
 					// 작성자 정보 조회
 					axios
-						.post('/api/user', { uid: res.data.detail.writer })
+						.get('/api/user', { uid: res.data.detail.writer })
 						.then((response) => {
 							if (response.data.success) {
 							} else {
@@ -44,7 +45,7 @@ function FaqDetail() {
 	const handleDelete = () => {
 		if (!window.confirm('정말 삭제하겠습니까')) return;
 
-		axios.post('/api/delete', params).then((res) => {
+		axios.delete('/api/delete', params).then((res) => {
 			if (res.data.success) {
 				alert('게시글이 삭제되었습니다.');
 				history.push('/faq');
