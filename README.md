@@ -193,6 +193,6 @@ $ nodemon server.js
 5.  지점별 지하철 노선 정보
 6.  지점별 버스 노선 정보 (지역버스, 간선버스, 광역버스, 좌석버스 등)
 
-        <img src='https://github.com/Du0Du0/coding-guide-react-ikea/raw/main/13.png?raw=true' width='200%;'>
+<img src='https://github.com/Du0Du0/coding-guide-react-ikea/raw/main/13.png?raw=true' width='200%'>
 
     <br>
