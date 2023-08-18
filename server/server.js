@@ -1,8 +1,8 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const app = express();
 const port = process.env.PORT || 4000;
 const path = require('path');
+const app = express();
 const cors = require('cors');
 require('dotenv').config();
 const MONGODB_ID = process.env.SERVER_MONGODB_ID;
@@ -13,6 +13,21 @@ const { User } = require('./model/userSchema');
 
 app.use(cors());
 
+const swaggerUi = require('swagger-ui-express');
+const swaggerJsdoc = require('swagger-jsdoc');
+const options = {
+	definition: {
+		openapi: '3.0.0',
+		info: {
+			title: 'Hello World',
+			version: '1.0.0',
+		},
+	},
+	apis: ['./router/*.js'], // files containing annotations as above
+};
+const openapiSpec = swaggerJsdoc(options);
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(openapiSpec));
+
 //클라이언트로부터 보내진 데이터를 전달받도록 설정 (body-parser)
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -20,11 +35,13 @@ app.use(express.urlencoded({ extended: true }));
 //express에서 react안쪽 build폴더까지의 경로를 static하게 지정
 app.use(express.static(path.join(__dirname, './client/build')));
 
+app.use('/api', require('./router/api'));
+
 //faq 전용 라우터 추가
-app.use('/api/faq', require('./router/faqRouter.js'));
+app.use('/api/faq', require('./router/faqRouter'));
 
 //유저 전용 라우터 추가
-app.use('/api/user', require('./router/userRouter.js'));
+app.use('/api/user', require('./router/userRouter'));
 
 app.listen(port, () => {
 	mongoose
