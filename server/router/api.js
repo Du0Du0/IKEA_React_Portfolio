@@ -1,10 +1,21 @@
 const express = require('express');
 const router = express.Router();
+
 /**
  * @openapi
- * /api/hello:
+ * tags:
+ *   name: 테스트
+ *   description: 테스트 API
+ */
+
+/**
+ * @openapi
+ * /api:
  *   get:
- *     description: Welcome to swagger-jsdoc!
+ *     summary: API 테스트
+ *     description: API 테스트
+ *     tags:
+ *       - 테스트
  *     parameters:
  *       - name: name
  *         in: query
@@ -19,4 +30,5 @@ router.get('/hello', function (req, res, next) {
 	const name = req.query.name || 'World';
 	res.json({ message: `Hello ${name}` });
 });
+
 module.exports = router;

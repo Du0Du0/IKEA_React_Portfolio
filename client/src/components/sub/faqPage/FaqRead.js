@@ -21,9 +21,10 @@ function FaqRead() {
 
 	console.log('user', user);
 	useEffect(() => {
-		axios.get('/api/faq/lists').then((res) => {
+		axios.get('/faq/lists').then((res) => {
 			console.log(res);
 			setPosts(res.data.communityList);
+			console.log('Posts', Posts);
 		});
 	}, []);
 

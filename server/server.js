@@ -19,7 +19,7 @@ const options = {
 	definition: {
 		openapi: '3.0.0',
 		info: {
-			title: 'Hello World',
+			title: 'Swagger Examples',
 			version: '1.0.0',
 		},
 	},
@@ -38,7 +38,7 @@ app.use(express.static(path.join(__dirname, './client/build')));
 app.use('/api', require('./router/api'));
 
 //faq 전용 라우터 추가
-app.use('/api/faq', require('./router/faqRouter'));
+app.use('/faq', require('./router/faqRouter'));
 
 //유저 전용 라우터 추가
 app.use('/api/user', require('./router/userRouter'));

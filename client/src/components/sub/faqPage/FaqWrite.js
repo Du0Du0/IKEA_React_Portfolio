@@ -20,9 +20,9 @@ function FaqWrite() {
 
 	//게시물 작성 (mongoDB)
 	const handleCreate = () => {
-		const item = { topic: Topic, title: Tit, content: Con, keyword: Keyword, displayName: user.displayName, uid: user.uid, isSecret: IsSecret };
+		const item = { topic: Topic, title: Tit, content: Con, keyword: Keyword, uid: user.uid, isSecret: IsSecret };
 		axios
-			.post('/api/faq/write', item)
+			.post('/faq/write', item)
 			.then((res) => {
 				console.log(res);
 				alert('글 저장에 성공했습니다.');
