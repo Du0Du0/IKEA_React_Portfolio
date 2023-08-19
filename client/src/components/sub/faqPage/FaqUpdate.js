@@ -20,13 +20,13 @@ function FaqUpdate() {
 		if (Title.trim() === '' || Content.trim() === '') return alert('모든 항목을 입력하세요.');
 
 		const item = {
-			// topic: Topic,
+			topic: Topic,
 			title: Title,
 			content: Content,
-			// keyword: Keyword,
+			keyword: Keyword,
 			id: params.id,
 		};
-		axios.put('/api/faq/update', item).then((res) => {
+		axios.put('/faq/update', item).then((res) => {
 			if (res.data.success) {
 				alert('글 수정이 완료되었습니다.');
 				history.push('/faq');

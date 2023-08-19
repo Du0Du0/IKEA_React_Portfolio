@@ -45,7 +45,7 @@ function FaqDetail() {
 	const handleDelete = () => {
 		if (!window.confirm('정말 삭제하겠습니까')) return;
 
-		axios.delete('/api/delete', params).then((res) => {
+		axios.delete('/delete', params).then((res) => {
 			if (res.data.success) {
 				alert('게시글이 삭제되었습니다.');
 				history.push('/faq');

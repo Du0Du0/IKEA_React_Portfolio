@@ -320,6 +320,98 @@ router.get('/detail', (req, res) => {
 		});
 });
 
+//Swagger FAQ- /faq/update API
+/**
+ * @openapi
+ * /faq/update:
+ *   put:
+ *     summary: 게시물 수정
+ *     description: 게시물 수정하는 API
+ *     tags:
+ *       - FAQ
+ *     requestBody:
+ *       description: 게시물 정보
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               topic:
+ *                 type: string
+ *                 example: 문의
+ *               title:
+ *                 type: string
+ *                 example: 안녕하세요.
+ *               content:
+ *                 type: string
+ *                 example: 안녕하세요. 문의드립니다.
+ *               keyword:
+ *                 type: array
+ *                 items:
+ *                   type: string
+ *                   example: 가격,문의
+ *               uid:
+ *                 type: string
+ *                 example: 1vTDwaeERwSTjtQO0CYoxcm6rIF2
+ *               isSecret:
+ *                 type: boolean
+ *                 example: false
+ *     responses:
+ *       200:
+ *         description: 게시글 수정 성공
+ *         content:
+ *           application/json:
+ *             schema:
+ *                   type: object
+ *                   properties:
+ *                     topic:
+ *                       type: string
+ *                       example: 문의
+ *                     title:
+ *                       type: string
+ *                       example: 안녕하세요.
+ *                     content:
+ *                       type: string
+ *                       example: 안녕하세요. 문의드립니다.
+ *                     keyword:
+ *                       type: array
+ *                       items:
+ *                         type: string
+ *                         example: 가격,문의
+ *                     isSecret:
+ *                       type: boolean
+ *                       example: false
+ *                     communityNum:
+ *                       type: number
+ *                       example: 3
+ *                     writer:
+ *                       type: string
+ *                       example: 64d227e32a7b32d6f50aaa6e
+ *                     publishedDate:
+ *                       type: date
+ *                       example: 2023-08-13T16:25:23.502+00:00
+ *                     __v:
+ *                       type: number
+ *                       example: 0
+ *       404:
+ *         description: 존재하지 않는 게시글
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "게시글이 존재하지 않습니다."
+ *                 error:
+ *                   type: string
+ *                   example: "Not Found"
+ *                 statusCode:
+ *                   type: number
+ *                   example: 404
+ */
+
 //게시물 수정 라우터
 router.put('/update', (req, res) => {
 	const temp = {
@@ -334,8 +426,84 @@ router.put('/update', (req, res) => {
 			console.log(doc);
 			res.json({ success: true });
 		})
-		.catch((err) => res.json({ success: false }));
+		.catch((err) => {
+			console.log(err);
+			res.json({ success: false });
+			res.status(404).json({ error: '게시글이 존재하지 않습니다.' });
+		});
 });
+
+//Swagger FAQ- /faq/delete API
+/**
+ * @openapi
+ * /faq/delete :
+ *   delete:
+ *     summary: 게시물 삭제
+ *     description: 게시물 삭제하는 API
+ *     tags:
+ *       - FAQ
+ *     parameters:
+ *       - name: communityNum
+ *         in: query
+ *         description: 커뮤니티 번호
+ *         required: true
+ *         schema:
+ *           type: number
+ *           example: 3
+ *     responses:
+ *       200:
+ *         description: 게시물 삭제 성공
+ *         content:
+ *           application/json:
+ *             schema:
+ *                   type: object
+ *                   properties:
+ *                     topic:
+ *                       type: string
+ *                       example: 문의
+ *                     title:
+ *                       type: string
+ *                       example: 안녕하세요.
+ *                     content:
+ *                       type: string
+ *                       example: 안녕하세요. 문의드립니다.
+ *                     keyword:
+ *                       type: array
+ *                       items:
+ *                         type: string
+ *                         example: 가격,문의
+ *                     isSecret:
+ *                       type: boolean
+ *                       example: false
+ *                     communityNum:
+ *                       type: number
+ *                       example: 3
+ *                     writer:
+ *                       type: string
+ *                       example: 64d227e32a7b32d6f50aaa6e
+ *                     publishedDate:
+ *                       type: date
+ *                       example: 2023-08-13T16:25:23.502+00:00
+ *                     __v:
+ *                       type: number
+ *                       example: 0
+ *       404:
+ *         description: 존재하지 않는 게시글
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "게시글이 존재하지 않습니다."
+ *                 error:
+ *                   type: string
+ *                   example: "Not Found"
+ *                 statusCode:
+ *                   type: number
+ *                   example: 404
+ */
 
 //게시물 삭제 라우터
 router.delete('/delete', (req, res) => {
@@ -344,7 +512,11 @@ router.delete('/delete', (req, res) => {
 		.then(() => {
 			res.json({ success: true });
 		})
-		.catch(() => res.json({ success: false }));
+		.catch((err) => {
+			console.log(err);
+			res.json({ success: false });
+			res.status(404).json({ error: '게시글이 존재하지 않습니다.' });
+		});
 });
 
 module.exports = router;
