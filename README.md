@@ -75,7 +75,7 @@ $ nodemon server.js
 <table>
   <tr>
     <td><img src='https://raw.githubusercontent.com/Du0Du0/IKEA_React_Portfolio/1875993b6009f431a1cd58983e0624d9aa8728c4/client/public/img/node.svg' alt=''/></td>
-       <td><img src='https://raw.githubusercontent.com/Du0Du0/coding-guide-react-ikea/97c7d56213bbc5070bf945aabe8752f87019c848/swagger.svg?token=A6NTPNFFIAQIDGVIQNBOKPDE4A7H2' width='100px;;' alt=''/></td>
+       <td><img src='https://github.com/Du0Du0/coding-guide-react-ikea/blob/main/swagger.svg' width='100px;' alt=''/></td>
   </tr>
   <tr align="center">
     <td>Node </td>
