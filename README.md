@@ -67,7 +67,7 @@ $ nodemon server.js
   </tr>
   <tr align="center">
     <td> JavaScript </td>
-    <td>React   </td>
+    <td>React</td>
   </tr>
 </table>
 
@@ -75,9 +75,11 @@ $ nodemon server.js
 <table>
   <tr>
     <td><img src='https://raw.githubusercontent.com/Du0Du0/IKEA_React_Portfolio/1875993b6009f431a1cd58983e0624d9aa8728c4/client/public/img/node.svg' alt=''/></td>
+       <td><img src='https://raw.githubusercontent.com/Du0Du0/coding-guide-react-ikea/97c7d56213bbc5070bf945aabe8752f87019c848/swagger.svg?token=A6NTPNFFIAQIDGVIQNBOKPDE4A7H2' width='100px;;' alt=''/></td>
   </tr>
   <tr align="center">
     <td>Node </td>
+     <td>Swagger </td>
   </tr>
 </table>
 
@@ -158,13 +160,13 @@ $ nodemon server.js
 
 | Index | Method |                      URI                       |      Description      |
 | :---: | :----: | :--------------------------------------------: | :-------------------: |
-|   1   |  GET   |         <a href=''>/api/faq/lists </a>         | FAQ 모든 글 목록 조회 |
-|   2   |  GET   | <a href=''>/api/faq/detail/{communityNum} </a> |    상세페이지 조회    |
-|   3   |  GET   |        <a href=''>/api/user/{uid} </a>         |      작성자 조회      |
-|   4   | DELETE |   <a href=''>/api/delete/{communityNum} </a>   |      게시물 삭제      |
-|   5   |  PUT   |        <a href=''>/api/faq/update </a>         |      게시물 수정      |
-|   6   |  POST  |         <a href=''>/api/faq/write </a>         |      게시물 작성      |
-|   7   |  POST  |            <a href=''>/api/join</a>            |       회원 가입       |
+|   1   |  GET   |         <a href=''>/faq/lists </a>         | FAQ 모든 글 목록 조회 |
+|   2   |  GET   | <a href=''>/faq/detail/{communityNum} </a> |    상세페이지 조회    |
+|   3   |  GET   |        <a href=''>/user/{uid} </a>         |      작성자 조회      |
+|   4   | DELETE |   <a href=''>/delete/{communityNum} </a>   |      게시물 삭제      |
+|   5   |  PUT   |        <a href=''>/faq/update </a>         |      게시물 수정      |
+|   6   |  POST  |         <a href=''>/faq/write </a>         |      게시물 작성      |
+|   7   |  POST  |            <a href=''>/user/join</a>            |       회원 가입       |
 
 <br>
 
