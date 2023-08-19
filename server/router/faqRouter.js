@@ -8,7 +8,7 @@ const { User } = require('../model/userSchema');
 /**
  * @openapi
  * tags:
- *   name: FAQ
+ *   name: Faq API
  *   description: FAQ 회원제 게시판 관련 API
  */
 
@@ -20,7 +20,7 @@ const { User } = require('../model/userSchema');
  *     summary: 게시물 작성
  *     description: 게시물을 작성하는 API
  *     tags:
- *       - FAQ
+ *       - Faq API
  *     requestBody:
  *       description: 게시물 정보
  *       required: true
@@ -146,7 +146,7 @@ router.post('/write', (req, res) => {
  *     summary: 게시물 조회
  *     description: 게시물 목록을 조회하는 API
  *     tags:
- *       - FAQ
+ *       - Faq API
  *     responses:
  *       200:
  *         description: 게시글 목록 조회 성공
@@ -243,7 +243,7 @@ router.get('/lists', (req, res) => {
  *     summary: 상세페이지 조회
  *     description: 상세페이지 조회하는 API
  *     tags:
- *       - FAQ
+ *       - Faq API
  *     parameters:
  *       - name: communityNum
  *         in: query
@@ -328,7 +328,7 @@ router.get('/detail', (req, res) => {
  *     summary: 게시물 수정
  *     description: 게시물 수정하는 API
  *     tags:
- *       - FAQ
+ *       - Faq API
  *     requestBody:
  *       description: 게시물 정보
  *       required: true
@@ -441,7 +441,7 @@ router.put('/update', (req, res) => {
  *     summary: 게시물 삭제
  *     description: 게시물 삭제하는 API
  *     tags:
- *       - FAQ
+ *       - Faq API
  *     parameters:
  *       - name: communityNum
  *         in: query

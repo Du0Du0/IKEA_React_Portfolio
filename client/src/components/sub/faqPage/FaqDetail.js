@@ -26,7 +26,7 @@ function FaqDetail() {
 
 					// 작성자 정보 조회
 					axios
-						.get('/api/user', { uid: res.data.detail.writer })
+						.get('/user', { uid: res.data.detail.writer })
 						.then((response) => {
 							if (response.data.success) {
 							} else {
