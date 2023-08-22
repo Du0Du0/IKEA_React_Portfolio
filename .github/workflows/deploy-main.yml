@@ -14,5 +14,6 @@ jobs:
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.KEY }}
           port: ${{ secrets.PORT }}
+          command_timeout: 200m
           script: |
             ./deploy.sh

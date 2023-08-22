@@ -101,7 +101,7 @@ function App() {
 
 			{/* Switch는 내부에 중복되는 라우트 경로가 있을때 더 먼저 나오는 라우터를 채택하고 나머지는 무시 */}
 			<Switch>
-				<Route exact path='/ikea-react' component={Main}></Route>
+				<Route exact path='/' component={Main}></Route>
 
 				<Route path='/' render={() => <Header type={'sub'} menu={menuRef} />}></Route>
 			</Switch>
