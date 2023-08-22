@@ -8,7 +8,7 @@ import store from './redux/store';
 import { HelmetProvider } from 'react-helmet-async';
 
 ReactDOM.render(
-	<BrowserRouter basename='http://ikeacompany.com'>
+	<BrowserRouter basename='https://ikeacompany.com'>
 		<Provider store={store}>
 			<HelmetProvider>
 				<ScrollToTop />
