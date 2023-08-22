@@ -32,8 +32,7 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(openapiSpec));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-//express에서 react안쪽 build폴더까지의 경로를 static하게 지정
-app.use(express.static(path.join(__dirname, './client/build')));
+app.use(express.static(path.join(__dirname, '../server/public/index.html')));
 
 app.use('/api', require('./router/api'));
 
@@ -41,7 +40,7 @@ app.use('/api', require('./router/api'));
 app.use('/faq', require('./router/faqRouter'));
 
 //유저 전용 라우터 추가
-app.use('/api/user', require('./router/userRouter'));
+app.use('/user', require('./router/userRouter'));
 
 app.listen(port, () => {
 	mongoose
@@ -53,12 +52,12 @@ app.listen(port, () => {
 
 app.get('/', (req, res) => {
 	//서버에서 5000포트로 접속하면 static폴더로 지정되어 있는 build안쪽의 index.html을 화면에 내보냄
-	res.sendFile(path.join(__dirname, '../client/build/index.html'));
+	res.sendFile(path.join(__dirname, '../server/public/index.html'));
 });
 
 app.get('*', (req, res) => {
 	//어떤 URL에서 접속하더라도 화면이 뜨도록 설정
-	res.sendFile(path.join(__dirname, '../client/build/index.html'));
+	res.sendFile(path.join(__dirname, '../server/public/index.html'));
 });
 
 // 서버 시작 시 게시물 번호 초기값 생성
