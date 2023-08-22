@@ -1,0 +1,28 @@
+{
+    "members": [
+        {
+            "name": "Karin Mobring",
+            "sub": "First lady of IKEA design",
+            "description": "It was love at first sight when Ingvar Kamprad spotted a wooden chair by a designer named Karin Mobring in 1964. With an eye for materials and a talent for designing comfortable, quality furniture with wide appeal, Karin was about to become the first female IKEA designer.",
+            "pic": "member5.png"
+        },
+        {
+            "name": "Hagberg",
+            "sub": "Dynamic design duo",
+            "description": "Meet Marianne and Knut – they've designed over 2100 products for IKEA; everything from toys to toothbrush holders to tables. As subjects of the successful retrospective exhibition Hagberg + Hagberg, we pay tribute to the siblings who just might be the world’s most prolific design duo.",
+            "pic": "member6.png"
+        },
+        {
+            "name": "OBEGRANSAD",
+            "sub": "electronic music artists",
+            "description": "Home is the new studio! Created together with electronic music artists, Swedish House Mafia, this just-launched collection helps music makers and other creatives to find their state of flow, wherever they call home.",
+            "pic": "member1.png"
+        },
+        {
+            "name": "Miami",
+            "sub": "Swedish House Mafia",
+            "description": "Apparently even the Swedish House Mafia – who provided the playlist to many of our pre-teen years – isn’t immune to the multidisciplinary urge of creatives living in this new age.",
+            "pic": "member2.png"
+        }
+    ]
+}
