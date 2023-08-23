@@ -38,7 +38,7 @@ function Menu(props, ref) {
 							{/* header left side title */}
 							<div className='leftBarTit'>
 								<div className='titWrap'>
-									<Link to='/ikea-react'>
+									<Link to='/'>
 										<h2>IKEA CATEGORY</h2>
 									</Link>
 									<br />
@@ -48,7 +48,7 @@ function Menu(props, ref) {
 											{displayName ? (
 												`${displayName}` + '님,  안녕하세요.'
 											) : (
-												<NavLink to='/login' activeStyle={active}>
+												<NavLink to='./login/' activeStyle={active}>
 													<button>로그인</button>
 												</NavLink>
 											)}
@@ -63,7 +63,7 @@ function Menu(props, ref) {
 								<div className='listLine'></div>
 								<ul>
 									<li>
-										<NavLink to='/youtube' activeStyle={active}>
+										<NavLink to='./youtube/' activeStyle={active}>
 											Youtube
 										</NavLink>
 									</li>
@@ -73,27 +73,27 @@ function Menu(props, ref) {
 										</NavLink>
 									</li>
 									<li>
-										<NavLink to='/member' activeStyle={active}>
+										<NavLink to='./member/' activeStyle={active}>
 											Member
 										</NavLink>
 									</li>
 									<li>
-										<NavLink to='/contact' activeStyle={active}>
+										<NavLink to='./contact/' activeStyle={active}>
 											Contact
 										</NavLink>
 									</li>
 									<li>
-										<NavLink to='/gallery' activeStyle={active}>
+										<NavLink to='./gallery/' activeStyle={active}>
 											Gallery
 										</NavLink>
 									</li>
 									<li>
-										<NavLink to='/join' activeStyle={active}>
+										<NavLink to='./join/' activeStyle={active}>
 											Join
 										</NavLink>
 									</li>
 									<li>
-										<NavLink to='/faq' activeStyle={active}>
+										<NavLink to='./faq/' activeStyle={active}>
 											FAQ
 										</NavLink>
 									</li>
