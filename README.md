@@ -15,43 +15,40 @@
 
 ## 배포 주소
 
-- 개발 버전:
-- 프론트 서버:
-- 백엔드 서버:
+- 서비스 URL: https://ikeacompany.com
   <br>
 
 ## 시작 가이드
 
-### <strong> Requirements <strong>
+### **Requirements**
 
 For building and running thr application you need:
 
-- <a href=''>React 17.0.2 </a>
-- <a href=''>React-router-dom 5.3.4 </a>
-- <a href=''>Node 18.15.0 </a>
-- <a href=''>Npm 9.6.5 </a>
+- <a href=''> React 17.0.2 </a>
+- <a href=''> React-router-dom 5.3.4 </a>
+- <a href=''> Node 16.14.0 </a>
+- <a href=''> Npm 9.6.5 </a>
 
-## <strong>Installation<strong>
+### **Installation**
 
 ```
 $ git clone https://github.com/Du0Du0/IKEA_React_Portfolio.git
 $ cd IKEA_React_Portfolio
 ```
 
-#### <strong>Frontend<strong>
+#### **Frontend**
 
 ```
 $ cd client
-$ npm install
+$ npm i
 $ npm start
 ```
 
-#### <strong>Backend<strong>
+#### **Backend**
 
 ```
 $ cd server
-$ npm install
-$ npm i nodemon
+$ npm i && npm i nodemon
 $ nodemon server.js
 ```
 
@@ -59,37 +56,65 @@ $ nodemon server.js
 
 ## Stacks
 
-<h3><strong>✔️ Front-end</strong></h3>
+#### **✔️ Front-end**
+
 <table>
   <tr>
     <td><img src='https://raw.githubusercontent.com/Du0Du0/IKEA_React_Portfolio/1875993b6009f431a1cd58983e0624d9aa8728c4/client/public/img/javascript.svg' alt=''/></td>
     <td><img src='https://raw.githubusercontent.com/Du0Du0/IKEA_React_Portfolio/1875993b6009f431a1cd58983e0624d9aa8728c4/client/public/img/react.svg' alt=''/></td>
+      <td><img src='https://raw.githubusercontent.com/Du0Du0/coding-guide-react-ikea/0e4a151e299ffe647914b4baeb093bd92756eb41/redux.svg?token=A6NTPNH7WKVWHKKRC63Q3XLE4W7MW'  width='80px;'  alt=''/></td>
+        <td><img src='https://raw.githubusercontent.com/Du0Du0/coding-guide-react-ikea/5a0537f9a1dacbbeb9cfcc64d4bbef87fae3933c/emblem-light-628080660fddb35787ff6c77e97ca43e.svg?token=A6NTPNG2V5T7ZNPOKZXP3XTE4XAYA'  width='100px;'  alt=''/></td>
+        <td><img src='https://raw.githubusercontent.com/Du0Du0/coding-guide-react-ikea/5a0537f9a1dacbbeb9cfcc64d4bbef87fae3933c/sass-1.svg?token=A6NTPNGAKWXONHVBGUTF5BLE4XAYA'  width='100px;'  alt=''/></td>
+        <td><img src='https://raw.githubusercontent.com/Du0Du0/coding-guide-react-ikea/5a0537f9a1dacbbeb9cfcc64d4bbef87fae3933c/styled-components-1.svg?token=A6NTPNBYZGPOX7RHIZQR2OLE4XAYA'  width='100px;'  alt=''/></td>
   </tr>
   <tr align="center">
     <td> JavaScript </td>
     <td>React</td>
+    <td>Redux & Redux toolkit</td>
+    <td>React query</td>
+    <td>Sass</td>
+    <td>Styled components</td>
   </tr>
 </table>
 
-<h3><strong>✔️ Back-end</strong></h3>
+#### **✔️ Back-end**
+
 <table>
   <tr>
-    <td><img src='https://raw.githubusercontent.com/Du0Du0/IKEA_React_Portfolio/1875993b6009f431a1cd58983e0624d9aa8728c4/client/public/img/node.svg' alt=''/></td>
-       <td><img src='https://github.com/Du0Du0/coding-guide-react-ikea/blob/main/swagger.svg' width='100px;' alt=''/></td>
+    <td><img src='https://raw.githubusercontent.com/Du0Du0/coding-guide-react-ikea/0e4a151e299ffe647914b4baeb093bd92756eb41/nodejs-1.svg?token=A6NTPNCKAPX6KMEHRXZADJLE4W62E' width='100px;'  alt=''/></td>
+    <td><img src='https://raw.githubusercontent.com/Du0Du0/coding-guide-react-ikea/bba4473b1c7626387ef23f785c70c12673421ed1/swagger.svg?token=A6NTPNBLHZT2MBXTN6SF6C3E4W2NA' width='100px;' alt=''/></td>
+     <td><img src='https://raw.githubusercontent.com/Du0Du0/coding-guide-react-ikea/0e4a151e299ffe647914b4baeb093bd92756eb41/68747470733a2f2f696d672e69636f6e73382e636f6d2f3f73697a653d3531322669643d743278364474436e355a7a7826666f726d61743d706e67.png?token=A6NTPNC5A3S7UA7B2M2H6T3E4W62E' width='100px;' alt=''/></td>
+      <td><img src='https://raw.githubusercontent.com/Du0Du0/coding-guide-react-ikea/6edc2410ae54f418a4de58745f0c25b0f8af0f75/aws-ec2.svg?token=A6NTPNGMCESN47GYXGLT3BLE4W7KS' width='100px;' alt=''/></td>
+      <td><img src='https://raw.githubusercontent.com/Du0Du0/coding-guide-react-ikea/0e4a151e299ffe647914b4baeb093bd92756eb41/pm2-2.svg?token=A6NTPNAZBZSI5SC4LYG6VFTE4W7MW' width='100px;' alt=''/></td>
   </tr>
   <tr align="center">
     <td>Node </td>
      <td>Swagger </td>
+     <td>Nginx </td>
+     <td>AWS EC2 </td>
+        <td>PM2 </td>
   </tr>
 </table>
 
-<h3><strong>✔️ DB </strong></h3>
+#### **✔️ DB**
+
 <table>
   <tr>
-    <td width='30%;'><img src='https://github.com/Du0Du0/coding-guide-react-ikea/blob/main/mongo.png?raw=true'  alt=''/></td>
+    <td><img src='https://raw.githubusercontent.com/Du0Du0/coding-guide-react-ikea/0e4a151e299ffe647914b4baeb093bd92756eb41/mongo.svg?token=A6NTPNHODMTL2PN6FO7JFCTE4W7MW'  width='100px;' alt=''/></td>
   </tr>
   <tr align="center">
     <td>MongoDB </td>
+  </tr>
+</table>
+
+#### **✔️ CI/CD**
+
+<table>
+  <tr>
+    <td ><img src='https://raw.githubusercontent.com/Du0Du0/coding-guide-react-ikea/0e4a151e299ffe647914b4baeb093bd92756eb41/%EB%8B%A4%EC%9A%B4%EB%A1%9C%EB%93%9C.png?token=A6NTPNCWWKFNFZVYLU42263E4W7MW'  width='100px;' alt=''/></td>
+  </tr>
+  <tr align="center">
+    <td>Github Actions</td>
   </tr>
 </table>
 <br>
@@ -112,45 +137,46 @@ $ nodemon server.js
 
 ## 아키텍쳐
 
-### <strong>Directory Structure<strong>
+### **Directory Structure**
 
+<img src='https://github.com/Du0Du0/coding-guide-react-ikea/blob/main/14.png?raw=true' width='100%;'>
 <img src='https://github.com/Du0Du0/coding-guide-react-ikea/raw/main/2.png?raw=true' width='200%;'>
 <br>
 
 ## 화면 구성 / API 주소
 
-### <strong>1️⃣ Main Page<strong>
+### **1️⃣ Main Page**
 
 <img src='https://github.com/Du0Du0/coding-guide-react-ikea/raw/main/6.png?raw=true' width='200%;'>
 <img src='https://github.com/Du0Du0/coding-guide-react-ikea/raw/main/7.png?raw=true' width='200%;'>
 <br>
 
-### <strong>2️⃣ Login Process<strong>
+### **2️⃣ Login Process**
 
-### <strong> ✔ 소셜 로그인<strong>
+### **✔ 소셜 로그인**
 
 1. 카카오 & 네이버 id와 pw를 입력
 2. 카카오 & 네이버 서버에서 유저 닉네임, 이메일을 가져와 Firebase와 MongoDB에 회원목록 추가
 3. Redux dispatch를 통해 전역 데이터를 관리함으로써 로그인 및 로그아웃 상태 확인 가능
 
-### <strong> ✔ 일반 로그인<strong>
+### **✔ 일반 로그인**
 
 <img src='https://github.com/Du0Du0/coding-guide-react-ikea/raw/main/8.png?raw=true' width='200%;'>
 <br>
 
-### <strong>3️⃣ Sub Page<strong>
+### **3️⃣ Sub Page**
 
 <img src='https://user-images.githubusercontent.com/127612852/260990977-f4e7ab08-cfa7-4ba4-ac18-e531ca1c0fbf.png' width='200%;'>
 <br>
 
-### <strong>✔ 회원 가입<strong>
+### **✔ 회원 가입**
 
 1. 사용자가 입력할 때 마다 상태값이 변하면서 리렌더링이 될 것이고, 예외 처리를 하는 함수가 그 때마다 호출된다면 굉장히 비효율적이기 때문에 특정 시간이 지난 후 예외 처리를 한 번만 실행하도록 debounce를 적용
 
 <img src='https://github.com/Du0Du0/coding-guide-react-ikea/raw/main/9.png?raw=true' width='200%;'>
 <br>
 
-### <strong>✔ API Specification<strong>
+### **✔ API Specification**
 
 주요 기능에 따라 도메인 나누고 리스트업:
 
@@ -158,19 +184,19 @@ $ nodemon server.js
 - 회원 (/user)
 - 회원가입 (/join)
 
-| Index | Method |                      URI                       |      Description      |
-| :---: | :----: | :--------------------------------------------: | :-------------------: |
+| Index | Method |                    URI                     |      Description      |
+| :---: | :----: | :----------------------------------------: | :-------------------: |
 |   1   |  GET   |         <a href=''>/faq/lists </a>         | FAQ 모든 글 목록 조회 |
 |   2   |  GET   | <a href=''>/faq/detail/{communityNum} </a> |    상세페이지 조회    |
 |   3   |  GET   |        <a href=''>/user/{uid} </a>         |      작성자 조회      |
 |   4   | DELETE |   <a href=''>/delete/{communityNum} </a>   |      게시물 삭제      |
 |   5   |  PUT   |        <a href=''>/faq/update </a>         |      게시물 수정      |
 |   6   |  POST  |         <a href=''>/faq/write </a>         |      게시물 작성      |
-|   7   |  POST  |            <a href=''>/user/join</a>            |       회원 가입       |
+|   7   |  POST  |         <a href=''>/user/join</a>          |       회원 가입       |
 
 <br>
 
-### <strong>✔ 익명 게시판<strong>
+### **✔ 익명 게시판**
 
 1. Localstorage를 이용한 익명게시판
 2. 게시물 조회 / 게시물 추가 / 게시물 수정 / 삭제
@@ -186,7 +212,7 @@ $ nodemon server.js
  <img src='https://github.com/Du0Du0/coding-guide-react-ikea/raw/main/12.png?raw=true' width='200%;'>
 <br>
 
-### <strong>✔ 점포 안내<strong>
+### **✔ 점포 안내**
 
 1.  OpenWeather API를 이용한 지점별 지역 온도 및 날씨 조회
 2.  react-calendar를 이용한 매장 일정 조회 (오늘 날짜, 휴점, 연장엽업 등)
