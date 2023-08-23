@@ -4,7 +4,7 @@
 </div>
 <br>
 
-<img src='https://github.com/Du0Du0/coding-guide-react-ikea/blob/main/1.png?raw=true' width='200%;'>
+<img src='https://raw.githubusercontent.com/Du0Du0/coding-guide-react-ikea/bf3edac0f7c5060d6a5fa61ed3fa1d7f1d8f0044/IKEA%20Coding%20Guide1.png?token=A6NTPNE3Q3GGPJ2SCM5SEEDE4XLGE' width='200%;'>
 <br>
 
 ## 개요
@@ -62,15 +62,15 @@ $ nodemon server.js
   <tr>
     <td><img src='https://raw.githubusercontent.com/Du0Du0/IKEA_React_Portfolio/1875993b6009f431a1cd58983e0624d9aa8728c4/client/public/img/javascript.svg' alt=''/></td>
     <td><img src='https://raw.githubusercontent.com/Du0Du0/IKEA_React_Portfolio/1875993b6009f431a1cd58983e0624d9aa8728c4/client/public/img/react.svg' alt=''/></td>
-      <td><img src='https://raw.githubusercontent.com/Du0Du0/coding-guide-react-ikea/0e4a151e299ffe647914b4baeb093bd92756eb41/redux.svg?token=A6NTPNH7WKVWHKKRC63Q3XLE4W7MW'  width='80px;'  alt=''/></td>
-        <td><img src='https://raw.githubusercontent.com/Du0Du0/coding-guide-react-ikea/5a0537f9a1dacbbeb9cfcc64d4bbef87fae3933c/emblem-light-628080660fddb35787ff6c77e97ca43e.svg?token=A6NTPNG2V5T7ZNPOKZXP3XTE4XAYA'  width='100px;'  alt=''/></td>
-        <td><img src='https://raw.githubusercontent.com/Du0Du0/coding-guide-react-ikea/5a0537f9a1dacbbeb9cfcc64d4bbef87fae3933c/sass-1.svg?token=A6NTPNGAKWXONHVBGUTF5BLE4XAYA'  width='100px;'  alt=''/></td>
-        <td><img src='https://raw.githubusercontent.com/Du0Du0/coding-guide-react-ikea/5a0537f9a1dacbbeb9cfcc64d4bbef87fae3933c/styled-components-1.svg?token=A6NTPNBYZGPOX7RHIZQR2OLE4XAYA'  width='100px;'  alt=''/></td>
+      <td align="center"> <img src='https://raw.githubusercontent.com/Du0Du0/coding-guide-react-ikea/0e4a151e299ffe647914b4baeb093bd92756eb41/redux.svg?token=A6NTPNGKLVXOXU2JFZCFZ3LE4XDVW'  width='80px;'  alt=''/></td>
+      <td><img src='https://raw.githubusercontent.com/Du0Du0/coding-guide-react-ikea/5a0537f9a1dacbbeb9cfcc64d4bbef87fae3933c/emblem-light-628080660fddb35787ff6c77e97ca43e.svg?token=A6NTPNHE2CF322RC25QOLI3E4XD5W'  width='100px;'  alt=''/></td>
+      <td><img src='https://raw.githubusercontent.com/Du0Du0/coding-guide-react-ikea/5a0537f9a1dacbbeb9cfcc64d4bbef87fae3933c/sass-1.svg?token=A6NTPNGBAPKYGRFPXABNAW3E4XD5W'  width='100px;'  alt=''/></td>
+      <td align="center"><img src='https://raw.githubusercontent.com/Du0Du0/coding-guide-react-ikea/5a0537f9a1dacbbeb9cfcc64d4bbef87fae3933c/styled-components-1.svg?token=A6NTPNBH32HVTUL5EXY7YMDE4XD5W'  width='100px;'  alt=''/></td>
   </tr>
   <tr align="center">
     <td> JavaScript </td>
     <td>React</td>
-    <td>Redux & Redux toolkit</td>
+    <td>Redux & Redux Toolkit</td>
     <td>React query</td>
     <td>Sass</td>
     <td>Styled components</td>
@@ -81,11 +81,11 @@ $ nodemon server.js
 
 <table>
   <tr>
-    <td><img src='https://raw.githubusercontent.com/Du0Du0/coding-guide-react-ikea/0e4a151e299ffe647914b4baeb093bd92756eb41/nodejs-1.svg?token=A6NTPNCKAPX6KMEHRXZADJLE4W62E' width='100px;'  alt=''/></td>
-    <td><img src='https://raw.githubusercontent.com/Du0Du0/coding-guide-react-ikea/bba4473b1c7626387ef23f785c70c12673421ed1/swagger.svg?token=A6NTPNBLHZT2MBXTN6SF6C3E4W2NA' width='100px;' alt=''/></td>
-     <td><img src='https://raw.githubusercontent.com/Du0Du0/coding-guide-react-ikea/0e4a151e299ffe647914b4baeb093bd92756eb41/68747470733a2f2f696d672e69636f6e73382e636f6d2f3f73697a653d3531322669643d743278364474436e355a7a7826666f726d61743d706e67.png?token=A6NTPNC5A3S7UA7B2M2H6T3E4W62E' width='100px;' alt=''/></td>
-      <td><img src='https://raw.githubusercontent.com/Du0Du0/coding-guide-react-ikea/6edc2410ae54f418a4de58745f0c25b0f8af0f75/aws-ec2.svg?token=A6NTPNGMCESN47GYXGLT3BLE4W7KS' width='100px;' alt=''/></td>
-      <td><img src='https://raw.githubusercontent.com/Du0Du0/coding-guide-react-ikea/0e4a151e299ffe647914b4baeb093bd92756eb41/pm2-2.svg?token=A6NTPNAZBZSI5SC4LYG6VFTE4W7MW' width='100px;' alt=''/></td>
+    <td><img src='https://raw.githubusercontent.com/Du0Du0/coding-guide-react-ikea/0e4a151e299ffe647914b4baeb093bd92756eb41/nodejs-1.svg?token=A6NTPNFXONYJD2F4IC7C2O3E4XECY' width='100px;'  alt=''/></td>
+    <td><img src='https://raw.githubusercontent.com/Du0Du0/coding-guide-react-ikea/97c7d56213bbc5070bf945aabe8752f87019c848/swagger.svg?token=A6NTPNG33OR4SX5DVNA5KCLE4XEFI' width='100px;' alt=''/></td>
+    <td><img src='https://raw.githubusercontent.com/Du0Du0/coding-guide-react-ikea/0e4a151e299ffe647914b4baeb093bd92756eb41/68747470733a2f2f696d672e69636f6e73382e636f6d2f3f73697a653d3531322669643d743278364474436e355a7a7826666f726d61743d706e67.png?token=A6NTPNFAKRAWB5H2RXEUJDLE4XEI6' width='100px;' alt=''/></td>
+    <td><img src='https://raw.githubusercontent.com/Du0Du0/coding-guide-react-ikea/6edc2410ae54f418a4de58745f0c25b0f8af0f75/aws-ec2.svg?token=A6NTPNC6ZPK2THCRQ6VZ453E4XEGS' width='80px;' alt=''/></td>
+    <td><img src='https://raw.githubusercontent.com/Du0Du0/coding-guide-react-ikea/0e4a151e299ffe647914b4baeb093bd92756eb41/pm2-2.svg?token=A6NTPNF5YIFSL6Y2KDKADULE4XEI6' width='100px;' alt=''/></td>
   </tr>
   <tr align="center">
     <td>Node </td>
@@ -100,7 +100,7 @@ $ nodemon server.js
 
 <table>
   <tr>
-    <td><img src='https://raw.githubusercontent.com/Du0Du0/coding-guide-react-ikea/0e4a151e299ffe647914b4baeb093bd92756eb41/mongo.svg?token=A6NTPNHODMTL2PN6FO7JFCTE4W7MW'  width='100px;' alt=''/></td>
+    <td><img src='https://raw.githubusercontent.com/Du0Du0/coding-guide-react-ikea/0e4a151e299ffe647914b4baeb093bd92756eb41/mongo.svg?token=A6NTPNELFARPLENMQRZADE3E4XEL2'  width='100px;' alt=''/></td>
   </tr>
   <tr align="center">
     <td>MongoDB </td>
@@ -111,7 +111,7 @@ $ nodemon server.js
 
 <table>
   <tr>
-    <td ><img src='https://raw.githubusercontent.com/Du0Du0/coding-guide-react-ikea/0e4a151e299ffe647914b4baeb093bd92756eb41/%EB%8B%A4%EC%9A%B4%EB%A1%9C%EB%93%9C.png?token=A6NTPNCWWKFNFZVYLU42263E4W7MW'  width='100px;' alt=''/></td>
+    <td ><img src='https://raw.githubusercontent.com/Du0Du0/coding-guide-react-ikea/0e4a151e299ffe647914b4baeb093bd92756eb41/%EB%8B%A4%EC%9A%B4%EB%A1%9C%EB%93%9C.png?token=A6NTPNBKWQ5RJ3FMHO773CDE4XEL2'  width='100px;' alt=''/></td>
   </tr>
   <tr align="center">
     <td>Github Actions</td>
@@ -137,9 +137,11 @@ $ nodemon server.js
 
 ## 아키텍쳐
 
+<img src='https://github.com/Du0Du0/coding-guide-react-ikea/blob/main/14.png?raw=true' width='100%;'>
+<br>
+
 ### **Directory Structure**
 
-<img src='https://github.com/Du0Du0/coding-guide-react-ikea/blob/main/14.png?raw=true' width='100%;'>
 <img src='https://github.com/Du0Du0/coding-guide-react-ikea/raw/main/2.png?raw=true' width='200%;'>
 <br>
 
@@ -183,6 +185,8 @@ $ nodemon server.js
 - FAQ게시판 (/faq)
 - 회원 (/user)
 - 회원가입 (/join)
+
+<a href="https://ikeacompany.com/api-docs/">API 명세서 바로가기(Swagger)<a>
 
 | Index | Method |                    URI                     |      Description      |
 | :---: | :----: | :----------------------------------------: | :-------------------: |
