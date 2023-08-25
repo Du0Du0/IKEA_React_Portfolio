@@ -108,7 +108,7 @@ function App() {
 
 			<Switch>
 				<Route
-					path='./gallery/'
+					path='/gallery'
 					render={() => (
 						<>
 							<Gallery />
@@ -128,7 +128,7 @@ function App() {
 				></Route>
 
 				<Route
-					path='./contact/'
+					path='/contact'
 					render={() => (
 						<>
 							<Contact />
@@ -138,7 +138,7 @@ function App() {
 				></Route>
 
 				<Route
-					path='./join/'
+					path='/join'
 					render={() => (
 						<>
 							<Join />
@@ -148,7 +148,7 @@ function App() {
 				></Route>
 
 				<Route
-					path='./member/'
+					path='/member'
 					render={() => (
 						<>
 							<Member />
@@ -170,7 +170,7 @@ function App() {
 
 				<Route
 					exact
-					path='./faq/'
+					path='/faq'
 					render={() => (
 						<>
 							<FaqRead />
@@ -265,7 +265,7 @@ function App() {
 				></Route>
 
 				<Route
-					path='./login/'
+					path='/login'
 					render={() => (
 						<>
 							<Login />
@@ -275,7 +275,7 @@ function App() {
 				></Route>
 
 				<Route
-					path='./passwordSearch/'
+					path='/passwordSearch'
 					render={() => (
 						<>
 							<FindPassword />
@@ -285,7 +285,7 @@ function App() {
 				></Route>
 
 				<Route
-					path='./youtube/'
+					path='/youtube'
 					render={() => (
 						<>
 							<Youtube />

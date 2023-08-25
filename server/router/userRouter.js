@@ -103,8 +103,8 @@ router.post('/join', (req, res) => {
  * @openapi
  * /user:
  *   get:
- *     summary: 게시물 작성자 조회 API
- *     description: 게시물 작성자 조회하는 API
+ *     summary: 회원 조회 API
+ *     description: 회원 조회하는 API
  *     tags:
  *       - User API
  *     parameters:
@@ -134,7 +134,7 @@ router.post('/join', (req, res) => {
  *                 example: 0
  *     responses:
  *       200:
- *         description: 게시물 작성자 조회 성공
+ *         description: 회원 조회 성공
  *         content:
  *           application/json:
  *             schema:
@@ -150,7 +150,7 @@ router.post('/join', (req, res) => {
  *                   type: number
  *                   example: 0
  *       404:
- *         description: 존재하지 않는 작성자
+ *         description: 존재하지 않는 회원
  *         content:
  *           application/json:
  *             schema:
@@ -158,7 +158,7 @@ router.post('/join', (req, res) => {
  *               properties:
  *                 message:
  *                   type: string
- *                   example: "작성자가 존재하지 않습니다."
+ *                   example: "회원이 존재하지 않습니다."
  *                 error:
  *                   type: string
  *                   example: "User Not Found "
@@ -167,7 +167,7 @@ router.post('/join', (req, res) => {
  *                   example: 404
  */
 
-//게시물 작성자 조회
+//회원 조회
 router.get('/user', (req, res) => {
 	const { uid } = req.body;
 	User.findOne({ uid })

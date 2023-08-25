@@ -72,7 +72,7 @@ function Login() {
 						if (res.data.success) {
 							firebase.auth().signOut();
 							alert('성공적으로 회원가입 되었습니다.');
-							history.push('/ikea-react');
+							history.push('/');
 						} else return alert('회원가입에 실패했습니다.');
 					});
 				} catch (error) {
@@ -130,7 +130,7 @@ function Login() {
 							if (res.data.success) {
 								firebase.auth().signOut();
 								alert('성공적으로 회원가입 되었습니다.');
-								history.push('/ikea-react');
+								history.push('/');
 							} else return alert('회원가입에 실패했습니다.');
 						});
 					},

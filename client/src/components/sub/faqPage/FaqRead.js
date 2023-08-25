@@ -3,7 +3,7 @@ import { faMagnifyingGlass, faLock } from '@fortawesome/free-solid-svg-icons';
 import { faCommentDots } from '@fortawesome/free-regular-svg-icons';
 import { useEffect, useState, useRef } from 'react';
 import LayoutNone from '../../common/LayoutNone';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import Pagination from 'react-js-pagination';
 import moment from 'moment';
 import { Helmet } from 'react-helmet-async';
@@ -13,6 +13,7 @@ import { useSelector } from 'react-redux';
 
 function FaqRead() {
 	const history = useHistory();
+	const params = useParams();
 	const today = moment();
 	const [Posts, setPosts] = useState([]);
 	const [Search, setSearch] = useState(false);
@@ -65,16 +66,14 @@ function FaqRead() {
 
 	const currentPosts = Posts.slice(indexOfFirstPost, indexOfLastPost);
 
-	const goToDetail = (idx) => {
+	const goToDetail = () => {
 		history.push({
-			pathname: `/community/articles/${idx}`,
+			pathname: `/community/articles/${params.id}`,
 			state: {
 				Posts: [...Posts],
-				idx: idx,
 			},
 		});
 		console.log(Posts);
-		console.log(idx);
 	};
 
 	const pageChange = (page) => {
