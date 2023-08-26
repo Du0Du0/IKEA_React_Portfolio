@@ -562,7 +562,7 @@ function Community() {
 					</div>
 				</div>
 				<div className='btnContainer'>
-					<button className='writeBtn' onClick={() => history.push('/Write')} style={{ display: NotFoundErr || Search ? 'none' : 'block' }}>
+					<button className='writeBtn' onClick={() => history.push('/write')} style={{ display: NotFoundErr || Search ? 'none' : 'block' }}>
 						글쓰기
 					</button>
 					<button className='seeCommunityList' onClick={() => window.location.replace('/community/articles')} style={{ display: NotFoundErr || Search ? 'block' : 'none' }}>

@@ -17,8 +17,6 @@ function FaqUpdate() {
 	const [Keyword, setKeyword] = useState([]);
 
 	const handleUpdate = () => {
-		if (Title.trim() === '' || Content.trim() === '') return alert('모든 항목을 입력하세요.');
-
 		const item = {
 			topic: Topic,
 			title: Title,
@@ -26,7 +24,7 @@ function FaqUpdate() {
 			keyword: Keyword,
 			id: params.id,
 		};
-		axios.put('/faq/update', item).then((res) => {
+		axios.put(`/faq/update/${params.id}`, item).then((res) => {
 			if (res.data.success) {
 				alert('글 수정이 완료되었습니다.');
 				history.push('/faq');
@@ -37,7 +35,7 @@ function FaqUpdate() {
 	};
 
 	useEffect(() => {
-		axios.get('/api/faq/detail', params).then((res) => {
+		axios.get(`/faq/detail/${params.id}`).then((res) => {
 			if (res.data.success) {
 				console.log(res.data.detail);
 				setDetail(res.data.detail);
@@ -50,6 +48,8 @@ function FaqUpdate() {
 		console.log(Detail);
 		setTitle(Detail.title);
 		setContent(Detail.content);
+		setKeyword(Detail.keyword);
+		setTopic(Detail.topic);
 	}, [Detail]);
 
 	return (
@@ -69,7 +69,7 @@ function FaqUpdate() {
 								<label htmlFor='userId'>작성자</label>
 							</th>
 							<td>
-								<input type='text' readOnly className='userIdInput' />
+								<input type='text' defaultValue={Detail?.writer?.displayName} readOnly className='userIdInput' />
 							</td>
 						</tr>
 

@@ -213,7 +213,7 @@ function App() {
 				></Route>
 
 				<Route
-					path='./write/'
+					path='/write'
 					render={() => (
 						<>
 							<Write />
@@ -233,7 +233,7 @@ function App() {
 				></Route>
 
 				<Route
-					path='./update/'
+					path='/update'
 					render={() => (
 						<>
 							<Update />

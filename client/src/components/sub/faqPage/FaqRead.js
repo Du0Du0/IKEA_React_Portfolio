@@ -66,16 +66,6 @@ function FaqRead() {
 
 	const currentPosts = Posts.slice(indexOfFirstPost, indexOfLastPost);
 
-	const goToDetail = () => {
-		history.push({
-			pathname: `/community/articles/${params.id}`,
-			state: {
-				Posts: [...Posts],
-			},
-		});
-		console.log(Posts);
-	};
-
 	const pageChange = (page) => {
 		setCurrentpage(page);
 	};

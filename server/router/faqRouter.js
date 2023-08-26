@@ -238,7 +238,7 @@ router.get('/lists', (req, res) => {
 //Swagger FAQ- /faq/detail API
 /**
  * @openapi
- * /faq/detail:
+ * /faq/detail/:id:
  *   get:
  *     summary: 상세페이지 조회
  *     description: 상세페이지 조회하는 API
@@ -246,7 +246,7 @@ router.get('/lists', (req, res) => {
  *       - Faq API
  *     parameters:
  *       - name: communityNum
- *         in: query
+ *         in: path
  *         description: 커뮤니티 번호
  *         required: true
  *         schema:
@@ -308,8 +308,8 @@ router.get('/lists', (req, res) => {
  */
 
 //상세페이지 출력 라우터
-router.get('/detail', (req, res) => {
-	Post.findOne({ communityNum: req.body.id })
+router.get('/detail/:id', (req, res) => {
+	Post.findOne({ communityNum: req.params.id })
 		.populate('writer') // 작성자 정보 populate 추가
 		.exec()
 		.then((doc) => res.json({ success: true, detail: doc }))
@@ -420,7 +420,7 @@ router.put('/update', (req, res) => {
 		content: req.body.content,
 		keyword: req.body.keyword,
 	};
-	Post.updateOne({ communityNum: req.body.id }, { $set: temp })
+	Post.updateOne({ communityNum: req.params.id }, { $set: temp })
 		.exec()
 		.then((doc) => {
 			console.log(doc);
@@ -436,7 +436,7 @@ router.put('/update', (req, res) => {
 //Swagger FAQ- /faq/delete API
 /**
  * @openapi
- * /faq/delete :
+ * /faq/delete/:id :
  *   delete:
  *     summary: 게시물 삭제
  *     description: 게시물 삭제하는 API
@@ -444,7 +444,7 @@ router.put('/update', (req, res) => {
  *       - Faq API
  *     parameters:
  *       - name: communityNum
- *         in: query
+ *         in: path
  *         description: 커뮤니티 번호
  *         required: true
  *         schema:
@@ -506,8 +506,8 @@ router.put('/update', (req, res) => {
  */
 
 //게시물 삭제 라우터
-router.delete('/delete', (req, res) => {
-	Post.deleteOne({ communityNum: req.body.id })
+router.delete('/delete/:id', (req, res) => {
+	Post.deleteOne({ communityNum: req.params.id })
 		.exec()
 		.then(() => {
 			res.json({ success: true });

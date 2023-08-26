@@ -11,7 +11,11 @@ const { Post } = require('./model/postSchema.js');
 const { Counter } = require('./model/counterSchema.js');
 const { User } = require('./model/userSchema');
 
-app.use(cors());
+app.use(
+	cors({
+		origin: ['http://localhost:4000', 'https://ikeacompany.com'],
+	})
+);
 
 const swaggerUi = require('swagger-ui-express');
 const swaggerJsdoc = require('swagger-jsdoc');

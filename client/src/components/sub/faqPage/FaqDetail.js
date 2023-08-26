@@ -13,27 +13,18 @@ import { Link } from 'react-router-dom';
 
 function FaqDetail() {
 	const params = useParams();
-	console.log('params', params);
 	const [Detail, setDetail] = useState(null);
 	const user = useSelector((state) => state.userReducer);
 
 	useEffect(() => {
 		axios
-			.get('/faq/detail', params)
+			.get(`/faq/detail/${params.id}`)
 			.then((res) => {
 				if (res.data.success) {
 					setDetail(res.data.detail);
 
+					console.log('Detail', Detail);
 					// 작성자 정보 조회
-					axios
-						.get('/user', { uid: res.data.detail.writer })
-						.then((response) => {
-							if (response.data.success) {
-							} else {
-								console.log(response.data.message);
-							}
-						})
-						.catch((err) => console.log(err));
 				} else {
 					alert('상세글 호출에 실패했습니다.');
 				}
@@ -45,7 +36,7 @@ function FaqDetail() {
 	const handleDelete = () => {
 		if (!window.confirm('정말 삭제하겠습니까')) return;
 
-		axios.delete('/delete', params).then((res) => {
+		axios.delete(`/faq/delete/${params.id}`).then((res) => {
 			if (res.data.success) {
 				alert('게시글이 삭제되었습니다.');
 				history.push('/faq');
@@ -100,7 +91,7 @@ function FaqDetail() {
 
 					<div className='contentWrap'>
 						<p>{Detail?.content}</p>
-						{Detail?.keyword && <p>{Detail.keyword}</p>}
+						{Detail?.keyword && <p className='keywordMap'>{Detail?.keyword.split(',')} </p>}
 					</div>
 					<div className='buttonWrap'>
 						{user.uid !== '' && (

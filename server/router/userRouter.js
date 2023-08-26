@@ -101,7 +101,7 @@ router.post('/join', (req, res) => {
 //Swagger User- /user API
 /**
  * @openapi
- * /user:
+ * /user/{uid}:
  *   get:
  *     summary: 회원 조회 API
  *     description: 회원 조회하는 API
@@ -109,7 +109,7 @@ router.post('/join', (req, res) => {
  *       - User API
  *     parameters:
  *       - name: uid
- *         in: query
+ *         in: path
  *         description: 회원 식별자
  *         required: true
  *         schema:
@@ -168,9 +168,8 @@ router.post('/join', (req, res) => {
  */
 
 //회원 조회
-router.get('/user', (req, res) => {
-	const { uid } = req.body;
-	User.findOne({ uid })
+router.get('/user/:uid', (req, res) => {
+	User.findOne({ uid: req.params.uid })
 		.exec()
 		.then((user) => {
 			if (user) {
