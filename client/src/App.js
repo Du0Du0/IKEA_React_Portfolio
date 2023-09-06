@@ -41,6 +41,7 @@ import FaqRead from './components/sub/faqPage/FaqRead';
 import FaqWrite from './components/sub/faqPage/FaqWrite';
 import FaqDetail from './components/sub/faqPage/FaqDetail';
 import FaqUpdate from './components/sub/faqPage/FaqUpdate';
+import OurBusinessMain from './components/sub/OurBusiness/OurBusinessMain';
 
 function App() {
 	const dispatch = useDispatch();
@@ -132,6 +133,16 @@ function App() {
 					render={() => (
 						<>
 							<Contact />
+							<FooterNone type={'sub'} imgBg={'footerW'} />
+						</>
+					)}
+				></Route>
+
+				<Route
+					path='/ourBusiness'
+					render={() => (
+						<>
+							<OurBusinessMain />
 							<FooterNone type={'sub'} imgBg={'footerW'} />
 						</>
 					)}

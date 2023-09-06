@@ -63,6 +63,11 @@ function Menu(props, ref) {
 								<div className='listLine'></div>
 								<ul>
 									<li>
+										<NavLink to='/ourBusiness' activeStyle={active}>
+											Our Business
+										</NavLink>
+									</li>
+									<li>
 										<NavLink to='/youtube' activeStyle={active}>
 											Youtube
 										</NavLink>

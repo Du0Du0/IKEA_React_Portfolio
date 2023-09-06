@@ -24,7 +24,7 @@ function FaqUpdate() {
 			keyword: Keyword,
 			id: params.id,
 		};
-		axios.put(`/faq/update/${params.id}`, item).then((res) => {
+		axios.put('/faq/update', item).then((res) => {
 			if (res.data.success) {
 				alert('글 수정이 완료되었습니다.');
 				history.push('/faq');

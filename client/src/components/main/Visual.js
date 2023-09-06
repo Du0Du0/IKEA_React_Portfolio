@@ -44,7 +44,7 @@ function Visual() {
 				<div className='bg'></div>
 				<div className='bg'>
 					<p ref={visualDesc1}>Good for me, Good for my home</p>
-					<h1 ref={visualDesc2}>IKEA wants more people to experience IKEA home furnishing with products of good quality and practical designs.</h1>
+					<h1 ref={visualDesc2}>이 웹사이트는 이케아 사이트를 클론 코딩한 프로젝트로, 취업용 포트폴리오로 활용됩니다. 절대 상업 목적으로 사용되지 않았으며 이미지 저작권은 전부 이케아에 있습니다.</h1>
 				</div>
 
 				{/* Main pointBox2 (text) (yellow box)*/}
