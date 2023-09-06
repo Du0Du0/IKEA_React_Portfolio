@@ -43,8 +43,15 @@ function Visual() {
 				<div className='bg'></div>
 				<div className='bg'></div>
 				<div className='bg'>
-					<p ref={visualDesc1}>Good for me, Good for my home</p>
-					<h1 ref={visualDesc2}>이 웹사이트는 이케아 사이트를 클론 코딩한 프로젝트로, 취업용 포트폴리오로 활용됩니다. 절대 상업 목적으로 사용되지 않았으며 이미지 저작권은 전부 이케아에 있습니다.</h1>
+					<p ref={visualDesc1}>
+						This website is a project that replicates the IKEA website for educational and portfolio purposes, with no intention of commercial or profit-driven use. All trademarks, logos, and images
+						are the property of IKEA, and their sources are attributed to IKEA. It is emphasized that this project is solely for cloning and educational purposes, and will not be used for commercial
+						or profit-making purposes.
+					</p>
+					<h1 ref={visualDesc2}>
+						이 웹사이트는 이케아 사이트를 클론 코딩한 프로젝트로, 취업용 포트폴리오로 활용됩니다. 본 작업물의 상표, 로고, 이미지 저작권은 전부 이케아에 있으며, 출처도 이케아에 있음을 밝힙니다. 또한
+						클론코딩 목적 이외에 상업적, 영리 목적으로 절대 사용되지 않았음을 밝힙니다.
+					</h1>
 				</div>
 
 				{/* Main pointBox2 (text) (yellow box)*/}
