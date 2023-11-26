@@ -96,7 +96,7 @@ function App() {
 	return (
 		<>
 			<Helmet>
-				<title>포트폴리오 사이트</title>
+				<title>이케아 코리아(포트폴리오)</title>
 			</Helmet>
 			<GlobalStyle />
 

@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import FooterNone from '../common/FooterNone';
 import Header from '../common/Header';
 import Visual from './Visual';
@@ -25,7 +25,6 @@ function Main({ menu }) {
 	const [IsHideChecked, setIsHideChecked] = useState(false);
 	const cookiePop = useRef(null);
 
-	console.log('CookiesValue', CookiesValue);
 	const oneWeek = moment();
 	oneWeek.add(7, 'd');
 
