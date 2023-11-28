@@ -182,7 +182,7 @@ function Login() {
 									<CategoryList>비밀번호 찾기</CategoryList>
 								</NavLink>
 								<CategoryListAfter>|</CategoryListAfter>
-								<NavLink to='/department'>
+								<NavLink to='/join'>
 									<CategoryList>회원가입</CategoryList>
 								</NavLink>
 							</CategoryLists>
