@@ -18,7 +18,7 @@
 - 서비스 URL: https://ergonomics.co.kr
   <br>
 
-## 시작 가이드j
+## 시작 가이드
 
 ### **Requirements**
 
